@@ -1,0 +1,1 @@
+Os inputs não tem animação quando clicamos em prosseguir sem preenche-los

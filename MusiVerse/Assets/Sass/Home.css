@@ -1,0 +1,920 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+}
+
+section.containerMusica {
+  margin-bottom: 60px;
+  max-width: 1400px;
+  margin: auto;
+}
+section.containerMusica h1 {
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 70px 0px 14px;
+}
+section.containerMusica article {
+  width: 100%;
+  margin: auto;
+}
+section.containerMusica article.containerMusicaCaixa {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 24px;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa {
+  width: 200px;
+  height: 270px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa:hover div.BtnDarPlay {
+  transition: 200ms opacity ease-in-out;
+  opacity: 1;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.BtnDarPlay {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 55%;
+  right: 5px;
+  opacity: 0;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
+  width: 150px;
+  height: 150px;
+  margin: 25px auto;
+  border-radius: 5px;
+  overflow: hidden;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa p {
+  width: 90%;
+  color: #fff;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa span {
+  color: #5d5d63;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+}
+section.containerMusica article.containerMusicaLinha {
+  width: 95%;
+  margin: 0px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha {
+  width: 100%;
+  height: 60px;
+  position: relative;
+  cursor: pointer;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha div {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha div img.ImgMusicaMeuPerfil {
+  width: 60px;
+  height: 60px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa {
+  width: 300px;
+  height: 100%;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa p {
+  width: 90%;
+  color: #fff;
+  font-size: 15px;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa span {
+  color: #5d5d63;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha p.GeneroMeuPerfil {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.2862745098);
+  font-weight: 100;
+}
+section.containerMusica article.containerMusicaLinha div.MusicasLinha img.btnCurtirMeuPerfil {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  position: absolute;
+  right: 0px;
+}
+
+/* ini: Preloader */
+#carregando {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: none;
+  justify-content: center;
+  background-color: #101014;
+  align-items: center;
+  z-index: 10;
+}
+
+#carregando > article {
+  width: 80%;
+  color: #fff;
+}
+
+.preloader .inner {
+  position: absolute;
+  top: 50%; /* centralizar a parte interna do preload (onde fica a animação)*/
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bolas > div {
+  display: inline-block;
+  background-color: #fff;
+  box-shadow: 2px 2px 3px black;
+  width: 25px;
+  height: 25px;
+  border-radius: 100%;
+  margin: 3px;
+  animation-fill-mode: both;
+  animation-name: animarBola;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.bolas > div:nth-child(1) {
+  animation-duration: 0.75s;
+  animation-delay: 0;
+}
+
+.bolas > div:nth-child(2) {
+  animation-duration: 0.75s;
+  animation-delay: 0.12s;
+}
+
+.bolas > div:nth-child(3) {
+  animation-duration: 0.75s;
+  animation-delay: 0.24s;
+}
+
+@keyframes animarBola {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  16% {
+    transform: scale(0.1);
+    opacity: 0.7;
+  }
+  33% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+/* end: Preloader */
+body {
+  color: #fff;
+  font-family: "Inter", sans-serif;
+  background: #1a1a1d;
+}
+body nav {
+  width: 100%;
+  max-width: 200px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  background: #212124;
+  padding: 12px 0px;
+}
+body nav div#contaUser {
+  width: calc(100% - 48px);
+  margin: 0px auto 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+body nav div#contaUser img {
+  width: 25px;
+  grid-row-end: 20px;
+  border-radius: 5px;
+}
+body nav div#contaUser svg {
+  width: 24px;
+  height: 24px;
+}
+body nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  list-style: none;
+  padding-left: 24px;
+}
+body nav ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 24px;
+  cursor: pointer;
+}
+body nav span {
+  color: #9898A6;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 12px;
+  margin: 32px 12px 12px 24px;
+  display: block;
+}
+body div#SearchBar {
+  width: 340px;
+  position: absolute;
+  top: 33px;
+  right: 30px;
+  border: 1px solid rgba(235, 235, 255, 0.05);
+  background: #1F1F22;
+  overflow: hidden;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  z-index: 3;
+}
+body div#SearchBar input {
+  width: 100%;
+  outline: none;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  color: #fff;
+}
+body main {
+  width: calc(100% - 200px);
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+body main section#containerMain {
+  width: 90%;
+  margin: 100px auto;
+}
+body section.Paginas {
+  width: calc(100% - 200px);
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  display: none;
+  background: #1a1a1d;
+  overflow-x: auto;
+  z-index: 4;
+}
+body section.Paginas article {
+  width: 90%;
+  margin: auto;
+  padding-top: 100px;
+}
+body section.Paginas#PagPesquisa {
+  z-index: 2;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa {
+  max-width: 1400px;
+  margin: auto;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa h1 {
+  font-size: 1.5em;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  margin: 0px 0px 14px;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa {
+  width: 100%;
+  margin: 20px auto;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.partePerfilPesquisa {
+  width: 280px;
+  height: 280px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #212124;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.partePerfilPesquisa div.DarkOverlayPerfilPesquisar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.37);
+  z-index: 1;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.partePerfilPesquisa img {
+  width: 150px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.partePerfilPesquisa h1 {
+  width: 95%;
+  margin: 0px auto;
+  text-align: center;
+  font-weight: 600;
+  font-size: 2em;
+  z-index: 2;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa {
+  width: calc(100% - 320px);
+  max-height: 260px;
+  overflow: hidden;
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  background-color: #212124;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  padding: 10px;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa {
+  width: calc(100% - 20px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa div.divInfosMusicaPerfilPesquisa {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa div.divInfosMusicaPerfilPesquisa img {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa div.divInfosMusicaPerfilPesquisa div.containerTextoPerfilPesquisa {
+  display: flex;
+  flex-direction: column;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa div.divInfosMusicaPerfilPesquisa div.containerTextoPerfilPesquisa span {
+  color: #5d5d63;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.containermusicaPerfilPesquisa div.musicasPerfilPesquisa img.heartPerfilPesquisa {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerMusica article.containerMusicaCaixa {
+  width: 100%;
+  padding-top: 0px !important;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT {
+  width: 95%;
+  max-width: 700px;
+  margin: auto;
+  display: block;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT h1 {
+  width: 400px;
+  margin: auto;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: 900;
+  margin-bottom: 40px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT p {
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.4862745098);
+  font-weight: 100;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div#containerInputLinkMusicaYT {
+  width: 100%;
+  position: relative;
+  margin: 20px 0px 43px;
+  border-radius: 17px;
+  overflow: hidden;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div#containerInputLinkMusicaYT input {
+  width: calc(100% - 15px);
+  height: 57px;
+  background-color: rgba(102, 102, 102, 0.13);
+  border: none;
+  padding-left: 15px;
+  color: #fff;
+  outline: none;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div#containerInputLinkMusicaYT input.inputAnimation {
+  animation: 300ms inputAnimado infinite ease-in-out;
+}
+@keyframes inputAnimado {
+  50% {
+    margin-left: -5px;
+  }
+  75% {
+    margin-left: 5px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div#containerInputLinkMusicaYT div {
+  width: 59px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0FF;
+  border-radius: 0px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div#containerInputLinkMusicaYT div.inputAnimation2 {
+  animation: 300ms inputAnimado2 infinite ease-in-out;
+}
+@keyframes inputAnimado2 {
+  50% {
+    background-color: red;
+  }
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div button {
+  width: 100%;
+  display: block;
+  border-radius: 17px;
+  padding: 10px 0px;
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(102, 102, 102, 0.13);
+  border: none;
+  outline: none;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#PrimeirosPassosYT div button:hover {
+  cursor: pointer;
+  scale: 1.05;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT {
+  width: 95%;
+  max-width: 700px;
+  display: none;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT img#ImgMusicaLinkYT {
+  width: auto;
+  height: 200px;
+  display: block;
+  margin: 50px auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  border-radius: 10px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT div.continerLinkYt {
+  width: 100%;
+  position: relative;
+  margin-bottom: 43px;
+  border-radius: 17px;
+  overflow: hidden;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT div.continerLinkYt input {
+  width: calc(100% - 15px);
+  height: 57px;
+  background-color: rgba(102, 102, 102, 0.13);
+  border: none;
+  padding-left: 15px;
+  color: #fff;
+  outline: none;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT div.continerLinkYt input.inputAnimation {
+  animation: 300ms inputAnimado infinite ease-in-out;
+}
+@keyframes inputAnimado {
+  50% {
+    margin-left: -5px;
+  }
+  75% {
+    margin-left: 5px;
+  }
+  100% {
+    margin-left: 0px;
+  }
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT div.continerLinkYt div {
+  width: 59px;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0FF;
+  border-radius: 0px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT div.continerLinkYt div.inputAnimation2 {
+  animation: 300ms inputAnimado2 infinite ease-in-out;
+}
+@keyframes inputAnimado2 {
+  50% {
+    background-color: red;
+  }
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT button {
+  width: 100%;
+  display: block;
+  border-radius: 17px;
+  padding: 10px 0px;
+  font-family: "Carter One", cursive;
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(102, 102, 102, 0.13);
+  border: none;
+  outline: none;
+  margin-bottom: 30px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT button:focus {
+  outline: none;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#FinalizarAddYT button:hover {
+  cursor: pointer;
+  scale: 1.05;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AdicionarDeOutroJeito {
+  display: none;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.562);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck div {
+  width: 95%;
+  max-width: 500px;
+  height: auto;
+  background-color: #1a1a1d;
+  padding: 20px;
+  border-radius: 20px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck div h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: rgb(255, 0, 0);
+  font-size: 25px;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck div p {
+  font-size: 14px;
+  font-weight: 300;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck div div {
+  width: 95%;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  display: flex;
+}
+body section.Paginas#PagAdicionarMusica article#containerAddMusic div#AletarPostarMusicaViaLinck div div button {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #1F1F22;
+  margin-top: 50px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+body section.Paginas#PagMeuPerfil {
+  padding: 0px;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil {
+  padding: 0px;
+  width: 100%;
+  margin: 0px;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil {
+  width: 100%;
+  height: 400px;
+  background-image: url("../Imgs/Banners/fitaCassete.avif");
+  background-position: center;
+  position: relative;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil div#blurBackgroundPerfil {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.329);
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil div#coteudoHeaderPerfil {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 2;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil div#coteudoHeaderPerfil button#btnEditarMeuPerfil {
+  width: 40px;
+  height: 40px;
+  border: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border-radius: 10px;
+  background-color: transparent;
+  background-image: url("../Imgs/Icons/Edit.png");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil div#coteudoHeaderPerfil h1#NomeUserMeuPerfil {
+  position: absolute;
+  bottom: 60px;
+  left: 50px;
+  font-size: 5em;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#coainerBackgroundPerfil div#coteudoHeaderPerfil button#btnPlayHeaderPerfil {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: block;
+  background-image: url("../Imgs/Icons/DarPlay200.png");
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
+  background-color: #fff;
+  position: absolute;
+  bottom: -50px;
+  left: 50px;
+  cursor: pointer;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.76);
+  z-index: 2;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil div {
+  width: 95%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 10px;
+  padding: 20px;
+  margin: auto;
+  background-color: #1a1a1d;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil div p {
+  margin: 20px 0px 10px;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil div input {
+  width: calc(100% - 15px);
+  height: 40px;
+  background-color: rgba(102, 102, 102, 0.13);
+  border: none;
+  padding-left: 15px;
+  color: rgb(255, 255, 255);
+  outline: none;
+  border-radius: 10px;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil div div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#pop-upEditarPerfil div div button {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 5px;
+  background-color: #1F1F22;
+  margin-top: 50px;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+body section.Paginas#PagMeuPerfil article#containerMeuPerfil div#containerMusicasPerfilUser section.containerMusica {
+  max-width: none !important;
+}
+body article#BarraMusica {
+  width: calc(100% - 40px);
+  height: 40px;
+  bottom: -100vh;
+  transition: 1s bottom ease-in-out;
+  position: fixed;
+  background: #212124;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  z-index: 5;
+}
+body article#BarraMusica div#InfosBarraMusica {
+  width: 200px;
+  display: flex;
+  align-items: end;
+  justify-content: start;
+  gap: 16px;
+}
+body article#BarraMusica div#InfosBarraMusica img#imgMusicaBarraMusica {
+  width: 64px;
+  height: 64px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+body article#BarraMusica div#InfosBarraMusica div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+body article#BarraMusica div#InfosBarraMusica div p {
+  width: 100%;
+  max-width: 200px;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body article#BarraMusica div#InfosBarraMusica div span {
+  width: 100%;
+  max-width: 200px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4196078431);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body article#BarraMusica div#InfosBarraMusica img#HeartBarraMusica {
+  width: 15px;
+  height: 15px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  -o-object-position: center;
+     object-position: center;
+  display: block;
+  cursor: pointer;
+}
+body article#BarraMusica div#PartePlayerBarraMusica {
+  width: 500px;
+}
+body article#BarraMusica div#PartePlayerBarraMusica div#controlesBarraMusica {
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: auto;
+}
+body article#BarraMusica div#PartePlayerBarraMusica div#controlesBarraMusica img {
+  width: 16px;
+  height: 16px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  cursor: pointer;
+}
+body article#BarraMusica div#PartePlayerBarraMusica div#controlesBarraMusica img#PlayBtn {
+  width: 24px;
+  height: 24px;
+}
+body article#BarraMusica div#PartePlayerBarraMusica input {
+  width: 100%;
+  margin: 10px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 5px;
+  background: #4C4E54;
+  border-radius: 10px;
+  cursor: pointer;
+}
+body article#BarraMusica div#PartePlayerBarraMusica input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e1ff;
+}
+body article#BarraMusica div#ConfigsBarraMusica {
+  display: flex;
+  gap: 16px;
+}
+body article#BarraMusica div#ConfigsBarraMusica img {
+  cursor: pointer;
+}
+body article#BarraMusica div#ConfigsBarraMusica div#containerControleVolume {
+  display: flex;
+  align-items: center;
+}
+body article#BarraMusica div#ConfigsBarraMusica div#containerControleVolume input {
+  width: 100%;
+  max-width: 100px;
+  margin: 10px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 5px;
+  background: #4C4E54;
+  border-radius: 10px;
+  cursor: pointer;
+}
+body article#BarraMusica div#ConfigsBarraMusica div#containerControleVolume input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e1ff;
+}/*# sourceMappingURL=Home.css.map */

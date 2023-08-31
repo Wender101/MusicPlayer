@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+
+    <link rel="stylesheet" href="Assets/Sass/Cadastro.css">
+</head>
+<body>
+    <div id="boll1" class="backgroundIcons"></div>
+    <div id="boll2" class="backgroundIcons"></div>
+    <div id="boll3" class="backgroundIcons"></div>
+    <div id="boll4" class="backgroundIcons"></div>
+
+    <main>
+        <section>
+            <p>Welcome to</p>
+            <img src="Assets/Imgs/Icons/LogoWithoutBoll.png">
+
+            <article>
+                <div class="containerInputCadastro">
+                    <input type="email" placeholder="Email@gmail.com" id="inputEmailUser" oninput="atualizarCadastro()">
+                    <div>
+                        <img src="Assets/Imgs/Icons/userIconWhite.png">
+                    </div>
+                </div>
+                
+                <div class="containerInputCadastro">
+                    <input type="password" placeholder="Senha" id="inputSenhaUser" oninput="atualizarCadastro()">
+                    <div>
+                        <img src="Assets/Imgs/Icons/userIcon2.png">
+                    </div>
+                </div>
+
+                <div class="containerInputCadastro" id="containerNomeUser">
+                    <input type="text" placeholder="Nome de usuário" id="inputNomeUser" oninput="atualizarCadastro()">
+                    <div>
+                        <img src="Assets/Imgs/Icons/userIconWhite.png">
+                    </div>
+                </div>
+
+                <div>
+                    <button id="btnLogin" onclick="FazerLogin()">Login</button>
+                    <button onclick="Cadastrar()" id="btnCadastro">Cadastrar</button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+     <!--? Firebase -->
+     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-storage.js"></script>
+     <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+     <script src="Assets/Js/Firebase.js"></script>
+
+    <script src="/Assets/Js/Cadastrar.js"></script>
+</body>
+</html>

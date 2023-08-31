@@ -1,0 +1,805 @@
+@import './Geral.scss';
+
+body {
+    color: #fff;
+    font-family: $fonte_inter;
+    background: #1a1a1d;
+
+    nav {
+        width: 100%;
+        max-width: 200px;
+        position: fixed;
+        top: 0; 
+        left: 0;
+        height: 100vh;
+        background: #212124;
+        padding: 12px 0px;
+
+        div#contaUser {
+            width: calc(100% - 48px);
+            margin: 0px auto 44px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            img {
+                width: 25px;
+                grid-row-end: 20px;
+                border-radius: 5px;
+            }
+
+            svg {
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        ul {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            list-style: none;
+            padding-left: 24px;
+
+            li {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 300;
+                line-height: 24px;
+                cursor: pointer;
+            }
+        }
+
+        span {
+            color: #9898A6;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 12px;
+            margin: 32px 12px 12px 24px;
+            display: block;
+        }
+    }
+
+    //? SearchBar -------------
+    div#SearchBar {
+        width: 340px;
+        position: absolute;
+        top: 33px;
+        right: 30px;
+        border: 1px solid rgba(235, 235, 255, 0.05);
+        background: #1F1F22;
+        overflow: hidden;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        z-index: 3;
+
+        input {
+            width: 100%;
+            outline: none;
+            padding: 10px;
+            background: transparent;
+            border: none;
+            color: #fff;
+        }
+    }
+
+    //? Main ------------------
+    main {
+        width: calc(100% - 200px);
+        position: absolute;
+        top: 0px;
+        right: 0px;
+
+        section#containerMain {
+            width: 90%;
+            margin: 100px auto;
+        }
+    }
+
+    //? Páginas --------------
+    section.Paginas {
+        width: calc(100% - 200px);
+        height: 100vh;
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        display: none;
+        background: #1a1a1d;
+        overflow-x: auto;
+        z-index: 4;
+        
+        article {
+            width: 90%;
+            // height: 100vh;
+            margin: auto;
+            padding-top: 100px;
+        }
+
+        &#PagPesquisa {
+            z-index: 2;
+            article#containerResultadoPesquisa {
+                max-width: 1400px;
+                margin: auto;
+
+                h1 {
+                    font-size: 1.5em;
+                    font-style: normal;
+                    font-weight: 600;
+                    line-height: 24px;
+                    margin: 0px 0px 14px;
+                }
+                
+                div.containerPerfilPesquisa {
+                    width: 100%;
+                    margin: 20px auto;
+                    display: flex;
+                    align-items: start;
+                    justify-content: space-between;
+                    // gap: 20px;
+
+                    div.partePerfilPesquisa {
+                        width: 280px;
+                        height: 280px;
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-color: #212124;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                        position: relative;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        flex-direction: column;
+                        gap: 10px;
+                        cursor: pointer;
+
+                        div.DarkOverlayPerfilPesquisar {
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(0, 0, 0, 0.37);
+                            z-index: 1;
+                        }
+
+                        img {
+                            width: 150px;
+                            height: 150px;
+                            object-fit: cover;
+                            border-radius: 50%;
+                            box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                            z-index: 2;
+                        }
+
+                        h1 {
+                            width: 95%;
+                            margin: 0px auto;
+                            text-align: center;
+                            font-weight: 600;
+                            font-size: 2em;
+                            z-index: 2;
+                        }
+                    }
+
+                    div.containermusicaPerfilPesquisa {
+                        width: calc(100% - 320px);
+                        max-height: 260px;
+                        overflow: hidden;
+                        display: flex;
+                        gap: 20px;
+                        flex-direction: column;
+                        background-color: #212124;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                        padding: 10px;
+
+                        div.musicasPerfilPesquisa {
+                            width: calc(100% - 20px);
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            cursor: pointer;
+                            
+                            div.divInfosMusicaPerfilPesquisa {
+                                display: flex;
+                                gap: 20px;
+                                align-items: center;
+
+                                img {
+                                    width: 50px;
+                                    height: 50px;
+                                    object-fit: cover;
+                                }
+
+                                div.containerTextoPerfilPesquisa {
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    p {
+
+                                    }
+
+                                    span {
+                                        color: #5d5d63;
+                                        font-size: 12px;
+                                        font-weight: 500;
+                                        line-height: 20px;
+                                    }
+                                }
+                            }
+
+                            img.heartPerfilPesquisa {
+                                width: 20px;
+                                height: 20px;
+                                object-fit: contain;
+                            }
+                        }
+                    }
+                }
+
+                section.containerMusica {
+                    article.containerMusicaCaixa {
+                        width: 100%;
+                        padding-top: 0px !important;
+                    }
+                }
+            }
+        }
+        
+        &#PagAdicionarMusica {
+
+            article#containerAddMusic {
+                width: 100%;
+                height: 70vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+
+                div#PrimeirosPassosYT {
+                    width: 95%;
+                    max-width: 700px;
+                    margin: auto;
+                    display: block;
+
+                    h1 {
+                        width: 400px;
+                        margin: auto;
+                        text-align: center;
+                        font-size: 2.5em;
+                        font-weight: 900;
+                        margin-bottom: 40px;
+                    }
+
+                    p {
+                        margin-bottom: 10px;
+                        color: #ffffff7c;
+                        font-weight: 100;
+                    }
+
+                    div#containerInputLinkMusicaYT {
+                        width: 100%;
+                        position: relative;
+                        margin: 20px 0px 43px;
+                        border-radius: 17px;
+                        overflow: hidden;
+
+                        input {
+                            width: calc(100% - 15px);
+                            height: 57px;
+                            background-color: rgba(102, 102, 102, 0.13);
+                            border: none;
+                            padding-left: 15px;
+                            color: #fff;
+                            outline: none;
+                        
+                            &.inputAnimation {
+                                animation: 300ms inputAnimado infinite ease-in-out;
+                            }
+                        }
+    
+                        @keyframes inputAnimado {
+                            50% {
+                                margin-left: -5px;
+                            }
+        
+                            75% {
+                                margin-left: 5px;
+                            }
+        
+                            100% {
+                                margin-left: 0px;
+                            }
+                        }
+
+                        div {
+                            width: 59px;
+                            height: 100%;
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: #0FF;
+                            border-radius: 0px;
+
+                            &.inputAnimation2 {
+                                animation: 300ms inputAnimado2 infinite ease-in-out;
+                            }
+        
+                            @keyframes inputAnimado2 {
+                                50% {
+                                    background-color: red;
+                                }
+                            }
+                        }
+
+                    }
+
+                    div {
+                        
+                        button {
+                            width: 100%;
+                            display: block;
+                            border-radius: 17px;
+                            padding: 10px 0px;
+                            font-size: 20px;
+                            color: #fff;
+                            background-color: rgba(102, 102, 102, 0.13);
+                            border: none;
+                            outline: none;
+                            margin-bottom: 10px;
+                            cursor: pointer;
+
+                            &:hover {
+                                cursor: pointer;
+                                scale: 1.05;
+                            }
+                        }
+                    }
+                }
+
+                div#FinalizarAddYT {
+                    width: 95%;
+                    max-width: 700px;
+                    display: none;
+
+                    img#ImgMusicaLinkYT {
+                        width: auto;
+                        height: 200px;
+                        display: block;
+                        margin: 50px auto;
+                        object-fit: cover;
+                        object-position: center;
+                        border-radius: 10px;
+                    }
+
+                    div.continerLinkYt {
+                        width: 100%;
+                        position: relative;
+                        margin-bottom: 43px;
+                        border-radius: 17px;
+                        overflow: hidden;
+    
+                        input {
+                            width: calc(100% - 15px);
+                            height: 57px;
+                            background-color: rgba(102, 102, 102, 0.13);
+                            border: none;
+                            padding-left: 15px;
+                            color: #fff;
+                            outline: none;
+    
+                            &.inputAnimation {
+                                animation: 300ms inputAnimado infinite ease-in-out;
+                            }
+                        }
+    
+                        @keyframes inputAnimado {
+                            50% {
+                                margin-left: -5px;
+                            }
+        
+                            75% {
+                                margin-left: 5px;
+                            }
+        
+                            100% {
+                                margin-left: 0px;
+                            }
+                        }
+    
+                        div {
+                            width: 59px;
+                            height: 100%;
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            background-color: #0FF;
+                            border-radius: 0px;
+    
+                            &.inputAnimation2 {
+                                animation: 300ms inputAnimado2 infinite ease-in-out;
+                            }
+        
+                            @keyframes inputAnimado2 {
+                                50% {
+                                    background-color: red;
+                                }
+                            }
+                            
+                        }
+                    }
+
+                    button {
+                        width: 100%;
+                        display: block;
+                        border-radius: 17px;
+                        padding: 10px 0px;
+                        font-family: "Carter One", cursive;
+                        font-size: 20px;
+                        color: #fff;
+                        background-color: rgba(102, 102, 102, 0.13);
+                        border: none;
+                        outline: none;
+                        margin-bottom: 30px;
+    
+                        &:focus {
+                            outline: none;
+                        }
+    
+                        &:hover {
+                            cursor: pointer;
+                            scale: 1.05;
+                        }
+                    }
+                }
+
+                div#AdicionarDeOutroJeito {
+                    display: none;
+                }
+
+                div#AletarPostarMusicaViaLinck {
+                    width: 100%;
+                    height: 100vh;
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
+                    background-color: rgba(0, 0, 0, 0.562);
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    
+                    div {
+                        width: 95%;
+                        max-width: 500px;
+                        height: auto;
+                        background-color: #1a1a1d;
+                        padding: 20px;
+                        border-radius: 20px;
+                        
+                        h1 {
+                            text-align: center;
+                            margin-bottom: 20px;
+                            color: rgb(255, 0, 0);
+                            font-size: 25px;
+                        }
+
+                        p {
+                            font-size: 14px;
+                            font-weight: 300;
+                        }
+
+                        div {
+                            width: 95%;
+                            margin: auto;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 20px;
+                            display: flex;
+                            
+                            button {
+                                width: 100%;
+                                padding: 10px 15px;
+                                border-radius: 5px;
+                                background-color: #1F1F22;
+                                margin-top: 50px;
+                                color: #fff;
+                                border: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#PagMeuPerfil {
+            padding: 0px;
+
+            article#containerMeuPerfil {
+                padding: 0px;
+                width: 100%;
+                margin: 0px;
+
+                div#coainerBackgroundPerfil {
+                    width: 100%;
+                    height: 400px;
+                    background-image: url('../Imgs/Banners/fitaCassete.avif');
+                    background-position: center;
+                    position: relative;
+
+                    div#blurBackgroundPerfil {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 1;
+                        background-color: rgba(0, 0, 0, 0.329);
+                    }
+
+                    div#coteudoHeaderPerfil {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 2;
+
+                        button#btnEditarMeuPerfil {
+                            width: 40px;
+                            height: 40px;
+                            border: none;
+                            position: absolute;
+                            top: 20px;
+                            right: 20px;
+                            border-radius: 10px;
+                            background-color: transparent;
+                            background-image: url('../Imgs/Icons/Edit.png');
+                            background-position: center;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            cursor: pointer;
+                        }
+
+                        h1#NomeUserMeuPerfil {
+                            position: absolute;
+                            bottom: 60px;
+                            left: 50px;
+                            font-size: 5em;
+                        }
+
+                        button#btnPlayHeaderPerfil {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                            display: block;
+                            background-image: url('../Imgs/Icons/DarPlay200.png');
+                            background-position: center center;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            border: none;
+                            background-color: #fff;
+                            position: absolute;
+                            bottom: -50px;
+                            left: 50px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                div#pop-upEditarPerfil {
+                    width: 100%;
+                    height: 100vh;
+                    position: fixed;
+                    top: 0px;
+                    left: 0px;
+                    display: none;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: rgba(0, 0, 0, 0.76);
+                    z-index: 2;
+
+                    div {
+                        width: 95%;
+                        max-width: 500px;
+                        height: auto;
+                        border-radius: 10px;
+                        padding: 20px;
+                        margin: auto;
+                        background-color: #1a1a1d;
+
+                        p {
+                            margin: 20px 0px 10px;
+                        }
+
+                        input {
+                            width: calc(100% - 15px);
+                            height: 40px;
+                            background-color: rgba(102, 102, 102, 0.13);
+                            border: none;
+                            padding-left: 15px;
+                            color: rgb(255, 255, 255);
+                            outline: none;
+                            border-radius: 10px;
+                        }
+
+                        div {
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            gap: 20px;
+
+                            button {
+                                width: 100%;
+                                padding: 10px 15px;
+                                border-radius: 5px;
+                                background-color: #1F1F22;
+                                margin-top: 50px;
+                                color: #fff;
+                                border: none;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+
+                div#containerMusicasPerfilUser {
+                    section.containerMusica {
+                        max-width: none !important;
+                    }
+                }
+            }
+        }
+    }
+
+
+
+    //? BarraMusica -----------
+    article#BarraMusica {
+        width: calc(100% - 40px);
+        height: 40px;
+        bottom: -100vh;
+        transition: 1s bottom ease-in-out;
+        position: fixed;
+        background: #212124;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        z-index: 5;
+
+        div#InfosBarraMusica {
+            width: 200px;
+            display: flex;
+            align-items: end;
+            justify-content: start;
+            gap: 16px;
+
+            img#imgMusicaBarraMusica {
+                width: 64px;
+                height: 64px;
+                object-fit: cover;
+                object-position: center;
+            }
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+
+                p {
+                    width: 100%;
+                    max-width: 200px;
+                    font-size: 14px;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                }
+
+                span {
+                    width: 100%;
+                    max-width: 200px;
+                    font-size: 12px;
+                    color: #ffffff6b;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+            }
+
+            img#HeartBarraMusica {
+                width: 15px;
+                height: 15px;
+                object-fit: contain;
+                object-position: center;
+                display: block;
+                cursor: pointer;
+            }
+        }
+
+        div#PartePlayerBarraMusica {
+            width: 500px;
+
+            div#controlesBarraMusica {
+                width: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin: auto;
+
+                img {
+                    width: 16px;
+                    height: 16px;
+                    object-fit: contain;
+                    cursor: pointer;
+
+                    &#PlayBtn {
+                        width: 24px;
+                        height: 24px;
+                    }
+                }
+            }
+
+            input {
+                width: 100%;
+                margin: 10px;
+                appearance: none;
+                height: 5px;
+                background: #4C4E54;
+                border-radius: 10px;
+                cursor: pointer;
+
+                &::-webkit-slider-thumb {
+                    appearance: none;
+                    width: 10px;
+                    height: 10px;
+                    border-radius: 50%; 
+                    background: #00e1ff;
+                }
+            }
+        }
+
+        div#ConfigsBarraMusica {
+            display: flex;
+            gap: 16px;
+
+            img {
+                cursor: pointer;
+            }
+
+            div#containerControleVolume {
+                display: flex;
+                align-items: center;
+
+                input {
+                    width: 100%;
+                    max-width: 100px;
+                    margin: 10px;
+                    appearance: none;
+                    height: 5px;
+                    background: #4C4E54;
+                    border-radius: 10px;
+                    cursor: pointer;
+
+                    &::-webkit-slider-thumb {
+                        appearance: none;
+                        width: 10px;
+                        height: 10px;
+                        border-radius: 50%; 
+                        background: #00e1ff;
+                    }
+                }
+            }
+        }
+    }
+}

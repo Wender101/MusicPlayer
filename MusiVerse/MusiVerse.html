@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musi ._. Verse</title>
+
+    <link rel="stylesheet" href="Assets/Sass/Home.css">
+</head>
+<body>
+    <nav>
+        <div id="contaUser">
+            <img src="" id="imgPerfilUser">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M6.5 12C6.5 12.5523 6.05228 13 5.5 13C4.94772 13 4.5 12.5523 4.5 12C4.5 11.4477 4.94772 11 5.5 11C6.05228 11 6.5 11.4477 6.5 12Z" fill="#FCFCFC" stroke="#FCFCFC"/>
+                <path d="M13 12C13 12.5523 12.5523 13 12 13C11.4477 13 11 12.5523 11 12C11 11.4477 11.4477 11 12 11C12.5523 11 13 11.4477 13 12Z" fill="#FCFCFC" stroke="#FCFCFC"/>
+                <path d="M19.5 12C19.5 12.5523 19.0523 13 18.5 13C17.9477 13 17.5 12.5523 17.5 12C17.5 11.4477 17.9477 11 18.5 11C19.0523 11 19.5 11.4477 19.5 12Z" fill="#FCFCFC" stroke="#FCFCFC"/>
+            </svg>
+        </div>
+
+        <ul>
+            <li style="color: #0FF;" class="linkPagina">Home</li>
+            <li>Explore</li>
+            <li class="linkPagina" id="btnMeuPerfil">Meu Perfil</li>
+        </ul>
+
+        <span>Minha Coleção</span>
+
+        <ul>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png">Playlists</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Faixas.png">Favoritas</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Artistas</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/friends.png"> Amigos</li>
+        </ul>
+
+        <span>Outros</span>
+
+        <ul>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png"> Adicionar Música</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Faixas.png"> Criar Playlist</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Adicionar Letra</li>
+        </ul>
+    </nav>
+
+    
+    <main>
+        <div id="SearchBar">
+            <img src="Assets/Imgs/Icons/search.png">
+            <input type="text" placeholder="Pesquisar" id="inputPesquisa">
+        </div>
+
+        <section id="containerMain"></section>
+    </main>
+
+    <!--? ------------------ Páginas ----------------->
+    <section id="PagPesquisa" class="Paginas">
+        <article id="containerResultadoPesquisa"></article>
+    </section>
+
+    <section id="PagAdicionarMusica" class="Paginas">
+        <article id="containerAddMusic">
+            <div id="PrimeirosPassosYT">
+                <h1>Poste suas músicas favoritas aqui</h1>
+                <p>Utilize o link de um vídeo do YouTube para fazer o download da música. Ou caso prefira o jeito tradicional, clique em "Outra Forma", esse método é muito utilizado quando as pessoas querem postar músicas de sua autoria. Fique à vontade para decidir :)</p>
+
+                
+                <div id="containerInputLinkMusicaYT">
+                    <input type="text" placeholder="link do vídeo aqui" id="inputLinkYT" class="inputAddMusic">
+                    <div>
+                        <img src="Assets/Imgs/Icons/IconYt.png">
+                    </div>
+                </div>
+
+                <div>
+                    <button onclick="abrirAviso('Abrir')">Prosseguir</button>
+                    <button>Outra Forma</button>
+                </div>
+            </div>
+            <div id="FinalizarAddYT">
+                <img src="" id="ImgMusicaLinkYT">
+
+                <div id="containerInputEditarMusicaYT">
+                    <div class="continerLinkYt">
+                        <input type="text" placeholder="Nome da música" id="inputNomeMusicaLinkYT" oninput="AtualizarFinalizar()" class="inputAddMusic">
+                        <div id="containerImgYt">
+                            <img src="Assets/Imgs/Icons/IconYt.png">
+                        </div>
+                    </div>
+
+                    <div class="continerLinkYt">
+                        <input type="text" placeholder="Autor da música" id="inputAutorMusicaLinkYT" oninput="AtualizarFinalizar()" class="inputAddMusic">
+                        <div id="containerImgYt">
+                            <img src="Assets/Imgs/Icons/IconYt.png">
+                        </div>
+                    </div>
+
+                    <div class="continerLinkYt">
+                        <input type="text" placeholder="Gênero da Música" id="inputGeneroMusicaLinkYT" oninput="AtualizarFinalizar()" class="inputAddMusic">
+                        <div id="containerImgYt">
+                            <img src="Assets/Imgs/Icons/IconYt.png">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="btnsMusicaLinkYT">
+                    <button onclick="FinalizarPostarMusicaYT()" id="btnFinalizarMusicaYT">Finalizar</button>
+                    <button>Cancelar</button>
+                </div>
+            </div>
+
+            <div id="AdicionarDeOutroJeito"></div>
+
+            <!--! Alerta Sobre Postar Música Via Link -->
+            <div id="AletarPostarMusicaViaLinck">
+                <div>
+                    <h1>Alerta</h1>
+                    <p>Tenha certeza de que o link do vídeo informado é, de fato, uma música. Caso poste qualquer outro tipo de conteúdo, poderá ser banido permanentemente. Se não seguir este protocolo não prometo que vou preservar seus dados pessoais :3</p>
+
+                    <div>
+                        <button id="cancelPostarYT" onclick="abrirAviso('Fechar')">Cancelar</button>
+                        <button id="prosseguirPostarYT" onclick="prosseguirMusicaYT()">Prosseguir</button>
+                    </div>
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <section id="PagMeuPerfil" class="Paginas">
+        <article id="containerMeuPerfil">
+            <div id="coainerBackgroundPerfil">
+                <div id="blurBackgroundPerfil"></div>
+
+                <div id="coteudoHeaderPerfil">
+                    <button id="btnEditarMeuPerfil" onclick="AbrirPopUpEditarPerfil('Abrir')"></button>
+
+                    <div id="imgPerfilUserHeaderUser"></div>
+                    <h1 id="NomeUserMeuPerfil"></h1>
+                    <button id="btnPlayHeaderPerfil"></button>
+                </div>
+            </div>
+
+            <div id="pop-upEditarPerfil">
+                <div>
+                    <p>Link do Background para o perfil</p>
+                    <input type="text" id="inputLinkBackgroundMeuPerfil" placeholder="Link da img">
+                    <p>Nome de usuário</p>
+                    <input type="text" id="inputNomeDeUserMeuPerfil" placeholder="Nome de usuário">
+
+                    <div>
+                        <button onclick="AbrirPopUpEditarPerfil('Fechar')">Cancelar</button>
+                        <button onclick="SalvarEdicao()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="containerMusicasPerfilUser"></div>
+        </article>
+    </section>
+
+    <!--? Barra da Música -->
+    <article id="BarraMusica">
+        <div id="InfosBarraMusica">
+            <img src="Assets/Imgs/Icons/Rectangle 39.png" id="imgMusicaBarraMusica">
+
+            <div>
+                <p id="NomeMusicaBarraMusica">Nome música</p>
+                <span id="AutorMusicaBarraMusica">Autor música</span>
+            </div>
+
+            <img src="./Assets/Imgs/Icons/icon _heart_ (1).png" id="HeartBarraMusica">
+        </div>
+
+        <div id="PartePlayerBarraMusica">
+
+            <!--? Controles da música -->
+            <div id="controlesBarraMusica">
+                <!--? Random -->
+                <img src="Assets/Imgs/Icons/Random.png" id="RandomBtn">
+            
+                <!--? Back -->
+                <img src="Assets/Imgs/Icons/Back.png" id="BackBtn">
+
+                <!--? Play -->
+                <img src="Assets/Imgs/Icons/Play.png" id="PlayBtn">
+
+                <!--? Next -->
+                <img src="Assets/Imgs/Icons/Next.png" id="NextBtn">
+
+                <!--? Cicle -->
+                <img src="Assets/Imgs/Icons/Cicle.png" id="CicleBtn">
+            </div>
+
+            <input type="range" value="0" id="progressoMusicaBarraMusica">
+        </div>
+
+        <!--? Configs Barra Música -->
+        <div id="ConfigsBarraMusica">
+            <!--? Letra -->
+            <img src="Assets/Imgs/Icons/Artistas.png">
+
+            <!--? Volume -->
+            <div id="containerControleVolume">
+                <img src="Assets/Imgs/Icons/Volume.png" onclick="mutarMusica()">
+
+                <input type="range" value="100" id="inputVolume" oninput="volumeMusica(this.value)">
+            </div>
+        </div>
+    </article>
+
+    <!--? Animação de carregamento 2 -->
+    <div id="carregando">
+        <article>
+        <div class="preloader">
+            <div class="inner">
+            <div class="bolas">
+              <div></div>
+              <div></div>
+              <div></div>                    
+          </div>
+          </div>
+        </div>
+        </article>
+    </div>
+    <!--? fim do preloader --> 
+
+    <!--? audioPlayer -->
+    <audio src="" id="audioPlayer" style="display: none;"></audio>
+
+    <!--? Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+    <script src="Assets/Js/Firebase.js"></script>
+
+    <!--? My Scripts -->
+    <script src="Assets/Js/Musicas.js"></script>
+    <script src="Assets/Js/Paginas.js"></script>
+    <script src="Assets/Js/PostarMusicas.js"></script>
+    <script src="Assets/Js/EditarPerfilUser.js"></script>
+</body>
+</html>
