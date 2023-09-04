@@ -10,7 +10,10 @@
 <body>
     <nav>
         <div id="contaUser">
-            <img src="" id="imgPerfilUser">
+            <div id="containerUserNavBar">
+                <p id="LetraNomePerfilUser"></p>
+                <img src="" id="imgPerfilUser">
+            </div>
 
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M6.5 12C6.5 12.5523 6.05228 13 5.5 13C4.94772 13 4.5 12.5523 4.5 12C4.5 11.4477 4.94772 11 5.5 11C6.05228 11 6.5 11.4477 6.5 12Z" fill="#FCFCFC" stroke="#FCFCFC"/>
@@ -29,7 +32,7 @@
 
         <ul>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png">Playlists</li>
-            <li class="linkPagina"><img src="Assets/Imgs/Icons/Faixas.png">Favoritas</li>
+            <li class="linkPagina" id="btnMusicasFavoritas"><img src="Assets/Imgs/Icons/Faixas.png">Favoritas</li>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Artistas</li>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/friends.png"> Amigos</li>
         </ul>
@@ -37,7 +40,7 @@
         <span>Outros</span>
 
         <ul>
-            <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png"> Adicionar Música</li>
+            <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png" id="arroz"> Adicionar Música</li>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Faixas.png"> Criar Playlist</li>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Adicionar Letra</li>
         </ul>
@@ -158,7 +161,39 @@
         </article>
     </section>
 
-    <!--? Barra da Música -->
+    <section class="Paginas" id="PagFavoritas">
+        <article id="containerMusicasFavoritas">
+            <div id="backgroundPagMusicasFavoritas"></div>
+
+            <div id="headerMusicasFavorias">
+                <img src="Assets/Imgs/Icons/PlayFavoritas.png" id="imgMusicaFavoritaTocandoAgora">
+                <h1>Músicas Curtidas</h1>
+            </div>
+
+            <article id="localMusicasCurtidas">
+                 
+            </article>
+        </article>
+    </section>
+
+    <section class="Paginas" id="PagArtistas">
+        <article id="containerArtista">
+            <div id="coainerBackgroundArtista">
+                <div id="blurBackgroundArtista"></div>
+
+                <div id="coteudoHeaderArtista">
+                    <div id="inforArtista">
+                        <div id="imgPerfilArtista"></div>
+                        <h1 id="NomeArtista"></h1>
+                    </div>
+                    <button id="btnPlayHeaderArtista"></button>
+                </div>
+            </div>
+            <div id="containerMusicasArtista"></div>
+        </article>
+    </section>
+
+    <!--?  ----------------- Barra da Música ---------------->
     <article id="BarraMusica">
         <div id="InfosBarraMusica">
             <img src="Assets/Imgs/Icons/Rectangle 39.png" id="imgMusicaBarraMusica">
@@ -208,7 +243,7 @@
         </div>
     </article>
 
-    <!--? Animação de carregamento 2 -->
+    <!--? ---------- Animação de carregamento 2 ------------->
     <div id="carregando">
         <article>
         <div class="preloader">
@@ -239,5 +274,6 @@
     <script src="Assets/Js/Paginas.js"></script>
     <script src="Assets/Js/PostarMusicas.js"></script>
     <script src="Assets/Js/EditarPerfilUser.js"></script>
+    <script src="Assets/Js/Recomendar.js"></script>
 </body>
 </html>

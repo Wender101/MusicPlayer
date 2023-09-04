@@ -14,6 +14,7 @@ body {
         height: 100vh;
         background: #212124;
         padding: 12px 0px;
+        z-index: 5;
 
         div#contaUser {
             width: calc(100% - 48px);
@@ -22,10 +23,25 @@ body {
             align-items: center;
             justify-content: space-between;
 
-            img {
-                width: 25px;
-                grid-row-end: 20px;
-                border-radius: 5px;
+            div#containerUserNavBar {
+                padding: 5px 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                // background-color: rgb(255, 123, 0);
+                border-radius: 2px;
+                cursor: pointer;
+
+                p#LetraNomePerfilUser {
+                    display: none;
+                }
+
+                img#imgPerfilUser {
+                    width: 25px;
+                    grid-row-end: 20px;
+                    border-radius: 5px;
+                    display: none;
+                }
             }
 
             svg {
@@ -650,6 +666,152 @@ body {
                 }
 
                 div#containerMusicasPerfilUser {
+                    padding-bottom: 100px;
+
+                    section.containerMusica {
+                        max-width: none !important;
+                    }
+                }
+            }
+        }
+
+        &#PagFavoritas {
+            #containerMusicasFavoritas {
+                width: 100%;
+                min-height: 100vh;
+                margin: 0px;
+                padding: 0px;
+                max-width: none;
+
+                div#backgroundPagMusicasFavoritas {
+                    position: fixed;
+                    z-index: -1;
+                    top: 0px;
+                    left: 0px;
+                    width: 100%;
+                    height: 100vh;
+                    background: linear-gradient(to bottom, rgba(0, 255, 255, 0.822), rgba(0, 255, 255, 0.432), transparent);
+                }
+
+                div#headerMusicasFavorias {
+                    width: calc(100% - 40px);
+                    margin: auto;
+                    display: flex;
+                    align-items: end;
+                    gap: 20px;
+                    padding: 50px 20px;
+                    border-bottom: 1px solid #ffffff38;
+
+                    img {
+                        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+                        border-radius: 39px;
+                    }
+
+                    h1 {
+                        font-size: 7em;
+                        // margin-bottom: -23px;
+                        text-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25);
+                    }
+                }
+
+                article#localMusicasCurtidas {
+                    width: 100%;
+                    padding-bottom: 100px;
+                    
+                    section.containerMusica  {
+                        max-width: none;
+
+                        article.containerMusicaLinha  {
+                            padding-top: 0px;
+                            
+                            div.MusicasLinha {
+                                align-items: center;
+
+                                img {
+                                    border-radius: 10px;
+                                }
+
+                                div.TextoMusicaCaixa  {
+                                    
+                                    span {
+                                        color: #ffffff;
+                                    }
+                                }
+
+                                p.GeneroMeuPerfil {
+                                    color: #fff;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &#PagArtistas {
+            padding: 0px;
+
+            article#containerArtista {
+                padding: 0px;
+                width: 100%;
+                margin: 0px;
+
+                div#coainerBackgroundArtista {
+                    width: 100%;
+                    height: 400px;
+                    // background-image: url('https://as2.ftcdn.net/v2/jpg/06/24/26/49/1000_F_624264909_kRNNw1U3lrVQoJVuFa2UsRguhhn6ig21.jpg');
+                    background-position: center;
+                    position: relative;
+                    z-index: 1;
+                    
+                    div#blurBackgroundArtista {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index:1;
+                        background-color: rgba(0, 0, 0, 0.534);
+                        // filter: blur(1px);
+                        background-image: url('../Imgs/Banners/c36fff19b54c90efecc303b86bb9f71a.jpg');
+                        background-position: center center;
+                        background-size: cover;
+                        // background-repeat: no-repeat;
+                    }
+
+                    div#coteudoHeaderArtista {
+                        width: 100%;
+                        height: 100%;
+                        position: absolute;
+                        z-index: 2;
+
+                        h1#NomeArtista {
+                            position: absolute;
+                            bottom: 60px;
+                            left: 50px;
+                            font-size: 5em;
+                        }
+
+                        button#btnPlayHeaderArtista {
+                            width: 100px;
+                            height: 100px;
+                            border-radius: 50%;
+                            display: block;
+                            background-image: url('../Imgs/Icons/DarPlay200.png');
+                            background-position: center center;
+                            background-size: contain;
+                            background-repeat: no-repeat;
+                            border: none;
+                            background-color: #fff;
+                            position: absolute;
+                            bottom: -50px;
+                            left: 50px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                div#containerMusicasArtista {
+                    padding-bottom: 100px;
+
                     section.containerMusica {
                         max-width: none !important;
                     }
@@ -702,7 +864,6 @@ body {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-                    
                 }
 
                 span {

@@ -21,21 +21,6 @@ document.addEventListener("DOMContentLoaded", function () {
   firebase.auth().onAuthStateChanged((usuario) => {
     if(usuario) {
       currentUser.InfoEmail = usuario
-      console.log(currentUser)
-      
-      try {
-        if(currentUser.InfoEmail.photoURL != null) {
-          document.getElementById('imgPerfilUser').src = currentUser.InfoEmail.photoURL
-          document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
-        } else {
-          document.getElementById('imgPerfilUser').src = './Assets/Imgs/Icons/userIconWhite.png'
-          document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(./Assets/Imgs/Icons/userIconWhite.png')`
-        }
-        
-      } catch{
-        document.getElementById('imgPerfilUser').src = './Assets/Imgs/Icons/userIconWhite.png'
-        document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(./Assets/Imgs/Icons/userIconWhite.png')`
-      }
 
       db.collection('Users').get().then((snapshot) => {
         let contador = 0
@@ -53,6 +38,31 @@ document.addEventListener("DOMContentLoaded", function () {
             if(InfoUsers.Email == currentUser.InfoEmail.email) {
               currentUser.User = InfoUsers
               currentUser.User.Id = Users.id
+
+              try {
+                if(currentUser.InfoEmail.photoURL != null) {
+                  const imgPerfilUser = document.getElementById('imgPerfilUser')
+                  imgPerfilUser.src = currentUser.InfoEmail.photoURL
+                  imgPerfilUser.style.display = 'block'
+        
+                  document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
+                } else {
+                  //? Vai colocar a primeira letra do email e um background que foi salvo
+                  const containerUserNavBar = document.getElementById('containerUserNavBar')
+                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
+                  LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
+                  LetraNomePerfilUser.style.display = 'block'
+                }
+                
+              } catch{
+                //? Vai colocar a primeira letra do email e um background que foi salvo
+                const containerUserNavBar = document.getElementById('containerUserNavBar')
+                containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
+                LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
+                LetraNomePerfilUser.style.display = 'block'
+              }
             }
 
           contador++
@@ -70,3 +80,7 @@ function generateUniqueUid() {
 function login() {
   auth.signInWithPopup(provider)
 }
+
+document.getElementById('containerUserNavBar').addEventListener('click', () => {
+  location.href = 'Cadastro.html'
+})

@@ -5,6 +5,10 @@ const btnLogin = document.getElementById('btnLogin')
 const btnCadastro = document.getElementById('btnCadastro')
 const containerNomeUser = document.getElementById('containerNomeUser')
 
+function RandomColor() {
+    return '#' + Math.floor(Math.random()*16777215).toString(16)  //gerador de cores aleatórias
+}
+
 function atualizarCadastro() {
 
     if(inputEmailUser.value.trim() != '' && inputSenhaUser.value.trim() != '') {
@@ -25,11 +29,9 @@ function FazerLogin() {
 }
 
 function Cadastrar() {
-    console.log(1111);
     containerNomeUser.style.display = 'block'
 
     if(inputNomeUser.value.trim() != '' && inputNomeUser.value.length > 0) {
-        console.log(2222);
         auth.createUserWithEmailAndPassword(inputEmailUser.value, inputSenhaUser.value).then(user => {
             console.log('Usuario', user)
 
@@ -48,8 +50,12 @@ function Cadastrar() {
                     Genero: [],
                     Playlists: []
                 },
-                Background: null,
-                FotoPerfil: null
+
+                Personalizar: {
+                    Background: null,
+                    FotoPerfil: null,
+                    BackgroundPerfil: RandomColor()
+                }
             }
 
             db.collection('Users').add(ContaUser).then(() => {
