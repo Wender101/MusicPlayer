@@ -86,6 +86,7 @@ function carregarMusicas() {
         const PesquisaFormatada = formatarTexto(Pesquisa)
     
         let contadorMusicasLinha = 0
+        let arrayMusicasRetornadas = []
         for (let c = 0; c < TodasMusicas.length; c++) {
             const NomeMusica = formatarTexto(TodasMusicas[c].NomeMusica)
             const Autor = formatarTexto(TodasMusicas[c].Autor)
@@ -168,7 +169,7 @@ function carregarMusicas() {
                         document.getElementById('NomeArtista').innerText = span.innerText
                         document.getElementById('containerMusicasArtista').innerHTML = ''
                         document.querySelector('body').style.overflow = 'hidden'
-                        RetornarMusicas(span.innerText, document.getElementById('containerMusicasArtista'), 'Indeterminado', 'Linha', false, true)
+                        RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
                     })
 
                 } else if(Estilo == 'Linha') {
@@ -417,6 +418,17 @@ function carregarMusicas() {
                                 Musicas: musicasFavoritasUser,
                                 Numero: contadorTodasAsMusicas,
                             }
+
+                            DarPlayMusica(musicasFavoritasUser[num], num)
+                        })
+
+                        //? Ao clicar no btn de play
+                        document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
+                            ListaProxMusica = {
+                                Musicas: musicasFavoritasUser,
+                                Numero: 0,
+                            }
+
                             DarPlayMusica(musicasFavoritasUser[num], num)
                         })
 
@@ -445,6 +457,96 @@ function carregarMusicas() {
         }
     }
     
+    async function RetornarMusicasArtista(Artsita, Local) {
+        const article = document.createElement('article')
+        article.className = 'containerMusicasOverflow'
+        let ArtistaFormadado = formatarTexto(Artsita)
+        let contadorMusicasLinha = -1
+        let arrayMusicasArtista = [] //? Vai salvar as músicas do artista pesquisado para poder colocar como lista de prox músicas
+
+        for(let c = 0; c < TodasMusicas.length; c++) {
+            let AutorFormadato  =  formatarTexto(TodasMusicas[c].Autor)
+
+
+            if(ArtistaFormadado.includes(AutorFormadato) || AutorFormadato.includes(ArtistaFormadado)) {
+                contadorMusicasLinha++
+                arrayMusicasArtista.push(TodasMusicas[c])
+                article.className = 'containerMusicaLinha'
+
+                const div = document.createElement('div')
+                const divPrimeiraParte = document.createElement('div')
+                const contador = document.createElement('p')
+                const img = document.createElement('img')
+                const divTexto = document.createElement('div')
+                const Nome = document.createElement('p')
+                const AutorDaMusica = document.createElement('span')
+                const Genero = document.createElement('p')
+                const Heart = document.createElement('img')
+
+                div.className = 'MusicasLinha'
+                divTexto.className = 'TextoMusicaCaixa'
+                Heart.className = 'btnCurtirMeuPerfil'
+                img.className = 'ImgMusicaMeuPerfil'
+                Genero.className = 'GeneroMeuPerfil'
+
+                contador.innerText = contadorMusicasLinha + 1
+                img.src = TodasMusicas[c].LinkImg
+                Nome.innerText = TodasMusicas[c].NomeMusica
+                AutorDaMusica.innerText = TodasMusicas[c].Autor
+                Genero.innerText = TodasMusicas[c].Genero
+                Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
+                
+                divTexto.appendChild(Nome)
+                divTexto.appendChild(AutorDaMusica)
+                divPrimeiraParte.appendChild(contador)
+                divPrimeiraParte.appendChild(img)
+                divPrimeiraParte.appendChild(divTexto)
+                div.appendChild(divPrimeiraParte)
+                div.appendChild(Genero)
+                div.appendChild(Heart)
+                article.appendChild(div)
+
+                
+                //? Ao clicar na música
+                divPrimeiraParte.addEventListener('click', () => {
+                    ListaProxMusica = {
+                        Musicas: arrayMusicasArtista,
+                        Numero: contadorMusicasLinha,
+                    }
+
+                    DarPlayMusica(TodasMusicas[c], c)
+                })
+
+                //? Ao clicar no btn de play
+                document.getElementById('btnPlayHeaderArtista').addEventListener('click', () => {
+                    ListaProxMusica = {
+                        Musicas: arrayMusicasArtista,
+                        Numero: 0,
+                    }
+
+                    DarPlayMusica(TodasMusicas[c], c)
+                })
+
+                //? Vai checar se as músicas foram curtidas pelo user
+                FavoritarDesfavoritarMusica(arrayMusicasArtista[contadorMusicasLinha].Id, 'Checar').then((resolve) => {
+                    Heart.src = resolve
+                })
+
+                //? Vai curtir / descurtir a música
+                Heart.addEventListener('click', () => {
+                    FavoritarDesfavoritarMusica(arrayMusicasArtista[contadorMusicasLinha].Id, 'Editar').then((resolve) => {
+                        Heart.src = resolve
+                    })
+                })
+            }
+        }
+
+        const section = document.createElement('section')
+        section.className = 'containerMusica'
+        section.appendChild(article)
+        Local.appendChild(section)
+    }
+
     async function RetornarArtistas(Pesquisa, Local, Estilo = 'Linha') {
         if(Estilo == 'Perfil') {
 
@@ -485,7 +587,7 @@ function carregarMusicas() {
             let ArtistasDasMusicasFavoritasUser = ordernarArray(ArtistasFavoritos)
 
             //? Vai recomendar os generos que o user gosta
-            console.log(GenerosDasMusicasFavoritasUser);
+            // console.log(GenerosDasMusicasFavoritasUser);
             if(GenerosDasMusicasFavoritasUser.length > 2 && ArtistasDasMusicasFavoritasUser.length > 2) {
                 RetornarMusicas(GenerosDasMusicasFavoritasUser[0], containerMain)
                 RetornarMusicas(ArtistasDasMusicasFavoritasUser[0], containerMain)
@@ -716,7 +818,6 @@ function BackSong() {
 function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
     let MusicaEncontrada = false
     return new Promise((resolve, reject) => {
-        console.log('Function favoritar');
         for(let c = 0; c <= currentUser.User.MusicasCurtidas.length; c++) {
             try {
                 if(currentUser.User.MusicasCurtidas[c] == IdMusica && MusicaEncontrada == false) {

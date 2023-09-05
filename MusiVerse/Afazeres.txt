@@ -2,8 +2,4 @@ Os inputs não tem animação quando clicamos em prosseguir sem preenche-los
 
 Sistema de recomendação através do que o user pesquisa e pricipalmente pelos artistas que ele segue, as músicas que ele mais curtir e assim recomendar músicas com o msm genêro e o mesmo autor
 
-Ao curtir as músicas aléatorias ele curti uma música errada no array Todas as músicas, tem que criar uma var para armazer a lista das proximas músicas, arrumar o dar play para tocar a lista de prox músicas.
-
-O coração da música tocando agora tem que mudar para curtido caso a música atual for uma música curtida ou vise-versa. Essa função vai ser a propria função de curtir mas passando um condicional para ele apenas checar se a música esta curtida ou n e retornar assim ele vai mudar o coração
-
-Ao clicar no nome do autor da música o user vai para uma página onde vai aparecer apenas músicas desse autor
+Adicionar no local a música adicionada pelo user para que ele n precise atualizar a página para ver
