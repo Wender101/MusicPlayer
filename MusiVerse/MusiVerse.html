@@ -6,6 +6,7 @@
     <title>Musi ._. Verse</title>
 
     <link rel="stylesheet" href="Assets/Sass/Home.css">
+    <link rel="stylesheet" href="Assets/Sass/Geral.css">
 </head>
 <body>
     <nav>
@@ -243,7 +244,7 @@
         </div>
     </article>
 
-    <!--? ---------- Animação de carregamento 2 ------------->
+    <!--? ---------- Animação de carregamento ------------->
     <div id="carregando">
         <article>
         <div class="preloader">
@@ -258,6 +259,26 @@
         </article>
     </div>
     <!--? fim do preloader --> 
+
+    <!--? --------------- Astronauta ----------------------->
+    <div id="CarregamentoTela1">
+        
+        <div class="preloader">
+            <div class="inner">
+            <div class="bolas">
+              <div></div>
+              <div></div>
+              <div></div>                    
+          </div>
+          </div>
+        </div>
+
+        <div id="containerMensagemAleatoria">
+            <strong>Você sabia que</strong>
+            <p id="MensagemAleatoria"></p>
+        </div>
+    </div>
+    <!--? --------------- Fim Astronauta ------------------->
 
     <!--? audioPlayer -->
     <audio src="" id="audioPlayer" style="display: none;"></audio>
@@ -275,5 +296,64 @@
     <script src="Assets/Js/PostarMusicas.js"></script>
     <script src="Assets/Js/EditarPerfilUser.js"></script>
     <script src="Assets/Js/Recomendar.js"></script>
+
+    <script>
+        const mensagens = [
+            "O primeiro som que um bebê ouve é o som do coração de sua mãe.",
+            "A música é um dos poucos idiomas que todos entendem, independentemente de sua língua materna.",
+            "A música pode nos ajudar a expressar nossas emoções, tanto positivas quanto negativas.",
+            "A música pode nos ajudar a relaxar e a nos concentrar.",
+            "A música pode nos ajudar a aprender e a crescer.",
+            "A música pode nos ajudar a nos conectar com outras pessoas.",
+            "A música pode nos levar a lugares distantes e a tempos diferentes.",
+            "A música pode nos fazer sentir felizes, tristes, zangados, apaixonados, e muito mais.",
+            "A música é uma parte essencial da nossa cultura e da nossa história.",
+            "A música é uma força poderosa que pode nos afetar de muitas maneiras diferentes.",
+            "A música é uma parte importante da nossa vida e nos torna mais humanos.",
+            "A música é uma forma de arte que pode nos inspirar e nos motivar.",
+            "A música é uma forma de expressão que pode nos ajudar a nos conectar com nosso eu interior.",
+            "A música é uma forma de comunicação que pode nos ajudar a nos comunicar com os outros.",
+            "A música é uma forma de entretenimento que pode nos divertir e nos relaxar.",
+            "A música é uma forma de educação que pode nos ensinar sobre o mundo ao nosso redor.",
+        ]
+
+        document.getElementById('MensagemAleatoria').innerText = mensagens[Math.floor(Math.random() * mensagens.length)]
+
+        const gifsCarregando = ['Rebobinando', 'Fita2', 'Lovesong']
+        const img = document.getElementById("ImgAstronauta")
+        // img.src = `./Assets/Imgs/Icons/Carregamento/${gifsCarregando[Math.floor(Math.random() * gifsCarregando.length)]}.gif`
+
+        function getBackgroundColor(img) {
+            // Get the width and height of the image.
+            const width = img.width;
+            const height = img.height;
+
+            // Get the canvas element.
+            const canvas = document.createElement("canvas");
+            canvas.width = width;
+            canvas.height = height;
+
+            // Set the canvas background color to transparent.
+            canvas.style.backgroundColor = "transparent";
+
+            // Draw the image on the canvas.
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
+
+            // Get the color of the first pixel in the canvas.
+            const color = ctx.getImageData(0, 0, 1, 1).data;
+
+            // Return the color as an RGB object.
+            return `rgb(${color[0]}, ${color[1]}, ${color[2]})`
+        }
+
+        // Example usage
+        // const backgroundColor = getBackgroundColor(img);
+
+        // Do something with the background color, such as display it in the console.
+        // console.log(backgroundColor)
+        // document.getElementById('AstronautaCarregamento').style.backgroundColor = backgroundColor
+
+    </script>
 </body>
 </html>

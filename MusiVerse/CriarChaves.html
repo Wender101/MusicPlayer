@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Chaves</title>
+</head>
+<body>
+    <p>Número de chaves</p>
+    <input type="number">
+
+    <button onclick="CriarChave()">Criar Chave</button>
+
+    <article id="containerTabela"></article>
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.7/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-auth.js"></script>
+    <script src="Assets/Js/Firebase.js"></script>
+
+    <script>
+        let ArrayChaves = []
+        let Chaves
+
+        function MostrarChaves() {
+            db.collection('Chaves').get().then(snapshot => {
+                snapshot.docs.forEach(ChavesAcesso => {
+                    Chaves = ChavesAcesso
+
+                    if(Chaves.data().ChavesDeAcesso) {
+                        ArrayChaves = Chaves.data().ChavesDeAcesso
+                        criarTabelaChaves()
+                    }
+                })
+            })
+        } MostrarChaves()
+
+        function criarTabelaChaves() {
+            const table = document.createElement('table')
+
+            // Adiciona as linhas à tabela
+            for (const value of ArrayChaves) {
+                const row = document.createElement('tr')
+                const cell = document.createElement('td')
+                cell.textContent = value
+                row.appendChild(cell)
+                table.appendChild(row)
+            }
+
+            // Adiciona a tabela ao documento
+            document.getElementById('containerTabela').appendChild(table)
+        }
+
+        function CriarChave() {
+            const numChaves = document.querySelector('input')
+
+            if(numChaves.value > 0 && numChaves.value < 31) {
+                for(let c = 0; c < numChaves.value; c++) {
+                    createRandomString(ArrayChaves)
+                }
+            }
+
+            //? Vai salvar as chaves no banco de dados
+            // Cria uma tabela
+            db.collection('Chaves').doc(Chaves.id).update({ChavesDeAcesso: ArrayChaves}).then(() => {
+                document.getElementById('containerTabela').innerHTML = ''
+                criarTabelaChaves()
+            })
+        }
+
+        function createRandomString(array) {
+            // Cria um array com todos os caracteres possíveis
+            const characters = [
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+                'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't',
+                'u', 'v', 'w', 'x', 'y', 'z', '!', '@', '#', '$',
+                '%', '^', '&', '*', '(', ')', '-', '_', '+', '=',
+                '{', '}', '[', ']', '\\', ',', '.', '/', ';', ':',
+                ' ',
+            ]
+
+            // Gera uma string de 26 caracteres aleatórios
+            const randomString = Array(26).fill(null).map(() => {
+                return characters[Math.floor(Math.random() * characters.length)]
+            })
+
+            // Adiciona a string ao array
+            array.push(randomString.join(''))
+        }
+    </script>
+</body>
+</html>

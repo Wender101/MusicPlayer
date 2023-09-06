@@ -72,7 +72,7 @@ body {
                 border-radius: 17px;
                 overflow: hidden;
 
-                &#containerNomeUser {
+                &#containerNomeUser, &#containerChave {
                     display: none;
                 }
 
@@ -151,5 +151,9 @@ body {
                 }
             }
         }
+    }
+
+    div#CarregamentoTela1 {
+        display: flex;
     }
 }

@@ -221,6 +221,38 @@ section.containerMusica article.containerMusicaLinha div.MusicasLinha img.btnCur
   }
 }
 /* end: Preloader */
+div#CarregamentoTela1 {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #101014;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria {
+  position: absolute;
+  bottom: 30px;
+  text-align: center;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria .preloader .inner {
+  position: relative;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria #ImgAstronauta {
+  width: 300px;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria p#MensagemAleatoria {
+  width: 95%;
+  max-width: 400px;
+  margin: 10px auto 0px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5490196078);
+}
+
 body {
   width: 100%;
   height: 100vh;
@@ -285,7 +317,7 @@ body main section div.containerInputCadastro {
   border-radius: 17px;
   overflow: hidden;
 }
-body main section div.containerInputCadastro#containerNomeUser {
+body main section div.containerInputCadastro#containerNomeUser, body main section div.containerInputCadastro#containerChave {
   display: none;
 }
 body main section div.containerInputCadastro input {
@@ -349,4 +381,7 @@ body main section div button {
   border-radius: 17px;
   background-color: rgba(102, 102, 102, 0.13);
   cursor: pointer;
+}
+body div#CarregamentoTela1 {
+  display: flex;
 }/*# sourceMappingURL=Cadastro.css.map */

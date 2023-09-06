@@ -57,11 +57,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 
               } catch{
                 //? Vai colocar a primeira letra do email e um background que foi salvo
-                const containerUserNavBar = document.getElementById('containerUserNavBar')
-                containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
-                const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
-                LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
-                LetraNomePerfilUser.style.display = 'block'
+                try {
+                  const containerUserNavBar = document.getElementById('containerUserNavBar')
+                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
+                  LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
+                  LetraNomePerfilUser.style.display = 'block'
+                } catch {}
               }
             }
 
@@ -81,6 +83,8 @@ function login() {
   auth.signInWithPopup(provider)
 }
 
-document.getElementById('containerUserNavBar').addEventListener('click', () => {
-  location.href = 'Cadastro.html'
-})
+try {
+  document.getElementById('containerUserNavBar').addEventListener('click', () => {
+    location.href = 'Cadastro.html'
+  })
+} catch{}

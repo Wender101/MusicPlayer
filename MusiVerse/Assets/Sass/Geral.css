@@ -220,4 +220,35 @@ section.containerMusica article.containerMusicaLinha div.MusicasLinha img.btnCur
     opacity: 1;
   }
 }
-/* end: Preloader *//*# sourceMappingURL=Geral.css.map */
+/* end: Preloader */
+div#CarregamentoTela1 {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background-color: #101014;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria {
+  position: absolute;
+  bottom: 30px;
+  text-align: center;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria .preloader .inner {
+  position: relative;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria #ImgAstronauta {
+  width: 300px;
+}
+div#CarregamentoTela1 div#containerMensagemAleatoria p#MensagemAleatoria {
+  width: 95%;
+  max-width: 400px;
+  margin: 10px auto 0px;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5490196078);
+}/*# sourceMappingURL=Geral.css.map */

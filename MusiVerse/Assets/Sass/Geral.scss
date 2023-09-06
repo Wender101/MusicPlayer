@@ -253,3 +253,45 @@ section.containerMusica {
   } 
 }
 /* end: Preloader */
+
+//? Astronauta
+div#CarregamentoTela1 {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background-color: #101014;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div#containerMensagemAleatoria {
+        position: absolute;
+        bottom: 30px;
+        text-align: center;
+
+        .preloader {
+            .inner {
+                position: relative;
+            }
+        }
+        
+        #ImgAstronauta {
+            width: 300px;
+            // height: 300px;
+            // object-fit: cover;
+            // border-radius: 50%;
+        }
+
+        p#MensagemAleatoria {
+            width: 95%;
+            max-width: 400px;
+            margin: 10px auto 0px;
+            text-align: center;
+            font-size: 13px;
+            color: #ffffff8c;
+        }
+    }
+}

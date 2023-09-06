@@ -652,6 +652,11 @@ function carregarMusicas() {
         document.getElementById('localMusicasCurtidas').innerHTML = ''
         RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
     })
+
+    //? Vai fechar a tela de carregamento
+    try {
+        document.getElementById('CarregamentoTela1').style.display = 'none'
+    } catch{}
 })
 
 let trocouDeMusica = false

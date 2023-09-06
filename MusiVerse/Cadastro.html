@@ -40,6 +40,13 @@
                     </div>
                 </div>
 
+                <div class="containerInputCadastro" id="containerChave">
+                    <input type="text" placeholder="Chave de acesso" id="inputChave" oninput="atualizarCadastro()">
+                    <div>
+                        <img src="Assets/Imgs/Icons/key.png">
+                    </div>
+                </div>
+
                 <div>
                     <button id="btnLogin" onclick="FazerLogin()">Login</button>
                     <button onclick="Cadastrar()" id="btnCadastro">Cadastrar</button>
@@ -47,6 +54,24 @@
             </article>
         </section>
     </main>
+
+    <div id="CarregamentoTela1" style="display: none;">
+        
+        <div class="preloader">
+            <div class="inner">
+            <div class="bolas">
+              <div></div>
+              <div></div>
+              <div></div>                    
+          </div>
+          </div>
+        </div>
+
+        <div id="containerMensagemAleatoria">
+            <strong style="color: #fff;">Estamos finalizando por aqui</strong>
+            <p id="MensagemAleatoria">Quase terminando...</p>
+        </div>
+    </div>
 
      <!--? Firebase -->
      <script src="https://www.gstatic.com/firebasejs/8.2.10/firebase-app.js"></script>
