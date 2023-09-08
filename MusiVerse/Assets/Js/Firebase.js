@@ -69,7 +69,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
           contador++
         })
-      })
+      }).catch((e) => {
+        location.href = `Error.html`
+    })
+    } else {
+      // Obtém a URL atual
+      var url = window.location.href
+
+      // Divide a URL em partes usando a barra '/'
+      var partesDaURL = url.split('/')
+
+      // Obtém a última parte da URL, que é o nome do arquivo
+      var nomeDoArquivo = partesDaURL[partesDaURL.length - 1]
+
+      if(nomeDoArquivo != 'Cadastro.html' && nomeDoArquivo != 'Error.html') {
+        location.href = `Cadastro.html`
+      }
     }
   })
 })

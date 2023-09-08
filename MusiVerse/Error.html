@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Musi .-. Verse | Error</title>
+
+    <style>
+        @import './Assets/Sass/Geral.css';
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            background-color: #000013;
+            background-image: url('./Assets/Imgs/Icons/Error/Small\ stars.png');
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+        }
+        
+        main {
+            width: 90%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: auto;
+        }
+
+        main > section#text {
+            max-width: 480px;
+        }
+
+        main > section#text > h1 {
+            font-size: 40px;
+            margin-bottom: 21px;
+        }
+
+        main > section#text > p {
+            font-size: 16px;
+            margin-bottom: 40px;
+            color: #d6d6f2a6;
+        }
+
+        main > section#text > div {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            gap: 20px;
+        }
+
+        main > section#text > div > button {
+            background-color: #00ffffd2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            /* border-radius: 5px; */
+            cursor: pointer;
+        }
+
+        main > section#error > h1 {
+            font-size: 17em;
+            color: #00ffff;
+        }
+
+        main > section#error > h1 > span {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section id="text">
+            <h1>Ops, parece que algo deu errado</h1>
+            <p>A página que você estava procurando não foi encontrada. Verifique se a URL está correta, caso você esteja na aba anônina o seu navegador pode bloquear algumas funções ocasionando em erro.</p>
+    
+            <div>
+                <button onclick="Voltar()">Voltar</button>
+                <button onclick="Home()">Ir Para o Home</button>
+            </div>
+        </section>
+    
+        <section id="error">
+            <h1>4<span>0</span>4</h1>
+            <!-- <img src="Assets/Imgs/Icons/Error/4042.png" alt="Error 404"> -->
+        </section>
+    </main>
+
+    <script>
+        function Voltar() {
+            window.history.back()
+        }
+
+        function Home() {
+            location.href = 'MusiVerse.html'
+        }
+    </script>
+</body>
+</html>

@@ -59,6 +59,8 @@ function carregarMusicas() {
                 contador++
             })
     
+        }).catch((e) => {
+            location.href = `Error.html`
         })
     })
 } carregarMusicas().then(() => {

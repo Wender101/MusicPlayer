@@ -61,26 +61,31 @@ function Cadastrar() {
                 }
             }
 
-            db.collection('Users').add(ContaUser).then(() => {
-                //? Vai deletar a chave de acesso
-                db.collection('Chaves').get().then(snapshot => {
-                    snapshot.docs.forEach(ChavesAcesso => {
-                        const Chaves = ChavesAcesso.data()
-                        console.log('Chaves', ChavesAcesso)
-                        for(let c = 0; c <= Chaves.ChavesDeAcesso.length; c++) {
-                            try {
-                                console.log(Chaves.ChavesDeAcesso[c], inputChave.value);
-                                if(Chaves.ChavesDeAcesso[c] == inputChave.value) {
-                                    let ArrayChavesDeAcesso = Chaves.ChavesDeAcesso
-                                    ArrayChavesDeAcesso.splice(c, 1)
+            //? Vai deletar a chave de acesso
+            db.collection('Chaves').get().then(snapshot => {
+                snapshot.docs.forEach(ChavesAcesso => {
+                    const Chaves = ChavesAcesso.data()
+                    console.log('Chaves', ChavesAcesso)
+                    for(let c = 0; c <= Chaves.ChavesDeAcesso.length; c++) {
+                        try {
+                            console.log(Chaves.ChavesDeAcesso[c], inputChave.value);
+                            if(Chaves.ChavesDeAcesso[c] == inputChave.value) {
+                                let ArrayChavesDeAcesso = Chaves.ChavesDeAcesso
+                                ArrayChavesDeAcesso.splice(c, 1)
 
-                                    db.collection('Chaves').doc(ChavesAcesso.id).update({ChavesDeAcesso: ArrayChavesDeAcesso}).then(() => {
+                                db.collection('Chaves').doc(ChavesAcesso.id).update({ChavesDeAcesso: ArrayChavesDeAcesso}).then(() => {
+                                    //? Vai salvar a conta do user
+                                    db.collection('Users').add(ContaUser).then(() => {
                                         location.href = 'MusiVerse.html'
+                                    }).catch((e) => {
+                                        alert('Error ao tentar criar o user: ' + e)
                                     })
-                                }
-                            } catch{}
-                        }
-                    })
+                                }).catch((e) => {
+                                    alert('Error ao tentar criar o user: ' + e)
+                                })
+                            }
+                        } catch{}
+                    }
                 })
             })
 
