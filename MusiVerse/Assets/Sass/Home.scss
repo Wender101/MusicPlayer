@@ -80,6 +80,62 @@ body {
         }
     }
 
+    div#navCelular {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+        height: 40px;
+        padding: 10px 0px;
+        z-index: 7;
+        background: #212124;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        
+        ul {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+
+            li {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+
+                img {
+                    width: 20px;
+                    height: 20px;
+                    object-fit: cover;
+                    object-position: center;
+                }
+
+                p {
+                    color: #ffffff98;
+                    font-size: 11px;
+                }
+
+                div#imgPerfilUserNavCell {
+                    width: 20px;
+                    height: 20px;
+                    // padding: 5px 8px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background-color: rgb(255, 123, 0);
+                    border-radius: 2px;
+                    cursor: pointer;
+
+                    p#LetraNomePerfilUserNavCell {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+
     //? SearchBar -------------
     div#SearchBar {
         width: 340px;
@@ -111,6 +167,112 @@ body {
         position: absolute;
         top: 0px;
         right: 0px;
+
+        section#MusicasAleatoriasBanner {
+            display: none;
+            margin: 0px;
+            background: linear-gradient(to bottom, rgb(0, 209, 209), rgba(0, 209, 209, 0.26), #1a1a1d);
+            padding: 100px 0px 0px;
+
+            article {
+                width: calc(90% - 60px);
+                margin: auto;
+                display: flex;
+                // align-items: center;
+                padding: 30px;
+                gap: 20px;
+                border-radius: 5px;
+                background-color: #1a1a1d;
+                // background: linear-gradient(to right, #1a1a1d, transparent);
+
+                // img {
+                //     width: 300px;
+                //     height: 300px;
+                //     object-fit: cover;
+                //     object-position: center;
+                // }
+
+                div#containerMusicasAleatoriasBanner {
+                    width: 300px;
+                    height: 300px;
+                    display: grid;
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 10px;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        object-position: center;
+                        display: block;
+                    }
+                }
+
+                div#textoMusicasAleatoriasBanner {
+                    width: calc(100% - 330px);
+                    display: flex;
+                    flex-direction: column;
+                    gap: 40px;
+
+                    h1 {
+                        font-size: 3.5em;
+                    }
+                }
+
+            }
+        }
+
+        section#containerFavoritasDoPerfil {
+            width: 90%;
+            margin: 120px auto -30px;
+            
+            article {
+                margin-top: 14px;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Dividir em no máximo 3 colunas com largura mínima de 300px */
+                gap: 20px;
+
+                div.containerPlaylistFavoritaPerfil {
+                    height: 60px;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                    overflow: hidden;
+                    border-radius: 5px;
+                    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                    cursor: pointer;
+                    position: relative;
+
+                    &:hover div.iconPlayPlaylistFavoritaPerfil {
+                        transition: 200ms opacity  ease-in-out;
+                        opacity: 1;
+                    }
+
+                    img {
+                        height: 100%;
+                        object-fit: cover;
+                        object-fit: contain;
+                    }
+
+                    p {
+
+                    }
+
+                    div.iconPlayPlaylistFavoritaPerfil {
+                        width: 50px;
+                        height: 50px;
+                        position: absolute;
+                        right: 5px;
+                        opacity: 0;
+                        border-radius: 50%;
+                        // background-color: red;
+                        background-image: url('../Imgs/Icons/DarPlay.png');
+                        background-size: cover;
+                    }
+                }
+            }
+
+        }
 
         section#containerMain {
             width: 90%;
@@ -818,6 +980,137 @@ body {
                 }
             }
         }
+
+        &#PagMusicaTocandoAgora {
+            padding: 0px;
+            z-index: 6;
+
+            &.Open {
+                display: none;
+            }
+
+            article {
+                width: 90%;
+                padding: 20px 0px;
+                max-width: 340px;
+
+                div#headerPagMusicaTocandoAgora {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+
+                    img {
+                        left: 0px;
+                        position: absolute;
+                    }
+                }
+
+                div#mainPagMusicaTocandoAgora {
+                    // width: 90%;
+                    margin: 20px auto;
+
+                    div#containerImgMusicaTocandoAgora {
+                        width: 100%; /* Define a largura para 100% */
+                        padding-top: 100%; /* Define a altura com base na largura (1:1) */
+                        position: relative; /* Permite posicionar o conteúdo interno */
+                        background-color: #25262cce; /* Cor de fundo, você pode personalizar conforme necessário */
+                        background-size: cover; /* Ajusta a imagem de fundo para cobrir toda a área */
+                        background-repeat: no-repeat;
+                        background-position: center;
+
+                        &::before {
+                            content: ""; /* Adiciona um pseudo-elemento para criar conteúdo interno */
+                            display: block;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            right: 0;
+                            bottom: 0;
+                            background-image: url('sua-imagem.jpg'); /* Adicione uma imagem de fundo ou personalize conforme necessário */
+                            background-size: cover; /* Ajusta a imagem de fundo para cobrir toda a área */
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: contain;
+                            display: none;
+                        }
+                    }
+
+
+                    div {
+                        h1 {
+                            width: 100%;
+                            // max-width: 200px;
+                            font-size: 18px;
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            margin: 20px 0px 10px;
+                        }
+
+                        p {
+                            width: 100%;
+                            // max-width: 200px;
+                            font-size: 14px;
+                            color: rgba(255, 255, 255, 0.4196078431);
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                        }
+                    }
+                }
+
+                div#controlesPagMusicaTocandoAgora {
+                    width: 100%;
+        
+                    div#containerControles {
+                        width: 80%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        margin: 20px auto;
+        
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            object-fit: contain;
+                            cursor: pointer;
+        
+                            &#PlayBtn {
+                                width: 28px;
+                                height: 28px;
+                            }
+                        }
+                    }
+        
+                    input {
+                        width: 100%;
+                        // margin: 10px;
+                        appearance: none;
+                        height: 5px;
+                        background: #4C4E54;
+                        border-radius: 10px;
+                        cursor: pointer;
+        
+                        &::-webkit-slider-thumb {
+                            appearance: none;
+                            width: 10px;
+                            height: 10px;
+                            border-radius: 50%; 
+                            background: #00e1ff;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -837,6 +1130,10 @@ body {
         padding: 20px;
         z-index: 5;
 
+        &.BarraMusicaOpen {
+            bottom: 0px;
+        }
+
         div#InfosBarraMusica {
             width: 200px;
             display: flex;
@@ -849,6 +1146,7 @@ body {
                 height: 64px;
                 object-fit: cover;
                 object-position: center;
+                border-radius: 10px;
             }
 
             div {
@@ -889,7 +1187,8 @@ body {
         }
 
         div#PartePlayerBarraMusica {
-            width: 500px;
+            width: calc(90% - 400px);
+            max-width: 500px;
 
             div#controlesBarraMusica {
                 width: 200px;
@@ -960,6 +1259,17 @@ body {
                         background: #00e1ff;
                     }
                 }
+            }
+        }
+
+        div#ConfigsBarraMusicaCell {
+            display: none;
+            gap: 20px;
+
+            img {
+                width: 24px;
+                height: 24px;
+                object-fit: contain;
             }
         }
     }

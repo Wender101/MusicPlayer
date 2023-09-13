@@ -1,0 +1,104 @@
+@import './Geral.scss';
+
+@media screen and (max-width: 1413px) {
+    div#headerMusicasFavorias {
+        img {
+            width: 150px;
+            border-radius: 29px !important;
+        }
+
+        h1 {
+            font-size: 6vw !important;
+        }
+    }
+}
+
+//? Versão cell
+@media screen and (max-width: 628px) {
+    nav {
+        left: -100vw !important;
+    }
+
+    div#navCelular {
+        display: flex !important;
+    }
+
+    main {
+        width: 100% !important;
+        left: 0px !important;
+        right: auto !important;
+    }
+
+    section.Paginas {
+        width: 100% !important;
+        left: 0px !important;
+        right: auto !important;
+
+        &.Open {
+            display: block !important;
+        }
+    }
+
+    article#BarraMusica {
+        &.BarraMusicaOpen {
+            bottom: 60px !important;
+        }
+
+        div#InfosBarraMusica {
+            align-items: start !important;
+            width: 70% !important;
+
+            img#imgMusicaBarraMusica {
+                width: 50px !important;
+                height: 50px !important;
+            }
+
+            div {
+                width: 70% !important;
+                gap: 10px !important;
+                height: 100% !important;
+                justify-content: space-evenly !important;
+
+                p, span {
+                    max-width: none !important;
+                    // overflow: visible !important;
+                }
+            }
+
+            img#HeartBarraMusica {
+                display: none !important;
+            }
+        }
+
+        div#PartePlayerBarraMusica {
+            display: none;
+        }
+
+        div#ConfigsBarraMusica {
+            display: none !important;
+        }
+
+        div#ConfigsBarraMusicaCell {
+            display: flex !important;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    div#headerMusicasFavorias {
+        img {
+            width: 100px;
+            border-radius: 20px !important;
+        }
+
+        h1 {
+            font-size: 5vw !important;
+        }
+    }
+
+    div.MusicasLinha {
+        p.GeneroMeuPerfil {
+            display: none;
+        }
+    }
+}

@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                   imgPerfilUser.style.display = 'block'
         
                   document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
+                  document.getElementById('imgPerfilUserNavCell').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
                 } else {
                   //? Vai colocar a primeira letra do email e um background que foi salvo
                   const containerUserNavBar = document.getElementById('containerUserNavBar')
@@ -53,6 +54,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
                   LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUser.style.display = 'block'
+
+                  const imgPerfilUserNavCell = document.getElementById('imgPerfilUserNavCell')
+                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  const LetraNomePerfilUserNavCell = document.getElementById('LetraNomePerfilUserNavCell')
+                  LetraNomePerfilUserNavCell.innerText = currentUser.InfoEmail.email.charAt(0)
+                  LetraNomePerfilUserNavCell.style.display = 'block'
                 }
                 
               } catch{
@@ -63,6 +70,13 @@ document.addEventListener("DOMContentLoaded", function () {
                   const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
                   LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUser.style.display = 'block'
+                  
+                  
+                  const imgPerfilUserNavCell = document.getElementById('imgPerfilUserNavCell')
+                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  const LetraNomePerfilUserNavCell = document.getElementById('LetraNomePerfilUserNavCell')
+                  LetraNomePerfilUserNavCell.innerText = currentUser.InfoEmail.email.charAt(0)
+                  LetraNomePerfilUserNavCell.style.display = 'block'
                 } catch {}
               }
             }
@@ -100,6 +114,10 @@ function login() {
 
 try {
   document.getElementById('containerUserNavBar').addEventListener('click', () => {
+    location.href = 'Cadastro.html'
+  })
+
+  document.getElementById('imgPerfilUserNavCell').addEventListener('click', () => {
     location.href = 'Cadastro.html'
   })
 } catch{}

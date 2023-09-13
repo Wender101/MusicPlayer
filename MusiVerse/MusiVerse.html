@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Musi ._. Verse</title>
+    <title>Musi .-. Verse</title>
 
     <link rel="stylesheet" href="Assets/Sass/Home.css">
-    <link rel="stylesheet" href="Assets/Sass/Geral.css">
+    <link rel="stylesheet" href="Assets/Sass/HomeResponsivo.css">
 </head>
 <body>
     <nav>
@@ -47,12 +47,52 @@
         </ul>
     </nav>
 
+    <div id="navCelular">
+        <ul>
+            <li id="homeCellPhone"><img src="Assets/Imgs/Icons/Home.png"> <p>Home</p></li>
+            <!-- <li><img src="Assets/Imgs/Icons//Faixas.png"> <p>Favoritas</p></li> -->
+            <li><img src="Assets/Imgs/Icons/Biblioteca.png"> <p>Biblioteca</p></li>
+            <li><img src="Assets/Imgs/Icons/friends.png"> <p>Amigos</p></li>
+            <li><div id="imgPerfilUserNavCell"><p id="LetraNomePerfilUserNavCell"></p></div> <p>Conta</p></li>
+        </ul>
+    </div>
+
     
     <main>
         <div id="SearchBar">
             <img src="Assets/Imgs/Icons/search.png">
             <input type="text" placeholder="Pesquisar" id="inputPesquisa">
         </div>
+
+        <section id="MusicasAleatoriasBanner">
+            <article>
+                <!-- <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" alt=""> -->
+
+                <div id="containerMusicasAleatoriasBanner">
+                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                </div>
+
+                <div id="textoMusicasAleatoriasBanner">
+                    <h1 id="Mensagem"></h1>
+                    <p id="RandomMsgs"></p>
+                </div>
+            </article>
+        </section>
+
+        <section id="containerFavoritasDoPerfil">
+            <h1 id="h1Bomdia">Bom Dia</h1>
+            
+            <article>
+                <div class="containerPlaylistFavoritaPerfil" id="musicasFavoritasPerfil">
+                    <img src="Assets/Imgs/Icons/Img Músicas Curtidas.png">
+                    <p>Músicas Curtidas</p>
+                    <div class="iconPlayPlaylistFavoritaPerfil"></div>
+                </div>
+            </article>
+        </section>
 
         <section id="containerMain"></section>
     </main>
@@ -194,6 +234,48 @@
         </article>
     </section>
 
+    <section class="Paginas" id="PagMusicaTocandoAgora">
+        <article>
+            <div id="headerPagMusicaTocandoAgora">
+                <img src="Assets/Imgs/Icons/Close.png" id="fecharPagMusicaTocandoAgora">
+                <p>Tocando Agora</p>
+            </div>
+
+            <div id="mainPagMusicaTocandoAgora">
+                <div id="containerImgMusicaTocandoAgora">
+                    <img src="Assets/Imgs/Icons/Container (1).png" id="imgMusicaTocandoAgoraPagMusicaTocandoAgora">
+                </div>
+                
+                <div>
+                    <h1 id="nomeMusicaTocandoAgoraPagMusicaTocandoAgora">Nome Música Tocando</h1>
+                    <p id="autorMusicaTocandoAgoraPagMusicaTocandoAgora">Nome Autor</p>
+                </div>
+
+                <img src="" id="heartMusicaTocandoAgoraPagMusicaTocandoAgora">
+            </div>
+
+            <div id="controlesPagMusicaTocandoAgora">
+                <div id="containerControles">
+                    <!--? Random -->
+                    <img src="Assets/Imgs/Icons/Random.png" id="RandomBtn2">
+                
+                    <!--? Back -->
+                    <img src="Assets/Imgs/Icons/Back.png" id="BackBtn2">
+    
+                    <!--? Play -->
+                    <img src="Assets/Imgs/Icons/Pause.png" id="PlayBtn2">
+    
+                    <!--? Next -->
+                    <img src="Assets/Imgs/Icons/Next.png" id="NextBtn2">
+    
+                    <!--? Cicle -->
+                    <img src="Assets/Imgs/Icons/Cicle.png" id="CicleBtn2">
+                </div>
+                <input type="range" value="0" id="progressoMusicaTocandoAgora">
+            </div>
+        </article>
+    </section>
+
     <!--?  ----------------- Barra da Música ---------------->
     <article id="BarraMusica">
         <div id="InfosBarraMusica">
@@ -241,6 +323,12 @@
 
                 <input type="range" value="100" id="inputVolume" oninput="volumeMusica(this.value)">
             </div>
+        </div>
+
+        <!--? Div Cell -->
+        <div id="ConfigsBarraMusicaCell">
+            <img src="./Assets/Imgs/Icons/icon _heart_ (1).png" id="HeartBarraMusica2">
+            <img src="./Assets/Imgs/Icons/Pause.png" id="PlayCellBarraMusica">
         </div>
     </article>
 
@@ -296,6 +384,7 @@
     <script src="Assets/Js/PostarMusicas.js"></script>
     <script src="Assets/Js/EditarPerfilUser.js"></script>
     <script src="Assets/Js/Recomendar.js"></script>
+    <script src="Assets/Js/PlaylistsFavoritas.js"></script>
 
     <script>
         const mensagens = [

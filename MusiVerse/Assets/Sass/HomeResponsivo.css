@@ -253,139 +253,77 @@ div#CarregamentoTela1 div#containerMensagemAleatoria p#MensagemAleatoria {
   color: rgba(255, 255, 255, 0.5490196078);
 }
 
-body {
-  width: 100%;
-  height: 100vh;
-  background-image: linear-gradient(180deg, #2C3137 0%, #17191D 100%);
-  font-family: "Inter", sans-serif;
-  overflow: hidden;
-}
-body div.backgroundIcons {
-  position: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-}
-body div.backgroundIcons#boll1 {
-  width: 300px;
-  height: 300px;
-  top: 0px;
-  left: 0px;
-  background-image: url("../Imgs/Icons/fundo1.png");
-}
-body div.backgroundIcons#boll2 {
-  width: 500px;
-  height: 140px;
-  top: -5px;
-  right: -5px;
-  background-image: url("../Imgs/Icons/fundo2.png");
-}
-body div.backgroundIcons#boll3 {
-  width: 300px;
-  height: 300px;
-  bottom: 0px;
-  right: 0px;
-  background-image: url("../Imgs/Icons/fundo3.png");
-}
-body div.backgroundIcons#boll4 {
-  width: 300px;
-  height: 300px;
-  bottom: 0px;
-  left: 0px;
-  background-image: url("../Imgs/Icons/fundo4.png");
-}
-body main {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: fixed;
-  color: #fff;
-}
-body main section {
-  width: calc(95% - 80px);
-  max-width: 580px;
-  background-image: linear-gradient(180deg, #2C3137 0%, #17191D 100%);
-  padding: 70px 40px;
-  border-radius: 20px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.445);
-}
-body main section img {
-  width: 100%;
-}
-body main section div.containerInputCadastro {
-  width: 100%;
-  position: relative;
-  margin: 20px 0px 43px;
-  border-radius: 17px;
-  overflow: hidden;
-}
-body main section div.containerInputCadastro#containerNomeUser, body main section div.containerInputCadastro#containerChave {
-  display: none;
-}
-body main section div.containerInputCadastro input {
-  width: calc(100% - 15px);
-  height: 57px;
-  background-color: rgba(102, 102, 102, 0.13);
-  border: none;
-  padding-left: 15px;
-  color: #fff;
-  outline: none;
-}
-body main section div.containerInputCadastro input.inputAnimation {
-  animation: 300ms inputAnimado infinite ease-in-out;
-}
-@keyframes inputAnimado {
-  50% {
-    margin-left: -5px;
+@media screen and (max-width: 1413px) {
+  div#headerMusicasFavorias img {
+    width: 150px;
+    border-radius: 29px !important;
   }
-  75% {
-    margin-left: 5px;
-  }
-  100% {
-    margin-left: 0px;
+  div#headerMusicasFavorias h1 {
+    font-size: 6vw !important;
   }
 }
-body main section div.containerInputCadastro div {
-  width: 59px;
-  height: 100%;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #0FF;
-  border-radius: 0px;
-}
-body main section div.containerInputCadastro div.inputAnimation2 {
-  animation: 300ms inputAnimado2 infinite ease-in-out;
-}
-@keyframes inputAnimado2 {
-  50% {
-    background-color: red;
+@media screen and (max-width: 628px) {
+  nav {
+    left: -100vw !important;
+  }
+  div#navCelular {
+    display: flex !important;
+  }
+  main {
+    width: 100% !important;
+    left: 0px !important;
+    right: auto !important;
+  }
+  section.Paginas {
+    width: 100% !important;
+    left: 0px !important;
+    right: auto !important;
+  }
+  section.Paginas.Open {
+    display: block !important;
+  }
+  article#BarraMusica.BarraMusicaOpen {
+    bottom: 60px !important;
+  }
+  article#BarraMusica div#InfosBarraMusica {
+    align-items: start !important;
+    width: 70% !important;
+  }
+  article#BarraMusica div#InfosBarraMusica img#imgMusicaBarraMusica {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  article#BarraMusica div#InfosBarraMusica div {
+    width: 70% !important;
+    gap: 10px !important;
+    height: 100% !important;
+    justify-content: space-evenly !important;
+  }
+  article#BarraMusica div#InfosBarraMusica div p, article#BarraMusica div#InfosBarraMusica div span {
+    max-width: none !important;
+  }
+  article#BarraMusica div#InfosBarraMusica img#HeartBarraMusica {
+    display: none !important;
+  }
+  article#BarraMusica div#PartePlayerBarraMusica {
+    display: none;
+  }
+  article#BarraMusica div#ConfigsBarraMusica {
+    display: none !important;
+  }
+  article#BarraMusica div#ConfigsBarraMusicaCell {
+    display: flex !important;
   }
 }
-body main section div.containerInputCadastro div img {
-  width: 40px;
-  height: 40px;
-}
-body main section div {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-body main section div button {
-  width: 100%;
-  padding: 15px 20px;
-  border: none;
-  color: #fff;
-  font-size: 15px;
-  border-radius: 17px;
-  background-color: rgba(102, 102, 102, 0.13);
-  cursor: pointer;
-}
-body div#CarregamentoTela1 {
-  display: flex;
-}/*# sourceMappingURL=Cadastro.css.map */
+@media screen and (max-width: 700px) {
+  div#headerMusicasFavorias img {
+    width: 100px;
+    border-radius: 20px !important;
+  }
+  div#headerMusicasFavorias h1 {
+    font-size: 5vw !important;
+  }
+  div.MusicasLinha p.GeneroMeuPerfil {
+    display: none;
+  }
+}/*# sourceMappingURL=HomeResponsivo.css.map */

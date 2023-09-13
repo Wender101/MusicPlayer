@@ -1,6 +1,9 @@
 function AbrirPopUpEditarPerfil(OqFazer) {
     if(OqFazer == 'Abrir') {
-        document.getElementById('inputLinkBackgroundMeuPerfil').value = currentUser.User.Background
+        if(currentUser.User.Background != undefined && currentUser.User.Background != null) {
+            document.getElementById('inputLinkBackgroundMeuPerfil').value = currentUser.User.Background
+        }
+
         document.getElementById('inputNomeDeUserMeuPerfil').value = currentUser.User.Nome
         document.getElementById('pop-upEditarPerfil').style.display = 'flex'
     } else {

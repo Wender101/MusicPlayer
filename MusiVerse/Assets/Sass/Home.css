@@ -323,6 +323,56 @@ body nav span {
   margin: 32px 12px 12px 24px;
   display: block;
 }
+body div#navCelular {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: 40px;
+  padding: 10px 0px;
+  z-index: 7;
+  background: #212124;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+body div#navCelular ul {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+body div#navCelular ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+body div#navCelular ul li img {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+}
+body div#navCelular ul li p {
+  color: rgba(255, 255, 255, 0.5960784314);
+  font-size: 11px;
+}
+body div#navCelular ul li div#imgPerfilUserNavCell {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 123, 0);
+  border-radius: 2px;
+  cursor: pointer;
+}
+body div#navCelular ul li div#imgPerfilUserNavCell p#LetraNomePerfilUserNavCell {
+  display: none;
+}
 body div#SearchBar {
   width: 340px;
   position: absolute;
@@ -350,6 +400,88 @@ body main {
   position: absolute;
   top: 0px;
   right: 0px;
+}
+body main section#MusicasAleatoriasBanner {
+  display: none;
+  margin: 0px;
+  background: linear-gradient(to bottom, rgb(0, 209, 209), rgba(0, 209, 209, 0.26), #1a1a1d);
+  padding: 100px 0px 0px;
+}
+body main section#MusicasAleatoriasBanner article {
+  width: calc(90% - 60px);
+  margin: auto;
+  display: flex;
+  padding: 30px;
+  gap: 20px;
+  border-radius: 5px;
+  background-color: #1a1a1d;
+}
+body main section#MusicasAleatoriasBanner article div#containerMusicasAleatoriasBanner {
+  width: 300px;
+  height: 300px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+body main section#MusicasAleatoriasBanner article div#containerMusicasAleatoriasBanner img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  display: block;
+}
+body main section#MusicasAleatoriasBanner article div#textoMusicasAleatoriasBanner {
+  width: calc(100% - 330px);
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+body main section#MusicasAleatoriasBanner article div#textoMusicasAleatoriasBanner h1 {
+  font-size: 3.5em;
+}
+body main section#containerFavoritasDoPerfil {
+  width: 90%;
+  margin: 120px auto -30px;
+}
+body main section#containerFavoritasDoPerfil article {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Dividir em no máximo 3 colunas com largura mínima de 300px */
+  gap: 20px;
+}
+body main section#containerFavoritasDoPerfil article div.containerPlaylistFavoritaPerfil {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  position: relative;
+}
+body main section#containerFavoritasDoPerfil article div.containerPlaylistFavoritaPerfil:hover div.iconPlayPlaylistFavoritaPerfil {
+  transition: 200ms opacity ease-in-out;
+  opacity: 1;
+}
+body main section#containerFavoritasDoPerfil article div.containerPlaylistFavoritaPerfil img {
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+body main section#containerFavoritasDoPerfil article div.containerPlaylistFavoritaPerfil div.iconPlayPlaylistFavoritaPerfil {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  right: 5px;
+  opacity: 0;
+  border-radius: 50%;
+  background-image: url("../Imgs/Icons/DarPlay.png");
+  background-size: cover;
 }
 body main section#containerMain {
   width: 90%;
@@ -946,6 +1078,118 @@ body section.Paginas#PagArtistas article#containerArtista div#containerMusicasAr
 body section.Paginas#PagArtistas article#containerArtista div#containerMusicasArtista section.containerMusica {
   max-width: none !important;
 }
+body section.Paginas#PagMusicaTocandoAgora {
+  padding: 0px;
+  z-index: 6;
+}
+body section.Paginas#PagMusicaTocandoAgora.Open {
+  display: none;
+}
+body section.Paginas#PagMusicaTocandoAgora article {
+  width: 90%;
+  padding: 20px 0px;
+  max-width: 340px;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#headerPagMusicaTocandoAgora {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#headerPagMusicaTocandoAgora img {
+  left: 0px;
+  position: absolute;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora {
+  margin: 20px auto;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora div#containerImgMusicaTocandoAgora {
+  width: 100%; /* Define a largura para 100% */
+  padding-top: 100%; /* Define a altura com base na largura (1:1) */
+  position: relative; /* Permite posicionar o conteúdo interno */
+  background-color: rgba(37, 38, 44, 0.8078431373); /* Cor de fundo, você pode personalizar conforme necessário */
+  background-size: cover; /* Ajusta a imagem de fundo para cobrir toda a área */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora div#containerImgMusicaTocandoAgora::before {
+  content: ""; /* Adiciona um pseudo-elemento para criar conteúdo interno */
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("sua-imagem.jpg"); /* Adicione uma imagem de fundo ou personalize conforme necessário */
+  background-size: cover; /* Ajusta a imagem de fundo para cobrir toda a área */
+  background-repeat: no-repeat;
+  background-position: center;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora div#containerImgMusicaTocandoAgora img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+  display: none;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora div h1 {
+  width: 100%;
+  font-size: 18px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 20px 0px 10px;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#mainPagMusicaTocandoAgora div p {
+  width: 100%;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.4196078431);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora {
+  width: 100%;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora div#containerControles {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px auto;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora div#containerControles img {
+  width: 20px;
+  height: 20px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  cursor: pointer;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora div#containerControles img#PlayBtn {
+  width: 28px;
+  height: 28px;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora input {
+  width: 100%;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  height: 5px;
+  background: #4C4E54;
+  border-radius: 10px;
+  cursor: pointer;
+}
+body section.Paginas#PagMusicaTocandoAgora article div#controlesPagMusicaTocandoAgora input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e1ff;
+}
 body article#BarraMusica {
   width: calc(100% - 40px);
   height: 40px;
@@ -959,6 +1203,9 @@ body article#BarraMusica {
   justify-content: space-between;
   padding: 20px;
   z-index: 5;
+}
+body article#BarraMusica.BarraMusicaOpen {
+  bottom: 0px;
 }
 body article#BarraMusica div#InfosBarraMusica {
   width: 200px;
@@ -974,6 +1221,7 @@ body article#BarraMusica div#InfosBarraMusica img#imgMusicaBarraMusica {
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
+  border-radius: 10px;
 }
 body article#BarraMusica div#InfosBarraMusica div {
   display: flex;
@@ -1010,7 +1258,8 @@ body article#BarraMusica div#InfosBarraMusica img#HeartBarraMusica {
   cursor: pointer;
 }
 body article#BarraMusica div#PartePlayerBarraMusica {
-  width: 500px;
+  width: calc(90% - 400px);
+  max-width: 500px;
 }
 body article#BarraMusica div#PartePlayerBarraMusica div#controlesBarraMusica {
   width: 200px;
@@ -1079,4 +1328,14 @@ body article#BarraMusica div#ConfigsBarraMusica div#containerControleVolume inpu
   height: 10px;
   border-radius: 50%;
   background: #00e1ff;
+}
+body article#BarraMusica div#ConfigsBarraMusicaCell {
+  display: none;
+  gap: 20px;
+}
+body article#BarraMusica div#ConfigsBarraMusicaCell img {
+  width: 24px;
+  height: 24px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }/*# sourceMappingURL=Home.css.map */

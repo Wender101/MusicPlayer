@@ -561,6 +561,13 @@ function carregarMusicas() {
             const containerMain = document.getElementById('containerMain')
 
             await RetornarMusicas('Aleatórias', containerMain)
+
+            for(let c = 0; c < arraymusicasAleatorias.length; c++) {
+                try {
+                    let imgMusicasAleatoriasBanner = document.getElementsByClassName('imgMusicasAleatoriasBanner')[c].src = arraymusicasAleatorias[c + 7].LinkImg
+                } catch{}
+            }
+
             // await RetornarMusicas('Gospel', containerMain)
             // await RetornarMusicas('Rock', containerMain)
             // await RetornarMusicas('Country', containerMain)
@@ -650,7 +657,13 @@ function carregarMusicas() {
 
     //? Vai abrir as músicas favoritas do user
     const btnMusicasFavoritas = document.getElementById('btnMusicasFavoritas')
+    const musicasFavoritasPerfil = document.getElementById('musicasFavoritasPerfil')
     btnMusicasFavoritas.addEventListener('click', () => {
+        document.getElementById('localMusicasCurtidas').innerHTML = ''
+        RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
+    })
+    musicasFavoritasPerfil.addEventListener('click', () => {
+        AbrirPaginas(3)
         document.getElementById('localMusicasCurtidas').innerHTML = ''
         RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
     })
@@ -673,6 +686,7 @@ function DarPlayMusica(Lista, num) {
     //? Vai checar se a música foi curtida ou n
     FavoritarDesfavoritarMusica(Lista.Id, 'Checar').then((resolve) => {
         document.getElementById('HeartBarraMusica').src = resolve
+        document.getElementById('HeartBarraMusica2').src = resolve
     })
 
     if(trocouDeMusica == false) {
@@ -686,9 +700,15 @@ function DarPlayMusica(Lista, num) {
 
         //? ----------------------------------------------------------
 
-        document.getElementById('BarraMusica').style.bottom = '0px'
-        PlayBtn = document.getElementById('PlayBtn')
+        document.getElementById('BarraMusica').className = 'BarraMusicaOpen'
+        const PlayBtn = document.getElementById('PlayBtn')
         PlayBtn.src = `Assets/Imgs/Icons/Pause.png`
+
+        const PlayBtn2 = document.getElementById('PlayBtn2')
+        PlayBtn2.src = `Assets/Imgs/Icons/Pause.png`
+
+        const PlayCellBarraMusica = document.getElementById('PlayCellBarraMusica')
+        PlayCellBarraMusica.src = `Assets/Imgs/Icons/Pause.png`
 
         //! Vai passar a música ou voltar usando os btns do teclado
         navigator.mediaSession.metadata = new MediaMetadata({
@@ -719,21 +739,34 @@ function DarPlayMusica(Lista, num) {
         audioPlayer.addEventListener('canplaythrough', function() {
             audioPlayer.play()
 
-            //? Vai mudar a informações na barra música
+            //? Vai mudar a informações na barra música para o pc
             document.getElementById('imgMusicaBarraMusica').src = Lista.LinkImg
             document.getElementById('NomeMusicaBarraMusica').innerText = Lista.NomeMusica
             document.getElementById('AutorMusicaBarraMusica').innerText = Lista.Autor
 
+            //? Vai mudar a informações na barra música para o cell
+            document.getElementById('containerImgMusicaTocandoAgora').style.backgroundImage = `url(${Lista.LinkImg})`
+            document.getElementById('imgMusicaTocandoAgoraPagMusicaTocandoAgora').src = Lista.LinkImg
+            document.getElementById('nomeMusicaTocandoAgoraPagMusicaTocandoAgora').innerText = Lista.NomeMusica
+            document.getElementById('autorMusicaTocandoAgoraPagMusicaTocandoAgora').innerText = Lista.Autor
+
             //? Vai atualizar a barra de progresso da música
-            let progressoMusicaBarraMusica = document.getElementById('progressoMusicaBarraMusica')
+            let progressoMusicaBarraMusica = document.getElementById('progressoMusicaBarraMusica') //? Progresso barra para pc
+            let progressoMusicaTocandoAgora = document.getElementById('progressoMusicaTocandoAgora') //? Progresso barra para cell
 
             audioPlayer.addEventListener('timeupdate', function() {
                 const percentProgress = (audioPlayer.currentTime / audioPlayer.duration) * 100
                 progressoMusicaBarraMusica.value = percentProgress
+                progressoMusicaTocandoAgora.value = percentProgress
             })
         
             progressoMusicaBarraMusica.addEventListener('input', function() {
                 const newTime = (progressoMusicaBarraMusica.value / 100) * audioPlayer.duration
+                audioPlayer.currentTime = newTime
+            })
+
+            progressoMusicaTocandoAgora.addEventListener('input', function() {
+                const newTime = (progressoMusicaTocandoAgora.value / 100) * audioPlayer.duration
                 audioPlayer.currentTime = newTime
             })
         })
@@ -741,12 +774,16 @@ function DarPlayMusica(Lista, num) {
         audioPlayer.addEventListener('pause', function() {
             isPlaying = false
             PlayBtn.src = `Assets/Imgs/Icons/Play.png`
-            document.title = `Musi ._. Verse`
+            PlayBtn2.src = `Assets/Imgs/Icons/Play.png`
+            PlayCellBarraMusica.src = `Assets/Imgs/Icons/Play.png`
+            document.title = `Musi .-. Verse`
         })
     
         audioPlayer.addEventListener('play', function() {
             isPlaying = true
             PlayBtn.src = `Assets/Imgs/Icons/Pause.png`
+            PlayBtn2.src = `Assets/Imgs/Icons/Pause.png`
+            PlayCellBarraMusica.src = `Assets/Imgs/Icons/Pause.png`
             document.title = `${Lista.NomeMusica}`
         })
 
@@ -775,23 +812,44 @@ HeartBarraMusica.addEventListener('click', () => {
 
 //? Vai pausar a música
 PlayBtn.addEventListener('click', function() {
+    PausaDespausarMusica()
+})
+
+PlayBtn2.addEventListener('click', function() {
+    PausaDespausarMusica()
+})
+
+PlayCellBarraMusica.addEventListener('click', function() {
+    PausaDespausarMusica()
+})
+
+function PausaDespausarMusica() {
     if(isPlaying == true) {
         document.title = `Musi ._. Verse`
         isPlaying = false
         PlayBtn.src = `Assets/Imgs/Icons/Play.png`
+        PlayBtn2.src = `Assets/Imgs/Icons/Play.png`
+        PlayCellBarraMusica.src = `Assets/Imgs/Icons/Play.png`
         audioPlayer.pause()
 
     } else {
         isPlaying = true
         PlayBtn.src = `Assets/Imgs/Icons/Pause.png`
+        PlayBtn2.src = `Assets/Imgs/Icons/Pause.png`
+        PlayCellBarraMusica.src = `Assets/Imgs/Icons/Pause.png`
         audioPlayer.play()
         document.title = `${Lista.NomeMusica}`
     }
-})
+}
 
 // //? Vai pular a música
 const NextBtn = document.getElementById('NextBtn')
 NextBtn.addEventListener("click", () => {
+    NextSong()
+})
+
+const NextBtn2 = document.getElementById('NextBtn2')
+NextBtn2.addEventListener("click", () => {
     NextSong()
 })
 
@@ -808,6 +866,11 @@ function NextSong() {
 // //? Vai voltar para a música anterior
 const BackBtn = document.getElementById('BackBtn')
 BackBtn.addEventListener("click", () => {
+    BackSong()
+})
+
+const BackBtn2 = document.getElementById('BackBtn2')
+BackBtn2.addEventListener("click", () => {
     BackSong()
 })
 
