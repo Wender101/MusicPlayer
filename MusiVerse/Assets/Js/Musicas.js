@@ -71,7 +71,7 @@ function carregarMusicas() {
         return texto.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '') //? Vai remover os acentos e espaços
     }
 
-    async function RetornarMusicas(Pesquisa, Local, maxMusicas = 6, Estilo = 'Caixa', PesquisarEmail = false, Artista = false) {
+    async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa', PesquisarEmail = false, Artista = false) {
         if(maxMusicas == 'Indeterminado') {
             maxMusicas = TodasMusicas.length
         }
@@ -132,32 +132,37 @@ function carregarMusicas() {
                     const darPlay = document.createElement('div')
                     const p = document.createElement('p')
                     const span = document.createElement('span')
+                    const divBlurTexto = document.createElement('img')
         
                     article.className = 'containerMusicaCaixa'
                     div.className = 'MusicasCaixa'
                     div.title = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].NomeMusica : TodasMusicas[c].NomeMusica
                     darPlay.className = 'BtnDarPlay'
                     darPlay.style.backgroundImage = `url(./Assets/Imgs/Icons/DarPlay.png)`
-                    // div.style.backgroundImage = `url(${'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg})`
+                    // div.style.backgroundImage = `url(${Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg})` //? ---
+                    divBlurTexto.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg //? ---
+
                     containerImg.className = 'ContainerImgMusicaCaixa'
                     img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg
                     divTexto.className = 'TextoMusicaCaixa'
                     p.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].NomeMusica : TodasMusicas[c].NomeMusica
                     span.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Autor : TodasMusicas[c].Autor
+                    divBlurTexto.className = 'divBlurTexto'
         
                     divTexto.appendChild(p)
                     divTexto.appendChild(span)
                     div.appendChild(darPlay)
                     containerImg.appendChild(img)
                     div.appendChild(containerImg)
+                    div.appendChild(divBlurTexto)
                     div.appendChild(divTexto)
                     article.appendChild(div)
 
                     div.addEventListener('click', (event) => {
                         if (event.target != span) {
                             ListaProxMusica = {
-                            Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas,
-                            Numero: c,
+                                Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas,
+                                Numero: c,
                             }
                             DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas[c], c)
                         }
@@ -166,12 +171,13 @@ function carregarMusicas() {
                     //? Ao clicar no nome do Autor
                     span.addEventListener('click', () => {
                         FecharPaginas()
-                        const PagArtistas = document.getElementById('PagArtistas')
-                        PagArtistas.style.display = 'block'
+                        document.getElementById('blurBackgroundArtista').style.backgroundImage = `url(${img.src})`
                         document.getElementById('NomeArtista').innerText = span.innerText
                         document.getElementById('containerMusicasArtista').innerHTML = ''
                         document.querySelector('body').style.overflow = 'hidden'
                         RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
+                        const PagArtistas = document.getElementById('PagArtistas')
+                        PagArtistas.style.display = 'block'
                     })
 
                 } else if(Estilo == 'Linha') {
@@ -583,10 +589,10 @@ function carregarMusicas() {
         
         try {
             for(let i = 0; i < currentUser.User.MusicasCurtidas.length; i++) {
-                for(let c = 0; c < TodasMusicas.length; c++) {
-                    if(TodasMusicas[c].Id == currentUser.User.MusicasCurtidas[i]) {
-                        GenerosFavoritosUser.push(TodasMusicas[c].Genero)
-                        ArtistasFavoritos.push(TodasMusicas[c].Autor)
+                for(let c = 0; c < arraymusicasAleatorias.length; c++) {
+                    if(arraymusicasAleatorias[c].Id == currentUser.User.MusicasCurtidas[i]) {
+                        GenerosFavoritosUser.push(arraymusicasAleatorias[c].Genero)
+                        ArtistasFavoritos.push(arraymusicasAleatorias[c].Autor)
                     }
                 }
             }
@@ -673,6 +679,11 @@ function carregarMusicas() {
         document.getElementById('CarregamentoTela1').style.display = 'none'
     } catch{}
 })
+
+//? Tirar dps
+// setTimeout(() => {
+//     document.getElementById('CarregamentoTela1').style.display = 'none'
+// }, 5000)
 
 let trocouDeMusica = false
 let fimMusica = false

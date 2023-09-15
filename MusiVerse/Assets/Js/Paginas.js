@@ -3,7 +3,6 @@ const Paginas = document.getElementsByClassName('Paginas')
 const Open = document.getElementsByClassName('Open')
 
 function FecharPaginas() {
-    console.log(Paginas.length);
     document.querySelector('body').style.overflow = 'auto'
     document.getElementById('inputPesquisa').value = ''
 

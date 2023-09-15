@@ -39,7 +39,8 @@ async function prosseguirMusicaYT() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ videoURL })
+                body: JSON.stringify({ videoURL 
+                })
             })
 
             if (response.ok) {
@@ -126,9 +127,14 @@ function FinalizarPostarMusicaYT() {
 
                             //? Vai fechar a aba postar músicas
                             document.getElementById('FinalizarAddYT').style.display = 'none'
-                            document.getElementById('PrimeirosPassosYT').style.display = 'none'
+                            document.getElementById('PrimeirosPassosYT').style.display = 'block'
+                            document.getElementById('ImgMusicaLinkYT').src = 'Assets/Imgs/Banners/c36fff19b54c90efecc303b86bb9f71a.jpg'
                             FecharPaginas()
                             limparInputAddMusics()
+
+                            //? Vai adicionar a música postada no array todas as músicas
+                            NovaMusica.Id = DadosNovaMusica.uid
+                            TodasMusicas.push(NovaMusica)
 
                             alert('Música postada com sucesso!')
                         })

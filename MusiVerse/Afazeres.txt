@@ -5,3 +5,5 @@ Sistema de recomendação através do que o user pesquisa e pricipalmente pelos 
 Adicionar no local a música adicionada pelo user para que ele n precise atualizar a página para ver
 
 Arrumar a ao clicar no autor da música e ouvir só as músicas dele, ao selecionar outro autor passa as músicas do anterior
+
+Almentar letra da conta do cell, n aparece direito
