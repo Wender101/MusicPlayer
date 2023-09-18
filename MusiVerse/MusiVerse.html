@@ -42,7 +42,7 @@
 
         <ul>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png" id="arroz"> Adicionar Música</li>
-            <li class="linkPagina"><img src="Assets/Imgs/Icons/Faixas.png"> Criar Playlist</li>
+            <li class="linkPagina" id="btnCriarPlaylist"><img src="Assets/Imgs/Icons/Faixas.png"> Criar Playlist</li>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Adicionar Letra</li>
         </ul>
     </nav>
@@ -98,11 +98,11 @@
     </main>
 
     <!--? ------------------ Páginas ----------------->
-    <section id="PagPesquisa" class="Paginas">
+    <section class="Paginas" id="PagPesquisa">
         <article id="containerResultadoPesquisa"></article>
     </section>
 
-    <section id="PagAdicionarMusica" class="Paginas">
+    <section class="Paginas" id="PagAdicionarMusica">
         <article id="containerAddMusic">
             <div id="PrimeirosPassosYT">
                 <h1>Poste suas músicas favoritas aqui</h1>
@@ -170,7 +170,7 @@
         </article>
     </section>
 
-    <section id="PagMeuPerfil" class="Paginas">
+    <section class="Paginas" id="PagMeuPerfil">
         <article id="containerMeuPerfil">
             <div id="coainerBackgroundPerfil">
                 <div id="blurBackgroundPerfil"></div>
@@ -274,6 +274,59 @@
                 <input type="range" value="0" id="progressoMusicaTocandoAgora">
             </div>
         </article>
+    </section>
+
+    <section class="Paginas" id="PagCriarPlaylist">
+        <article>
+            <div id="containerHeaderCriarPlaylist">
+                <div id="containerImgPlaylist">
+                    <img src="Assets/Imgs/Icons/Faixas200.png" id="imgCriarPlaylist">
+                </div>
+
+                <div id="textoHeaderCriarPlaylist">
+                    <p id="estadoPlaylistCriarPlaylist">Playlist pública</p>
+                    <h1 id="nomePlaylistCriarPlaylist">Minha Playlist</h1>
+                </div>
+            </div>
+
+           <article id="containerMainCriarPlaylist">
+                <div id="inputAddMusicaCriarPlaylist">
+                    <h1>Adicione uma música</h1>
+                    <div>
+                        <input type="text" id="pesquisarMuiscaCriarPlaylist" oninput="PesquisarMusicaCriarPlaylist()">
+                        <img src="Assets/Imgs/Icons/search.png">
+                    </div>
+                </div>
+
+                <div id="containerMusicasPesquisadasCriarPlaylist">
+                    
+                </div>
+
+                <div id="containerMusicasAddCriarPlaylist">
+                    <section class="containerMusica">
+                        <article class="containerMusicaLinha"></article>
+                    </section>
+                </div>
+           </article>
+        </article>
+
+        <button id="btnPostarPlaylist" onclick="PopUpPostaNovaPlaylist()">
+            <img src="Assets/Imgs/Icons/back50.png" alt="">
+        </button>
+
+        <div id="popUpAdicionarPlaylist">
+            <div>
+                <p>Nome da playlist</p>
+                <input type="text" id="inputNomeNovaPlaylist" placeholder="Nome playlist" oninput="PostarNovaPlaylist()">
+                <p>Descrição da playlist opcional</p>
+                <textarea id="textareaDescricaoNovaPlaylist" cols="30" rows="10" placeholder="Descrição"></textarea>
+
+                <div>
+                    <button onclick="CancelarPostarNovaPlaylist()">Cancelar</button>
+                    <button id="postarNovaPlaylist" onclick="PostarNovaPlaylist(true)">Postar</button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!--?  ----------------- Barra da Música ---------------->
@@ -387,6 +440,7 @@
     <script src="Assets/Js/EditarPerfilUser.js"></script>
     <script src="Assets/Js/Recomendar.js"></script>
     <script src="Assets/Js/PlaylistsFavoritas.js"></script>
+    <script src="Assets/Js/CriarPlaylists.js"></script>
 
     <script>
         const mensagens = [
