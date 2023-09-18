@@ -1,3 +1,8 @@
+//? Vai formatar os textos
+function formatarTexto(texto) {
+    return texto.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '') //? Vai remover os acentos e espaços
+}
+
 const audioPlayer = document.querySelector('#audioPlayer')
 const inputVolume = document.getElementById('inputVolume')
 let audioNoMudo = false
@@ -65,11 +70,6 @@ function carregarMusicas() {
     })
 } carregarMusicas().then(() => {
     //# Vai execultar apenas depois que o banco for carregado
-
-    //? Vai formatar os textos
-    function formatarTexto(texto) {
-        return texto.toLocaleLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/\s/g, '').replace(/[^a-zA-Z0-9]/g, '') //? Vai remover os acentos e espaços
-    }
 
     async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa', PesquisarEmail = false, Artista = false) {
         if(maxMusicas == 'Indeterminado') {
@@ -347,7 +347,7 @@ function carregarMusicas() {
                                 NomeMusica.innerText = TodasMusicas[i].NomeMusica
                                 Autor.innerText = TodasMusicas[i].Autor
                                 Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
-    
+
                                 divInfosMusica.appendChild(img)
                                 divTexto.appendChild(NomeMusica)
                                 divTexto.appendChild(Autor)

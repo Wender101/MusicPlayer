@@ -1107,6 +1107,223 @@ body {
                 }
             }
         }
+
+        &#PagCriarPlaylist {
+            article {
+                width: 100%;
+                padding: 0;
+
+                div#containerHeaderCriarPlaylist {
+                    width: calc(100% - 40px);
+                    height: 400px;
+                    background-image: linear-gradient(#3c3c42, #232327);
+                    position: relative;
+                    padding: 0px;
+                    display: flex;
+                    align-items: center;
+                    padding: 20px;
+                    gap: 40px;
+                    
+                    div#containerImgPlaylist {
+                        width: 250px;
+                        height: 250px;
+                        background-color: #1a1a1d;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        overflow: hidden;
+                        
+                        img#imgCriarPlaylist {
+                            width: 50%;
+
+                            &.PlaylistTemImg {
+                                width: 177%;
+                            }
+                        }
+                    }
+
+                    div#textoHeaderCriarPlaylist {
+                        // width: 100%;
+                        height: 250px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        justify-content: center;
+                        gap: 10px;
+
+                        h1 {
+                            font-size: 5em;
+                        }
+                    }
+                }
+
+                article#containerMainCriarPlaylist {
+                    width: 95%;
+                    margin: auto;
+                    position: relative;
+                }
+
+                div#inputAddMusicaCriarPlaylist {
+
+                    h1 {
+                        margin: 30px 0px 20px;
+                        font-size: 1.5em;
+                    }
+
+                    div {
+                        width: 95%;
+                        max-width: 300px;
+                        position: relative;
+                        background-color: #232327;
+                        border-radius: 5px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding-right: 10px;
+
+                        input {
+                            width: 100%;
+                            padding: 10px 15px;
+                            border: none;
+                            background: none;
+                            color: #fff;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+
+                        img {
+                            width: 20px;
+                            height: 20px;
+                            cursor: pointer;
+                        }
+                    }
+                }
+
+                div#containerMusicasPesquisadasCriarPlaylist {
+                    width: 100%;
+                    height: 100vh;
+                    position: absolute;
+                    margin-top: 20px;
+                    display: none;
+                    padding: 20px 0px;
+                    background-color: #1a1a1d;
+                    z-index: 2;
+
+                    section {
+                        max-width: none;
+                    }
+                }
+
+                div#containerMusicasAddCriarPlaylist {
+                    margin-top: 50px;
+                    padding-bottom: 100px;
+
+                    section {
+                        max-width: none;
+                    }
+                }
+            }
+
+            button#btnPostarPlaylist {
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                position: fixed;
+                bottom: 30px;
+                right: 30px;
+                display: none;
+                align-items: center;
+                justify-content: center;
+                background-color: rgb(0, 255, 255);
+                cursor: pointer;
+                z-index: 2;
+
+                &:hover {
+                    transition: 100ms scale ease-in-out;
+                    scale: 1.1;
+                }
+
+                img {
+                    width: 70%;
+                    height: 870%;
+                    object-fit: contain;
+                }
+            }
+
+            div#popUpAdicionarPlaylist {
+                width: 100%;
+                height: 100vh;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background-color: rgba(0, 0, 0, 0.562);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                z-index: 2;
+
+                div {
+                    width: 95%;
+                    max-width: 500px;
+                    height: auto;
+                    background-color: #1a1a1d;
+                    padding: 20px;
+                    border-radius: 20px;
+
+                    p {
+                        padding: 10px 0px;
+                    }
+
+                    input {
+                        margin-bottom: 30px;
+                    }
+
+                    input, textarea {
+                        width: calc(100% - 30px);
+                        background-color: #232327;
+                        border: none;
+                        padding: 10px 15px;
+                        border-radius: 5px;
+                        -webkit-appearance: none;
+                        appearance: none;
+                        resize: none;
+                        color: #fff;
+                        font-family: $fonte_inter;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::-webkit-clear-button {
+                            display: none;
+                        }
+                    }
+
+                    div {
+                        width: 95%;
+                        margin: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 20px;
+
+                        button {
+                            width: 100%;
+                            padding: 10px 15px;
+                            border-radius: 5px;
+                            background-color: #1F1F22;
+                            margin-top: 30px;
+                            color: #fff;
+                            border: none;
+                            cursor: pointer;
+                        }
+                    }
+                }
+            }
+        }
     }
 
 
@@ -1181,6 +1398,7 @@ body {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
+                    cursor: pointer;
                 }
             }
 
@@ -1508,6 +1726,18 @@ body {
                         object-fit: contain;
                         position: absolute;
                         right: 0px;
+                    }
+
+                    button.btnAdicionar {
+                        max-width: 100px;
+                        padding: 10px 20px;
+                        border-radius: 20px;
+                        background-color: transparent;
+                        border: 1px solid #4C4E54;
+                        color: #fff;
+                        position: absolute;
+                        right: 0px;
+                        cursor: pointer;
                     }
                 }
             }

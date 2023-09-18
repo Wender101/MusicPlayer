@@ -77,3 +77,8 @@ fecharPagMusicaTocandoAgora.addEventListener('click', () => {
         document.getElementById('PagMusicaTocandoAgora').classList.remove('Open')
     }
 })
+
+//? Ao abrir a pág criar playlist
+const btnCriarPlaylist = document.getElementById('btnCriarPlaylist')
+btnCriarPlaylist.addEventListener('click', () => {
+})
