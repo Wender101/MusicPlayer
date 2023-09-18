@@ -45,33 +45,50 @@ async function prosseguirMusicaYT() {
 
             if (response.ok) {
                 const data = await response.json()
-                console.log(data)
-
-                //? Vai mostrar a página de editar as informações da música
+              
+                // Vai mostrar a página de editar as informações da música
                 document.getElementById('FinalizarAddYT').style.display = 'block'
                 document.getElementById('PrimeirosPassosYT').style.display = 'none'
                 carregando.style.display = 'none'
-
-                //? Vai pegar os inputs e a img para colocar as infos da música pro user poder edita-las
-                const ImgMusicaLinkYT = document.getElementById('ImgMusicaLinkYT')
+              
+                // Vai pegar os inputs e a img para colocar as infos da música para o usuário poder editá-las
+                const ImgMusicaLinkYT = document.getElementById('ImgMusicaLinkYT');
                 const inputNomeMusicaLinkYT = document.getElementById('inputNomeMusicaLinkYT')
                 const inputAutorMusicaLinkYT = document.getElementById('inputAutorMusicaLinkYT')
                 const inputGeneroMusicaLinkYT = document.getElementById('inputGeneroMusicaLinkYT')
-                
+              
+                // Função para carregar a imagem
+                function carregarImagem() {
+                  setTimeout(() => {
+                    if (data.thumbnailUrl) {
+                      ImgMusicaLinkYT.src = data.thumbnailUrl
+                    } else {
+                      // Tente novamente após 1 segundo
+                      carregarImagem()
+                    }
+                  }, 1000)
+                }
+              
+                // Iniciar a tentativa de carregar a imagem
+                carregarImagem()
+
                 setTimeout(() => {
-                    ImgMusicaLinkYT.src = data.thumbnailUrl
-                }, 1000)
+                    carregarImagem()
+                }, 300)
+              
                 inputNomeMusicaLinkYT.value = data.videoTitle
                 inputAutorMusicaLinkYT.value = data.channelName
-
-                //? Vai postar a nova música na parte "MusicasPostadas" do Firebase
-                DadosNovaMusica = data
-
-            } else {
+              
+                // Vai postar a nova música na parte "MusicasPostadas" do Firebase
+                DadosNovaMusica = data;
+              } else {
                 console.log("Erro na requisição: " + response.statusText)
-            }
+              }
+              
         } catch (error) {
             console.log("Erro na requisição: " + error.message)
+            document.getElementById('carregando').style.display = 'none'
+            alert('Erro: ' + error.message )
         }
     }
 }

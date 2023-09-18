@@ -89,7 +89,7 @@ function carregarMusicas() {
     
         let contadorMusicasLinha = 0
         let arrayMusicasRetornadas = []
-        for (let c = 0; c < TodasMusicas.length; c++) {
+        for (let c = TodasMusicas.length - 1; c >= 0; c--) {
             const NomeMusica = formatarTexto(TodasMusicas[c].NomeMusica)
             const Autor = formatarTexto(TodasMusicas[c].Autor)
             const Genero = formatarTexto(TodasMusicas[c].Genero)
@@ -132,7 +132,7 @@ function carregarMusicas() {
                     const darPlay = document.createElement('div')
                     const p = document.createElement('p')
                     const span = document.createElement('span')
-                    const divBlurTexto = document.createElement('img')
+                    const divBlurTexto = document.createElement('div')
         
                     article.className = 'containerMusicaCaixa'
                     div.className = 'MusicasCaixa'
@@ -140,7 +140,8 @@ function carregarMusicas() {
                     darPlay.className = 'BtnDarPlay'
                     darPlay.style.backgroundImage = `url(./Assets/Imgs/Icons/DarPlay.png)`
                     // div.style.backgroundImage = `url(${Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg})` //? ---
-                    divBlurTexto.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg //? ---
+                    // divBlurTexto.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg //? ---
+                    divBlurTexto.style.backgroundImage = `url(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg)` //? ---
 
                     containerImg.className = 'ContainerImgMusicaCaixa'
                     img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas[c].LinkImg
@@ -187,6 +188,7 @@ function carregarMusicas() {
                     const div = document.createElement('div')
                     const divPrimeiraParte = document.createElement('div')
                     const contador = document.createElement('p')
+                    const divImg = document.createElement('div')
                     const img = document.createElement('img')
                     const divTexto = document.createElement('div')
                     const Nome = document.createElement('p')
@@ -197,6 +199,7 @@ function carregarMusicas() {
                     div.className = 'MusicasLinha'
                     divTexto.className = 'TextoMusicaCaixa'
                     Heart.className = 'btnCurtirMeuPerfil'
+                    divImg.className = 'DivImgMusicaMeuPerfil'
                     img.className = 'ImgMusicaMeuPerfil'
                     Genero.className = 'GeneroMeuPerfil'
 
@@ -210,19 +213,22 @@ function carregarMusicas() {
                     divTexto.appendChild(Nome)
                     divTexto.appendChild(AutorDaMusica)
                     divPrimeiraParte.appendChild(contador)
-                    divPrimeiraParte.appendChild(img)
+                    divImg.appendChild(img)
+                    divPrimeiraParte.appendChild(divImg)
                     divPrimeiraParte.appendChild(divTexto)
                     div.appendChild(divPrimeiraParte)
                     div.appendChild(Genero)
                     div.appendChild(Heart)
                     article.appendChild(div)
 
-                    divPrimeiraParte.addEventListener('click', () => {
-                        ListaProxMusica = {
-                            Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas,
-                            Numero: c,
+                    div.addEventListener('click', (event) => {
+                        if (event.target != AutorDaMusica && event.target != Heart) {
+                            ListaProxMusica = {
+                                Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas,
+                                Numero: c,
+                            }
+                            DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas[c], c)
                         }
-                        DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas[c], c)
                     })
 
                     //? Vai checar se as músicas foram curtidas pelo user
@@ -235,6 +241,18 @@ function carregarMusicas() {
                         FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Id : TodasMusicas[c].Id, 'Editar').then((resolve) => {
                             Heart.src = resolve
                         })
+                    })
+
+                    //? Ao clicar no nome do Autor
+                    AutorDaMusica.addEventListener('click', () => {
+                        FecharPaginas()
+                        document.getElementById('blurBackgroundArtista').style.backgroundImage = `url(${img.src})`
+                        document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
+                        document.getElementById('containerMusicasArtista').innerHTML = ''
+                        document.querySelector('body').style.overflow = 'hidden'
+                        RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
+                        const PagArtistas = document.getElementById('PagArtistas')
+                        PagArtistas.style.display = 'block'
                     })
                 }
             }
@@ -337,9 +355,11 @@ function carregarMusicas() {
                                 musica.appendChild(divInfosMusica)
                                 musica.appendChild(Heart)
                                 ContainerMusicas.appendChild(musica)
-    
-                                divInfosMusica.addEventListener('click', () => {
-                                    DarPlayMusica(TodasMusicas[i], i)
+
+                                divInfosMusica.addEventListener('click', (event) => {
+                                    if (event.target != Autor && event.target != Heart) {
+                                        DarPlayMusica(TodasMusicas[i], i)
+                                    }
                                 })
     
                                 //? Vai checar se as músicas foram curtidas pelo user
@@ -352,6 +372,18 @@ function carregarMusicas() {
                                     FavoritarDesfavoritarMusica(TodasMusicas[i].Id, 'Editar').then((resolve) => {
                                         Heart.src = resolve
                                     })
+                                })
+
+                                //? Ao clicar no nome do Autor
+                                Autor.addEventListener('click', () => {
+                                    FecharPaginas()
+                                    document.getElementById('blurBackgroundArtista').style.backgroundImage = `url(${img.src})`
+                                    document.getElementById('NomeArtista').innerText = Autor.innerText
+                                    document.getElementById('containerMusicasArtista').innerHTML = ''
+                                    document.querySelector('body').style.overflow = 'hidden'
+                                    RetornarMusicasArtista(Autor.innerText, document.getElementById('containerMusicasArtista'))
+                                    const PagArtistas = document.getElementById('PagArtistas')
+                                    PagArtistas.style.display = 'block'
                                 })
                             }
                         }
@@ -390,6 +422,7 @@ function carregarMusicas() {
                         const div = document.createElement('div')
                         const divPrimeiraParte = document.createElement('div')
                         const contador = document.createElement('p')
+                        const divImg = document.createElement('div')
                         const img = document.createElement('img')
                         const divTexto = document.createElement('div')
                         const Nome = document.createElement('p')
@@ -400,6 +433,7 @@ function carregarMusicas() {
                         div.className = 'MusicasLinha'
                         divTexto.className = 'TextoMusicaCaixa'
                         Heart.className = 'btnCurtirMeuPerfil'
+                        divImg.className = 'DivImgMusicaMeuPerfil'
                         img.className = 'ImgMusicaMeuPerfil'
                         Genero.className = 'GeneroMeuPerfil'
 
@@ -413,7 +447,8 @@ function carregarMusicas() {
                         divTexto.appendChild(Nome)
                         divTexto.appendChild(AutorDaMusica)
                         divPrimeiraParte.appendChild(contador)
-                        divPrimeiraParte.appendChild(img)
+                        divImg.appendChild(img)
+                        divPrimeiraParte.appendChild(divImg)
                         divPrimeiraParte.appendChild(divTexto)
                         div.appendChild(divPrimeiraParte)
                         div.appendChild(Genero)
@@ -421,13 +456,15 @@ function carregarMusicas() {
                         article.appendChild(div)
 
                         let num = contadorMusicasLinha - 1
-                        divPrimeiraParte.addEventListener('click', () => {
-                            ListaProxMusica = {
-                                Musicas: musicasFavoritasUser,
-                                Numero: contadorTodasAsMusicas,
+                        div.addEventListener('click', (event) => {
+                            if (event.target != AutorDaMusica && event.target != Heart) {
+                                ListaProxMusica = {
+                                    Musicas: musicasFavoritasUser,
+                                    Numero: contadorTodasAsMusicas,
+                                }
+        
+                                DarPlayMusica(musicasFavoritasUser[num], num)
                             }
-
-                            DarPlayMusica(musicasFavoritasUser[num], num)
                         })
 
                         //? Ao clicar no btn de play
@@ -449,6 +486,18 @@ function carregarMusicas() {
                             .catch((error) => {
                                 alert(error)
                             })
+                        })
+
+                        //? Ao clicar no nome do Autor
+                        AutorDaMusica.addEventListener('click', () => {
+                            FecharPaginas()
+                            document.getElementById('blurBackgroundArtista').style.backgroundImage = `url(${img.src})`
+                            document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
+                            document.getElementById('containerMusicasArtista').innerHTML = ''
+                            document.querySelector('body').style.overflow = 'hidden'
+                            RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
+                            const PagArtistas = document.getElementById('PagArtistas')
+                            PagArtistas.style.display = 'block'
                         })
                     }
                 }
@@ -484,6 +533,7 @@ function carregarMusicas() {
                 const div = document.createElement('div')
                 const divPrimeiraParte = document.createElement('div')
                 const contador = document.createElement('p')
+                const divImg = document.createElement('div')
                 const img = document.createElement('img')
                 const divTexto = document.createElement('div')
                 const Nome = document.createElement('p')
@@ -494,6 +544,7 @@ function carregarMusicas() {
                 div.className = 'MusicasLinha'
                 divTexto.className = 'TextoMusicaCaixa'
                 Heart.className = 'btnCurtirMeuPerfil'
+                divImg.className = 'DivImgMusicaMeuPerfil'
                 img.className = 'ImgMusicaMeuPerfil'
                 Genero.className = 'GeneroMeuPerfil'
 
@@ -507,7 +558,8 @@ function carregarMusicas() {
                 divTexto.appendChild(Nome)
                 divTexto.appendChild(AutorDaMusica)
                 divPrimeiraParte.appendChild(contador)
-                divPrimeiraParte.appendChild(img)
+                divImg.appendChild(img)
+                divPrimeiraParte.appendChild(divImg)
                 divPrimeiraParte.appendChild(divTexto)
                 div.appendChild(divPrimeiraParte)
                 div.appendChild(Genero)
@@ -516,13 +568,15 @@ function carregarMusicas() {
 
                 
                 //? Ao clicar na música
-                divPrimeiraParte.addEventListener('click', () => {
-                    ListaProxMusica = {
-                        Musicas: arrayMusicasArtista,
-                        Numero: contadorMusicasLinha,
+                div.addEventListener('click', (event) => {
+                    if (event.target != AutorDaMusica && event.target != Heart) {
+                        ListaProxMusica = {
+                            Musicas: arrayMusicasArtista,
+                            Numero: contadorMusicasLinha,
+                        }
+        
+                        DarPlayMusica(TodasMusicas[c], c)
                     }
-
-                    DarPlayMusica(TodasMusicas[c], c)
                 })
 
                 //? Ao clicar no btn de play
@@ -681,9 +735,9 @@ function carregarMusicas() {
 })
 
 //? Tirar dps
-// setTimeout(() => {
-//     document.getElementById('CarregamentoTela1').style.display = 'none'
-// }, 5000)
+setTimeout(() => {
+    document.getElementById('CarregamentoTela1').style.display = 'none'
+}, 5000)
 
 let trocouDeMusica = false
 let fimMusica = false
@@ -865,10 +919,10 @@ NextBtn2.addEventListener("click", () => {
 })
 
 function NextSong() {
-    if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
-        ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
+    if(ListaProxMusica.Numero > 0) {
+        ListaProxMusica.Numero =  ListaProxMusica.Numero - 1
     } else {
-        ListaProxMusica.Numero = 0
+        ListaProxMusica.Numero =  ListaProxMusica.Musicas.length
     }
 
     DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
@@ -886,10 +940,10 @@ BackBtn2.addEventListener("click", () => {
 })
 
 function BackSong() {
-    if(ListaProxMusica.Numero > 0) {
-        ListaProxMusica.Numero =  ListaProxMusica.Numero - 1
+    if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
+        ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
     } else {
-        ListaProxMusica.Numero =  ListaProxMusica.Musicas.length
+        ListaProxMusica.Numero = 0
     }
 
     DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)

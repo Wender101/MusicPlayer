@@ -254,10 +254,6 @@ body {
                         object-fit: contain;
                     }
 
-                    p {
-
-                    }
-
                     div.iconPlayPlaylistFavoritaPerfil {
                         width: 50px;
                         height: 50px;
@@ -396,10 +392,6 @@ body {
                                 div.containerTextoPerfilPesquisa {
                                     display: flex;
                                     flex-direction: column;
-
-                                    p {
-
-                                    }
 
                                     span {
                                         color: #5d5d63;
@@ -1122,7 +1114,7 @@ body {
     //? BarraMusica -----------
     article#BarraMusica {
         width: calc(100% - 40px);
-        height: 40px;
+        height: 41px;
         bottom: -100vh;
         transition: 1s bottom ease-in-out;
         position: fixed;
@@ -1139,18 +1131,30 @@ body {
         }
 
         div#InfosBarraMusica {
-            width: 200px;
+            max-width: 229px;
             display: flex;
             align-items: end;
             justify-content: start;
             gap: 16px;
 
-            img#imgMusicaBarraMusica {
+            div#divImgMusicaBarraMusica {
                 width: 64px;
                 height: 64px;
-                object-fit: cover;
-                object-position: center;
-                border-radius: 10px;
+                flex: 0 0 64px;
+                overflow: hidden;
+                border-radius: 2px;
+                position: relative;
+
+
+                img#imgMusicaBarraMusica {
+                    width: 100%;
+                    height: 130%;
+                    top: -10px;
+                    display: block;
+                    object-fit: cover;
+                    object-position: center;
+                    position: absolute;
+                }
             }
 
             div {
@@ -1341,51 +1345,70 @@ body {
                     }
                     
                     div.ContainerImgMusicaCaixa {
+                        // width: 100%;
+                        // height: 55%;
+                        // z-index: 2;
+                        // overflow: hidden;
+                        // display: flex;
+                        // align-items: center;
+                        // justify-content: center;
+
+                        //?  ----
                         width: 100%;
-                        height: 55%;
+                        height: 135%;
                         z-index: 2;
-                        // position: absolute;
-                        // top: 0px;
-                        // margin: 25px auto;
-                        // border-radius: 5px;
                         overflow: hidden;
+                        position: absolute;
                         display: flex;
+                        top: -43px;
                         align-items: center;
                         justify-content: center;
                         
                         img {
                             width: 100%;
-                            // height: 100%;
+                            height: 100%;
                             object-fit: cover;
                             object-position: center;
                         }
                     }
 
                     .divBlurTexto {
-                        width: 100%;
-                        height: 120%;
-                        background-color: rgb(41, 42, 49);
-                        opacity: 0.3;
-                        filter: blur(5px);
+                        width: calc(100% + 40px);
+                        height: calc(45% - 20px);
+                        background-color: #14151ad8;
+                        filter: blur(1px);
+                        opacity: 0.9;
                         position: absolute;
-                        bottom: -50px;
-                        left: 0px;
-                        z-index: 1;
+                        bottom: -20px;
+                        left: -20px;
+                        z-index: 2;
                         object-fit: cover;
 
+                        //? ---
                     }
     
                     div.TextoMusicaCaixa {
+                        // width: 100%;
+                        // height: calc(45% - 20px);
+                        // padding: 10px;
+                        // display: flex;
+                        // flex-direction: column;
+                        // justify-content: center;
+                        // position: absolute;
+                        // bottom: 0px;
+
+                        //? ---------
                         width: 100%;
-                        height: calc(45% - 20px);
+                        /* height: calc(45% - 20px); */
                         padding: 10px;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
-
-                        //? ---------
                         position: absolute;
-                        bottom: 0px;
+                        left: 0px;
+                        bottom: -3px;
+                        z-index: 2;
+
     
                         p {
                             width: 90%;
@@ -1402,7 +1425,7 @@ body {
                         }
     
                         span {
-                            color: #ffffff69;
+                            color: #ffffffbf;
                             font-size: 12px;
                             font-weight: 500;
                             line-height: 20px;
@@ -1434,11 +1457,20 @@ body {
                         align-items: center;
                         gap: 20px;
     
-                        img.ImgMusicaMeuPerfil {
+                        div.DivImgMusicaMeuPerfil {
                             width: 60px;
                             height: 60px;
-                            object-fit: cover;
-                            object-position: center;
+                            overflow: hidden;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            
+                            img.ImgMusicaMeuPerfil {
+                                // width: 100%;
+                                height: 135%;
+                                object-fit: cover;
+                                object-position: center;
+                            }
                         }
         
                         div.TextoMusicaCaixa {
