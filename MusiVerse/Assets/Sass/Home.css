@@ -884,35 +884,50 @@ body section.Paginas#PagArtistas article#containerArtista {
   margin: 0px;
 }
 body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista {
-  width: 100%;
+  width: calc(100% - 40px);
   height: 400px;
-  background-position: center;
+  background-image: linear-gradient(#3c3c42, #232327);
   position: relative;
-  z-index: 1;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  gap: 40px;
 }
 body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#blurBackgroundArtista {
-  width: 100%;
-  max-width: 1000px;
-  left: 50%;
-  transform: translate(-50%);
-  height: 100%;
-  position: absolute;
+  width: 250px;
+  height: 250px;
   z-index: 1;
+  display: none;
+  position: absolute;
   background-color: rgba(0, 0, 0, 0.534);
-  background-image: url("../Imgs/Banners/c36fff19b54c90efecc303b86bb9f71a.jpg");
   background-position: center center;
   background-size: cover;
 }
 body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista {
   width: 100%;
   height: 100%;
-  position: absolute;
   z-index: 2;
 }
-body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista h1#NomeArtista {
-  position: absolute;
-  bottom: 60px;
-  left: 50px;
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista {
+  width: 100%;
+  height: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 20px;
+}
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista div#imgPerfilArtista {
+  width: 250px;
+  height: 250px;
+  z-index: 1;
+  background-color: #1a1a1d;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+  background-position: center center;
+  background-size: cover;
+  margin-left: 20px;
+}
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista h1#NomeArtista {
   font-size: 5em;
 }
 body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista button#btnPlayHeaderArtista {
@@ -1395,8 +1410,13 @@ body article#BarraMusica div#ConfigsBarraMusicaCell img {
 }
 body section.containerMusica {
   margin-bottom: 60px;
+  width: 100%;
   max-width: 1400px;
   margin: auto;
+  overflow: auto;
+}
+body section.containerMusica::-webkit-scrollbar {
+  width: 0px; /* Largura da barra de rolagem */
 }
 body section.containerMusica h1 {
   font-size: 1.5em;
@@ -1406,16 +1426,21 @@ body section.containerMusica h1 {
   margin: 70px 0px 14px;
 }
 body section.containerMusica article {
-  width: 100%;
   margin: auto;
 }
 body section.containerMusica article.containerMusicaCaixa {
+  display: flex;
+  gap: 20px;
+  height: 250px;
+}
+body section.containerMusica article.containerMusicaCaixa.SemScroll {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
+  height: auto;
 }
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa {
-  width: 240px;
+  min-width: 240px;
   height: 244px;
   display: flex;
   flex-direction: column;
@@ -1424,8 +1449,33 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa {
   border-radius: 0px;
   overflow: hidden;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
-  background-color: #212124;
+  background-color: #1a1a1d;
   cursor: pointer;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa {
+  width: 64%;
+  height: 64%;
+  border-radius: 50%;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.7098039216);
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg {
+  display: none;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgTop {
+  top: -2px;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgBottom {
+  bottom: 45px;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa img {
+  height: 134%;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico .divBlurTexto {
+  background-color: #1a1a1d;
+  opacity: 1;
 }
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa:hover div.BtnDarPlay {
   transition: 200ms opacity ease-in-out;
@@ -1435,11 +1485,18 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.B
   width: 50px;
   height: 50px;
   position: absolute;
-  top: 45%;
+  bottom: 45px;
   right: 5px;
   opacity: 0;
   z-index: 3;
   border-radius: 50%;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixaTreeFy {
+  height: 72% !important;
+  top: 0px !important;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgArtistaHistoricoTreeFy img {
+  height: 100% !important;
 }
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
   width: 100%;
@@ -1452,6 +1509,21 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.C
   align-items: center;
   justify-content: center;
 }
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg {
+  width: 100%;
+  z-index: 3;
+  position: absolute;
+  left: -2px;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgTop {
+  top: 43px;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgBottom {
+  bottom: 111px;
+}
+body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg path {
+  fill: transparent;
+}
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa img {
   width: 100%;
   height: 100%;
@@ -1463,9 +1535,8 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.C
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto {
   width: calc(100% + 40px);
   height: calc(45% - 20px);
-  background-color: rgba(20, 21, 26, 0.8470588235);
+  background-color: #1a1a1d;
   filter: blur(1px);
-  opacity: 0.9;
   position: absolute;
   bottom: -20px;
   left: -20px;
@@ -1488,7 +1559,7 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.T
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa p {
   width: 90%;
   color: #fff;
-  font-size: 15px;
+  font-size: 17px;
   font-style: normal;
   font-weight: 500;
   line-height: 24px;
@@ -1498,8 +1569,8 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.T
   text-overflow: ellipsis;
 }
 body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa span {
-  color: rgba(255, 255, 255, 0.7490196078);
-  font-size: 12px;
+  color: rgba(255, 255, 255, 0.4117647059);
+  font-size: 13px;
   font-weight: 500;
   line-height: 20px;
   z-index: 2;

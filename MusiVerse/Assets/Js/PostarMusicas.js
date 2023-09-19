@@ -74,10 +74,10 @@ async function prosseguirMusicaYT() {
 
                 setTimeout(() => {
                     carregarImagem()
-                }, 300)
+                }, 500)
               
                 inputNomeMusicaLinkYT.value = data.videoTitle
-                inputAutorMusicaLinkYT.value = data.channelName
+                inputAutorMusicaLinkYT.value = data.channelName.replace('- Topic', '')
               
                 // Vai postar a nova música na parte "MusicasPostadas" do Firebase
                 DadosNovaMusica = data;

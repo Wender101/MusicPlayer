@@ -5,3 +5,5 @@ Sistema de recomendação através do que o user pesquisa e pricipalmente pelos 
 Arrumar a ao clicar no autor da música e ouvir só as músicas dele, ao selecionar outro autor passa as músicas do anterior
 
 Almentar letra da conta do cell, n aparece direito
+
+Arrumar o pesquisar por user, ao perquisar por algum user com nome semelhante aparece a img do primeiro usar encontrado e as músicas do utimo
