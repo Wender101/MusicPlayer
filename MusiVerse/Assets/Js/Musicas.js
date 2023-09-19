@@ -1011,7 +1011,7 @@ async function RetornarMusicasArtista(Artsita, Local) {
                         Numero: contadorMusicasLinha,
                     }
     
-                    DarPlayMusica(arrayMusicasArtista[contadorMusicasLinha], contadorMusicasLinha)
+                    DarPlayMusica(TodasMusicas[c], c)
                 }
             })
 
