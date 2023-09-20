@@ -682,6 +682,7 @@ let salvarHistorico = false
 
 //? Vai dar play naas músicas
 function DarPlayMusica(Lista, num) {
+    console.log(Lista.ID);
 
     function EnviarDados() {
         if(audioPlayer.currentTime > 2) {
@@ -824,7 +825,7 @@ function DarPlayMusica(Lista, num) {
 //? Vai curtir / descurtir a música ao clica no coração
 const HeartBarraMusica = document.getElementById('HeartBarraMusica')
 HeartBarraMusica.addEventListener('click', () => {
-    FavoritarDesfavoritarMusica(MusicaTocandoAgora.Id, 'Editar')
+    FavoritarDesfavoritarMusica(MusicaTocandoAgora.ID, 'Editar')
     .then((resolve) => {
         HeartBarraMusica.src = resolve
     })
@@ -909,6 +910,7 @@ function BackSong() {
 
 //? Vai curtir ou descurtir a música
 function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
+    console.log(IdMusica);
     let MusicaEncontrada = false
     return new Promise((resolve, reject) => {
         for(let c = 0; c <= currentUser.User.MusicasCurtidas.length; c++) {
