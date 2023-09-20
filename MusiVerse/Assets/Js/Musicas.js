@@ -120,7 +120,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
 
     let contadorMusicasLinha = 0
     let arrayMusicasRetornadas = []
-    for (let c = TodasMusicas.Musicas.length - 1; c >= 0; c--) {
+    for (let c = maxMusicas - 1; c >= 0; c--) {
         const NomeMusica = formatarTexto(TodasMusicas.Musicas[c].NomeMusica)
         const Autor = formatarTexto(TodasMusicas.Musicas[c].Autor)
         const Genero = formatarTexto(TodasMusicas.Musicas[c].Genero)
