@@ -115,6 +115,7 @@ function AtualizarFinalizar() {
 
 function FinalizarPostarMusicaYT() {
     if(PodeFinalizarPostarMusicaYT) {
+        let feito = false
         let musicaPostadaComSucesso = false
         const inputNomeMusicaLinkYT = document.getElementById('inputNomeMusicaLinkYT')
         const inputAutorMusicaLinkYT = document.getElementById('inputAutorMusicaLinkYT')
@@ -128,35 +129,47 @@ function FinalizarPostarMusicaYT() {
             LinkAudio: DadosNovaMusica.audioUrl,
             LinkImg: DadosNovaMusica.thumbnailUrl,
             NomeMusica: inputNomeMusicaLinkYT.value,
+            ID: DadosNovaMusica.uid
         }
 
         //? Vai postar a música
-        db.collection('MusicasPostadas').doc(DadosNovaMusica.uid).set(NovaMusica).then(() => {
+        db.collection('InfoMusicas').limit(1).get().then((snapshot) => {
+            snapshot.docs.forEach(Musicas => {
+                if(feito == false) {
+                    feito = true
 
-            //? Vai atualizar o perfil do user
-            db.collection('Users').onSnapshot(snapshot => {
-                snapshot.docChanges().forEach(User => {
-                    if(User.doc.data().Email == currentUser.User.Email && musicaPostadaComSucesso == false) {
-                        musicaPostadaComSucesso = true
-                        let NovaMusicaPostada = User.doc.data().MusicasPostadas
-                        NovaMusicaPostada.push(DadosNovaMusica.uid)
-                        db.collection('Users').doc(User.doc.id).update({MusicasPostadas: NovaMusicaPostada}).then(() => {
+                    const InfoMusicasObj = Musicas.data()
+                    InfoMusicasObj.Musicas.push(NovaMusica)
 
-                            //? Vai fechar a aba postar músicas
-                            document.getElementById('FinalizarAddYT').style.display = 'none'
-                            document.getElementById('PrimeirosPassosYT').style.display = 'block'
-                            document.getElementById('ImgMusicaLinkYT').src = 'Assets/Imgs/Banners/c36fff19b54c90efecc303b86bb9f71a.jpg'
-                            FecharPaginas()
-                            limparInputAddMusics()
-
-                            //? Vai adicionar a música postada no array todas as músicas
-                            NovaMusica.Id = DadosNovaMusica.uid
-                            TodasMusicas.push(NovaMusica)
-
-                            alert('Música postada com sucesso!')
+                    db.collection('InfoMusicas').doc(Musicas.id).update({Musicas: InfoMusicasObj.Musicas}).then(() => {
+            
+                        //? Vai atualizar o perfil do user
+                        db.collection('Users').onSnapshot(snapshot => {
+                            snapshot.docChanges().forEach(User => {
+                                if(User.doc.data().Email == currentUser.User.Email && musicaPostadaComSucesso == false) {
+                                    musicaPostadaComSucesso = true
+                                    let NovaMusicaPostada = User.doc.data().MusicasPostadas
+                                    NovaMusicaPostada.push(DadosNovaMusica.uid)
+                                    db.collection('Users').doc(User.doc.id).update({MusicasPostadas: NovaMusicaPostada}).then(() => {
+            
+                                        //? Vai fechar a aba postar músicas
+                                        document.getElementById('FinalizarAddYT').style.display = 'none'
+                                        document.getElementById('PrimeirosPassosYT').style.display = 'block'
+                                        document.getElementById('ImgMusicaLinkYT').src = 'Assets/Imgs/Banners/c36fff19b54c90efecc303b86bb9f71a.jpg'
+                                        FecharPaginas()
+                                        limparInputAddMusics()
+            
+                                        //? Vai adicionar a música postada no array todas as músicas
+                                        NovaMusica.Id = DadosNovaMusica.uid
+                                        TodasMusicas.Musicas.push(NovaMusica)
+            
+                                        alert('Música postada com sucesso!')
+                                    })
+                                }
+                            })
                         })
-                    }
-                })
+                    })
+                }
             })
         })
     }
