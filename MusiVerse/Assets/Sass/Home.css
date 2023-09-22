@@ -917,7 +917,7 @@ body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundA
   justify-content: start;
   gap: 20px;
 }
-body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista div#imgPerfilArtista {
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista div#containerImgPerfilArtista {
   width: 250px;
   height: 250px;
   z-index: 1;
@@ -926,6 +926,19 @@ body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundA
   background-position: center center;
   background-size: cover;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  overflow: hidden;
+}
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista div#containerImgPerfilArtista img#imgPerfilArtista {
+  width: 100%;
+  height: 133%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista div#containerImgPerfilArtista img#imgPerfilArtista.imgPerfilArtistaTreeFy {
+  height: 100%;
 }
 body section.Paginas#PagArtistas article#containerArtista div#coainerBackgroundArtista div#coteudoHeaderArtista div#inforArtista h1#NomeArtista {
   font-size: 5em;
@@ -1140,6 +1153,8 @@ body section.Paginas#PagCriarPlaylist article div#inputAddMusicaCriarPlaylist di
   width: 20px;
   height: 20px;
   cursor: pointer;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 body section.Paginas#PagCriarPlaylist article div#containerMusicasPesquisadasCriarPlaylist {
   width: 100%;
@@ -1282,7 +1297,7 @@ body article#BarraMusica div#InfosBarraMusica div#divImgMusicaBarraMusica {
 }
 body article#BarraMusica div#InfosBarraMusica div#divImgMusicaBarraMusica img#imgMusicaBarraMusica {
   width: 100%;
-  height: 130%;
+  height: 133%;
   top: -10px;
   display: block;
   -o-object-fit: cover;
@@ -1290,6 +1305,9 @@ body article#BarraMusica div#InfosBarraMusica div#divImgMusicaBarraMusica img#im
   -o-object-position: center;
      object-position: center;
   position: absolute;
+}
+body article#BarraMusica div#InfosBarraMusica div#divImgMusicaBarraMusica img#imgMusicaBarraMusica.imgMusicaBarraMusicaTreeFy {
+  height: 100%;
 }
 body article#BarraMusica div#InfosBarraMusica div {
   display: flex;

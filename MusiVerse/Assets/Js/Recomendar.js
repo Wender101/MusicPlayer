@@ -170,7 +170,14 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
         //? Ao clicar no nome do Autor
         div.addEventListener('click', () => {
           FecharPaginas()
-          document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+          // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+          if(img.src.includes ('treefy')) {
+            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+          } else {
+            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+          }
+          imgPerfilArtista.src = img.src
           document.getElementById('NomeArtista').innerText = p.innerText
           document.getElementById('containerMusicasArtista').innerHTML = ''
           document.querySelector('body').style.overflow = 'hidden'

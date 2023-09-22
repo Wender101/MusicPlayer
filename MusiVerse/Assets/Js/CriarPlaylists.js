@@ -13,10 +13,14 @@ function PesquisarMusicaCriarPlaylist() {
     
     if(pesquisarMuiscaCriarPlaylist.value.trim() != '') {
         Local.style.display = 'block'
-        for(let c = 0; c < TodasMusicas.length; c++) {
-            const NomeMusica = formatarTexto(TodasMusicas[c].NomeMusica)
-            const Autor = formatarTexto(TodasMusicas[c].Autor)
-            const Genero = formatarTexto(TodasMusicas[c].Genero)
+        document.getElementById('btnPesquisaMusicaPlaylist').src = 'Assets/Imgs/Icons/x.png'
+        document.getElementById('btnPesquisaMusicaPlaylist').style.width = '17px'
+        document.getElementById('btnPesquisaMusicaPlaylist').style.height = '17px'
+
+        for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+            const NomeMusica = formatarTexto(TodasMusicas.Musicas[c].NomeMusica)
+            const Autor = formatarTexto(TodasMusicas.Musicas[c].Autor)
+            const Genero = formatarTexto(TodasMusicas.Musicas[c].Genero)
     
             if(contadorMusicas < 12) {
                 if (PesquisaFormatada.includes(NomeMusica) || PesquisaFormatada.includes(Autor) || PesquisaFormatada.includes(Genero) || NomeMusica.includes(PesquisaFormatada) || Autor.includes(PesquisaFormatada) || Genero.includes(PesquisaFormatada)
@@ -40,10 +44,10 @@ function PesquisarMusicaCriarPlaylist() {
                     divImg.className = 'DivImgMusicaMeuPerfil'
                     img.className = 'ImgMusicaMeuPerfil'
                     Genero.className = 'GeneroMeuPerfil'
-                    img.src = TodasMusicas[c].LinkImg
-                    Nome.innerText = TodasMusicas[c].NomeMusica
-                    AutorDaMusica.innerText = TodasMusicas[c].Autor
-                    Genero.innerText = TodasMusicas[c].Genero
+                    img.src = TodasMusicas.Musicas[c].LinkImg
+                    Nome.innerText = TodasMusicas.Musicas[c].NomeMusica
+                    AutorDaMusica.innerText = TodasMusicas.Musicas[c].Autor
+                    Genero.innerText = TodasMusicas.Musicas[c].Genero
                     btnAdicionar.innerText = 'Adicionar'
                     
                     divTexto.appendChild(Nome)
@@ -59,11 +63,11 @@ function PesquisarMusicaCriarPlaylist() {
                     div.addEventListener('click', (event) => {
                         if (event.target != AutorDaMusica && event.target != btnAdicionar) {
                             ListaProxMusica = {
-                                Musicas: TodasMusicas[c],
+                                Musicas: TodasMusicas.Musicas[c],
                                 Numero: c,
                             }
         
-                            DarPlayMusica(TodasMusicas[c], c)
+                            DarPlayMusica(TodasMusicas.Musicas[c], c)
                         }
                     })
         
@@ -74,13 +78,14 @@ function PesquisarMusicaCriarPlaylist() {
                         const imgCriarPlaylist = document.getElementById('imgCriarPlaylist')
     
                         if(clicouAdd == false) {
-                            arrayMusicasNovaPlaylist.push(TodasMusicas[c])
+                            arrayMusicasNovaPlaylist.push(TodasMusicas.Musicas[c])
+                            // Local.style.display = 'none'
                             clicouAdd = true
                             containerMusicasAddCriarPlaylist.appendChild(div)
                             btnAdicionar.innerText = 'Remover'
                         } else {
                             for(let b = 0; b < arrayMusicasNovaPlaylist.length; b++) {
-                                if(arrayMusicasNovaPlaylist[b].Id == TodasMusicas[c].Id) {
+                                if(arrayMusicasNovaPlaylist[b].ID == TodasMusicas.Musicas[c].ID) {
                                     arrayMusicasNovaPlaylist.splice(b, 1)
                                 }
                             }
@@ -115,7 +120,15 @@ function PesquisarMusicaCriarPlaylist() {
         }
     } else {
         Local.style.display = 'none'
+        document.getElementById('btnPesquisaMusicaPlaylist').src = 'Assets/Imgs/Icons/search.png'
+        document.getElementById('btnPesquisaMusicaPlaylist').style.width = '20px'
+        document.getElementById('btnPesquisaMusicaPlaylist').style.height = '20px'
     }
+
+    document.getElementById('btnPesquisaMusicaPlaylist').addEventListener('click', () => {
+        pesquisarMuiscaCriarPlaylist.value = ''
+        PesquisarMusicaCriarPlaylist()
+    })
 }
 
 //? Cancelar Postar
@@ -135,6 +148,7 @@ function PopUpPostaNovaPlaylist() {
 
 //? Postar nova playlist
 function PostarNovaPlaylist(btn) {
+    let feito = false
     if(inputNomeNovaPlaylist.value.trim() != '') {
         document.getElementById('postarNovaPlaylist').style.background = 'rgb(0, 255, 255)'
 
@@ -148,14 +162,25 @@ function PostarNovaPlaylist(btn) {
                 Colaboradores: [],
             }
 
-            db.collection('Playlists').doc().set(novaPlaylist).then(() => {
-                CancelarPostarNovaPlaylist()
-                alert('Playlist postada com sucesso!')
-                FecharPaginas()
-                document.getElementById('containerMusicasPesquisadasCriarPlaylist').innerHTML = ''
-                document.getElementById('containerMusicasAddCriarPlaylist').querySelector('section').querySelector('article').innerHTML = ''
-                document.getElementById('pesquisarMuiscaCriarPlaylist').innerHTML = ''
-                document.getElementById('imgCriarPlaylist').src = 'Assets/Imgs/Icons/Faixas200.png'
+            db.collection('InfoMusicas').limit(1).get().then((snapshot) => {
+                snapshot.docs.forEach(TodasAsMusicas => {
+                    if(feito == false) {
+                        feito = true
+    
+                        const InfoMusicasObj = TodasAsMusicas.data()
+                        InfoMusicasObj.Playlists.push(novaPlaylist)
+    
+                        db.collection('InfoMusicas').doc(TodasAsMusicas.id).update({Playlists: InfoMusicasObj.Playlists}).then(() => {
+                            CancelarPostarNovaPlaylist()
+                            alert('Playlist postada com sucesso!')
+                            FecharPaginas()
+                            document.getElementById('containerMusicasPesquisadasCriarPlaylist').innerHTML = ''
+                            document.getElementById('containerMusicasAddCriarPlaylist').querySelector('section').querySelector('article').innerHTML = ''
+                            document.getElementById('pesquisarMuiscaCriarPlaylist').innerHTML = ''
+                            document.getElementById('imgCriarPlaylist').src = 'Assets/Imgs/Icons/Faixas200.png'
+                        })
+                    }
+                })
             })
         }
     } else {

@@ -103,7 +103,6 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
     const article = document.createElement('article')
 
     if(ClassArticle) {
-        console.log(ClassArticle);
         article.classList.add('containerMusicaCaixa', 'SemScroll')
 
     } else {
@@ -223,7 +222,14 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
             //? Ao clicar no nome do Autor
             span.addEventListener('click', () => {
                 FecharPaginas()
-                document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+                if(img.src.includes ('treefy')) {
+                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+                } else {
+                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+                }
+                imgPerfilArtista.src = img.src
                 document.getElementById('NomeArtista').innerText = span.innerText
                 document.getElementById('containerMusicasArtista').innerHTML = ''
                 document.querySelector('body').style.overflow = 'hidden'
@@ -305,7 +311,14 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
             //? Ao clicar no nome do Autor
             AutorDaMusica.addEventListener('click', () => {
                 FecharPaginas()
-                document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+                if(img.src.includes ('treefy')) {
+                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+                } else {
+                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+                }
+                imgPerfilArtista.src = img.src
                 document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
                 document.getElementById('containerMusicasArtista').innerHTML = ''
                 document.querySelector('body').style.overflow = 'hidden'
@@ -435,7 +448,14 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                             //? Ao clicar no nome do Autor
                             Autor.addEventListener('click', () => {
                                 FecharPaginas()
-                                document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+                                if(img.src.includes ('treefy')) {
+                                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+                                } else {
+                                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+                                }
+                                imgPerfilArtista.src = img.src
                                 document.getElementById('NomeArtista').innerText = Autor.innerText
                                 document.getElementById('containerMusicasArtista').innerHTML = ''
                                 document.querySelector('body').style.overflow = 'hidden'
@@ -550,7 +570,14 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                     //? Ao clicar no nome do Autor
                     AutorDaMusica.addEventListener('click', () => {
                         FecharPaginas()
-                        document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                        // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
+                        const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+                        if(img.src.includes ('treefy')) {
+                            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+                        } else {
+                            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+                        }
+                        imgPerfilArtista.src = img.src
                         document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
                         document.getElementById('containerMusicasArtista').innerHTML = ''
                         document.querySelector('body').style.overflow = 'hidden'
@@ -682,7 +709,6 @@ let salvarHistorico = false
 
 //? Vai dar play naas músicas
 function DarPlayMusica(Lista, num) {
-    console.log(Lista.ID);
 
     function EnviarDados() {
         if(audioPlayer.currentTime > 2) {
@@ -764,7 +790,13 @@ function DarPlayMusica(Lista, num) {
             audioPlayer.play()
 
             //? Vai mudar a informações na barra música para o pc
-            document.getElementById('imgMusicaBarraMusica').src = Lista.LinkImg
+            const imgMusicaBarraMusica = document.getElementById('imgMusicaBarraMusica')
+            if(Lista.LinkImg.includes('treefy')) {
+                imgMusicaBarraMusica.classList.add('imgMusicaBarraMusicaTreeFy')
+            } else {
+                imgMusicaBarraMusica.classList.remove('imgMusicaBarraMusicaTreeFy')
+            }
+            imgMusicaBarraMusica.src = Lista.LinkImg
             document.getElementById('NomeMusicaBarraMusica').innerText = Lista.NomeMusica
             document.getElementById('AutorMusicaBarraMusica').innerText = Lista.Autor
 
@@ -910,7 +942,6 @@ function BackSong() {
 
 //? Vai curtir ou descurtir a música
 function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
-    console.log(IdMusica);
     let MusicaEncontrada = false
     return new Promise((resolve, reject) => {
         for(let c = 0; c <= currentUser.User.MusicasCurtidas.length; c++) {
