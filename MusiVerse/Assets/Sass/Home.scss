@@ -136,6 +136,49 @@ body {
         }
     }
 
+    //? ----------------------
+    div#btnVoltarPagina {
+        position: absolute;
+        top: 33px;
+        left: 33px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        z-index: 5;
+
+        button {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            border: none;
+            cursor: pointer;
+            background-color: #1a1a1d;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+            
+            // &#btnBackPag {
+            //     background-image: url('../Imgs/Icons/BackPag.png');
+            // }
+
+            // &#btnNextPag {
+            //     background-image: url('../Imgs/Icons/NextPag.png');
+            // }
+            
+            &.btnBloqueado {
+                img {
+                    opacity: 0.3;
+                }
+            }
+        }
+    }
+
     //? SearchBar -------------
     div#SearchBar {
         width: 340px;

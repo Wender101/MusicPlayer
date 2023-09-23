@@ -182,8 +182,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
           document.getElementById('containerMusicasArtista').innerHTML = ''
           document.querySelector('body').style.overflow = 'hidden'
           RetornarMusicasArtista(p.innerText, document.getElementById('containerMusicasArtista'))
-          const PagArtistas = document.getElementById('PagArtistas')
-          PagArtistas.style.display = 'block'
+          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
         })
       }
     }

@@ -24,27 +24,137 @@ function FecharPaginas() {
     }
 }
 
+
+//? Vai salvar o históco das páginas que foram abertas para o user poder voltar
+let historiacoDasPaginas = {
+    Paginas: [],
+    PaginaAtual: null
+}
+
+const btnBackPag = document.getElementById('btnBackPag')
+const btnNextPag = document.getElementById('btnNextPag')
+function HistoricoPaginasAbertas(PaginaAberta) {
+    //? --------------
+    const index = historiacoDasPaginas.Paginas.indexOf(PaginaAberta)
+
+    if (index !== -1) {
+      // Se o valor já estiver presente, remova-o do array
+      historiacoDasPaginas.Paginas.splice(index, 1)
+    }
+
+    let valorAntigo = historiacoDasPaginas.Paginas[historiacoDasPaginas.PaginaAtual]
+      historiacoDasPaginas.Paginas.splice(historiacoDasPaginas.PaginaAtual, 1)
+      historiacoDasPaginas.Paginas.push(valorAntigo)
+  
+    // Adicione o valor novamente ao final do array
+    historiacoDasPaginas.Paginas.push(PaginaAberta)
+    historiacoDasPaginas.PaginaAtual =  historiacoDasPaginas.Paginas.length -1
+    //? -------------
+
+    btnBackPag.classList.remove('btnBloqueado')
+    btnNextPag.classList.add('btnBloqueado')
+}
+
+function VolatarPaginaAnterior() {
+    if(historiacoDasPaginas.PaginaAtual > 0) {
+        historiacoDasPaginas.PaginaAtual = historiacoDasPaginas.PaginaAtual - 1
+        FecharPaginas()
+        AbrirPaginas(historiacoDasPaginas.Paginas[historiacoDasPaginas.PaginaAtual])
+
+        btnNextPag.classList.remove('btnBloqueado')
+    } 
+    
+    if(historiacoDasPaginas.PaginaAtual <= 0) {
+        btnBackPag.classList.add('btnBloqueado')
+        AbrirPaginas(0)
+    }
+}
+
+function ProxmaPagina() {
+    if(historiacoDasPaginas.PaginaAtual < historiacoDasPaginas.Paginas.length -1) {
+
+        historiacoDasPaginas.PaginaAtual = historiacoDasPaginas.PaginaAtual + 1
+        FecharPaginas()
+        AbrirPaginas(historiacoDasPaginas.Paginas[historiacoDasPaginas.PaginaAtual])
+    
+        btnBackPag.classList.remove('btnBloqueado')
+    } 
+    
+    if(historiacoDasPaginas.PaginaAtual >= historiacoDasPaginas.Paginas.length -1) {
+        btnNextPag.classList.add('btnBloqueado')
+    }
+}
+
+function SalvarHistoricoDePaginas(idPagina = undefined, contadorLinkPagina) {
+    
+    if(idPagina == undefined) {
+        for(let b = 0; b < Paginas.length; b++) {
+            try {
+                if(Paginas[b].id == removerEspacosEAcentos(`Pag${document.getElementsByClassName('linkPagina')[contadorLinkPagina].innerText}`)) {
+                    AbrirPaginas(b, contadorLinkPagina)
+                    VoltouAoHome(b)
+                } else if(contadorLinkPagina == 0) {
+                    const ultimoValor = historiacoDasPaginas.Paginas[historiacoDasPaginas.Paginas.length -1]
+                    
+                    historiacoDasPaginas = {
+                        Paginas: [undefined, ultimoValor],
+                        PaginaAtual: 0
+                    }
+                    
+                    btnBackPag.classList.add('btnBloqueado')
+                    btnNextPag.classList.remove('btnBloqueado')
+                    AbrirPaginas(0)
+                }
+            } catch(e){console.warn(e)}
+        }
+    } else {
+        idPagina = idPagina.id
+        for(let c = 0; c < Paginas.length; c++) {
+            if(idPagina == Paginas[c].id) {
+                AbrirPaginas(c)
+                VoltouAoHome(c)
+            }
+        }
+    }
+}
+
 for(let c = 0; c < linkPagina.length; c++) {
     document.getElementsByClassName('linkPagina')[c].addEventListener('click', () => {
-        AbrirPaginas(c)
+        SalvarHistoricoDePaginas(undefined, c)
     })
 }
 
-function AbrirPaginas(c) {
+function VoltouAoHome(contador) {
+    if(historiacoDasPaginas.Paginas[historiacoDasPaginas.PaginaAtual] == 0 && contador != 0 || historiacoDasPaginas.Paginas[historiacoDasPaginas.PaginaAtual] == undefined && contador != 0) {
+        historiacoDasPaginas = {
+            Paginas: [],
+            PaginaAtual: null
+        }
+    }
+
+    HistoricoPaginasAbertas(contador)
+}
+
+function AbrirPaginas(contadorPagina, contadorLinkPagina = undefined) {
     FecharPaginas()
+    
+    if(contadorPagina != 0) {
+        setTimeout(() => {
         
-    setTimeout(() => {
-        document.getElementsByClassName('linkPagina')[c].style.color = '#0FF'
+            try {
+                if(contadorLinkPagina != undefined) {
+                    document.getElementsByClassName('linkPagina')[contadorLinkPagina].style.color = '#0FF'
+                    let img = document.getElementsByClassName('linkPagina')[contadorLinkPagina].querySelector('img')
+                    img.src = img.src.replace('.png', 'Selected.png')
+                }
+            } catch{}
+        }, 100)
         
         try {
-            let img = document.getElementsByClassName('linkPagina')[c].querySelector('img')
-            img.src = img.src.replace('.png', 'Selected.png')
+            document.getElementsByClassName(`Paginas`)[contadorPagina].style.display = 'block'
+            document.querySelector('body').style.overflow = 'hidden'
         } catch{}
-    }, 100)
-    try {
-        document.getElementById(`Pag${removerEspacosEAcentos(linkPagina[c].innerText)}`).style.display = 'block'
-        document.querySelector('body').style.overflow = 'hidden'
-    } catch{}
+    }
 }
 
 function removerEspacosEAcentos(texto) {

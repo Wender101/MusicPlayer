@@ -12,7 +12,8 @@ function recuperarMusicas(emailRecuperarMusicas) {
     }
 
     //? Vai atualizar o perfil do user com as músicas postadas por ele
-    db.collection('Users').onSnapshot(snapshot => {
+    console.log(todasAsMusicasDoUser);
+    db.collection('Users').get().then((snapshot) => {
         snapshot.docChanges().forEach(User => {
             if(User.doc.data().Email == emailRecuperarMusicas && musicasRecuperadasComSucesso == false) {
                 musicasRecuperadasComSucesso = true
@@ -23,5 +24,5 @@ function recuperarMusicas(emailRecuperarMusicas) {
         })
     })
 } setTimeout(() => {
-    recuperarMusicas('endrel006san@gmail.com')
+    recuperarMusicas('danielentoni75@gmail.com')
 }, 2000)

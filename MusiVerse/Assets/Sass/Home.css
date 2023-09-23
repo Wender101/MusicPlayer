@@ -229,6 +229,35 @@ body div#navCelular ul li div#imgPerfilUserNavCell {
 body div#navCelular ul li div#imgPerfilUserNavCell p#LetraNomePerfilUserNavCell {
   display: none;
 }
+body div#btnVoltarPagina {
+  position: absolute;
+  top: 33px;
+  left: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 5;
+}
+body div#btnVoltarPagina button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  background-color: #1a1a1d;
+}
+body div#btnVoltarPagina button img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body div#btnVoltarPagina button.btnBloqueado img {
+  opacity: 0.3;
+}
 body div#SearchBar {
   width: 340px;
   position: absolute;

@@ -59,6 +59,15 @@
 
     
     <main>
+        <div id="btnVoltarPagina">
+            <button id="btnBackPag" class="btnBloqueado" onclick="VolatarPaginaAnterior()">
+                <img src="Assets/Imgs/Icons/BackPag.png">
+            </button>
+            <button id="btnNextPag" class="btnBloqueado" onclick="ProxmaPagina()">
+                <img src="Assets/Imgs/Icons/NextPag.png">
+            </button>
+        </div>
+
         <div id="SearchBar">
             <img src="Assets/Imgs/Icons/search.png">
             <input type="text" placeholder="Pesquisar" id="inputPesquisa">
@@ -66,7 +75,7 @@
 
         <section id="MusicasAleatoriasBanner">
             <article>
-                <!-- <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" alt=""> -->
+                <!-- <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60"> -->
 
                 <div id="containerMusicasAleatoriasBanner">
                     <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
@@ -202,6 +211,8 @@
         </article>
     </section>
 
+    <section class="Paginas" id="PagPlaylists"></section>
+
     <section class="Paginas" id="PagFavoritas">
         <article id="containerMusicasFavoritas">
             <div id="backgroundPagMusicasFavoritas"></div>
@@ -316,7 +327,7 @@
         </article>
 
         <button id="btnPostarPlaylist" onclick="PopUpPostaNovaPlaylist()">
-            <img src="Assets/Imgs/Icons/back50.png" alt="">
+            <img src="Assets/Imgs/Icons/back50.png">
         </button>
 
         <div id="popUpAdicionarPlaylist">
@@ -333,6 +344,8 @@
             </div>
         </div>
     </section>
+
+    <section class="Paginas" id="PagAdicionarLetra"></section>
 
     <!--?  ----------------- Barra da Música ---------------->
     <article id="BarraMusica">
@@ -446,6 +459,8 @@
     <script src="Assets/Js/EditarPerfilUser.js"></script>
     <script src="Assets/Js/PlaylistsFavoritas.js"></script>
     <script src="Assets/Js/CriarPlaylists.js"></script>
+
+    <!-- <script src="CodigosAParte/RecuperarMusicas.js"></script> -->
 
     <script>
         const mensagens = [

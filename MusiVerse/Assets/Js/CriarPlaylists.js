@@ -25,6 +25,7 @@ function PesquisarMusicaCriarPlaylist() {
             if(contadorMusicas < 12) {
                 if (PesquisaFormatada.includes(NomeMusica) || PesquisaFormatada.includes(Autor) || PesquisaFormatada.includes(Genero) || NomeMusica.includes(PesquisaFormatada) || Autor.includes(PesquisaFormatada) || Genero.includes(PesquisaFormatada)
                 ) {
+                    console.log(TodasMusicas.Musicas[c].EmailUser);
                     contadorMusicas++
                     article.className = 'containerMusicaLinha'
         
