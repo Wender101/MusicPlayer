@@ -596,7 +596,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
     const article = document.createElement('article')
     let contadorMusicasLinha = 0
 
-    for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+    for(let c = TodasMusicas.Musicas.length - 1; c > 0; c--) {
 
         if(EmailUser == TodasMusicas.Musicas[c].EmailUser) {
             contadorMusicasLinha++
@@ -703,16 +703,16 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
 const inputPesquisa = document.getElementById('inputPesquisa')
 inputPesquisa.addEventListener('keypress', (e) => {
     if(e.keyCode == 13 && inputPesquisa.value.trim() != "") {
-        document.querySelector('body').style.overflowY = 'hidden'
-        document.getElementById('PagPesquisa').style.display = 'block'
+        // SalvarHistoricoDePaginas(document.getElementById('PagPesquisa'))
         document.getElementById('containerResultadoPesquisa').innerHTML = ''
-
+        
         //? Vai pesquisar por um perfil
         RetornarPerfil(inputPesquisa.value, document.getElementById('containerResultadoPesquisa'))
-
+        
         //? Vai pesquisar por músicas
         RetornarMusicas(inputPesquisa.value, document.getElementById('containerResultadoPesquisa'), 'Indeterminado', 'Caixa', false, false, 'SemScroll')
-
+        document.querySelector('body').style.overflowY = 'hidden'
+        document.getElementById('PagPesquisa').style.display = 'block'
     }
 })
 
