@@ -35,6 +35,7 @@ async function prosseguirMusicaYT() {
         try {
             const videoURL = inputLinkYT.value // URL do vídeo
             const response = await fetch('https://api-baixar-musica-yt-h3o3-k0utkoxqt-wender101.vercel.app/', {
+                mode: 'no-cors',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -83,6 +84,8 @@ async function prosseguirMusicaYT() {
                 DadosNovaMusica = data;
               } else {
                 console.log("Erro na requisição: " + response.statusText)
+                alert('Erro: ' + response.statusText)
+                document.getElementById('carregando').style.display = 'none'
               }
               
         } catch (error) {
