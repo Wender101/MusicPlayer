@@ -35,7 +35,6 @@ async function prosseguirMusicaYT() {
         try {
             const videoURL = inputLinkYT.value // URL do vídeo
             const response = await fetch('https://apibaixarmusicayt.onrender.com', {
-                mode: 'no-cors',
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
