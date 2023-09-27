@@ -34,7 +34,7 @@ async function prosseguirMusicaYT() {
 
         try {
             const videoURL = inputLinkYT.value // URL do vídeo
-            const response = await fetch('https://api-baixar-musica-yt-h3o3-k0utkoxqt-wender101.vercel.app/', {
+            const response = await fetch('https://apibaixarmusicayt.onrender.com', {
                 mode: 'no-cors',
                 method: 'POST',
                 headers: {
