@@ -32,12 +32,17 @@ function AbrirPerfilOutroUser(infosUser) {
     }
 
     try {
-        if(infosUser.Personalizar.RepetirBackGround) {
-            Background.classList.add('RepetirBackgroundPerfilUser')
+        if(Background.style.backgroundImage != `url(Assets/Imgs/Banners/fitaCassete.avif)`) {
+            if(infosUser.Personalizar.RepetirBackGround || infosUser.Personalizar.RepetirBackGround == undefined) {
+                Background.classList.add('RepetirBackgroundPerfilUser')
+            } else {
+                Background.classList.remove('RepetirBackgroundPerfilUser')
+            }
         } else {
-            Background.classList.remove('RepetirBackgroundPerfilUser')
+            console.log('dentro do else');
+            Background.classList.add('RepetirBackgroundPerfilUser')
         }
-    } catch{}
+    } catch(e){console.warn(e)}
     
     //? Vai informar o nome do user pequisado
     const nomePagPerfilOutroUser = document.getElementById('nomePagPerfilOutroUser')

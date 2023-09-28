@@ -67,10 +67,14 @@ function SalvarEdicao() {
                 document.getElementById('pop-upEditarPerfil').style.display = 'none'
 
                 try {
-                    if(btnRepetirBackground.checked) {
-                        document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
+                    if(document.getElementById('coainerBackgroundPerfil').style.backgroundImage != `url(Assets/Imgs/Banners/fitaCassete.avif)`) {
+                        if(btnRepetirBackground.checked) {
+                            document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
+                        } else {
+                            document.getElementById('coainerBackgroundPerfil').classList.remove('RepetirBackgroundPerfilUser')
+                        }
                     } else {
-                        document.getElementById('coainerBackgroundPerfil').classList.remove('RepetirBackgroundPerfilUser')
+                        document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
                     }
                 } catch{}
             })

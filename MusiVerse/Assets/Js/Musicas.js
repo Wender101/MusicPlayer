@@ -735,13 +735,14 @@ const btnMeuPerfil = document.getElementById('btnMeuPerfil')
 btnMeuPerfil.addEventListener('click', () => {
     document.getElementById('NomeUserMeuPerfil').innerText = currentUser.User.Nome
 
-    try {
-        if(currentUser.User.Personalizar.RepetirBackGround) {
-            document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
-        }
-    } catch{}
-
     if(currentUser.User.Personalizar.Background != null && currentUser.User.Personalizar.Background.trim() != '') {
+        
+        try {
+            if(currentUser.User.Personalizar.RepetirBackGround || currentUser.User.Personalizar.RepetirBackGround == undefined) {
+                document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
+            }
+        } catch{}
+
         //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
         var img = new Image()
         img.src = currentUser.User.Personalizar.Background
@@ -755,6 +756,7 @@ btnMeuPerfil.addEventListener('click', () => {
 
     } else {
         document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
+        document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
     }
 
     document.getElementById('containerMusicasPerfilUser').innerHTML = ''
