@@ -754,6 +754,22 @@ btnMeuPerfil.addEventListener('click', () => {
             document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
         }
 
+        //? Vai checar se está tudo certo com a img de perfil
+        var imgTeste2 = new Image()
+        imgTeste2.src = currentUser.User.Personalizar.FotoPerfil
+        const FotoPerfil = document.getElementById('imgPerfilUserHeaderUser')
+        imgTeste2.onload = function() {
+            FotoPerfil.src = currentUser.User.Personalizar.FotoPerfil
+            document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'block'
+            document.getElementById('coainerBackgroundPerfil').style.alignItems = 'center'
+            document.getElementById('coteudoHeaderPerfil').style.height = '80%'
+        }
+        imgTeste2.onerror = function() {
+            document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
+            document.getElementById('coteudoHeaderPerfil').style.height = '50%'
+            document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
+        }
+
     } else {
         document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
         document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')

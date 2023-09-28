@@ -50,20 +50,54 @@ function SalvarEdicao() {
                 currentUser.User.Nome = inputNomeDeUserMeuPerfil.value
                 currentUser.User.Personalizar = NewPersonalizar
 
+                for(let c = 0; c < TodosOsUsers.length; c++) {
+                    if(TodosOsUsers[c].User.Email == currentUser.User.Email) {
+                        TodosOsUsers[c].User.Personalizar = NewPersonalizar
+                    }
+                }
+
                 document.getElementById('NomeUserMeuPerfil').innerText = inputNomeDeUserMeuPerfil.value
 
 
                 //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
                 var img = new Image()
-                img.src = inputLinkBackgroundMeuPerfil.value
-                img.onload = function() {
-                    console.log('Imagem de fundo carregada com sucesso.')
-                    document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(${inputLinkBackgroundMeuPerfil.value})`
+                if(inputLinkBackgroundMeuPerfil.value.trim() != '') {
+                    img.src = inputLinkBackgroundMeuPerfil.value
+                    img.onload = function() {
+                        document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(${inputLinkBackgroundMeuPerfil.value})`
+                    }
+                    img.onerror = function() {
+                        alert('Algo deu errado com o link informado para a imagem de "fundo". Tente outro.')
+                        document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
+                    }
                 }
-                img.onerror = function() {
-                    alert('Algo deu errado com o link informado. Tente outro.')
-                    document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
+
+                //? Vai checar se a img de perfil adionada está funcionando
+                var imgTeste2 = new Image()
+                if(inputLinkPerfilMeuPerfil.value.trim() != '') {
+                    console.log('dentro do if??');
+                    imgTeste2.src = inputLinkPerfilMeuPerfil.value
+                    const FotoPerfil = document.getElementById('imgPerfilUserHeaderUser')
+                    imgTeste2.onload = function() {
+                        console.log('tudo certo por aqui');
+                        FotoPerfil.src = inputLinkPerfilMeuPerfil.value
+                        document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'block'
+                        document.getElementById('coainerBackgroundPerfil').style.alignItems = 'center'
+                        document.getElementById('coteudoHeaderPerfil').style.height = '80%'
+                    }
+                    imgTeste2.onerror = function() {
+                        alert('Algo deu errado com o link informado para a imagem de "perfil". Tente outro.')
+                        document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
+                        document.getElementById('coteudoHeaderPerfil').style.height = '50%'
+                        document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
+                    } 
+                } else {
+                    console.log('dentro do else??');
+                    document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
+                    document.getElementById('coteudoHeaderPerfil').style.height = '50%'
+                    document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
                 }
+
                 document.getElementById('pop-upEditarPerfil').style.display = 'none'
 
                 try {

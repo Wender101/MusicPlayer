@@ -20,9 +20,12 @@ function AbrirPerfilOutroUser(infosUser) {
     
     var imgTeste2 = new Image()
     imgTeste2.src = infosUser.Personalizar.FotoPerfil
-    const FotoPerfil = document.getElementById('imPerfilOutroUser')
+    const FotoPerfil = document.getElementById('imgPerfilOutroUser')
     imgTeste2.onload = function() {
         FotoPerfil.src = infosUser.Personalizar.FotoPerfil
+        document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'block'
+        document.getElementById('headerPagPerfilOutroUser').style.alignItems = 'center'
+        document.getElementById('containerHeaderPagPerfilOutroUser').style.height = '80%'
     }
     imgTeste2.onerror = function() {
         // FotoPerfil.src = `Assets/Imgs/Banners/fitaCassete.avif`
