@@ -50,13 +50,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 } else {
                   //? Vai colocar a primeira letra do email e um background que foi salvo
                   const containerUserNavBar = document.getElementById('containerUserNavBar')
-                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgoundEmail
                   const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
                   LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUser.style.display = 'block'
 
                   const imgPerfilUserNavCell = document.getElementById('imgPerfilUserNavCell')
-                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgoundEmail
                   const LetraNomePerfilUserNavCell = document.getElementById('LetraNomePerfilUserNavCell')
                   LetraNomePerfilUserNavCell.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUserNavCell.style.display = 'block'
@@ -66,14 +66,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 //? Vai colocar a primeira letra do email e um background que foi salvo
                 try {
                   const containerUserNavBar = document.getElementById('containerUserNavBar')
-                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgoundEmail
                   const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
                   LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUser.style.display = 'block'
                   
                   
                   const imgPerfilUserNavCell = document.getElementById('imgPerfilUserNavCell')
-                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgroundPerfil
+                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgoundEmail
                   const LetraNomePerfilUserNavCell = document.getElementById('LetraNomePerfilUserNavCell')
                   LetraNomePerfilUserNavCell.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUserNavCell.style.display = 'block'

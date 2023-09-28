@@ -749,6 +749,13 @@ body {
                     background-image: url('../Imgs/Banners/fitaCassete.avif');
                     background-position: center;
                     position: relative;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+
+                    &.RepetirBackgroundPerfilUser {
+                        background-repeat: repeat;
+                        background-size: contain;
+                    }
 
                     div#blurBackgroundPerfil {
                         width: 100%;
@@ -840,6 +847,11 @@ body {
                             color: rgb(255, 255, 255);
                             outline: none;
                             border-radius: 10px;
+
+                            &#btnRepetirBackground {
+                                width: 20px;
+                                height: 20px;
+                            }
                         }
 
                         div {

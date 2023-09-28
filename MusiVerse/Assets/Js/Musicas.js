@@ -735,6 +735,12 @@ const btnMeuPerfil = document.getElementById('btnMeuPerfil')
 btnMeuPerfil.addEventListener('click', () => {
     document.getElementById('NomeUserMeuPerfil').innerText = currentUser.User.Nome
 
+    try {
+        if(currentUser.User.Personalizar.RepetirBackGround) {
+            document.getElementById('coainerBackgroundPerfil').classList.add('RepetirBackgroundPerfilUser')
+        }
+    } catch{}
+
     if(currentUser.User.Background != null && currentUser.User.Background.trim() != '') {
         //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
         var img = new Image()
