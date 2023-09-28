@@ -343,6 +343,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
 }
 
 async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
+    let feito = false
 
     //? ------------------------------------
 
@@ -363,7 +364,12 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
         for(let c = 0; c < TodosOsUsers.length; c++) {
             const Nome = formatarTexto(TodosOsUsers[c].User.Nome)
 
-            if(PesquisaFormatada.includes(Nome) || Nome.includes(PesquisaFormatada)) {
+            if(PesquisaFormatada.includes(Nome) || Nome.includes(PesquisaFormatada) && !feito) {
+                feito = true
+
+                DarkOverlay.addEventListener('click', () => {
+                    AbrirPerfilOutroUser(TodosOsUsers[c].User)
+                })
                 
                 //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
                 var imgTeste = new Image()
@@ -374,14 +380,15 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                 imgTeste.onerror = function() {
                     Perfil.style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
                 }
-
+                
                 var imgTeste2 = new Image()
-                imgTeste2.src = TodosOsUsers[c].User.FotoPerfil
+                imgTeste2.src = TodosOsUsers[c].User.Personalizar.FotoPerfil
                 imgTeste2.onload = function() {
-                    FotoPerfil.src = TodosOsUsers[c].User.FotoPerfil
+                    FotoPerfil.src = TodosOsUsers[c].User.Personalizar.FotoPerfil
                 }
                 imgTeste2.onerror = function() {
                     FotoPerfil.src = `Assets/Imgs/Banners/fitaCassete.avif`
+                    FotoPerfil.style.display = 'none'
                 }
 
                 NomeUserPesquisado.innerText = TodosOsUsers[c].User.Nome

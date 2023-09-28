@@ -192,7 +192,7 @@ body {
         display: flex;
         align-items: center;
         padding-left: 10px;
-        z-index: 3;
+        z-index: 4;
 
         input {
             width: 100%;
@@ -339,7 +339,7 @@ body {
         }
 
         &#PagPesquisa {
-            z-index: 2;
+            z-index: 3;
             article#containerResultadoPesquisa {
                 max-width: 1400px;
                 margin: auto;
@@ -1401,6 +1401,118 @@ body {
                             cursor: pointer;
                         }
                     }
+                }
+            }
+        }
+
+        &#PagPerfilOutroUser {
+            padding: 0px;
+
+            div#headerPagPerfilOutroUser {
+                width: calc(100% - 40px);
+                height: 400px;
+                background-image: url(../Imgs/Banners/fitaCassete.avif);
+                background-position: center;
+                position: relative;
+                display: flex;
+                align-items: center;
+                padding: 20px;
+                gap: 40px;
+
+                div#blurHeaderPagPerfilOutroUser {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    z-index: 1;
+                    left: 0px;
+                    bottom: 0px;
+                    background-color: rgba(0, 0, 0, 0.329);
+                }
+
+                div#containerHeaderPagPerfilOutroUser {
+                    width: 100%;
+                    height: 80%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: start;
+                    gap: 20px;
+                    z-index: 2;
+
+                    div#containerImgHeaderPagPerfilOutroUser {
+                        width: 250px;
+                        height: 250px;
+                        z-index: 1;
+                        background-color: #1a1a1d;
+                        box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
+                        background-position: center center;
+                        background-size: cover;
+                        margin-left: 20px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: baseline;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    div#parteTextoPagPerfilOutroUser {
+                        h1 {
+                            font-size: 5em;
+                        }
+                    }
+                }
+
+                div#containerBtnsPagPerfilOutroUser {
+                    position: absolute;
+                    bottom: -50px;
+                    left: 20px;
+                    z-index: 2;
+                    display: flex;
+                    align-items: end;
+                    gap: 40px;
+
+                    button#darPlayPagPerfilOutroUser {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        display: block;
+                        background-image: url(../Imgs/Icons/DarPlay200.png);
+                        background-position: center center;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        border: none;
+                        background-color: #fff;
+                        cursor: pointer;
+                    }
+
+                    button#btnSeguirPagPerfilOutroUser {
+                        background-color: transparent;
+                        border: 2px solid #fff;
+                        padding: 12px 35px;
+                        color: #fff;
+                        border-radius: 30px;
+                        background-color: #1a1a1d;
+                        cursor: pointer;
+
+                        &.btnSeguindoUser {
+                            // color: #00e1ff;
+                            // border: 2px solid #00e1ff;
+                        }
+                    }
+                }
+            }
+
+            article#containerMusicasPagPerfilOutroUser {
+                width: 100%;
+                padding: 0;
+
+                section {
+                    width: 100%;
+                    max-width: none;
                 }
             }
         }
