@@ -148,7 +148,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
 
         if (musicaPassou && contadorMusicasPorSection < maxMusicas) {
             if(Pesquisa == 'Aleatórias') {
-                arrayMusicasRetornadas = arraymusicasAleatorias
+                arrayMusicasRetornadas = arraymusicasAleatorias.slice(0, maxMusicas)
             } else {
                 arrayMusicasRetornadas.push(TodasMusicas.Musicas[c])
             }
