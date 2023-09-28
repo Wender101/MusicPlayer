@@ -52,7 +52,7 @@ async function prosseguirMusicaYT() {
                 carregando.style.display = 'none'
               
                 // Vai pegar os inputs e a img para colocar as infos da música para o usuário poder editá-las
-                const ImgMusicaLinkYT = document.getElementById('ImgMusicaLinkYT');
+                const ImgMusicaLinkYT = document.getElementById('ImgMusicaLinkYT')
                 const inputNomeMusicaLinkYT = document.getElementById('inputNomeMusicaLinkYT')
                 const inputAutorMusicaLinkYT = document.getElementById('inputAutorMusicaLinkYT')
                 const inputGeneroMusicaLinkYT = document.getElementById('inputGeneroMusicaLinkYT')
