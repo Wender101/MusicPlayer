@@ -58,7 +58,8 @@ function AbrirPerfilOutroUser(infosUser) {
     
     //? Vai checar se você segue o user ou se o user pesquisado é você
     btnSeguirPagPerfilOutroUser.style.display = 'block'
-    for(let c = 0; c <= infosUser.InfosPerfil.Seguindo.length; c++) {
+    for(let c = 0; c <= currentUser.User.InfosPerfil.Seguindo.length; c++) {
+
         try {
             if(currentUser.User.InfosPerfil.Seguindo[c] == infosUser.Email) {
                 seguindoEsseUser = true
@@ -82,14 +83,14 @@ function AbrirPerfilOutroUser(infosUser) {
 
 //? Vai seguir/ deixar de seguir
 btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
-    let seguindoEsseUser = false
+    let seguindoEsseUserBtn = false
     let feito = false
     let contador = 0
     for(let c = 0; c <= currentUser.User.InfosPerfil.Seguindo.length; c++) {
         try {
             if(infosUserPesquisado.Email == currentUser.User.InfosPerfil.Seguindo[c] && infosUserPesquisado.Email != currentUser.User.Email && !feito) {
                 feito = true
-               seguindoEsseUser = true
+               seguindoEsseUserBtn = true
                contador = c
             }
         } catch (error) {
@@ -98,14 +99,14 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
     }
 
      //? Se está seguindo, vai remover da lista
-     if(seguindoEsseUser) {
+     if(seguindoEsseUserBtn) {
         currentUser.User.InfosPerfil.Seguindo.splice(contador, 1)
-        seguindoEsseUser = false
+        seguindoEsseUserBtn = false
         btnSeguirPagPerfilOutroUser.classList.remove('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguir'
     } else {
         currentUser.User.InfosPerfil.Seguindo.push(infosUserPesquisado.Email)
-        seguindoEsseUser = true
+        seguindoEsseUserBtn = true
         btnSeguirPagPerfilOutroUser.classList.add('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguindo'
     }
