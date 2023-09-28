@@ -96,3 +96,14 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
     }
     db.collection('Users').doc(currentUser.User.Id).update({ InfosPerfil: currentUser.User.InfosPerfil })
 })
+
+//? Vai tocar as músicas do user pesquisado
+//? Ao clicar no btn de play
+const  darPlayPagPerfilOutroUser = document.getElementById('darPlayPagPerfilOutroUser')
+darPlayPagPerfilOutroUser.addEventListener('click', () => {
+    ListaProxMusica = {
+        Musicas: arrayMusicasPostadasPeloUser,
+        Numero: 0,
+    }
+    DarPlayMusica(arrayMusicasPostadasPeloUser[0], 0)
+})

@@ -603,13 +603,16 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 }
 
 
+let arrayMusicasPostadasPeloUser = []
 async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
+    arrayMusicasPostadasPeloUser = []
     const article = document.createElement('article')
     let contadorMusicasLinha = 0
 
     for(let c = TodasMusicas.Musicas.length - 1; c > 0; c--) {
 
         if(EmailUser == TodasMusicas.Musicas[c].EmailUser) {
+            arrayMusicasPostadasPeloUser.push(TodasMusicas.Musicas[c])
             contadorMusicasLinha++
             article.className = 'containerMusicaLinha'
 
@@ -750,6 +753,17 @@ btnMeuPerfil.addEventListener('click', () => {
 
     document.getElementById('containerMusicasPerfilUser').innerHTML = ''
     RetornarMusicasPostadasPeloUser(currentUser.InfoEmail.email, document.getElementById('containerMusicasPerfilUser'))
+})
+
+//? Vai tocar as músicas do user
+//? Ao clicar no btn de play
+const  btnPlayHeaderPerfil = document.getElementById('btnPlayHeaderPerfil')
+btnPlayHeaderPerfil.addEventListener('click', () => {
+    ListaProxMusica = {
+        Musicas: arrayMusicasPostadasPeloUser,
+        Numero: 0,
+    }
+    DarPlayMusica(arrayMusicasPostadasPeloUser[0], 0)
 })
 
 //? Vai abrir as músicas favoritas do user
@@ -1147,7 +1161,6 @@ async function RetornarMusicasArtista(Artsita, Local) {
 //? Ao clicar no btn de play
 const  btnPlayHeaderArtista = document.getElementById('btnPlayHeaderArtista')
 btnPlayHeaderArtista.addEventListener('click', () => {
-    console.log(arrayMusicasArtista[0]);
     ListaProxMusica = {
         Musicas: arrayMusicasArtista,
         Numero: 0,
