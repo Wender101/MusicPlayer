@@ -9,10 +9,10 @@ function AbrirPerfilOutroUser(infosUser) {
     
     //? Vai colocar a img de perfil do user pesquisado e o background
     var imgTeste = new Image()
-    imgTeste.src = infosUser.Background
+    imgTeste.src = infosUser.Personalizar.Background
     const Background = document.getElementById('headerPagPerfilOutroUser')
     imgTeste.onload = function() {
-        Background.style.backgroundImage = `url(${infosUser.Background})`
+        Background.style.backgroundImage = `url(${infosUser.Personalizar.Background})`
     }
     imgTeste.onerror = function() {
         Background.style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
@@ -29,8 +29,15 @@ function AbrirPerfilOutroUser(infosUser) {
         document.getElementById('headerPagPerfilOutroUser').style.alignItems = 'end'
         document.getElementById('containerHeaderPagPerfilOutroUser').style.height = '50%'
         document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'none'
-        
     }
+
+    try {
+        if(infosUser.Personalizar.RepetirBackGround) {
+            Background.classList.add('RepetirBackgroundPerfilUser')
+        } else {
+            Background.classList.remove('RepetirBackgroundPerfilUser')
+        }
+    } catch{}
     
     //? Vai informar o nome do user pequisado
     const nomePagPerfilOutroUser = document.getElementById('nomePagPerfilOutroUser')

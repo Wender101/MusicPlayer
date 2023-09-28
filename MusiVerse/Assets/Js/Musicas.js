@@ -373,9 +373,9 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                 
                 //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
                 var imgTeste = new Image()
-                imgTeste.src = TodosOsUsers[c].User.Background
+                imgTeste.src = TodosOsUsers[c].User.Personalizar.Background
                 imgTeste.onload = function() {
-                    Perfil.style.backgroundImage = `url(${TodosOsUsers[c].User.Background})`
+                    Perfil.style.backgroundImage = `url(${TodosOsUsers[c].User.Personalizar.Background})`
                 }
                 imgTeste.onerror = function() {
                     Perfil.style.backgroundImage = `url(Assets/Imgs/Banners/fitaCassete.avif)`
@@ -741,12 +741,12 @@ btnMeuPerfil.addEventListener('click', () => {
         }
     } catch{}
 
-    if(currentUser.User.Background != null && currentUser.User.Background.trim() != '') {
+    if(currentUser.User.Personalizar.Background != null && currentUser.User.Personalizar.Background.trim() != '') {
         //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
         var img = new Image()
-        img.src = currentUser.User.Background
+        img.src = currentUser.User.Personalizar.Background
         img.onload = function() {
-            document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(${currentUser.User.Background})`
+            document.getElementById('coainerBackgroundPerfil').style.backgroundImage = `url(${currentUser.User.Personalizar.Background})`
         }
         img.onerror = function() {
             alert('Algo deu errado com img de background. Tente outra.')
