@@ -385,9 +385,9 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                 imgTeste2.src = TodosOsUsers[c].User.Personalizar.FotoPerfil
                 imgTeste2.onload = function() {
                     FotoPerfil.src = TodosOsUsers[c].User.Personalizar.FotoPerfil
+                    FotoPerfil.style.display = 'block'
                 }
                 imgTeste2.onerror = function() {
-                    FotoPerfil.src = `Assets/Imgs/Banners/fitaCassete.avif`
                     FotoPerfil.style.display = 'none'
                 }
 
@@ -719,6 +719,20 @@ inputPesquisa.addEventListener('keypress', (e) => {
     if(e.keyCode == 13 && inputPesquisa.value.trim() != "") {
         // SalvarHistoricoDePaginas(document.getElementById('PagPesquisa'))
         document.getElementById('containerResultadoPesquisa').innerHTML = ''
+
+        if(formatarTexto(inputPesquisa.value).includes(formatarTexto('we live, we love, we lie'))) {
+            console.log('indo alí?');
+
+            for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+                if(TodasMusicas.Musicas[c].NomeMusica == 'BEAT INDO ALI - MEME VIRAL') {
+                    DarPlayMusica(TodasMusicas.Musicas[c], c)
+
+                    document.getElementById('PagPesquisa').style.backgroundImage = `url('https://i.ytimg.com/vi/9LFqwZPlih4/sddefault.jpg')`
+                }
+            }
+        } else {
+            document.getElementById('PagPesquisa').style.backgroundImage = ``
+        }
         
         //? Vai pesquisar por um perfil
         RetornarPerfil(inputPesquisa.value, document.getElementById('containerResultadoPesquisa'))

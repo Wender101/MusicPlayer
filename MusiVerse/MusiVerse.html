@@ -555,5 +555,37 @@
         // document.getElementById('AstronautaCarregamento').style.backgroundColor = backgroundColor
 
     </script>
+
+
+    <!--? EsterEggs -->
+    <script>
+        const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight"];
+        let konamiCodeIndex = 0;
+
+        function checkKonamiCode(event) {
+            if (event.code === konamiCode[konamiCodeIndex]) {
+                konamiCodeIndex++;
+                if (konamiCodeIndex === konamiCode.length) {
+                    alert("Código Konami ativado!");
+                    konamiCodeIndex = 0; // Reinicia o índice
+                    changeBackgroundColor();
+                }
+            } else {
+                konamiCodeIndex = 0; // Reinicia o índice se a tecla errada for pressionada
+            }
+        }
+
+        function changeBackgroundColor() {
+            const colors = ['#FF0000', '#00FF00', '#0000FF']; // Cores RGB
+            let currentIndex = 0;
+
+            setInterval(() => {
+                document.body.style.backgroundColor = colors[currentIndex];
+                currentIndex = (currentIndex + 1) % colors.length;
+            }, 500); // Altera a cor a cada 0,5 segundos
+        }
+
+        document.addEventListener("keydown", checkKonamiCode);
+    </script>
 </body>
 </html>

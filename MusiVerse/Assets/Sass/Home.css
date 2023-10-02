@@ -390,6 +390,9 @@ body section.Paginas article {
 }
 body section.Paginas#PagPesquisa {
   z-index: 3;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom 50% center;
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa {
   max-width: 1400px;
@@ -440,6 +443,7 @@ body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containe
   border-radius: 50%;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
   z-index: 2;
+  display: none;
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa div.partePerfilPesquisa h1 {
   width: 95%;
@@ -1338,7 +1342,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser {
   background-position: center;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: end;
   padding: 20px;
   gap: 40px;
   background-repeat: no-repeat;
@@ -1359,7 +1363,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#blurHea
 }
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser {
   width: 100%;
-  height: 80%;
+  height: 50%;
   display: flex;
   align-items: center;
   justify-content: start;
@@ -1375,7 +1379,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#contain
   background-position: center center;
   background-size: cover;
   margin-left: 20px;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: baseline;
   overflow: hidden;
@@ -1427,6 +1431,7 @@ body section.Paginas#PagPerfilOutroUser article#containerMusicasPagPerfilOutroUs
 body section.Paginas#PagPerfilOutroUser article#containerMusicasPagPerfilOutroUser section {
   width: 100%;
   max-width: none;
+  padding-bottom: 50px;
 }
 body article#BarraMusica {
   width: calc(100% - 40px);

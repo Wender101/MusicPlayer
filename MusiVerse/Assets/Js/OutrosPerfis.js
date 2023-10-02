@@ -2,6 +2,7 @@ const btnSeguirPagPerfilOutroUser = document.getElementById('btnSeguirPagPerfilO
 let  infosUserPesquisado
 
 function AbrirPerfilOutroUser(infosUser) {
+    document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'none'
     let seguindoEsseUser = false
     infosUserPesquisado = infosUser
     const PagPerfilOutroUser = document.getElementById('PagPerfilOutroUser')
@@ -23,7 +24,7 @@ function AbrirPerfilOutroUser(infosUser) {
     const FotoPerfil = document.getElementById('imgPerfilOutroUser')
     imgTeste2.onload = function() {
         FotoPerfil.src = infosUser.Personalizar.FotoPerfil
-        document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'block'
+        document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'flex'
         document.getElementById('headerPagPerfilOutroUser').style.alignItems = 'center'
         document.getElementById('containerHeaderPagPerfilOutroUser').style.height = '80%'
     }
