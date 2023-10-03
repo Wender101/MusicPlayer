@@ -352,6 +352,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
     let contadorScroll = 0
     function handleResize() {
       scrollStep = section.scrollWidth
+      checkScrollLimit()
   
       if (articleContainer.scrollWidth > section.scrollWidth) {
         divBtnsScrollHorizontal.style.display = 'flex'

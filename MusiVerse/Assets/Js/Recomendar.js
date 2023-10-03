@@ -225,6 +225,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
   let contadorScroll = 0
   function handleResize() {
       scrollStep = section.scrollWidth
+      checkScrollLimit()
 
       // Verifique se o conteúdo é maior do que a tela
       if (articleContainer.scrollWidth > section.scrollWidth) {
