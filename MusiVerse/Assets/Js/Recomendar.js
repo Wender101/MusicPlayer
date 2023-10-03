@@ -19,8 +19,9 @@ let GostoMusicalHistorico = {
   Genero: [],
   Historico: {
     Musicas: [],
+    Autores: [],
     Playlists: [],
-    Users: []
+    Users: [],
   }
 }
 
@@ -38,25 +39,27 @@ function carregarHistorico() {
         Genero: currentUser.User.GostoMusical.Genero,
         Historico: {
           Musicas: [],
+          Autores: [],
           Playlists: [],
-          Users: []
+          Users: [],
         }
       }
     }
 
   } catch(r){
     if(feito == false) {
-      console.log('Caiu no catch')
       setTimeout(() => {
         carregarHistorico()
       }, 1000)
     }
   }
 
-  console.log('carregarHistorico')
+  // console.log('carregarHistorico')
 } carregarHistorico()
 
-function coletarHistorico(Dados) {
+function coletarHistorico(Dados, Tipo = 'Música') {
+  // console.log('Coletar dados foi chamado')
+
   if(salvarHistoricoNoBanco == false) {
     salvarHistoricoNoBanco = true
 
@@ -64,16 +67,64 @@ function coletarHistorico(Dados) {
       salvarHistoricoNoBanco = false
     }, 2000)
 
-    try {
-      if(GostoMusicalHistorico.Musicas.length >= 20) {
-        GostoMusicalHistorico.Musicas.splice(0, 1)
-      }
-    } catch{}
+    if(Tipo == 'Música') {
+      let feito = false
+      try {
+        for(let c = 0; c < GostoMusicalHistorico.Historico.Musicas.length; c++) {
+          if(GostoMusicalHistorico.Historico.Musicas[c].NomeMusica.trim() == Dados.trim()) {
+            feito == true
+            GostoMusicalHistorico.Historico.Musicas.splice(c, 1)
+          }
+        }
 
-    GostoMusicalHistorico.Historico.Musicas.push(Dados)
-    console.log(GostoMusicalHistorico)
+        if(GostoMusicalHistorico.Historico.Musicas.length >= 20 && !feito) {
+          feito = true
+          GostoMusicalHistorico.Historico.Musicas.splice(0, 1)
+        }
+      } catch{}
+  
+      GostoMusicalHistorico.Historico.Musicas.push(Dados)
+
+    } else if(Tipo == 'Playlist') {
+      let feito = false
+      try {
+        for(let c = 0; c < GostoMusicalHistorico.Historico.Playlists.length; c++) {
+          if(GostoMusicalHistorico.Historico.Playlists[c].trim() == Dados.trim()) {
+            feito == true
+            GostoMusicalHistorico.Historico.Playlists.splice(c, 1)
+          }
+        }
+
+        if(GostoMusicalHistorico.Historico.Playlists.length >= 20 && !feito) {
+          feito = true
+          GostoMusicalHistorico.Historico.Playlists.splice(0, 1)
+        }
+      } catch{}
+  
+      GostoMusicalHistorico.Historico.Playlists.push(Dados)
+
+    } else if(Tipo == 'Autor') {
+      let feito = false
+      try {
+        for(let c = 0; c < GostoMusicalHistorico.Historico.Autores.length; c++) {
+          if(GostoMusicalHistorico.Historico.Autores[c].trim() == Dados.trim()) {
+            feito == true
+            GostoMusicalHistorico.Historico.Autores.splice(c, 1)
+          }
+        }
+
+        if(GostoMusicalHistorico.Historico.Autores.length >= 20 && !feito) {
+          feito = true
+          GostoMusicalHistorico.Historico.Autores.splice(0, 1)
+        }
+      } catch{}
+
+      GostoMusicalHistorico.Historico.Autores.push(Dados)
+    }
+
     currentUser.User.GostoMusical.Historico = GostoMusicalHistorico.Historico
     db.collection('Users').doc(currentUser.User.Id).update({GostoMusical: currentUser.User.GostoMusical})
+    RecomendarAutoresPlaylistsHistorico()
   }
 }
 
@@ -126,6 +177,7 @@ function RecomendarMusicasHistorico() {
   //? Vai recomendar os artitas mais ouvidos de acordo com seu historico
   ArtistasMaisOuvidosHistorico(autoresMaisRepetidos)
   RecomendarGeneros(generosMaisRepetidos)
+  RecomendarAutoresPlaylistsHistorico()
 }
 
 function ArtistasMaisOuvidosHistorico(Artistas) {
@@ -205,6 +257,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
           document.querySelector('body').style.overflow = 'hidden'
           RetornarMusicasArtista(p.innerText, document.getElementById('containerMusicasArtista'))
           SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+          coletarHistorico(p.innerText, 'Autor')
         })
       }
     }
@@ -272,7 +325,6 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
   btnNextScrollHorizontal.addEventListener('click', () => {
       // Rode a rolagem suave
       articleContainer.scrollLeft += scrollStep
-      console.log(articleContainer.scrollLeft)
       contadorScroll++
       checkScrollLimit()
   })
@@ -301,5 +353,79 @@ let containerMain = document.getElementById('containerMain')
 function RecomendarGeneros(Generos) {
   for(let c = 0; c < Generos.length && c < 5; c++) {
     RetornarMusicas(Generos[c], containerMain)
+  }
+}
+
+//? Vai recomendar os autores e as palylists vistas por ultimo no histórico
+function RecomendarAutoresPlaylistsHistorico() {
+  // Suponhamos que você tenha as duas arrays Autores e Playlists
+  let Autores = GostoMusicalHistorico.Historico.Autores;
+  let Playlists = GostoMusicalHistorico.Historico.Playlists;
+
+  const articleContainerPlaylistFavoritaPerfil = document.getElementById('articleContainerPlaylistFavoritaPerfil')
+  articleContainerPlaylistFavoritaPerfil.innerHTML = '<div class="containerPlaylistFavoritaPerfil" id="musicasFavoritasPerfil"><img src="Assets/Imgs/Icons/Img Músicas Curtidas.png"><p>Músicas Curtidas</p><div class="iconPlayPlaylistFavoritaPerfil"></div></div>'
+  let maxRetornosAutor = 3
+  let maxRetornosPlaylist = 3
+
+  if(Autores.length < maxRetornosAutor) {
+    maxRetornosPlaylist = 5 - Autores.length
+  } else if(Playlists.length < maxRetornosPlaylist) {
+    maxRetornosAutor = 5 - Playlists.length
+  }
+
+  for(let c = 0; c < Autores.length && c < maxRetornosAutor; c++) {
+    RetornarAutorPlaylistVistaPorUltimo(Autores[Autores.length - (c + 1)], 'Autor')
+  }
+
+  for(let c = 0; c < Playlists.length && c < maxRetornosPlaylist; c++) {
+    RetornarAutorPlaylistVistaPorUltimo(Playlists[Playlists.length - (c + 1)], 'Playlist')
+  }
+
+  function RetornarAutorPlaylistVistaPorUltimo(Pesquisa, Tipo) {
+    let Feito = false
+    
+    if(Tipo == 'Autor') {
+      for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+        if(TodasMusicas.Musicas[c].Autor.trim() == Pesquisa.trim() && Feito == false) {
+          Feito = true
+          const containerPlaylistFavoritaPerfil = document.createElement('div')
+          containerPlaylistFavoritaPerfil.className = 'containerPlaylistFavoritaPerfil'
+          const imgCapa = document.createElement('img')
+          const nome = document.createElement('p')
+          const iconPlayPlaylistFavoritaPerfil = document.createElement('div')
+          iconPlayPlaylistFavoritaPerfil.className = 'iconPlayPlaylistFavoritaPerfil'
+          
+          imgCapa.src = TodasMusicas.Musicas[c].LinkImg
+
+          if(!imgCapa.src.includes('treefy')) {
+            imgCapa.style.height = '138%'
+          }
+
+          nome.innerText = TodasMusicas.Musicas[c].Autor
+          
+          containerPlaylistFavoritaPerfil.appendChild(imgCapa)
+          containerPlaylistFavoritaPerfil.appendChild(nome)
+          containerPlaylistFavoritaPerfil.appendChild(iconPlayPlaylistFavoritaPerfil)
+          articleContainerPlaylistFavoritaPerfil.appendChild(containerPlaylistFavoritaPerfil)
+
+          containerPlaylistFavoritaPerfil.addEventListener('click', () => {
+            FecharPaginas()
+            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+            if(imgCapa.src.includes ('treefy')) {
+              imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+            } else {
+              imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+            }
+            imgPerfilArtista.src = imgCapa.src
+            document.getElementById('NomeArtista').innerText = nome.innerText
+            document.getElementById('containerMusicasArtista').innerHTML = ''
+            document.querySelector('body').style.overflow = 'hidden'
+            RetornarMusicasArtista(nome.innerText, document.getElementById('containerMusicasArtista'))
+            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+            // coletarHistorico(nome.innerText, 'Autor')
+          })
+        }
+      }
+    }
   }
 }

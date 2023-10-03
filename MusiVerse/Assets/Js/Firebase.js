@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       db.collection('Users').get().then((snapshot) => {
         let contador = 0
-        console.log('Chamada feita, carregar info user')
+        // console.log('Chamada feita, carregar info user')
 
         snapshot.docs.forEach(Users => {
             const InfoUsers = Users.data()

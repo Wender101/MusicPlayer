@@ -224,6 +224,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
           document.querySelector('body').style.overflow = 'hidden'
           RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
           SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+          coletarHistorico(span.innerText, 'Autor')
         })
   
       } else if(Estilo == 'Linha') {
@@ -306,6 +307,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
           document.querySelector('body').style.overflow = 'hidden'
           RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
           SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+          coletarHistorico(AutorDaMusica.innerText, 'Autor')
         })
       }
     }
@@ -516,6 +518,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                                 document.querySelector('body').style.overflow = 'hidden'
                                 RetornarMusicasArtista(Autor.innerText, document.getElementById('containerMusicasArtista'))
                                 SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+                                coletarHistorico(Autor.innerText, 'Autor')
                             })
                         }
                     }
@@ -637,6 +640,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                         document.querySelector('body').style.overflow = 'hidden'
                         RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
                         SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+                        coletarHistorico(AutorDaMusica.innerText, 'Autor')
                     })
                 }
             }
@@ -754,6 +758,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
                 document.querySelector('body').style.overflow = 'hidden'
                 RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
                 SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+                coletarHistorico(AutorDaMusica.innerText, 'Autor')
             })
         }
     }
