@@ -14,29 +14,49 @@ function ordernarArray(words) {
 
 //? Vai esperar o user trocar de música para salvar as informações da música anterior
 let salvarHistoricoNoBanco = false
-let historicoMusicasOuvidas = []
+let GostoMusicalHistorico = {
+  Autores: [],
+  Genero: [],
+  Historico: {
+    Musicas: [],
+    Playlists: [],
+    Users: []
+  }
+}
 
 function carregarHistorico() {
   let feito = false
   try {
     if(currentUser.User.GostoMusical.Historico) {
       feito = true
-      historicoMusicasOuvidas = currentUser.User.GostoMusical.Historico
+      GostoMusicalHistorico = currentUser.User.GostoMusical
       RecomendarMusicasHistorico()
+
+    } else {
+      GostoMusicalHistorico = {
+        Autores: currentUser.User.GostoMusical.Autores,
+        Genero: currentUser.User.GostoMusical.Genero,
+        Historico: {
+          Musicas: [],
+          Playlists: [],
+          Users: []
+        }
+      }
     }
+
   } catch(r){
     if(feito == false) {
+      console.log('Caiu no catch')
       setTimeout(() => {
         carregarHistorico()
       }, 1000)
     }
   }
 
-  console.log('carregarHistorico');
+  console.log('carregarHistorico')
 } carregarHistorico()
 
 function coletarHistorico(Dados) {
-  console.log(Dados);
   if(salvarHistoricoNoBanco == false) {
     salvarHistoricoNoBanco = true
 
@@ -44,25 +64,27 @@ function coletarHistorico(Dados) {
       salvarHistoricoNoBanco = false
     }, 2000)
 
-    if(historicoMusicasOuvidas.length >= 20) {
-      historicoMusicasOuvidas.splice(0, 1)
-    }
+    try {
+      if(GostoMusicalHistorico.Musicas.length >= 20) {
+        GostoMusicalHistorico.Musicas.splice(0, 1)
+      }
+    } catch{}
 
-    historicoMusicasOuvidas.push(Dados)
-    console.log(historicoMusicasOuvidas)
-    currentUser.User.GostoMusical.Historico = historicoMusicasOuvidas
+    GostoMusicalHistorico.Historico.Musicas.push(Dados)
+    console.log(GostoMusicalHistorico)
+    currentUser.User.GostoMusical.Historico = GostoMusicalHistorico.Historico
     db.collection('Users').doc(currentUser.User.Id).update({GostoMusical: currentUser.User.GostoMusical})
   }
 }
 
 function RecomendarMusicasHistorico() {
-  let HistoricoOrdenado = historicoMusicasOuvidas.slice().sort((a, b) => b.Tempo - a.Tempo); // Vai ordenar o array de acordo com o tempo em ordem decrescente
-  let HistoricoDeMusicas = [];
+  let HistoricoOrdenado = GostoMusicalHistorico.Historico.Musicas.slice().sort((a, b) => b.Tempo - a.Tempo) // Vai ordenar o array de acordo com o tempo em ordem decrescente
+  let HistoricoDeMusicas = []
 
   for (let b = 0; b < HistoricoOrdenado.length; b++) {
     for (let c = 0; c < TodasMusicas.Musicas.length; c++) {
       if (HistoricoOrdenado[b].Musica == TodasMusicas.Musicas[c].ID) {
-        HistoricoDeMusicas.push(TodasMusicas.Musicas[c]);
+        HistoricoDeMusicas.push(TodasMusicas.Musicas[c])
       }
     }
   }
