@@ -373,7 +373,6 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
   
     btnNextScrollHorizontal.addEventListener('click', () => {
       articleContainer.scrollLeft += scrollStep
-      console.log(articleContainer.scrollLeft)
       contadorScroll++
       checkScrollLimit()
     })

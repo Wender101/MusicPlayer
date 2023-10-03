@@ -27,12 +27,14 @@ function AbrirPerfilOutroUser(infosUser) {
         document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'flex'
         document.getElementById('headerPagPerfilOutroUser').style.alignItems = 'center'
         document.getElementById('containerHeaderPagPerfilOutroUser').style.height = '80%'
+        document.getElementById('parteTextoPagPerfilOutroUser').style.marginBottom = '0px'
     }
     imgTeste2.onerror = function() {
         // FotoPerfil.src = `Assets/Imgs/Banners/fitaCassete.avif`
         document.getElementById('headerPagPerfilOutroUser').style.alignItems = 'end'
         document.getElementById('containerHeaderPagPerfilOutroUser').style.height = '50%'
         document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'none'
+        document.getElementById('parteTextoPagPerfilOutroUser').style.marginBottom = '40px'
     }
 
     try {
@@ -50,8 +52,13 @@ function AbrirPerfilOutroUser(infosUser) {
     
     //? Vai informar o nome do user pequisado
     const nomePagPerfilOutroUser = document.getElementById('nomePagPerfilOutroUser')
-    
+    const ouvintesMensaisOutroUser = document.getElementById('ouvintesMensaisOutroUser')
     nomePagPerfilOutroUser.innerText = infosUser.Nome
+
+    if(infosUser.InfosPerfil.Seguidores.length > 0) {
+        ouvintesMensaisOutroUser.style.display = 'block'
+        ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvintes mensais`
+    }
     
     //? Vai mostrar as músicas postadas pelo user
     document.getElementById('containerMusicasPagPerfilOutroUser').innerHTML = ''
@@ -98,19 +105,50 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
         }
     }
 
+    let oqFazerComUser
      //? Se está seguindo, vai remover da lista
      if(seguindoEsseUserBtn) {
         currentUser.User.InfosPerfil.Seguindo.splice(contador, 1)
         seguindoEsseUserBtn = false
         btnSeguirPagPerfilOutroUser.classList.remove('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguir'
+        oqFazerComUser = 'Remover Dos Seguidores'
+
     } else {
         currentUser.User.InfosPerfil.Seguindo.push(infosUserPesquisado.Email)
         seguindoEsseUserBtn = true
         btnSeguirPagPerfilOutroUser.classList.add('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguindo'
+        oqFazerComUser = 'Adicionar Nos Seguidores'
     }
-    db.collection('Users').doc(currentUser.User.Id).update({ InfosPerfil: currentUser.User.InfosPerfil })
+    db.collection('Users').doc(currentUser.User.Id).update({ InfosPerfil: currentUser.User.InfosPerfil }).then(() => {
+        //? Vai salvar no perfil do user pequisado o novo seguidor
+        let NovoSeguidorSalvo = false
+        db.collection('Users').get().then((snapshot) => {
+            snapshot.docs.forEach(Users => {
+
+                if(Users.data().Email == infosUserPesquisado.Email && !NovoSeguidorSalvo) {
+                    NovoSeguidorSalvo= true
+                    const InfosPerfilUserPesquisado = Users.data().InfosPerfil
+        
+                    if(oqFazerComUser == 'Remover Dos Seguidores') {
+                        for(let c = 0; c < InfosPerfilUserPesquisado.Seguidores.length; c++) {
+                            if(InfosPerfilUserPesquisado.Seguidores[c] == currentUser.User.Email) {
+                                InfosPerfilUserPesquisado.Seguidores.splice(c, 1)
+                            }
+                        }
+                        
+                    } else if(oqFazerComUser == 'Adicionar Nos Seguidores') {
+                        InfosPerfilUserPesquisado.Seguidores.push(currentUser.User.Email)
+                    }
+                    
+                    setTimeout(() => {
+                        db.collection('Users').doc(Users.id).update({ InfosPerfil: InfosPerfilUserPesquisado })
+                    }, 500)
+                }
+            })
+        })
+    })
 })
 
 //? Vai tocar as músicas do user pesquisado

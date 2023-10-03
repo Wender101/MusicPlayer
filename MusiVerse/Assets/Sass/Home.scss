@@ -1515,8 +1515,15 @@ body {
                     }
 
                     div#parteTextoPagPerfilOutroUser {
+                        margin-bottom: 40px;
+
                         h1 {
                             font-size: 5em;
+                        }
+
+                        span#ouvintesMensaisOutroUser {
+                            // display: none;
+                            color: #ffffff69;
                         }
                     }
                 }
