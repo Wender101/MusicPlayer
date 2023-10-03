@@ -7,6 +7,10 @@
   text-decoration: none;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* ini: Preloader */
 #carregando {
   width: 100%;
@@ -1601,10 +1605,8 @@ body section.containerMusica {
   width: 100%;
   max-width: 1400px;
   margin: auto;
-  overflow: auto;
-}
-body section.containerMusica::-webkit-scrollbar {
-  width: 0px; /* Largura da barra de rolagem */
+  overflow: hidden;
+  position: relative;
 }
 body section.containerMusica h1 {
   font-size: 1.5em;
@@ -1613,21 +1615,48 @@ body section.containerMusica h1 {
   line-height: 24px;
   margin: 70px 0px 14px;
 }
-body section.containerMusica article {
-  margin: auto;
+body section.containerMusica .divBtnsScrollHorizontal {
+  position: absolute;
+  right: 0px;
+  top: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
-body section.containerMusica article.containerMusicaCaixa {
+body section.containerMusica .divBtnsScrollHorizontal button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  cursor: pointer;
+  background-color: #1a1a1d;
+}
+body section.containerMusica article.articleContainer {
+  overflow: auto;
+  margin: auto;
+  scroll-behavior: smooth;
+  padding: 0;
+}
+body section.containerMusica article.articleContainer::-webkit-scrollbar {
+  width: 0px; /* Largura da barra de rolagem */
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa {
+  margin: auto;
   display: flex;
   gap: 20px;
   height: 250px;
 }
-body section.containerMusica article.containerMusicaCaixa.SemScroll {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa.SemScroll {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
   gap: 24px;
   height: auto;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa {
   min-width: 240px;
   height: 244px;
   display: flex;
@@ -1640,7 +1669,7 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa {
   background-color: #1a1a1d;
   cursor: pointer;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa {
   width: 64%;
   height: 64%;
   border-radius: 50%;
@@ -1649,27 +1678,27 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.Artis
   transform: translate(-50%);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.7098039216);
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg {
   display: none;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgTop {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgTop {
   top: -2px;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgBottom {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa svg.svgBottom {
   bottom: 45px;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa img {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa img {
   height: 134%;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico .divBlurTexto {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico .divBlurTexto {
   background-color: #1a1a1d;
   opacity: 1;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa:hover div.BtnDarPlay {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa:hover div.BtnDarPlay {
   transition: 200ms opacity ease-in-out;
   opacity: 1;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.BtnDarPlay {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.BtnDarPlay {
   width: 50px;
   height: 50px;
   position: absolute;
@@ -1679,14 +1708,14 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.B
   z-index: 3;
   border-radius: 50%;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixaTreeFy {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixaTreeFy {
   height: 72% !important;
   top: 0px !important;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgArtistaHistoricoTreeFy img {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgArtistaHistoricoTreeFy img {
   height: 100% !important;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
   width: 100%;
   height: 135%;
   z-index: 2;
@@ -1697,22 +1726,22 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.C
   align-items: center;
   justify-content: center;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg {
   width: 100%;
   z-index: 3;
   position: absolute;
   left: -2px;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgTop {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgTop {
   top: 43px;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgBottom {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg.svgBottom {
   bottom: 111px;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg path {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa svg path {
   fill: transparent;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa img {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -1720,7 +1749,7 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.C
   -o-object-position: center;
      object-position: center;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto {
   width: calc(100% + 40px);
   height: calc(45% - 20px);
   background-color: #1a1a1d;
@@ -1732,7 +1761,7 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa .divB
   -o-object-fit: cover;
      object-fit: cover;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa {
   width: 100%;
   /* height: calc(45% - 20px); */
   padding: 10px;
@@ -1744,7 +1773,7 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.T
   bottom: -3px;
   z-index: 2;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa p {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa p {
   width: 90%;
   color: #fff;
   font-size: 17px;
@@ -1756,21 +1785,21 @@ body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.T
   overflow: hidden;
   text-overflow: ellipsis;
 }
-body section.containerMusica article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa span {
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa span {
   color: rgba(255, 255, 255, 0.4117647059);
   font-size: 13px;
   font-weight: 500;
   line-height: 20px;
   z-index: 2;
 }
-body section.containerMusica article.containerMusicaLinha {
+body section.containerMusica article.articleContainer article.containerMusicaLinha {
   width: 95%;
   margin: 0px auto;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha {
   width: 100%;
   height: 60px;
   position: relative;
@@ -1779,12 +1808,12 @@ body section.containerMusica article.containerMusicaLinha div.MusicasLinha {
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div {
   display: flex;
   align-items: center;
   gap: 20px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.DivImgMusicaMeuPerfil {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.DivImgMusicaMeuPerfil {
   width: 60px;
   height: 60px;
   overflow: hidden;
@@ -1792,14 +1821,14 @@ body section.containerMusica article.containerMusicaLinha div.MusicasLinha div d
   align-items: center;
   justify-content: center;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.DivImgMusicaMeuPerfil img.ImgMusicaMeuPerfil {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.DivImgMusicaMeuPerfil img.ImgMusicaMeuPerfil {
   height: 135%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa {
   width: 300px;
   height: 100%;
   display: flex;
@@ -1807,23 +1836,23 @@ body section.containerMusica article.containerMusicaLinha div.MusicasLinha div d
   justify-content: center;
   flex-direction: column;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa p {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa p {
   width: 90%;
   color: #fff;
   font-size: 15px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa span {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa span {
   color: #5d5d63;
   font-size: 12px;
   font-weight: 500;
   line-height: 20px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha p.GeneroMeuPerfil {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha p.GeneroMeuPerfil {
   text-align: center;
   color: rgba(255, 255, 255, 0.2862745098);
   font-weight: 100;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha img.btnCurtirMeuPerfil {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha img.btnCurtirMeuPerfil {
   width: 20px;
   height: 20px;
   -o-object-fit: contain;
@@ -1831,7 +1860,7 @@ body section.containerMusica article.containerMusicaLinha div.MusicasLinha img.b
   position: absolute;
   right: 0px;
 }
-body section.containerMusica article.containerMusicaLinha div.MusicasLinha button.btnAdicionar {
+body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha button.btnAdicionar {
   max-width: 100px;
   padding: 10px 20px;
   border-radius: 20px;

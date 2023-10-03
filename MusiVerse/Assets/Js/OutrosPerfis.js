@@ -79,7 +79,6 @@ function AbrirPerfilOutroUser(infosUser) {
         btnSeguirPagPerfilOutroUser.classList.remove('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguir'
     }
-    
 }
 
 //? Vai seguir/ deixar de seguir

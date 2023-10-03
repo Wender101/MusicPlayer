@@ -95,42 +95,40 @@ setTimeout(() => {
     document.getElementById('CarregamentoTela1').style.display = 'none'
 }, 5000)
 
-async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa', PesquisarEmail = false, Artista = false, ClassArticle) {
+async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa', PesquisarEmail = false, Artista = false, ClassArticle) {
     if(maxMusicas == 'Indeterminado') {
         maxMusicas = TodasMusicas.Musicas.length
     }
-
+    
     const article = document.createElement('article')
-
+    
     if(ClassArticle) {
         article.classList.add('containerMusicaCaixa', 'SemScroll')
-
     } else {
-        article.className = 'containerMusicaCaixa'
+      article.className = 'containerMusicaCaixa'
     }
     let contadorMusicasPorSection = 0
-
+    
     if(Pesquisa == 'Aleatórias') {
         arraymusicasAleatorias = [...TodasMusicas.Musicas]
         arraymusicasAleatorias.sort(() => Math.random() - 0.5)
     }
-
-    const PesquisaFormatada = formatarTexto(Pesquisa)
-
+    
+    let PesquisaFormatada = formatarTexto(Pesquisa)
+    
     let contadorMusicasLinha = 0
     let arrayMusicasRetornadas = []
-    for (let c = maxMusicas - 1; c >= 0; c--) {
-        const NomeMusica = formatarTexto(TodasMusicas.Musicas[c].NomeMusica)
-        const Autor = formatarTexto(TodasMusicas.Musicas[c].Autor)
-        const Genero = formatarTexto(TodasMusicas.Musicas[c].Genero)
+    for (let c = 0; c < TodasMusicas.Musicas.length; c++) {
+        let NomeMusica = formatarTexto(TodasMusicas.Musicas[c].NomeMusica)
+        let Autor = formatarTexto(TodasMusicas.Musicas[c].Autor)
+        let Genero = formatarTexto(TodasMusicas.Musicas[c].Genero)
         let EmailUser = '&&&&&&&&&&&'
         let musicaPassou = false
-
+        
         if(Artista == true) {
             if(PesquisaFormatada.includes(Autor) || Autor.includes(PesquisaFormatada)) {
                 musicaPassou = true
             }
-
         } else if (
             PesquisaFormatada.includes(NomeMusica) ||
             PesquisaFormatada.includes(Autor) ||
@@ -140,12 +138,12 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
             Autor.includes(PesquisaFormatada) ||
             Genero.includes(PesquisaFormatada) ||
             EmailUser.includes(PesquisaFormatada)
-        ) {
+            ) {
             musicaPassou = true
         } else if(Pesquisa == 'Aleatórias') {
             musicaPassou = true
         }
-
+    
         if (musicaPassou && contadorMusicasPorSection < maxMusicas) {
             if(Pesquisa == 'Aleatórias') {
                 arrayMusicasRetornadas = arraymusicasAleatorias.slice(0, maxMusicas)
@@ -154,193 +152,245 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 5, Estilo = 'Caixa'
             }
         }
     }
-
+  
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1)); // Gerar um índice aleatório
-          // Trocar os elementos de posição
+          const j = Math.floor(Math.random() * (i + 1));
           [array[i], array[j]] = [array[j], array[i]];
         }
       }
-      
-      shuffleArray(arrayMusicasRetornadas)
-      
-
-    for(let c = 0; c < arrayMusicasRetornadas.length; c++) {
-        contadorMusicasPorSection++
-
-        if(Estilo == 'Caixa') {
-            const div = document.createElement('div')
-            const containerImg = document.createElement('div')
-            const img = document.createElement('img')
-            const divTexto = document.createElement('div')
-            const darPlay = document.createElement('div')
-            const p = document.createElement('p')
-            const span = document.createElement('span')
-            const divBlurTexto = document.createElement('div')
-
-            div.className = 'MusicasCaixa'
-            div.title = arrayMusicasRetornadas[c].NomeMusica
-            darPlay.className = 'BtnDarPlay'
-            darPlay.style.backgroundImage = `url(./Assets/Imgs/Icons/DarPlay.png)`
-            // div.style.backgroundImage = `url(${arrayMusicasRetornadas[c].LinkImg` //? ---
-            // divBlurTexto.src = arrayMusicasRetornadas[c].LinkImg : //? ---
-            //divBlurTexto.style.backgroundImage = `url(${arrayMusicasRetornadas[c].LinkImg})` //? ---
-
-            img.src = arrayMusicasRetornadas[c].LinkImg
-            if(img.src.includes('treefy')) {
-                containerImg.classList.add('ContainerImgMusicaCaixa', 'ContainerImgMusicaCaixaTreeFy')
-            } else {
-                containerImg.classList.add('ContainerImgMusicaCaixa')
-            }
-
-            divTexto.className = 'TextoMusicaCaixa'
-            p.innerText = arrayMusicasRetornadas[c].NomeMusica
-            span.innerText = arrayMusicasRetornadas[c].Autor
-            divBlurTexto.className = 'divBlurTexto'
-
-            divTexto.appendChild(p)
-            divTexto.appendChild(span)
-            div.appendChild(darPlay)
-            containerImg.appendChild(img)
-            div.appendChild(containerImg)
-            div.appendChild(divBlurTexto)
-            div.appendChild(divTexto)
-            article.appendChild(div)
-
-            div.addEventListener('click', (event) => {
-                if (event.target != span) {
-                    ListaProxMusica = {
-                        Musicas: arrayMusicasRetornadas,
-                        Numero: c,
-                    }
-                    DarPlayMusica(arrayMusicasRetornadas[c], c)
-                }
-            })
-            
-            //? Ao clicar no nome do Autor
-            span.addEventListener('click', () => {
-                FecharPaginas()
-                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                if(img.src.includes ('treefy')) {
-                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                } else {
-                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                }
-                imgPerfilArtista.src = img.src
-                document.getElementById('NomeArtista').innerText = span.innerText
-                document.getElementById('containerMusicasArtista').innerHTML = ''
-                document.querySelector('body').style.overflow = 'hidden'
-                RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
-                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-            })
-
-        } else if(Estilo == 'Linha') {
-            contadorMusicasLinha++
-            article.className = 'containerMusicaLinha'
-
-            const div = document.createElement('div')
-            const divPrimeiraParte = document.createElement('div')
-            const contador = document.createElement('p')
-            const divImg = document.createElement('div')
-            const img = document.createElement('img')
-            const divTexto = document.createElement('div')
-            const Nome = document.createElement('p')
-            const AutorDaMusica = document.createElement('span')
-            const Genero = document.createElement('p')
-            const Heart = document.createElement('img')
-
-            div.className = 'MusicasLinha'
-            divTexto.className = 'TextoMusicaCaixa'
-            Heart.className = 'btnCurtirMeuPerfil'
-            divImg.className = 'DivImgMusicaMeuPerfil'
-            img.className = 'ImgMusicaMeuPerfil'
-            Genero.className = 'GeneroMeuPerfil'
-
-            contador.innerText = contadorMusicasLinha
-            img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas.Musicas[c].LinkImg
-
-            img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas.Musicas[c].LinkImg
-            if(img.src.includes('treefy')) {
-                divImg.classList.add('DivImgMusicaMeuPerfil', 'DivImgMusicaMeuPerfilTreeFy')
-            } else {
-                divImg.classList.add('DivImgMusicaMeuPerfil')
-            }
-
-            Nome.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].NomeMusica : TodasMusicas.Musicas[c].NomeMusica
-            AutorDaMusica.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Autor : TodasMusicas.Musicas[c].Autor
-            Genero.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Genero : TodasMusicas.Musicas[c].Genero
-            Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
-            
-            divTexto.appendChild(Nome)
-            divTexto.appendChild(AutorDaMusica)
-            divPrimeiraParte.appendChild(contador)
-            divImg.appendChild(img)
-            divPrimeiraParte.appendChild(divImg)
-            divPrimeiraParte.appendChild(divTexto)
-            div.appendChild(divPrimeiraParte)
-            div.appendChild(Genero)
-            div.appendChild(Heart)
-            article.appendChild(div)
-
-            div.addEventListener('click', (event) => {
-                if (event.target != AutorDaMusica && event.target != Heart) {
-                    ListaProxMusica = {
-                        Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas.Musicas,
-                        Numero: c,
-                    }
-                    DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas.Musicas[c], c)
-                }
-            })
-
-            //? Vai checar se as músicas foram curtidas pelo user
-            FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Checar').then((resolve) => {
-                Heart.src = resolve
-            })
-
-            //? Vai curtir / descurtir a música
-            Heart.addEventListener('click', () => {
-                FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Editar').then((resolve) => {
-                    Heart.src = resolve
-                })
-            })
-
-            //? Ao clicar no nome do Autor
-            AutorDaMusica.addEventListener('click', () => {
-                FecharPaginas()
-                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                if(img.src.includes ('treefy')) {
-                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                } else {
-                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                }
-                imgPerfilArtista.src = img.src
-                document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                document.getElementById('containerMusicasArtista').innerHTML = ''
-                document.querySelector('body').style.overflow = 'hidden'
-                RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-            })
+    
+    shuffleArray(arrayMusicasRetornadas)
+  
+    for(let c = 0; c < arrayMusicasRetornadas.length && c < maxMusicas; c++) {
+      contadorMusicasPorSection++
+  
+      if(Estilo == 'Caixa') {
+        const div = document.createElement('div')
+        const containerImg = document.createElement('div')
+        const img = document.createElement('img')
+        const divTexto = document.createElement('div')
+        const darPlay = document.createElement('div')
+        const p = document.createElement('p')
+        const span = document.createElement('span')
+        const divBlurTexto = document.createElement('div')
+  
+        div.className = 'MusicasCaixa'
+        div.title = arrayMusicasRetornadas[c].NomeMusica
+        darPlay.className = 'BtnDarPlay'
+        darPlay.style.backgroundImage = `url(./Assets/Imgs/Icons/DarPlay.png)`
+        img.src = arrayMusicasRetornadas[c].LinkImg
+        if(img.src.includes('treefy')) {
+          containerImg.classList.add('ContainerImgMusicaCaixa', 'ContainerImgMusicaCaixaTreeFy')
+        } else {
+          containerImg.classList.add('ContainerImgMusicaCaixa')
         }
+  
+        divTexto.className = 'TextoMusicaCaixa'
+        p.innerText = arrayMusicasRetornadas[c].NomeMusica
+        span.innerText = arrayMusicasRetornadas[c].Autor
+        divBlurTexto.className = 'divBlurTexto'
+  
+        divTexto.appendChild(p)
+        divTexto.appendChild(span)
+        div.appendChild(darPlay)
+        containerImg.appendChild(img)
+        div.appendChild(containerImg)
+        div.appendChild(divBlurTexto)
+        div.appendChild(divTexto)
+        article.appendChild(div)
+  
+        div.addEventListener('click', (event) => {
+          if (event.target != span) {
+            ListaProxMusica = {
+              Musicas: arrayMusicasRetornadas,
+              Numero: c,
+            }
+            DarPlayMusica(arrayMusicasRetornadas[c], c)
+          }
+        })
+  
+        span.addEventListener('click', () => {
+          FecharPaginas()
+          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+          if(img.src.includes ('treefy')) {
+            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+          } else {
+            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+          }
+          imgPerfilArtista.src = img.src
+          document.getElementById('NomeArtista').innerText = span.innerText
+          document.getElementById('containerMusicasArtista').innerHTML = ''
+          document.querySelector('body').style.overflow = 'hidden'
+          RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
+          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+        })
+  
+      } else if(Estilo == 'Linha') {
+        contadorMusicasLinha++
+        article.className = 'containerMusicaLinha'
+  
+        const div = document.createElement('div')
+        const divPrimeiraParte = document.createElement('div')
+        const contador = document.createElement('p')
+        const divImg = document.createElement('div')
+        const img = document.createElement('img')
+        const divTexto = document.createElement('div')
+        const Nome = document.createElement('p')
+        const AutorDaMusica = document.createElement('span')
+        const Genero = document.createElement('p')
+        const Heart = document.createElement('img')
+  
+        div.className = 'MusicasLinha'
+        divTexto.className = 'TextoMusicaCaixa'
+        Heart.className = 'btnCurtirMeuPerfil'
+        divImg.className = 'DivImgMusicaMeuPerfil'
+        img.className = 'ImgMusicaMeuPerfil'
+        Genero.className = 'GeneroMeuPerfil'
+  
+        contador.innerText = contadorMusicasLinha
+        img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas.Musicas[c].LinkImg
+        if(img.src.includes('treefy')) {
+          divImg.classList.add('DivImgMusicaMeuPerfil', 'DivImgMusicaMeuPerfilTreeFy')
+        } else {
+          divImg.classList.add('DivImgMusicaMeuPerfil')
+        }
+  
+        Nome.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].NomeMusica : TodasMusicas.Musicas[c].NomeMusica
+        AutorDaMusica.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Autor : TodasMusicas.Musicas[c].Autor
+        Genero.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Genero : TodasMusicas.Musicas[c].Genero
+        Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
+        
+        divTexto.appendChild(Nome)
+        divTexto.appendChild(AutorDaMusica)
+        divPrimeiraParte.appendChild(contador)
+        divImg.appendChild(img)
+        divPrimeiraParte.appendChild(divImg)
+        divPrimeiraParte.appendChild(divTexto)
+        div.appendChild(divPrimeiraParte)
+        div.appendChild(Genero)
+        div.appendChild(Heart)
+        article.appendChild(div)
+  
+        div.addEventListener('click', (event) => {
+          if (event.target != AutorDaMusica && event.target != Heart) {
+            ListaProxMusica = {
+              Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas.Musicas,
+              Numero: c,
+            }
+            DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas.Musicas[c], c)
+          }
+        })
+  
+        FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Checar').then((resolve) => {
+          Heart.src = resolve
+        })
+  
+        Heart.addEventListener('click', () => {
+          FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Editar').then((resolve) => {
+            Heart.src = resolve
+          })
+        })
+  
+        AutorDaMusica.addEventListener('click', () => {
+          FecharPaginas()
+          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+          if(img.src.includes ('treefy')) {
+            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+          } else {
+            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+          }
+          imgPerfilArtista.src = img.src
+          document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
+          document.getElementById('containerMusicasArtista').innerHTML = ''
+          document.querySelector('body').style.overflow = 'hidden'
+          RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
+          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+        })
+      }
     }
-
+  
     const h1 = document.createElement('h1')
     const section = document.createElement('section')
-
-    //? Vai adicionar o article no html apenas se houver algunma música
+    const articleContainer = document.createElement('article')
+    articleContainer.className = 'articleContainer'
+  
     if(article.innerHTML != '') {
-        h1.innerText = Pesquisa === 'Aleatórias' ? 'Aleatórias' : Pesquisa
-        section.className = 'containerMusica'
-    
+      h1.innerText = Pesquisa === 'Aleatórias' ? 'Aleatórias' : Pesquisa
+      section.className = 'containerMusica'
+  
         if(Estilo != 'Linha') {
             section.appendChild(h1)
+        } else {
+            articleContainer.style.width = '100%'
+            articleContainer.style.padding = '0'
         }
-        section.appendChild(article)
+  
+        articleContainer.appendChild(article)
+        section.appendChild(articleContainer)
         Local.appendChild(section)
     }
-}
+  
+    const divBtnsScrollHorizontal = document.createElement('div')
+    divBtnsScrollHorizontal.className = 'divBtnsScrollHorizontal'
+  
+    const btnBackScrollHorizontal = document.createElement('button')
+    const imgBack = document.createElement('img')
+    imgBack.src = 'Assets/Imgs/Icons/BackPag.png'
+  
+    const btnNextScrollHorizontal = document.createElement('button')
+    const imgNext = document.createElement('img')
+    imgNext.src = 'Assets/Imgs/Icons/NextPag.png'
+  
+    btnBackScrollHorizontal.appendChild(imgBack)
+    btnNextScrollHorizontal.appendChild(imgNext)
+    divBtnsScrollHorizontal.appendChild(btnBackScrollHorizontal)
+    divBtnsScrollHorizontal.appendChild(btnNextScrollHorizontal)
+    section.appendChild(divBtnsScrollHorizontal)
+  
+    let scrollStep = section.scrollWidth
+    let contadorScroll = 0
+    function handleResize() {
+      scrollStep = section.scrollWidth
+  
+      if (articleContainer.scrollWidth > section.scrollWidth) {
+        divBtnsScrollHorizontal.style.display = 'flex'
+      } else {
+        divBtnsScrollHorizontal.style.display = 'none'
+      }
+    }
+    window.addEventListener('resize', handleResize)
+    handleResize()
+  
+    btnBackScrollHorizontal.addEventListener('click', () => {
+      articleContainer.scrollLeft -= scrollStep
+      contadorScroll--
+      checkScrollLimit()
+    })
+  
+    btnNextScrollHorizontal.addEventListener('click', () => {
+      articleContainer.scrollLeft += scrollStep
+      console.log(articleContainer.scrollLeft)
+      contadorScroll++
+      checkScrollLimit()
+    })
+  
+    function checkScrollLimit() {
+      if(contadorScroll <= 0) {
+        btnBackScrollHorizontal.style.opacity = 0.3
+      } else {
+        btnBackScrollHorizontal.style.opacity = 1
+      }
+  
+      if(contadorScroll < (articleContainer.scrollWidth / section.scrollWidth) - 1) {
+        btnNextScrollHorizontal.style.opacity = 1
+      } else {
+        btnNextScrollHorizontal.style.opacity = 0.3
+      }
+    }
+    checkScrollLimit()
+  }
+  
 
 async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
     let feito = false
@@ -597,7 +647,12 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
     //? Vai adicionar o article no html apenas se houver algunma música
     if(article.innerHTML != '') {
         section.className = 'containerMusica'
-        section.appendChild(article)
+        const articleContainer = document.createElement('article')
+        articleContainer.className = 'articleContainer'
+        articleContainer.style.width = '100%'
+        articleContainer.style.padding = '0'
+        articleContainer.appendChild(article)
+        section.appendChild(articleContainer)
         Local.appendChild(section)
     }
 }
@@ -706,12 +761,16 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
     //? Vai adicionar o article no html apenas se houver algunma música
     if(article.innerHTML != '') {
         section.className = 'containerMusica'
-        section.appendChild(article)
+        const articleContainer = document.createElement('article')
+        articleContainer.style.width = '100%'
+        articleContainer.style.padding = '0'
+        articleContainer.className = 'articleContainer'
+        articleContainer.appendChild(article)
+        section.appendChild(articleContainer)
         Local.appendChild(section)
     }
 
 }
-
 
 //? Vai pesquisar pelas músicas
 const inputPesquisa = document.getElementById('inputPesquisa')
@@ -720,9 +779,8 @@ inputPesquisa.addEventListener('keypress', (e) => {
         // SalvarHistoricoDePaginas(document.getElementById('PagPesquisa'))
         document.getElementById('containerResultadoPesquisa').innerHTML = ''
 
+        //? Indo ali ---------------------------------
         if(formatarTexto(inputPesquisa.value).includes(formatarTexto('we live, we love, we lie'))) {
-            console.log('indo alí?');
-
             for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
                 if(TodasMusicas.Musicas[c].NomeMusica == 'BEAT INDO ALI - MEME VIRAL') {
                     DarPlayMusica(TodasMusicas.Musicas[c], c)
@@ -1191,7 +1249,12 @@ async function RetornarMusicasArtista(Artsita, Local) {
 
     const section = document.createElement('section')
     section.className = 'containerMusica'
-    section.appendChild(article)
+    const articleContainer = document.createElement('article')
+    articleContainer.className = 'articleContainer'
+    articleContainer.style.width = '100%'
+    articleContainer.style.padding = '0'
+    articleContainer.appendChild(article)
+    section.appendChild(articleContainer)
     Local.appendChild(section)
 
 }

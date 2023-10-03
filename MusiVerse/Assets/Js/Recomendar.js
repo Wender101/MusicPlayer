@@ -97,8 +97,8 @@ function RecomendarMusicasHistorico() {
   // Encontrar os gêneros mais repetidos
   const generosMaisRepetidos = Object.keys(generoFrequencia).sort((a, b) => generoFrequencia[b] - generoFrequencia[a])
 
-  console.log("Autores mais repetidos:", autoresMaisRepetidos)
-  console.log("Gêneros mais repetidos:", generosMaisRepetidos)
+  // console.log("Autores mais repetidos:", autoresMaisRepetidos)
+  // console.log("Gêneros mais repetidos:", generosMaisRepetidos)
 
 
   //? Vai recomendar os artitas mais ouvidos de acordo com seu historico
@@ -190,19 +190,93 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
   const h1 = document.createElement('h1')
   const section = document.createElement('section')
+  const articleContainer = document.createElement('article')
 
   //? Vai adicionar o article no html apenas se houver algunma música
   if(article.innerHTML != '') {
       h1.innerText = `Artistas ouvidos recentemente`
       section.className = 'containerMusica'
       section.appendChild(h1)
-      section.appendChild(article)
+      articleContainer.className = 'articleContainer'
+      articleContainer.appendChild(article)
+      section.appendChild(articleContainer)
       document.getElementById('containerMain').appendChild(section)
   }
+
+  //? Scroll lateral
+  const divBtnsScrollHorizontal = document.createElement('div')
+  divBtnsScrollHorizontal.className = 'divBtnsScrollHorizontal'
+
+  const btnBackScrollHorizontal = document.createElement('button')
+  const imgBack = document.createElement('img')
+  imgBack.src = 'Assets/Imgs/Icons/BackPag.png'
+
+  const btnNextScrollHorizontal = document.createElement('button')
+  const imgNext = document.createElement('img')
+  imgNext.src = 'Assets/Imgs/Icons/NextPag.png'
+
+  btnBackScrollHorizontal.appendChild(imgBack)
+  btnNextScrollHorizontal.appendChild(imgNext)
+  divBtnsScrollHorizontal.appendChild(btnBackScrollHorizontal)
+  divBtnsScrollHorizontal.appendChild(btnNextScrollHorizontal)
+  section.appendChild(divBtnsScrollHorizontal)
+
+  let scrollStep = section.scrollWidth // Ajuste a velocidade de rolagem conforme necessário.
+  let contadorScroll = 0
+  function handleResize() {
+      scrollStep = section.scrollWidth
+
+      // Verifique se o conteúdo é maior do que a tela
+      if (articleContainer.scrollWidth > section.scrollWidth) {
+          // Se for maior, mostre o botão
+          divBtnsScrollHorizontal.style.display = 'flex'
+      } else {
+          divBtnsScrollHorizontal.style.display = 'none'
+      }
+  }
+  // Adicionar um ouvinte de evento de redimensionamento à janela
+  window.addEventListener('resize', handleResize)
+  // Inicialização - opcional
+  handleResize() // Para registrar o tamanho inicial da tela
+
+  btnBackScrollHorizontal.addEventListener('click', () => {
+      // Rode a rolagem suave
+      articleContainer.scrollLeft -= scrollStep
+      contadorScroll--
+      checkScrollLimit()
+  })
+
+  btnNextScrollHorizontal.addEventListener('click', () => {
+      // Rode a rolagem suave
+      articleContainer.scrollLeft += scrollStep
+      console.log(articleContainer.scrollLeft)
+      contadorScroll++
+      checkScrollLimit()
+  })
+
+  // Função para verificar e ajustar a opacidade dos botões com base no limite de rolagem
+  function checkScrollLimit() {
+      if(contadorScroll <= 0) {
+      btnBackScrollHorizontal.style.opacity = 0.3
+
+      } else {
+      btnBackScrollHorizontal.style.opacity = 1
+      }
+
+      if(contadorScroll < (articleContainer.scrollWidth / section.scrollWidth) - 1) {
+      btnNextScrollHorizontal.style.opacity = 1
+
+      } else {
+      btnNextScrollHorizontal.style.opacity = 0.3
+      }
+  }
+  // Verifique os limites iniciais
+  checkScrollLimit()
 }
 
+let containerMain = document.getElementById('containerMain')
 function RecomendarGeneros(Generos) {
   for(let c = 0; c < Generos.length && c < 5; c++) {
-    RetornarMusicas(Generos[c], document.getElementById('containerMain'))
+    RetornarMusicas(Generos[c], containerMain)
   }
 }
