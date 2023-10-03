@@ -57,7 +57,12 @@ function AbrirPerfilOutroUser(infosUser) {
 
     if(infosUser.InfosPerfil.Seguidores.length > 0) {
         ouvintesMensaisOutroUser.style.display = 'block'
-        ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvintes mensais`
+
+        if(infosUser.InfosPerfil.Seguidores.length == 1) {
+            ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvinte mensal`
+        } else {
+            ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvintes mensais`
+        }
     }
     
     //? Vai mostrar as músicas postadas pelo user

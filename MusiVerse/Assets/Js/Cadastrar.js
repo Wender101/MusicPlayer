@@ -57,7 +57,7 @@ function Cadastrar() {
                 Personalizar: {
                     Background: null,
                     FotoPerfil: null,
-                    BackgroundPerfil: RandomColor()
+                    BackgroundEmail: RandomColor()
                 }
             }
 

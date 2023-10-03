@@ -1402,7 +1402,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#contain
   font-size: 5em;
 }
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser div#parteTextoPagPerfilOutroUser span#ouvintesMensaisOutroUser {
-  color: rgba(255, 255, 255, 0.4117647059);
+  color: #ffffff;
 }
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerBtnsPagPerfilOutroUser {
   position: absolute;

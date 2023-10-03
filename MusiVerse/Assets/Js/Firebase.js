@@ -48,15 +48,16 @@ document.addEventListener("DOMContentLoaded", function () {
                   document.getElementById('imgPerfilUserHeaderUser').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
                   document.getElementById('imgPerfilUserNavCell').style.backgroundImage = `url(${currentUser.InfoEmail.photoURL})`
                 } else {
+                  console.log('Rapaz');
                   //? Vai colocar a primeira letra do email e um background que foi salvo
                   const containerUserNavBar = document.getElementById('containerUserNavBar')
-                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgoundEmail
+                  containerUserNavBar.style.background = currentUser.User.Personalizar.BackgroundEmail
                   const LetraNomePerfilUser = document.getElementById('LetraNomePerfilUser')
                   LetraNomePerfilUser.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUser.style.display = 'block'
 
                   const imgPerfilUserNavCell = document.getElementById('imgPerfilUserNavCell')
-                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgoundEmail
+                  imgPerfilUserNavCell.style.background = currentUser.User.Personalizar.BackgroundEmail
                   const LetraNomePerfilUserNavCell = document.getElementById('LetraNomePerfilUserNavCell')
                   LetraNomePerfilUserNavCell.innerText = currentUser.InfoEmail.email.charAt(0)
                   LetraNomePerfilUserNavCell.style.display = 'block'
