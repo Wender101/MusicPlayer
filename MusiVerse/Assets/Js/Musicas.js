@@ -892,6 +892,50 @@ let salvarHistorico = false
 
 //? Vai dar play naas músicas
 function DarPlayMusica(Lista, num) {
+    function AtualizarViewSemanal() {
+        let userEncontrado = false
+
+        for(let c = 0; c < TodosOsUsers.length; c++) {
+            if(TodosOsUsers[c].User.Email == Lista.EmailUser && userEncontrado == false) {
+                userEncontrado = true
+
+                db.collection('Users').doc(TodosOsUsers[c].User.Id).get().then((Users) => {
+                        const Usuarios = Users.data()
+                    if(Usuarios.Email == Lista.EmailUser) {
+                        let infosUser = Usuarios.InfosPerfil
+    
+                        let dataHj = new Date()
+                        const DataAtual = `${dataHj.getDate()}${dataHj.getMonth() +1}${dataHj.getFullYear()}`
+                        //? Caso tenha acabado a semana vai zerar as views do user
+                        try {
+                            if(infosUser.ViewsSemanais.Data - DataAtual >= 7) {
+                                infosUser.ViewsSemanais.Data = DataAtual
+                                infosUser.ViewsSemanais.Views = 1
+                            } else {
+                                infosUser.ViewsSemanais.Views = parseInt(infosUser.ViewsSemanais.Views) + 1
+                            }
+                        } catch {
+                            const newInfoUser = {
+                                Seguidores: infosUser.Seguidores,
+                                Seguindo: infosUser.Seguindo,
+                                Amigos: infosUser.Amigos,
+                                ViewsSemanais: {
+                                    Data: DataAtual,
+                                    Views: 1
+                                },
+                            }
+
+                            infosUser = newInfoUser
+                        }
+    
+                        setTimeout(() => {
+                            db.collection('Users').doc(TodosOsUsers[c].User.Id).update({ InfosPerfil: infosUser }).then(() => {console.log(infosUser.ViewsSemanais)})
+                        }, 1000)
+                    }
+                })
+            }
+        }
+    } AtualizarViewSemanal()
 
     function EnviarDados() {
         if(audioPlayer.currentTime > 2) {

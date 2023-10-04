@@ -1403,7 +1403,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#contain
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser div#parteTextoPagPerfilOutroUser h1 {
   font-size: 5em;
 }
-body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser div#parteTextoPagPerfilOutroUser span#ouvintesMensaisOutroUser {
+body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser div#parteTextoPagPerfilOutroUser span#viewsSemanais {
   display: none;
   color: #ffffff;
 }

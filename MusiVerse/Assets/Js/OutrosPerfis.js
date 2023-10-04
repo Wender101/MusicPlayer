@@ -52,19 +52,19 @@ function AbrirPerfilOutroUser(infosUser) {
     
     //? Vai informar o nome do user pequisado
     const nomePagPerfilOutroUser = document.getElementById('nomePagPerfilOutroUser')
-    const ouvintesMensaisOutroUser = document.getElementById('ouvintesMensaisOutroUser')
+    const spanViewsSemanais = document.getElementById('viewsSemanais')
     nomePagPerfilOutroUser.innerText = infosUser.Nome
 
-    if(infosUser.InfosPerfil.Seguidores.length > 0) {
-        ouvintesMensaisOutroUser.style.display = 'block'
+    if(infosUser.InfosPerfil.ViewsSemanais.Views > 0) {
+        spanViewsSemanais.style.display = 'block'
 
-        if(infosUser.InfosPerfil.Seguidores.length == 1) {
-            ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvinte mensal`
+        if(infosUser.InfosPerfil.ViewsSemanais.Views == 1) {
+            spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvinte semanal`
         } else {
-            ouvintesMensaisOutroUser.innerText = `${infosUser.InfosPerfil.Seguidores.length} ouvintes mensais`
+            spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvintes semanais`
         }
     } else {
-        ouvintesMensaisOutroUser.style.display = 'none'
+        spanViewsSemanais.style.display = 'none'
     }
     
     //? Vai mostrar as músicas postadas pelo user

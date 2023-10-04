@@ -45,6 +45,7 @@ function Cadastrar() {
                     Seguidores: [],
                     Seguindo: [],
                     Amigos: [],
+                    ViewsSemanais: 0,
                 },
                 MusicasPostadas: [],
                 MusicasCurtidas: [],
