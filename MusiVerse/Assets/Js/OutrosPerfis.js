@@ -55,15 +55,19 @@ function AbrirPerfilOutroUser(infosUser) {
     const spanViewsSemanais = document.getElementById('viewsSemanais')
     nomePagPerfilOutroUser.innerText = infosUser.Nome
 
-    if(infosUser.InfosPerfil.ViewsSemanais.Views > 0) {
-        spanViewsSemanais.style.display = 'block'
-
-        if(infosUser.InfosPerfil.ViewsSemanais.Views == 1) {
-            spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvinte semanal`
+    try {
+        if(infosUser.InfosPerfil.ViewsSemanais.Views > 0) {
+            spanViewsSemanais.style.display = 'block'
+    
+            if(infosUser.InfosPerfil.ViewsSemanais.Views == 1) {
+                spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvinte semanal`
+            } else {
+                spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvintes semanais`
+            }
         } else {
-            spanViewsSemanais.innerText = `${infosUser.InfosPerfil.ViewsSemanais.Views} ouvintes semanais`
+            spanViewsSemanais.style.display = 'none'
         }
-    } else {
+    } catch (error) {
         spanViewsSemanais.style.display = 'none'
     }
     
