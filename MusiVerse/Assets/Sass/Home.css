@@ -408,7 +408,6 @@ body section.Paginas#PagPesquisa article#containerResultadoPesquisa h1 {
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin: 0px 0px 14px;
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containerPerfilPesquisa {
   width: 100%;
@@ -503,7 +502,10 @@ body section.Paginas#PagPesquisa article#containerResultadoPesquisa div.containe
   -o-object-fit: contain;
      object-fit: contain;
 }
-body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerMusica article.containerMusicaCaixa {
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerMusica article.articleContainer {
+  width: 100%;
+}
+body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerMusica article.articleContainer article.containerMusicaCaixa {
   width: 100%;
   padding-top: 0px !important;
 }
@@ -1402,6 +1404,7 @@ body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#contain
   font-size: 5em;
 }
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerHeaderPagPerfilOutroUser div#parteTextoPagPerfilOutroUser span#ouvintesMensaisOutroUser {
+  display: none;
   color: #ffffff;
 }
 body section.Paginas#PagPerfilOutroUser div#headerPagPerfilOutroUser div#containerBtnsPagPerfilOutroUser {
@@ -1616,11 +1619,14 @@ body section.containerMusica {
   position: relative;
 }
 body section.containerMusica h1 {
+  width: 100%;
+  max-width: 1400px;
   font-size: 1.5em;
   font-style: normal;
   font-weight: 600;
   line-height: 24px;
-  margin: 70px 0px 14px;
+  margin: 70px auto 14px;
+  display: block;
 }
 body section.containerMusica .divBtnsScrollHorizontal {
   position: absolute;

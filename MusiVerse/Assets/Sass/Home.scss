@@ -355,7 +355,6 @@ body {
                     font-style: normal;
                     font-weight: 600;
                     line-height: 24px;
-                    margin: 0px 0px 14px;
                 }
                 
                 div.containerPerfilPesquisa {
@@ -462,9 +461,13 @@ body {
                 }
 
                 section.containerMusica {
-                    article.containerMusicaCaixa {
+                    article.articleContainer {
                         width: 100%;
-                        padding-top: 0px !important;
+
+                        article.containerMusicaCaixa {
+                            width: 100%;
+                            padding-top: 0px !important;
+                        }
                     }
                 }
             }
@@ -1522,7 +1525,7 @@ body {
                         }
 
                         span#ouvintesMensaisOutroUser {
-                            // display: none;
+                            display: none;
                             color: #ffffff;
                         }
                     }
@@ -1769,11 +1772,14 @@ body {
         position: relative;
     
         h1 {
+            width: 100%;
+            max-width: 1400px;
             font-size: 1.5em;
             font-style: normal;
             font-weight: 600;
             line-height: 24px;
-            margin: 70px 0px 14px
+            margin: 70px auto 14px;
+            display: block;
         }
 
         .divBtnsScrollHorizontal {
