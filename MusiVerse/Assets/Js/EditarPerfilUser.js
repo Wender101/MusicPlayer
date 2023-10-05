@@ -29,19 +29,19 @@ function SalvarEdicao() {
     if(inputNomeDeUserMeuPerfil && inputLinkBackgroundMeuPerfil) {
         db.collection('Users').doc(currentUser.User.Id).update({Nome: inputNomeDeUserMeuPerfil.value}).then(() => {
 
-            let BackgoundEmail
+            let BackgroundEmail
 
             if(currentUser.User.Personalizar.BackgroundPerfil) {
-                BackgoundEmail = currentUser.User.Personalizar.BackgroundPerfil
+                BackgroundEmail = currentUser.User.Personalizar.BackgroundPerfil
             } else {
-                BackgoundEmail = currentUser.User.Personalizar.BackgoundEmail
+                BackgroundEmail = currentUser.User.Personalizar.BackgroundEmail
             }
 
             
             let NewPersonalizar = {
                 Background: inputLinkBackgroundMeuPerfil.value,
                 FotoPerfil: inputLinkPerfilMeuPerfil.value,
-                BackgoundEmail,
+                BackgroundEmail,
                 RepetirBackGround: btnRepetirBackground.checked
             }
 
@@ -92,7 +92,6 @@ function SalvarEdicao() {
                         document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
                     } 
                 } else {
-                    console.log('dentro do else??');
                     document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
                     document.getElementById('coteudoHeaderPerfil').style.height = '50%'
                     document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
