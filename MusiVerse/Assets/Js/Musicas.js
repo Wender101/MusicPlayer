@@ -543,11 +543,13 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
     }
 }
 
+let musicasFavoritasUser = []
+let numMusicasFavoritas = 0
 async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
     const article = document.createElement('article')
     article.className = 'containerMusicasOverflow'
     let contadorMusicasLinha = 0
-    let musicasFavoritasUser = []
+    musicasFavoritasUser = []
 
     if(MusicaFavoritaOuPostada == 'Favoritas') {
         for(let contadorMusicasCurtidas = currentUser.User.MusicasCurtidas.length; contadorMusicasCurtidas >= 0; contadorMusicasCurtidas--) {
@@ -597,7 +599,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 
                     let num = contadorMusicasLinha - 1
                     div.addEventListener('click', (event) => {
-                        AbrirTelaTocandoAgora(Email)
+                        AbrirTelaTocandoAgora(musicasFavoritasUser[numMusicasFavoritas])
 
                         if (event.target != AutorDaMusica && event.target != Heart) {
                             ListaProxMusica = {
@@ -605,27 +607,15 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                                 Numero: contadorTodasAsMusicas,
                             }
     
-                            DarPlayMusica(musicasFavoritasUser[num], num)
+                            DarPlayMusica(musicasFavoritasUser[numMusicasFavoritas], numMusicasFavoritas)
                         }
-                    })
-
-                    //? Ao clicar no btn de play
-                    document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
-                        AbrirTelaTocandoAgora(Email)
-
-                        ListaProxMusica = {
-                            Musicas: musicasFavoritasUser,
-                            Numero: 0,
-                        }
-
-                        DarPlayMusica(musicasFavoritasUser[num], num)
                     })
 
                     Heart.addEventListener('click', () => {
-                        FavoritarDesfavoritarMusica(musicasFavoritasUser[num].ID)
+                        FavoritarDesfavoritarMusica(musicasFavoritasUser[numMusicasFavoritas].ID)
                         .then((resolve) => {
                             document.getElementById('localMusicasCurtidas').innerHTML = ''
-                            musicasFavoritasUser.splice(num, 1)
+                            musicasFavoritasUser.splice(numMusicasFavoritas, 1)
                             RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
                         })
                         .catch((error) => {
@@ -670,6 +660,18 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
         Local.appendChild(section)
     }
 }
+
+ //? Ao clicar no btn de play
+ document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
+    AbrirTelaTocandoAgora(musicasFavoritasUser[numMusicasFavoritas])
+
+    ListaProxMusica = {
+        Musicas: musicasFavoritasUser,
+        Numero: 0,
+    }
+
+    DarPlayMusica(musicasFavoritasUser[numMusicasFavoritas], numMusicasFavoritas)
+})
 
 
 let arrayMusicasPostadasPeloUser = []
@@ -1246,10 +1248,10 @@ function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
 }
 
 let arrayMusicasArtista = []
-async function RetornarMusicasArtista(Artsita, Local) {
+async function RetornarMusicasArtista(Artista, Local) {
     const article = document.createElement('article')
     article.className = 'containerMusicasOverflow'
-    let ArtistaFormadado = formatarTexto(Artsita)
+    let ArtistaFormadado = formatarTexto(Artista)
     let contadorMusicasLinha = -1
     arrayMusicasArtista = [] //? Vai salvar as músicas do artista pesquisado para poder colocar como lista de prox músicas
     ListaProxMusica = {}
@@ -1302,7 +1304,7 @@ async function RetornarMusicasArtista(Artsita, Local) {
             
             //? Ao clicar na música
             div.addEventListener('click', (event) => {
-                AbrirTelaTocandoAgora(Artsita)
+                AbrirTelaTocandoAgora(Artista)
 
                 if (event.target != AutorDaMusica && event.target != Heart) {
                     ListaProxMusica = {
@@ -1343,7 +1345,7 @@ async function RetornarMusicasArtista(Artsita, Local) {
 //? Ao clicar no btn de play
 const  btnPlayHeaderArtista = document.getElementById('btnPlayHeaderArtista')
 btnPlayHeaderArtista.addEventListener('click', () => {
-    AbrirTelaTocandoAgora(Artista)
+    AbrirTelaTocandoAgora(arrayMusicasArtista[0])
 
     ListaProxMusica = {
         Musicas: arrayMusicasArtista,
@@ -1507,15 +1509,19 @@ function AddInfoTelaTocandoAgora(Musica) {
     containerMusicaslistaTelaTocandoAgora.innerHTML = ''
     
     const infoLista = document.getElementById('infoLista')
-    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 4) {
+    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 0) {
+        let max = 4
+
+        if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) < 4) {
+            max = ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero)
+        }
+
         infoLista.innerText = 'A seguir'
 
-        for(let c = 1; c < 4; c++) {
+        for(let c = 1; c < max; c++) {
+            console.log(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica);
             RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
         } 
-
-    } else if(ListaProxMusica.length - parseInt(ListaProxMusica.Numero) > 0) {
-        RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + 1].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
 
     } else {
         infoLista.innerText = 'Sua lista está vazia'
