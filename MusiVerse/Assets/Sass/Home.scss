@@ -1584,7 +1584,255 @@ body {
         }
     }
 
+    //? TelaTocandoAgora
+    article#TelaTocandoAgora {
+        width: 350px;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        right: -100%;
+        z-index: 5;
+        background-color: #1a1a1d;
+        box-shadow: -8px 6px 18px 0px rgba(0, 0, 0, 0.4);
+        padding: 25px 20px;
+        overflow-y: auto;
+        transition: 1s right ease-in-out;
 
+        &::-webkit-scrollbar {
+            width: 1px; /* Largura da barra de rolagem */
+        }
+
+        &.TelaTocandoAgoraOpen {
+            right: 0px;
+        }
+
+        div#tituloTelaTocandoAgora {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            button#fecharTelaTocandoAgora {
+                width: 20px;
+                height: 20px;
+                background-color: transparent;
+                border: none;
+                background-image: url('../Imgs/Icons/x.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+                cursor: pointer;
+            }
+        }
+
+        div#containerMusicaTelaTocanAgora {
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #29292e91;
+            overflow: hidden;
+
+            div#containerImgMusicaTelaTocandoAgora {
+                width: 100%;
+                height: 290px;
+                margin-bottom: 20px;
+                box-shadow:  4px 8px 0px rgba(0, 0, 0, 0.4);
+                display: flex;
+                align-items: center;
+                justify-content: baseline;
+                overflow: hidden;
+
+                
+                img#imgMusicaTelaTocandoAgora {
+                    width: 100%;
+                    height: 141%;
+                    object-fit: cover;
+                    border-radius: 10px;
+
+                    &.imgMusicaTelaTocandoAgoraTreeFy {
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+            }
+    
+            h1#NomeMusicaTelaTocandoAgora {
+                margin: 10px 0px;
+                width: 90%;
+                color: #fff;
+                font-style: normal;
+                line-height: 24px;
+                z-index: 2;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    
+            p#AutorMusicaTelaTocandoAgora {
+                color: rgba(255, 255, 255, 0.4117647059);
+                font-size: 13px;
+                font-weight: 500;
+                line-height: 20px;
+                z-index: 2;
+            }
+        }
+
+        div#SobreQuemPostou {
+            width: calc(100% - 40px);
+            margin: 30px 0px;
+            position: relative;
+            overflow-y: auto;
+            background-color: #29292e91;
+            border-radius: 10px;
+            padding: 20px;
+            div#containerImgSobreQuemPostou {
+                width: 100%;
+                height: 290px;
+                overflow: hidden;
+                position: relative;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                div#textoImgSobreQuemPostou {
+                    width: 90%;
+                    height: 90%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    z-index: 3;
+
+                    p#pSobreQuemPostou {
+                        font-size: 20px;
+                        border-radius: 10px;
+                        font-style: normal;
+                        font-weight: 600;
+                        line-height: 24px;
+                        z-index: 2;
+                    }
+
+                    h1#NomeUserPostouMusicaTelaTocandoAgora {
+                        z-index: 2;
+                        font-size: 30px;
+                    }
+                }
+    
+                div#blurImgUserTelaTocandoAgora {
+                    width: 100%;
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    z-index: 2;
+                    background-color: rgba(0, 0, 0, 0.329);
+                }
+    
+                img#imgUserPostouMusicaTelaTocandoAgora {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border-radius: 10px;
+                    position: absolute;
+                    top: 0px;
+                    z-index: 1;
+                }
+            }
+
+            
+            div#containerInfoUserTelaTocandoAgora {
+                width: 95%;
+                margin: 20px auto 30px;
+                background: none;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 20px;
+                flex-wrap: wrap;
+
+                div {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    p#NumeroOuvintesTelaTocandoAgora {
+                        color: rgba(255, 255, 255, 0.4117647059);
+                        font-weight: 200;
+                        line-height: 20px;
+                    }    
+                }
+
+                button {
+                    background-color: transparent;
+                    border: 2px solid #fff;
+                    padding: 12px 35px;
+                    color: #fff;
+                    border-radius: 30px;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
+            }
+
+            p#descUserTelaTocandoAgora {
+                text-align: justify;
+                color: rgba(255, 255, 255, 0.4117647059);
+                font-weight: 200;
+                line-height: 20px;
+                display: none;
+            }
+        }
+        
+        div#listaMusicasTelaTocandoAgora {
+            margin: 40px 0px 150px;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #29292e91;
+           
+            
+            h3#infoLista {
+                margin: 10px 0px;
+                width: 100%;
+                color: #fff;
+                font-style: normal;
+                line-height: 24px;
+                z-index: 2;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            div#containerMusicaslistaTelaTocandoAgora {
+                .containerMusica {
+                    .articleContainer {
+                        .containerMusicaLinha {
+                            .MusicasLinha {
+                                grid-template-columns: repeat(1, 1fr) !important;
+
+                                p.GeneroMeuPerfil {
+                                    display:  none !important;
+                                }
+
+                                div {
+                                    p:first-of-type {
+                                        display: none !important;
+                                    }
+
+                                    div.TextoMusicaCaixa {
+                                        p {
+                                            display: block !important;
+                                        }
+                                    }
+
+                                }
+
+                                .btnCurtirMeuPerfil {
+                                    display: none !important;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     //? BarraMusica -----------
     article#BarraMusica {
@@ -1723,6 +1971,10 @@ body {
 
             img {
                 cursor: pointer;
+
+                #btnAbrirTelaTocandoAgora {
+                    display: none;
+                }
             }
 
             div#containerControleVolume {

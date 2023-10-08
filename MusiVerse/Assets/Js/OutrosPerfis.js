@@ -45,7 +45,6 @@ function AbrirPerfilOutroUser(infosUser) {
                 Background.classList.remove('RepetirBackgroundPerfilUser')
             }
         } else {
-            console.log('dentro do else');
             Background.classList.add('RepetirBackgroundPerfilUser')
         }
     } catch(e){console.warn(e)}

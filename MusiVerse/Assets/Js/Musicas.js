@@ -125,7 +125,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         let EmailUser = '&&&&&&&&&&&'
         let musicaPassou = false
         
-        if(Artista == true) {
+        if(Artista) {
             if(PesquisaFormatada.includes(Autor) || Autor.includes(PesquisaFormatada)) {
                 musicaPassou = true
             }
@@ -201,13 +201,15 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         article.appendChild(div)
   
         div.addEventListener('click', (event) => {
-          if (event.target != span) {
-            ListaProxMusica = {
-              Musicas: arrayMusicasRetornadas,
-              Numero: c,
+            AbrirTelaTocandoAgora(Pesquisa)
+
+            if (event.target != span) {
+                ListaProxMusica = {
+                Musicas: arrayMusicasRetornadas,
+                Numero: c,
+                }
+                DarPlayMusica(arrayMusicasRetornadas[c], c)
             }
-            DarPlayMusica(arrayMusicasRetornadas[c], c)
-          }
         })
   
         span.addEventListener('click', () => {
@@ -250,16 +252,16 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         Genero.className = 'GeneroMeuPerfil'
   
         contador.innerText = contadorMusicasLinha
-        img.src = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].LinkImg : TodasMusicas.Musicas[c].LinkImg
+        img.src = arrayMusicasRetornadas[c].LinkImg
         if(img.src.includes('treefy')) {
           divImg.classList.add('DivImgMusicaMeuPerfil', 'DivImgMusicaMeuPerfilTreeFy')
         } else {
           divImg.classList.add('DivImgMusicaMeuPerfil')
         }
   
-        Nome.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].NomeMusica : TodasMusicas.Musicas[c].NomeMusica
-        AutorDaMusica.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Autor : TodasMusicas.Musicas[c].Autor
-        Genero.innerText = Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].Genero : TodasMusicas.Musicas[c].Genero
+        Nome.innerText = arrayMusicasRetornadas[c].NomeMusica
+        AutorDaMusica.innerText = arrayMusicasRetornadas[c].Autor
+        Genero.innerText = arrayMusicasRetornadas[c].Genero
         Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
         
         divTexto.appendChild(Nome)
@@ -274,21 +276,23 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         article.appendChild(div)
   
         div.addEventListener('click', (event) => {
+            AbrirTelaTocandoAgora(Pesquisa)
+
           if (event.target != AutorDaMusica && event.target != Heart) {
             ListaProxMusica = {
-              Musicas: Pesquisa === 'Aleatórias' ? arraymusicasAleatorias : TodasMusicas.Musicas,
+              Musicas: ParrayMusicasRetornadas[c],
               Numero: c,
             }
-            DarPlayMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c] : TodasMusicas.Musicas[c], c)
+            DarPlayMusica(arrayMusicasRetornadas[c], c)
           }
         })
   
-        FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Checar').then((resolve) => {
+        FavoritarDesfavoritarMusica(arrayMusicasRetornadas.ID, 'Checar').then((resolve) => {
           Heart.src = resolve
         })
   
         Heart.addEventListener('click', () => {
-          FavoritarDesfavoritarMusica(Pesquisa === 'Aleatórias' ? arraymusicasAleatorias[c].ID : TodasMusicas.Musicas[c].ID, 'Editar').then((resolve) => {
+          FavoritarDesfavoritarMusica(arrayMusicasRetornadas.ID, 'Editar').then((resolve) => {
             Heart.src = resolve
           })
         })
@@ -333,64 +337,66 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         Local.appendChild(section)
     }
   
-    const divBtnsScrollHorizontal = document.createElement('div')
-    divBtnsScrollHorizontal.className = 'divBtnsScrollHorizontal'
-  
-    const btnBackScrollHorizontal = document.createElement('button')
-    const imgBack = document.createElement('img')
-    imgBack.src = 'Assets/Imgs/Icons/BackPag.png'
-  
-    const btnNextScrollHorizontal = document.createElement('button')
-    const imgNext = document.createElement('img')
-    imgNext.src = 'Assets/Imgs/Icons/NextPag.png'
-  
-    btnBackScrollHorizontal.appendChild(imgBack)
-    btnNextScrollHorizontal.appendChild(imgNext)
-    divBtnsScrollHorizontal.appendChild(btnBackScrollHorizontal)
-    divBtnsScrollHorizontal.appendChild(btnNextScrollHorizontal)
-    section.appendChild(divBtnsScrollHorizontal)
-  
-    let scrollStep = section.scrollWidth
-    let contadorScroll = 0
-    function handleResize() {
-      scrollStep = section.scrollWidth
-      checkScrollLimit()
-  
-      if (articleContainer.scrollWidth > section.scrollWidth) {
-        divBtnsScrollHorizontal.style.display = 'flex'
-      } else {
-        divBtnsScrollHorizontal.style.display = 'none'
-      }
+    if(ClassArticle != 'SemScroll') {
+        const divBtnsScrollHorizontal = document.createElement('div')
+        divBtnsScrollHorizontal.className = 'divBtnsScrollHorizontal'
+    
+        const btnBackScrollHorizontal = document.createElement('button')
+        const imgBack = document.createElement('img')
+        imgBack.src = 'Assets/Imgs/Icons/BackPag.png'
+    
+        const btnNextScrollHorizontal = document.createElement('button')
+        const imgNext = document.createElement('img')
+        imgNext.src = 'Assets/Imgs/Icons/NextPag.png'
+    
+        btnBackScrollHorizontal.appendChild(imgBack)
+        btnNextScrollHorizontal.appendChild(imgNext)
+        divBtnsScrollHorizontal.appendChild(btnBackScrollHorizontal)
+        divBtnsScrollHorizontal.appendChild(btnNextScrollHorizontal)
+        section.appendChild(divBtnsScrollHorizontal)
+    
+        let scrollStep = section.scrollWidth
+        let contadorScroll = 0
+        function handleResize() {
+        scrollStep = section.scrollWidth
+        checkScrollLimit()
+    
+        if (articleContainer.scrollWidth > section.scrollWidth) {
+            divBtnsScrollHorizontal.style.display = 'flex'
+        } else {
+            divBtnsScrollHorizontal.style.display = 'none'
+        }
+        }
+        window.addEventListener('resize', handleResize)
+        handleResize()
+    
+        btnBackScrollHorizontal.addEventListener('click', () => {
+            articleContainer.scrollLeft -= scrollStep
+            contadorScroll--
+            checkScrollLimit()
+        })
+    
+        btnNextScrollHorizontal.addEventListener('click', () => {
+            articleContainer.scrollLeft += scrollStep
+            contadorScroll++
+            checkScrollLimit()
+        })
+    
+        function checkScrollLimit() {
+        if(contadorScroll <= 0) {
+            btnBackScrollHorizontal.style.opacity = 0.3
+        } else {
+            btnBackScrollHorizontal.style.opacity = 1
+        }
+    
+        if(contadorScroll < (articleContainer.scrollWidth / section.scrollWidth) - 1) {
+            btnNextScrollHorizontal.style.opacity = 1
+        } else {
+            btnNextScrollHorizontal.style.opacity = 0.3
+        }
+        }
+        checkScrollLimit()
     }
-    window.addEventListener('resize', handleResize)
-    handleResize()
-  
-    btnBackScrollHorizontal.addEventListener('click', () => {
-      articleContainer.scrollLeft -= scrollStep
-      contadorScroll--
-      checkScrollLimit()
-    })
-  
-    btnNextScrollHorizontal.addEventListener('click', () => {
-      articleContainer.scrollLeft += scrollStep
-      contadorScroll++
-      checkScrollLimit()
-    })
-  
-    function checkScrollLimit() {
-      if(contadorScroll <= 0) {
-        btnBackScrollHorizontal.style.opacity = 0.3
-      } else {
-        btnBackScrollHorizontal.style.opacity = 1
-      }
-  
-      if(contadorScroll < (articleContainer.scrollWidth / section.scrollWidth) - 1) {
-        btnNextScrollHorizontal.style.opacity = 1
-      } else {
-        btnNextScrollHorizontal.style.opacity = 0.3
-      }
-    }
-    checkScrollLimit()
   }
   
 
@@ -451,7 +457,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
 
                 //? ---------------------------------------------------------------------------------
 
-                for(let i = 0; i < TodasMusicas.Musicas.length; i++) {
+                for(let i = TodasMusicas.Musicas.length -1; i > 0; i--) {
 
                     for(let contadorMusicasPostadas = 0; contadorMusicasPostadas < TodosOsUsers[c].User.MusicasPostadas.length; contadorMusicasPostadas++) {
                         if(TodasMusicas.Musicas[i].ID == TodosOsUsers[c].User.MusicasPostadas[contadorMusicasPostadas]) {
@@ -591,6 +597,8 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 
                     let num = contadorMusicasLinha - 1
                     div.addEventListener('click', (event) => {
+                        AbrirTelaTocandoAgora(Email)
+
                         if (event.target != AutorDaMusica && event.target != Heart) {
                             ListaProxMusica = {
                                 Musicas: musicasFavoritasUser,
@@ -603,6 +611,8 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 
                     //? Ao clicar no btn de play
                     document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
+                        AbrirTelaTocandoAgora(Email)
+
                         ListaProxMusica = {
                             Musicas: musicasFavoritasUser,
                             Numero: 0,
@@ -929,8 +939,8 @@ function DarPlayMusica(Lista, num) {
                         }
     
                         setTimeout(() => {
-                            db.collection('Users').doc(TodosOsUsers[c].User.Id).update({ InfosPerfil: infosUser }).then(() => {console.log(infosUser.ViewsSemanais)})
-                        }, 1000)
+                            db.collection('Users').doc(TodosOsUsers[c].User.Id).update({ InfosPerfil: infosUser })
+                        }, 500)
                     }
                 })
             }
@@ -958,6 +968,8 @@ function DarPlayMusica(Lista, num) {
             }
         }
     } EnviarDados()
+
+    AddInfoTelaTocandoAgora(Lista)
 
     MusicaTocandoAgora = Lista
     //? Vai checar se a música foi curtida ou n
@@ -1076,6 +1088,24 @@ function DarPlayMusica(Lista, num) {
                 fimMusica = true
                 NextSong()
             }
+        })
+
+        //? Vai abrir a aba com as músicas do autor ques está ouvindo a música
+        document.getElementById('AutorMusicaBarraMusica').addEventListener('click', () => {
+            FecharPaginas()
+            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+            if(Lista.LinkImg.includes ('treefy')) {
+              imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+            } else {
+              imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+            }
+            imgPerfilArtista.src = Lista.LinkImg
+            document.getElementById('NomeArtista').innerText = Lista.Autor
+            document.getElementById('containerMusicasArtista').innerHTML = ''
+            document.querySelector('body').style.overflow = 'hidden'
+            RetornarMusicasArtista(Lista.Autor, document.getElementById('containerMusicasArtista'))
+            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+            coletarHistorico(Lista.Autor, 'Autor')
         })
 
     }
@@ -1272,6 +1302,8 @@ async function RetornarMusicasArtista(Artsita, Local) {
             
             //? Ao clicar na música
             div.addEventListener('click', (event) => {
+                AbrirTelaTocandoAgora(Artsita)
+
                 if (event.target != AutorDaMusica && event.target != Heart) {
                     ListaProxMusica = {
                         Musicas: arrayMusicasArtista,
@@ -1311,6 +1343,8 @@ async function RetornarMusicasArtista(Artsita, Local) {
 //? Ao clicar no btn de play
 const  btnPlayHeaderArtista = document.getElementById('btnPlayHeaderArtista')
 btnPlayHeaderArtista.addEventListener('click', () => {
+    AbrirTelaTocandoAgora(Artista)
+
     ListaProxMusica = {
         Musicas: arrayMusicasArtista,
         Numero: 0,
@@ -1318,3 +1352,195 @@ btnPlayHeaderArtista.addEventListener('click', () => {
     
     DarPlayMusica(arrayMusicasArtista[0], 0)
 })
+
+//? Vai adicionar as informações na tela tocando agora
+function AddInfoTelaTocandoAgora(Musica) {
+    document.getElementById('btnAbrirTelaTocandoAgora').style.display = 'block'
+
+    const TituloMusicaTelaTocandoAgora = document.getElementById('TituloMusicaTelaTocandoAgora')
+    const imgMusicaTelaTocandoAgora = document.getElementById('imgMusicaTelaTocandoAgora')
+    const NomeMusicaTelaTocandoAgora = document.getElementById('NomeMusicaTelaTocandoAgora')
+    const AutorMusicaTelaTocandoAgora = document.getElementById('AutorMusicaTelaTocandoAgora')
+    const imgUserPostouMusicaTelaTocandoAgora = document.getElementById('imgUserPostouMusicaTelaTocandoAgora')
+    const NomeUserPostouMusicaTelaTocandoAgora = document.getElementById('NomeUserPostouMusicaTelaTocandoAgora')
+    const NumeroOuvintesTelaTocandoAgora = document.getElementById('NumeroOuvintesTelaTocandoAgora')
+    const btnSeguirUserTelaTocandoAgora = document.getElementById('btnSeguirUserTelaTocandoAgora')
+
+    imgMusicaTelaTocandoAgora.src = Musica.LinkImg
+
+    if(imgMusicaTelaTocandoAgora.src.includes('treefy')) {
+        imgMusicaTelaTocandoAgora.classList.add('imgMusicaTelaTocandoAgoraTreeFy')
+      } else {
+        imgMusicaTelaTocandoAgora.classList.remove('imgMusicaTelaTocandoAgoraTreeFy')
+      }
+    NomeMusicaTelaTocandoAgora.innerText = Musica.NomeMusica
+    AutorMusicaTelaTocandoAgora.innerText = Musica.Autor
+
+    //? Vai pegar as informações do user que postou a música
+    let seguindoEsseUser = false
+    btnSeguirUserTelaTocandoAgora.style.display = ''
+    for(let c = 0; c < TodosOsUsers.length; c++) {
+        if(TodosOsUsers[c].User.Email == Musica.EmailUser) {
+            //? Vai colocar a img de perfil do user pesquisado
+            function carregarImagem(src, callback) {
+                var img = new Image()
+                img.onload = function() {
+                callback(img)
+                }
+                img.onerror = function() {
+                callback(null)
+                }
+                img.src = src
+            }
+            
+            // Pré-carregue as imagens
+            carregarImagem(TodosOsUsers[c].User.Personalizar.FotoPerfil, function(imgPerfil) {
+                carregarImagem(TodosOsUsers[c].User.Personalizar.Background, function(imgBackground) {
+                if (imgPerfil) {
+                    imgUserPostouMusicaTelaTocandoAgora.src = imgPerfil.src
+                } else if (imgBackground) {
+                    imgUserPostouMusicaTelaTocandoAgora.src = imgBackground.src
+                } else {
+                    imgUserPostouMusicaTelaTocandoAgora.src = 'Assets/Imgs/Banners/fitaCassete.avif'
+                }
+                })
+            })
+              
+
+            NomeUserPostouMusicaTelaTocandoAgora.innerText = TodosOsUsers[c].User.Nome
+            
+            try {
+                NumeroOuvintesTelaTocandoAgora.innerText = `${TodosOsUsers[c].User.InfosPerfil.ViewsSemanais
+                    .Views} Ouvintes semanais`
+            } catch{}
+
+            //? Vai checar se você segue o user ou se o user pesquisado é você
+            for(let i = 0; i <= currentUser.User.InfosPerfil.Seguindo.length; i++) {
+                
+                try {
+                    if(currentUser.User.InfosPerfil.Seguindo[i] == TodosOsUsers[c].User.Email) {
+
+                        seguindoEsseUser = true
+                        btnSeguirUserTelaTocandoAgora.classList.add('btnSeguindoUser')
+                        btnSeguirUserTelaTocandoAgora.innerText = 'Seguindo'
+                        
+                        
+                    } else if(TodosOsUsers[c].User.Email == currentUser.User.Email) {
+                        seguindoEsseUser = true
+                        btnSeguirUserTelaTocandoAgora.style.display = 'none'
+                    }
+                } catch (error) {
+                    console.warn(error)
+                }
+            }
+            
+            if(!seguindoEsseUser) {
+                btnSeguirUserTelaTocandoAgora.style.display = ''
+                btnSeguirUserTelaTocandoAgora.innerText = 'Seguir'
+            }
+
+            //? Vai começar a seguir
+            btnSeguirUserTelaTocandoAgora.addEventListener('click', () => {
+                let seguindoEsseUserBtn = false
+                let feito = false
+                let contador = 0
+                for(let f = 0; f <= currentUser.User.InfosPerfil.Seguindo.length; f++) {
+                    try {
+                        if(TodosOsUsers[c].User.Email == currentUser.User.InfosPerfil.Seguindo[f] && TodosOsUsers[c].User.Email != currentUser.User.Email && !feito) {
+                            feito = true
+                           seguindoEsseUserBtn = true
+                           contador = f
+                        }
+                    } catch (error) {
+                        console.warn(error)
+                    }
+                }
+            
+                let oqFazerComUser
+                 //? Se está seguindo, vai remover da lista
+                 if(seguindoEsseUserBtn) {
+                    currentUser.User.InfosPerfil.Seguindo.splice(contador, 1)
+                    seguindoEsseUserBtn = false
+                    btnSeguirUserTelaTocandoAgora.innerText = 'Seguir'
+                    oqFazerComUser = 'Remover Dos Seguidores'
+            
+                } else {
+                    currentUser.User.InfosPerfil.Seguindo.push(TodosOsUsers[c].User.Email)
+                    seguindoEsseUserBtn = true
+                    btnSeguirUserTelaTocandoAgora.innerText = 'Seguindo'
+                    oqFazerComUser = 'Adicionar Nos Seguidores'
+                }
+                db.collection('Users').doc(currentUser.User.Id).update({ InfosPerfil: currentUser.User.InfosPerfil }).then(() => {
+                    //? Vai salvar no perfil do user pequisado o novo seguidor
+                    let NovoSeguidorSalvo = false
+                    db.collection('Users').get().then((snapshot) => {
+                        snapshot.docs.forEach(Users => {
+            
+                            if(Users.data().Email == TodosOsUsers[c].User.Email && !NovoSeguidorSalvo) {
+                                NovoSeguidorSalvo= true
+                                const InfosPerfilUserPesquisado = Users.data().InfosPerfil
+                    
+                                if(oqFazerComUser == 'Remover Dos Seguidores') {
+                                    for(let c = 0; c < InfosPerfilUserPesquisado.Seguidores.length; c++) {
+                                        if(InfosPerfilUserPesquisado.Seguidores[f] == currentUser.User.Email) {
+                                            InfosPerfilUserPesquisado.Seguidores.splice(f, 1)
+                                        }
+                                    }
+                                    
+                                } else if(oqFazerComUser == 'Adicionar Nos Seguidores') {
+                                    InfosPerfilUserPesquisado.Seguidores.push(currentUser.User.Email)
+                                }
+                                
+                                setTimeout(() => {
+                                    db.collection('Users').doc(Users.id).update({ InfosPerfil: InfosPerfilUserPesquisado })
+                                }, 500)
+                            }
+                        })
+                    })
+                })
+            })
+        }
+    }
+
+    //? Vai retonar a fila de músicas
+    const containerMusicaslistaTelaTocandoAgora = document.getElementById('containerMusicaslistaTelaTocandoAgora')
+    containerMusicaslistaTelaTocandoAgora.innerHTML = ''
+    
+    const infoLista = document.getElementById('infoLista')
+    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 4) {
+        infoLista.innerText = 'A seguir'
+
+        for(let c = 1; c < 4; c++) {
+            RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
+        } 
+
+    } else if(ListaProxMusica.length - parseInt(ListaProxMusica.Numero) > 0) {
+        RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + 1].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
+
+    } else {
+        infoLista.innerText = 'Sua lista está vazia'
+    }
+}
+
+let ultimoNomeAbirTelaTocandoAgora
+function AbrirTelaTocandoAgora(Nome) {
+    const TelaTocandoAgora = document.getElementById('TelaTocandoAgora')
+
+    if(Nome == 'OpenViaBtn') {
+        if(TelaTocandoAgora.classList == 'TelaTocandoAgoraOpen') {
+            TelaTocandoAgora.classList.remove('TelaTocandoAgoraOpen')
+
+        } else {
+            TelaTocandoAgora.classList.add('TelaTocandoAgoraOpen')
+            ultimoNomeAbirTelaTocandoAgora = Nome
+        }
+    } else if(ultimoNomeAbirTelaTocandoAgora != Nome) {
+        TelaTocandoAgora.classList.add('TelaTocandoAgoraOpen')
+        ultimoNomeAbirTelaTocandoAgora = Nome
+    }
+} 
+
+function FecharTelaTocandoAgora() {
+    const TelaTocandoAgora = document.getElementById('TelaTocandoAgora')
+    TelaTocandoAgora.classList.remove('TelaTocandoAgoraOpen')
+}

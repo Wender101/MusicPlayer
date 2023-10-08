@@ -382,6 +382,50 @@
         <article id="containerMusicasPagPerfilOutroUser"></article>
     </section>
 
+    <!--? ------------------ Tela Tocando Agora ------------->
+    <article id="TelaTocandoAgora">
+       <div id="tituloTelaTocandoAgora">
+            <h3 id="TituloMusicaTelaTocandoAgora">Tocando agora</h3>
+            <button id="fecharTelaTocandoAgora" onclick="FecharTelaTocandoAgora()"></button>
+       </div>
+
+        <div id="containerMusicaTelaTocanAgora">
+            <div id="containerImgMusicaTelaTocandoAgora">
+                <img src="Assets/Imgs/Banners/fitaCassete.avif" onerror="this.src='Assets/Imgs/Banners/fitaCassete.avif'" id="imgMusicaTelaTocandoAgora">
+            </div>
+            <h1 id="NomeMusicaTelaTocandoAgora"></h1>
+            <p id="AutorMusicaTelaTocandoAgora"></p>
+        </div>
+
+        <div id="SobreQuemPostou">
+            <div id="containerImgSobreQuemPostou">
+                <div id="textoImgSobreQuemPostou">
+                    <p id="pSobreQuemPostou">Sobre quem postou</p>
+                    <h1 id="NomeUserPostouMusicaTelaTocandoAgora"></h1>
+                </div>
+                <div id="blurImgUserTelaTocandoAgora"></div>
+                <img src="Assets/Imgs/Banners/fitaCassete.avif" onerror="this.src='Assets/Imgs/Banners/fitaCassete.avif'" id="imgUserPostouMusicaTelaTocandoAgora">    
+            </div>
+
+            <div id="containerInfoUserTelaTocandoAgora">
+                <div>
+                    <h3></h3>
+                    <p id="NumeroOuvintesTelaTocandoAgora"></p>
+                </div>
+
+                <button id="btnSeguirUserTelaTocandoAgora">Seguir</button>
+            </div>
+
+            <p id="descUserTelaTocandoAgora"></p>
+        </div>
+
+        <div id="listaMusicasTelaTocandoAgora">
+            <h3 id="infoLista">Sua lista está vazia</h3>
+
+            <div id="containerMusicaslistaTelaTocandoAgora"></div>
+        </div>
+    </article>
+
     <!--?  ----------------- Barra da Música ---------------->
     <article id="BarraMusica">
         <div id="InfosBarraMusica">
@@ -423,6 +467,7 @@
         <!--? Configs Barra Música -->
         <div id="ConfigsBarraMusica">
             <!--? Letra -->
+            <img src="Assets/Imgs/Icons/Videos.png" onclick="AbrirTelaTocandoAgora('OpenViaBtn')" id="btnAbrirTelaTocandoAgora">
             <img src="Assets/Imgs/Icons/Artistas.png">
 
             <!--? Volume -->
