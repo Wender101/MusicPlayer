@@ -172,6 +172,8 @@ darPlayPagPerfilOutroUser.addEventListener('click', () => {
         Numero: 0,
     }
     DarPlayMusica(arrayMusicasPostadasPeloUser[0], 0)
+    AbrirTelaTocandoAgora(arrayMusicasPostadasPeloUser[0])
+
 })
 
 //? Vai mostrar no NavBar os usuários e Artistas que vc segue
@@ -179,7 +181,7 @@ function carregarUserArtistasSeguidos() {
     const localUserArtistaSeguido = document.getElementById('localUserArtistaSeguido')
     localUserArtistaSeguido.innerHTML = ''
     try {
-       for(let i = 0; i < currentUser.User.InfosPerfil.Seguindo.length; i++) {
+        for(let i = 0; i < currentUser.User.InfosPerfil.Seguindo.length; i++) {
             for(let c = 0; c < TodosOsUsers.length; c++) {
 
                 if(currentUser.User.InfosPerfil.Seguindo[i] == TodosOsUsers[c].User.Email) {
@@ -231,7 +233,7 @@ function carregarUserArtistasSeguidos() {
                     
                 }
             }
-       }
+        }
     } catch(error) {
         console.warn(error)
         setTimeout(() => {

@@ -739,6 +739,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
                         Numero: c,
                     }
                     DarPlayMusica(TodasMusicas.Musicas[c], c)
+                    AbrirTelaTocandoAgora(TodasMusicas.Musicas[c])
                 }
             })
 
@@ -1399,13 +1400,13 @@ function AddInfoTelaTocandoAgora(Musica) {
             // Pré-carregue as imagens
             carregarImagem(TodosOsUsers[c].User.Personalizar.FotoPerfil, function(imgPerfil) {
                 carregarImagem(TodosOsUsers[c].User.Personalizar.Background, function(imgBackground) {
-                if (imgPerfil) {
-                    imgUserPostouMusicaTelaTocandoAgora.src = imgPerfil.src
-                } else if (imgBackground) {
-                    imgUserPostouMusicaTelaTocandoAgora.src = imgBackground.src
-                } else {
-                    imgUserPostouMusicaTelaTocandoAgora.src = 'Assets/Imgs/Banners/fitaCassete.avif'
-                }
+                    if (imgPerfil) {
+                        imgUserPostouMusicaTelaTocandoAgora.src = imgPerfil.src
+                    } else if (imgBackground) {
+                        imgUserPostouMusicaTelaTocandoAgora.src = imgBackground.src
+                    } else {
+                        imgUserPostouMusicaTelaTocandoAgora.src = 'Assets/Imgs/Banners/fitaCassete.avif'
+                    }
                 })
             })
               
@@ -1413,8 +1414,7 @@ function AddInfoTelaTocandoAgora(Musica) {
             NomeUserPostouMusicaTelaTocandoAgora.innerText = TodosOsUsers[c].User.Nome
             
             try {
-                NumeroOuvintesTelaTocandoAgora.innerText = `${TodosOsUsers[c].User.InfosPerfil.ViewsSemanais
-                    .Views} Ouvintes semanais`
+                NumeroOuvintesTelaTocandoAgora.innerText = `${TodosOsUsers[c].User.InfosPerfil.ViewsSemanais.Views} Ouvintes semanais`
             } catch{}
 
             //? Vai checar se você segue o user ou se o user pesquisado é você
@@ -1520,7 +1520,6 @@ function AddInfoTelaTocandoAgora(Musica) {
         infoLista.innerText = 'A seguir'
 
         for(let c = 1; c < max; c++) {
-            console.log(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica);
             RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
         } 
 
