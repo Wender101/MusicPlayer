@@ -86,6 +86,7 @@ function carregarMusicas() {
     try {
         document.getElementById('CarregamentoTela1').style.display = 'none'
     } catch{}
+
 }).catch((e) => {
     console.warn(e)
 })
@@ -1387,10 +1388,10 @@ function AddInfoTelaTocandoAgora(Musica) {
             function carregarImagem(src, callback) {
                 var img = new Image()
                 img.onload = function() {
-                callback(img)
+                    callback(img)
                 }
                 img.onerror = function() {
-                callback(null)
+                    callback(null)
                 }
                 img.src = src
             }

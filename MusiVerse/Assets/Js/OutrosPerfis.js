@@ -2,6 +2,7 @@ const btnSeguirPagPerfilOutroUser = document.getElementById('btnSeguirPagPerfilO
 let  infosUserPesquisado
 
 function AbrirPerfilOutroUser(infosUser) {
+    document.querySelector('body').style.overflow = 'hidden'
     document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'none'
     let seguindoEsseUser = false
     infosUserPesquisado = infosUser
@@ -154,6 +155,7 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
                     
                     setTimeout(() => {
                         db.collection('Users').doc(Users.id).update({ InfosPerfil: InfosPerfilUserPesquisado })
+                        carregarUserArtistasSeguidos()
                     }, 500)
                 }
             })
@@ -171,3 +173,69 @@ darPlayPagPerfilOutroUser.addEventListener('click', () => {
     }
     DarPlayMusica(arrayMusicasPostadasPeloUser[0], 0)
 })
+
+//? Vai mostrar no NavBar os usuários e Artistas que vc segue
+function carregarUserArtistasSeguidos() {
+    const localUserArtistaSeguido = document.getElementById('localUserArtistaSeguido')
+    localUserArtistaSeguido.innerHTML = ''
+    try {
+       for(let i = 0; i < currentUser.User.InfosPerfil.Seguindo.length; i++) {
+            for(let c = 0; c < TodosOsUsers.length; c++) {
+
+                if(currentUser.User.InfosPerfil.Seguindo[i] == TodosOsUsers[c].User.Email) {
+
+                    let li = document.createElement('li')
+                    let img = document.createElement('img')
+                    let div = document.createElement('div')
+                    let p = document.createElement('p')
+                    let span = document.createElement('span')
+
+                        //? Vai colocar a img de perfil do user pesquisado
+                    function carregarImagem(src, callback) {
+                        var img = new Image()
+                        img.onload = function() {
+                            callback(img)
+                        }
+                        img.onerror = function() {
+                            callback(null)
+                        }
+                        img.src = src
+                    }
+                    
+                    // Pré-carregue as imagens
+                    carregarImagem(TodosOsUsers[c].User.Personalizar.FotoPerfil, function(imgPerfil) {
+                        carregarImagem(TodosOsUsers[c].User.Personalizar.Background, function(imgBackground) {
+                        if (imgPerfil) {
+                            img.src = imgPerfil.src
+                        } else if (imgBackground) {
+                            img.src = imgBackground.src
+                        } else {
+                            img.src = 'Assets/Imgs/Banners/fitaCassete.avif'
+                        }
+                        })
+                    })
+
+                    li.className = 'perfilSeguindoNavBar'
+                    p.innerText = TodosOsUsers[c].User.Nome
+                    span.innerText = 'Usuário'
+
+                    div.appendChild(p)
+                    div.appendChild(span)
+                    li.appendChild(img)
+                    li.appendChild(div)
+                    localUserArtistaSeguido.appendChild(li)
+
+                    li.addEventListener('click' , () => {
+                        AbrirPerfilOutroUser(TodosOsUsers[c].User)
+                    })
+                    
+                }
+            }
+       }
+    } catch(error) {
+        console.warn(error)
+        setTimeout(() => {
+            carregarUserArtistasSeguidos()
+        }, 1000)
+    }
+}  carregarUserArtistasSeguidos()

@@ -15,6 +15,11 @@ body {
         background: #212124;
         padding: 12px 0px;
         z-index: 5;
+        overflow: auto;
+
+        &::-webkit-scrollbar {
+            width: 1px; /* Largura da barra de rolagem */
+        }
 
         div#contaUser {
             width: calc(100% - 48px);
@@ -57,6 +62,10 @@ body {
             list-style: none;
             padding-left: 24px;
 
+            &#localUserArtistaSeguido {
+                margin-bottom: 120px;
+            }
+
             li {
                 display: flex;
                 align-items: center;
@@ -66,6 +75,31 @@ body {
                 font-weight: 300;
                 line-height: 24px;
                 cursor: pointer;
+
+                &.perfilSeguindoNavBar {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+
+                    img {
+                        width: 50px;
+                        height: 50px;
+                        object-fit: cover;
+                        border-radius: 5px;
+                    }
+
+                    div {
+                        height: 50px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        justify-content: space-around;
+
+                        span {
+                            margin: 0px;
+                        }
+                    }
+                }
             }
         }
 
@@ -1630,16 +1664,17 @@ body {
             border-radius: 10px;
             background-color: #29292e91;
             overflow: hidden;
+            box-shadow:  4px 8px 16px rgba(0, 0, 0, 0.4);
 
             div#containerImgMusicaTelaTocandoAgora {
                 width: 100%;
                 height: 290px;
                 margin-bottom: 20px;
-                box-shadow:  4px 8px 0px rgba(0, 0, 0, 0.4);
                 display: flex;
                 align-items: center;
                 justify-content: baseline;
                 overflow: hidden;
+                border-radius: 10px;
 
                 
                 img#imgMusicaTelaTocandoAgora {
@@ -1684,6 +1719,8 @@ body {
             background-color: #29292e91;
             border-radius: 10px;
             padding: 20px;
+            box-shadow:  4px 8px 16px rgba(0, 0, 0, 0.4);
+
             div#containerImgSobreQuemPostou {
                 width: 100%;
                 height: 290px;
@@ -1785,7 +1822,7 @@ body {
             padding: 20px;
             border-radius: 10px;
             background-color: #29292e91;
-           
+            box-shadow:  4px 8px 16px rgba(0, 0, 0, 0.4);
             
             h3#infoLista {
                 margin: 10px 0px;
