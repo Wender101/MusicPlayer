@@ -1,5 +1,5 @@
 const containerMusicasAddCriarPlaylist = document.getElementById('containerMusicasAddCriarPlaylist').querySelector('section').querySelector('article')
-
+const articleContainerMusicasAdded = document.getElementById('articleContainerMusicasAdded')
 //? Adicionar músicas a playlist
 let arrayMusicasNovaPlaylist = []
 function PesquisarMusicaCriarPlaylist() {
@@ -25,7 +25,6 @@ function PesquisarMusicaCriarPlaylist() {
             if(contadorMusicas < 12) {
                 if (PesquisaFormatada.includes(NomeMusica) || PesquisaFormatada.includes(Autor) || PesquisaFormatada.includes(Genero) || NomeMusica.includes(PesquisaFormatada) || Autor.includes(PesquisaFormatada) || Genero.includes(PesquisaFormatada)
                 ) {
-                    console.log(TodasMusicas.Musicas[c].EmailUser);
                     contadorMusicas++
                     article.className = 'containerMusicaLinha'
         
@@ -82,7 +81,7 @@ function PesquisarMusicaCriarPlaylist() {
                             arrayMusicasNovaPlaylist.push(TodasMusicas.Musicas[c])
                             // Local.style.display = 'none'
                             clicouAdd = true
-                            containerMusicasAddCriarPlaylist.appendChild(div)
+                            articleContainerMusicasAdded.appendChild(div)
                             btnAdicionar.innerText = 'Remover'
                         } else {
                             for(let b = 0; b < arrayMusicasNovaPlaylist.length; b++) {
@@ -92,7 +91,7 @@ function PesquisarMusicaCriarPlaylist() {
                             }
     
                             clicouAdd = false
-                            containerMusicasAddCriarPlaylist.removeChild(div)
+                            articleContainerMusicasAdded.removeChild(div)
                         }
     
                         //? Vai mudar a foto da playlist
@@ -157,8 +156,11 @@ function PostarNovaPlaylist(btn) {
         document.getElementById('postarNovaPlaylist').style.background = 'rgb(0, 255, 255)'
 
         if(btn) {
+            const uniqueId = db.collection('IdsUnicos').doc().id;
+
             let novaPlaylist = {
                 Estado: 'Pública',
+                ID: uniqueId,
                 EmailUser: currentUser.User.Email,
                 Musicas: arrayMusicasNovaPlaylist,
                 Nome: inputNomeNovaPlaylist.value,
@@ -179,7 +181,7 @@ function PostarNovaPlaylist(btn) {
                             alert('Playlist postada com sucesso!')
                             FecharPaginas()
                             document.getElementById('containerMusicasPesquisadasCriarPlaylist').innerHTML = ''
-                            document.getElementById('containerMusicasAddCriarPlaylist').querySelector('section').querySelector('article').innerHTML = ''
+                            document.getElementById('containerMusicasAddCriarPlaylist').querySelector('section').querySelector('article').querySelector('article').innerHTML = ''
                             document.getElementById('pesquisarMuiscaCriarPlaylist').innerHTML = ''
                             document.getElementById('imgCriarPlaylist').src = 'Assets/Imgs/Icons/Faixas200.png'
                         })
