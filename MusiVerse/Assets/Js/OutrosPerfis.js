@@ -123,6 +123,7 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
         seguindoEsseUserBtn = false
         btnSeguirPagPerfilOutroUser.classList.remove('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguir'
+        document.getElementById('btnSeguirUserTelaTocandoAgora').innerText = 'Seguir'
         oqFazerComUser = 'Remover Dos Seguidores'
 
     } else {
@@ -130,6 +131,7 @@ btnSeguirPagPerfilOutroUser.addEventListener('click', () => {
         seguindoEsseUserBtn = true
         btnSeguirPagPerfilOutroUser.classList.add('btnSeguindoUser')
         btnSeguirPagPerfilOutroUser.innerText = 'Seguindo'
+        document.getElementById('btnSeguirUserTelaTocandoAgora').innerText = 'Seguindo'
         oqFazerComUser = 'Adicionar Nos Seguidores'
     }
     db.collection('Users').doc(currentUser.User.Id).update({ InfosPerfil: currentUser.User.InfosPerfil }).then(() => {

@@ -1518,6 +1518,7 @@ body article#TelaTocandoAgora div#containerMusicaTelaTocanAgora {
   background-color: rgba(41, 41, 46, 0.568627451);
   overflow: hidden;
   box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 body article#TelaTocandoAgora div#containerMusicaTelaTocanAgora div#containerImgMusicaTelaTocandoAgora {
   width: 100%;
@@ -1567,6 +1568,7 @@ body article#TelaTocandoAgora div#SobreQuemPostou {
   border-radius: 10px;
   padding: 20px;
   box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 body article#TelaTocandoAgora div#SobreQuemPostou div#containerImgSobreQuemPostou {
   width: 100%;

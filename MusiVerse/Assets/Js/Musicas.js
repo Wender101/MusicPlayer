@@ -1358,7 +1358,9 @@ btnPlayHeaderArtista.addEventListener('click', () => {
 })
 
 //? Vai adicionar as informações na tela tocando agora
+let infoMusicaTocandoAgora
 function AddInfoTelaTocandoAgora(Musica) {
+    infoMusicaTocandoAgora = Musica
     document.getElementById('btnAbrirTelaTocandoAgora').style.display = 'block'
 
     const TituloMusicaTelaTocandoAgora = document.getElementById('TituloMusicaTelaTocandoAgora')
@@ -1527,6 +1529,43 @@ function AddInfoTelaTocandoAgora(Musica) {
         infoLista.innerText = 'Sua lista está vazia'
     }
 }
+
+//? Ao clicar na música tocando agora na barra tela música tocando agora, vai abir a aba mostrando todas as músicas do autor
+document.getElementById('containerMusicaTelaTocanAgora').addEventListener('click',() => {
+    FecharPaginas()
+    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+    if(infoMusicaTocandoAgora.LinkImg.includes ('treefy')) {
+      imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+    } else {
+      imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+    }
+    imgPerfilArtista.src = infoMusicaTocandoAgora.LinkImg
+    document.getElementById('NomeArtista').innerText = infoMusicaTocandoAgora.Autor
+    document.getElementById('containerMusicasArtista').innerHTML = ''
+    document.querySelector('body').style.overflow = 'hidden'
+    RetornarMusicasArtista(infoMusicaTocandoAgora.Autor, document.getElementById('containerMusicasArtista'))
+    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+    coletarHistorico(infoMusicaTocandoAgora.Autor, 'Autor')
+})
+
+//? Vai abrir a página do user que postou a música ao clicar no perfil dele da tela música tocando agora
+document.getElementById('SobreQuemPostou').addEventListener('click', (e) => {
+    let el = e.target
+    if(el.id == 'btnSeguirUserTelaTocandoAgora') {
+        for(let c = 0; c < TodosOsUsers.length; c++) {
+            if(infoMusicaTocandoAgora.EmailUser == TodosOsUsers[c].User.Email) {
+                AbrirPerfilOutroUser(TodosOsUsers[c].User)
+                carregarUserArtistasSeguidos()
+            }
+        }
+    } else if(document.getElementById('PagPerfilOutroUser').style.display != 'block'){
+        for(let c = 0; c < TodosOsUsers.length; c++) {
+            if(infoMusicaTocandoAgora.EmailUser == TodosOsUsers[c].User.Email) {
+                AbrirPerfilOutroUser(TodosOsUsers[c].User)
+            }
+        }
+    }
+})
 
 let ultimoNomeAbirTelaTocandoAgora
 function AbrirTelaTocandoAgora(Nome) {
