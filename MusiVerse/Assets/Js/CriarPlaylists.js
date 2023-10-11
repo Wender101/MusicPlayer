@@ -112,11 +112,14 @@ function PesquisarMusicaCriarPlaylist() {
         }
     
         const section = document.createElement('section')
+        const articleContainer = document.createElement('article')
+        articleContainer.className = 'articleContainer'
     
         //? Vai adicionar o article no html apenas se houver algunma música
         if(article.innerHTML != '') {
             section.className = 'containerMusica'
-            section.appendChild(article)
+            section.appendChild(articleContainer)
+            articleContainer.appendChild(article)
             Local.appendChild(section)
         }
     } else {
