@@ -1727,7 +1727,7 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                                 AbrirTelaTocandoAgora(Pesquisa)
 
                                 ListaProxMusica = {
-                                    Musicas: TodasMusicas.Playlists[c].Musicas[i],
+                                    Musicas: arrayMusicasPlaylist,
                                     Numero: i,
                                 }
                                 DarPlayMusica(TodasMusicas.Playlists[c].Musicas[i], i)
