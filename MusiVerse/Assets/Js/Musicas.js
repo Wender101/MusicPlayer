@@ -1718,9 +1718,10 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                         article.appendChild(div)
                 
                         div.addEventListener('click', (event) => {
-                            AbrirTelaTocandoAgora(Pesquisa)
-
+                            
                             if (event.target != AutorDaMusica && event.target != Heart) {
+                                AbrirTelaTocandoAgora(Pesquisa)
+                                
                                 ListaProxMusica = {
                                     Musicas: TodasMusicas.Playlists[c].Musicas[i],
                                     Numero: i,
@@ -1739,22 +1740,22 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                             })
                         })
                 
-                        // AutorDaMusica.addEventListener('click', () => {
-                        //     FecharPaginas()
-                        //     const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                        //     if(img.src.includes ('treefy')) {
-                        //         imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                        //     } else {
-                        //         imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                        //     }
-                        //     imgPerfilArtista.src = img.src
-                        //     document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                        //     document.getElementById('containerMusicasArtista').innerHTML = ''
-                        //     document.querySelector('body').style.overflow = 'hidden'
-                        //     RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                        //     SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                        //     coletarHistorico(AutorDaMusica.innerText, 'Autor')
-                        // })
+                        AutorDaMusica.addEventListener('click', () => {
+                            FecharPaginas()
+                            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+                            if(img.src.includes ('treefy')) {
+                                imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+                            } else {
+                                imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+                            }
+                            imgPerfilArtista.src = img.src
+                            document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
+                            document.getElementById('containerMusicasArtista').innerHTML = ''
+                            document.querySelector('body').style.overflow = 'hidden'
+                            RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
+                            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+                            coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                        })
                     }
                 }
             }
