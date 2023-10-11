@@ -1547,6 +1547,7 @@ body {
                     width: 95%;
                     margin: auto;
                     position: relative;
+                    padding-bottom: 100px;
                 }
 
                 div#inputAddMusicaCriarPlaylist {
@@ -1618,7 +1619,7 @@ body {
                 height: 50px;
                 border-radius: 50%;
                 position: fixed;
-                bottom: 30px;
+                bottom: 130px;
                 right: 30px;
                 display: none;
                 align-items: center;
@@ -1626,6 +1627,7 @@ body {
                 background-color: rgb(0, 255, 255);
                 cursor: pointer;
                 z-index: 2;
+                border: none;
 
                 &:hover {
                     transition: 100ms scale ease-in-out;

@@ -1596,6 +1596,7 @@ function FecharTelaTocandoAgora() {
 }
 
 //? Vai retornar as playlists
+let arrayMusicasPlaylist = []
 function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
     let PesquisaFormatada = formatarTexto(Pesquisa)
     let contadorMusicasLinha = 0
@@ -1671,7 +1672,10 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                     })
 
                 } else if(Formato == 'Linha') {
+                    arrayMusicasPlaylist = []
+
                     for(let i = TodasMusicas.Playlists[c].Musicas.length -1; i >= 0; i--) {
+                        arrayMusicasPlaylist.push(TodasMusicas.Playlists[c].Musicas[i])
                         contadorMusicasLinha++
                         article.className = 'containerMusicaLinha'
                 
@@ -1721,7 +1725,7 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                             
                             if (event.target != AutorDaMusica && event.target != Heart) {
                                 AbrirTelaTocandoAgora(Pesquisa)
-                                
+
                                 ListaProxMusica = {
                                     Musicas: TodasMusicas.Playlists[c].Musicas[i],
                                     Numero: i,
@@ -1804,3 +1808,15 @@ function AbrirPlaylist(Playlist) {
     const PagPlaylist = document.getElementById('PagPlaylist')
     PagPlaylist.style.display = 'block'
 }
+
+//? Vai dar play na playlist ao clicar no btn start
+document.getElementById('btnPlayHeaderPagPlaylist').addEventListener('click', () => {
+    AbrirTelaTocandoAgora(arrayMusicasPlaylist[0])
+
+    ListaProxMusica = {
+        Musicas: arrayMusicasPlaylist,
+        Numero: 0,
+    }
+    
+    DarPlayMusica(arrayMusicasPlaylist[0], 0)
+})
