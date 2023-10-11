@@ -2102,7 +2102,7 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
   height: auto;
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa {
-  min-width: 240px;
+  min-width: 205px;
   height: 244px;
   display: flex;
   flex-direction: column;
@@ -2115,8 +2115,8 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
   cursor: pointer;
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa {
-  width: 64%;
-  height: 64%;
+  width: 75%;
+  height: 62%;
   border-radius: 50%;
   top: 10px;
   left: 50%;
@@ -2162,7 +2162,7 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
   width: 100%;
-  height: 135%;
+  height: 107%;
   z-index: 2;
   overflow: hidden;
   position: absolute;

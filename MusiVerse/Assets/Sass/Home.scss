@@ -2350,9 +2350,9 @@ body {
     
                 //? Músicas Caixa --------------------------------
                 div.MusicasCaixa {
-                    // width: 200px;
+                    min-width: 205px;
                     // height: 270px;
-                    min-width: 240px;
+                    // min-width: 240px;
                     height: 244px;
                     display: flex;
                     // flex: 1;
@@ -2370,8 +2370,8 @@ body {
 
                     &.ArtistaHistorico {
                         div.ContainerImgMusicaCaixa {
-                            width: 64%;
-                            height: 64%;
+                            width: 75%;
+                            height: 62%;
                             border-radius: 50%;
                             top: 10px;
                             left: 50%;
@@ -2441,7 +2441,7 @@ body {
 
                         //?  ----
                         width: 100%;
-                        height: 135%;
+                        height: 107%;
                         z-index: 2;
                         overflow: hidden;
                         position: absolute;

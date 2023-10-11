@@ -77,12 +77,13 @@ function coletarHistorico(Dados, Tipo = 'Música') {
           }
         }
 
-        if(GostoMusicalHistorico.Historico.Musicas.length >= 20 && !feito) {
-          feito = true
-          GostoMusicalHistorico.Historico.Musicas.splice(0, 1)
-        }
       } catch{}
-  
+      
+      if(GostoMusicalHistorico.Historico.Musicas.length >= 20 && !feito) {
+        feito = true
+        GostoMusicalHistorico.Historico.Musicas.splice(0, 1)
+      }
+      
       GostoMusicalHistorico.Historico.Musicas.push(Dados)
 
     } else if(Tipo == 'Playlist') {
