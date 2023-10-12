@@ -1039,12 +1039,16 @@ function DarPlayMusica(Lista, num) {
 
             //? Vai mudar a informações na barra música para o pc
             const imgMusicaBarraMusica = document.getElementById('imgMusicaBarraMusica')
+            const ImgLargaEscalaBarraMusica = document.getElementById('ImgLargaEscalaBarraMusica')
             if(Lista.LinkImg.includes('treefy')) {
                 imgMusicaBarraMusica.classList.add('imgMusicaBarraMusicaTreeFy')
+                ImgLargaEscalaBarraMusica.classList.add('imgMusicaBarraMusicaTreeFy')
             } else {
                 imgMusicaBarraMusica.classList.remove('imgMusicaBarraMusicaTreeFy')
+                ImgLargaEscalaBarraMusica.classList.remove('imgMusicaBarraMusicaTreeFy')
             }
             imgMusicaBarraMusica.src = Lista.LinkImg
+            ImgLargaEscalaBarraMusica.src = Lista.LinkImg
             document.getElementById('NomeMusicaBarraMusica').innerText = Lista.NomeMusica
             document.getElementById('AutorMusicaBarraMusica').innerText = Lista.Autor
 
@@ -1053,6 +1057,24 @@ function DarPlayMusica(Lista, num) {
             document.getElementById('imgMusicaTocandoAgoraPagMusicaTocandoAgora').src = Lista.LinkImg
             document.getElementById('nomeMusicaTocandoAgoraPagMusicaTocandoAgora').innerText = Lista.NomeMusica
             document.getElementById('autorMusicaTocandoAgoraPagMusicaTocandoAgora').innerText = Lista.Autor
+
+            //? Vai abir a img em alta escala
+            imgMusicaBarraMusica.addEventListener('click', () => {
+                document.getElementById('containerImgLargaEscalaBarraMusica').style.bottom = '90px'
+            })
+            
+            document.getElementById('btnAbrirContainerImgLargaEscalaBarraMusica').addEventListener('click', () => {
+                document.getElementById('containerImgLargaEscalaBarraMusica').style.bottom = '90px'
+            })
+            
+            //? Vai fechar a img em alta escala
+            document.getElementById('btnFecharContainerImgLargaEscalaBarraMusica').addEventListener('click', () => {
+                document.getElementById('containerImgLargaEscalaBarraMusica').style.bottom = '-100vh'
+            })
+
+            document.getElementById('containerImgLargaEscalaBarraMusica').addEventListener('click', () => {
+                document.getElementById('containerImgLargaEscalaBarraMusica').style.bottom = '-100vh'
+            })
 
             //? Vai atualizar a barra de progresso da música
             let progressoMusicaBarraMusica = document.getElementById('progressoMusicaBarraMusica') //? Progresso barra para pc
@@ -1135,6 +1157,13 @@ HeartBarraMusica.addEventListener('click', () => {
 //? Vai pausar a música
 PlayBtn.addEventListener('click', function() {
     PausaDespausarMusica()
+})
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === " ") { // Verifica se a tecla pressionada é a barra de espaço
+        event.preventDefault() //? Vai impedir de scrollar para baixo
+        PausaDespausarMusica()
+    }
 })
 
 PlayBtn2.addEventListener('click', function() {
@@ -1263,7 +1292,7 @@ async function RetornarMusicasArtista(Artista, Local) {
     arrayMusicasArtista = [] //? Vai salvar as músicas do artista pesquisado para poder colocar como lista de prox músicas
     ListaProxMusica = {}
 
-    for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+    for(let c = TodasMusicas.Musicas.length -1; c >= 0; c--) {
         let AutorFormadato  =  formatarTexto(TodasMusicas.Musicas[c].Autor)
 
 

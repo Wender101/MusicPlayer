@@ -114,11 +114,12 @@ function coletarHistorico(Dados, Tipo = 'Música') {
           }
         }
 
-        if(GostoMusicalHistorico.Historico.Autores.length >= 20 && !feito) {
-          feito = true
-          GostoMusicalHistorico.Historico.Autores.splice(0, 1)
-        }
       } catch{}
+      
+      if(GostoMusicalHistorico.Historico.Autores.length >= 20 && !feito) {
+        feito = true
+        GostoMusicalHistorico.Historico.Autores.splice(0, 1)
+      }
 
       GostoMusicalHistorico.Historico.Autores.push(Dados)
     }
