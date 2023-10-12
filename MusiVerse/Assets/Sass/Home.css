@@ -1948,6 +1948,7 @@ body article#BarraMusica div#containerImgLargaEscalaBarraMusica div {
 body article#BarraMusica div#containerImgLargaEscalaBarraMusica div img#ImgLargaEscalaBarraMusica {
   width: 100%;
   height: 133%;
+  top: -50px;
   display: block;
   -o-object-fit: cover;
      object-fit: cover;
@@ -1958,6 +1959,7 @@ body article#BarraMusica div#containerImgLargaEscalaBarraMusica div img#ImgLarga
 }
 body article#BarraMusica div#containerImgLargaEscalaBarraMusica div img#ImgLargaEscalaBarraMusica.imgMusicaBarraMusicaTreeFy {
   height: 100%;
+  top: 0px;
 }
 body article#BarraMusica div#InfosBarraMusica {
   max-width: 229px;
