@@ -1563,8 +1563,12 @@ function AddInfoTelaTocandoAgora(Musica) {
         infoLista.innerText = 'A seguir'
 
         function getNextFourElements(arr, startIndex) {
+            let maxContador = 4
+            if(arr.length < 4) {
+                maxContador = arr.length -1
+            }
             const result = []
-            for (let i = startIndex + 1; result.length < 4; i++) {
+            for (let i = startIndex + 1; result.length < maxContador; i++) {
               result.push(arr[i % arr.length])
             }
             return result
