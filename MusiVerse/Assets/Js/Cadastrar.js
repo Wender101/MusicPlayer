@@ -66,10 +66,8 @@ function Cadastrar() {
             db.collection('Chaves').get().then(snapshot => {
                 snapshot.docs.forEach(ChavesAcesso => {
                     const Chaves = ChavesAcesso.data()
-                    console.log('Chaves', ChavesAcesso)
                     for(let c = 0; c <= Chaves.ChavesDeAcesso.length; c++) {
                         try {
-                            console.log(Chaves.ChavesDeAcesso[c], inputChave.value);
                             if(Chaves.ChavesDeAcesso[c] == inputChave.value) {
                                 let ArrayChavesDeAcesso = Chaves.ChavesDeAcesso
                                 ArrayChavesDeAcesso.splice(c, 1)
@@ -91,7 +89,7 @@ function Cadastrar() {
             })
 
         }).catch(error => {
-            console.log('Error: ', error)
+            console.warn('Error: ', error)
             
             if(error.code == 'auth/email-already-in-use') {
                 alert('Email já cadastrado! Use outro Email ou faça login com essa conta.')

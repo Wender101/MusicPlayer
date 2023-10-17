@@ -75,11 +75,9 @@ function SalvarEdicao() {
                 //? Vai checar se a img de perfil adionada está funcionando
                 var imgTeste2 = new Image()
                 if(inputLinkPerfilMeuPerfil.value.trim() != '') {
-                    console.log('dentro do if??');
                     imgTeste2.src = inputLinkPerfilMeuPerfil.value
                     const FotoPerfil = document.getElementById('imgPerfilUserHeaderUser')
                     imgTeste2.onload = function() {
-                        console.log('tudo certo por aqui');
                         FotoPerfil.src = inputLinkPerfilMeuPerfil.value
                         document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'block'
                         document.getElementById('coainerBackgroundPerfil').style.alignItems = 'center'

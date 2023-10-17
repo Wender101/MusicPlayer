@@ -1345,16 +1345,13 @@ async function RetornarMusicasArtista(Artista, Local) {
             
             //? Ao clicar na música
             let numContador = contadorMusicasLinhaArtista
-            div.addEventListener('click', (event) => {
-                console.log(numContador, c);
-                
+            div.addEventListener('click', (event) => {                
                 if (event.target != AutorDaMusica && event.target != Heart) {
                     ListaProxMusica = {
                         Musicas: arrayMusicasArtista,
                         Numero: numContador,
                     }
-
-                    
+        
                     AbrirTelaTocandoAgora(Artista)
                     DarPlayMusica(TodasMusicas.Musicas[c], numContador)
                 }
@@ -1577,7 +1574,6 @@ function AddInfoTelaTocandoAgora(Musica) {
         const minhaArray = ListaProxMusica.Musicas
         const startIndex = parseInt(ListaProxMusica.Numero); // Pode ser qualquer índice da sua escolha
         const proximasQuatroCasas = getNextFourElements(minhaArray, startIndex)    
-        console.log(proximasQuatroCasas); 
 
         for(let c = 0; c < proximasQuatroCasas.length; c++) {
             RetornarMusicas(proximasQuatroCasas[c].ID, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
