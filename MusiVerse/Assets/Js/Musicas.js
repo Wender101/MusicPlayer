@@ -138,7 +138,8 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
             NomeMusica.includes(PesquisaFormatada) ||
             Autor.includes(PesquisaFormatada) ||
             Genero.includes(PesquisaFormatada) ||
-            EmailUser.includes(PesquisaFormatada)
+            EmailUser.includes(PesquisaFormatada) ||
+            TodasMusicas.Musicas[c].ID == Pesquisa
             ) {
             musicaPassou = true
         } else if(Pesquisa == 'Aleatórias') {
@@ -1291,7 +1292,7 @@ async function RetornarMusicasArtista(Artista, Local) {
     const article = document.createElement('article')
     article.className = 'containerMusicasOverflow'
     let ArtistaFormadado = formatarTexto(Artista)
-    let contadorMusicasLinha = -1
+    let contadorMusicasLinhaArtista = -1
     arrayMusicasArtista = [] //? Vai salvar as músicas do artista pesquisado para poder colocar como lista de prox músicas
     ListaProxMusica = {}
 
@@ -1300,7 +1301,7 @@ async function RetornarMusicasArtista(Artista, Local) {
 
 
         if(ArtistaFormadado.includes(AutorFormadato) || AutorFormadato.includes(ArtistaFormadado)) {
-            contadorMusicasLinha++
+            contadorMusicasLinhaArtista++
             arrayMusicasArtista.push(TodasMusicas.Musicas[c])
             article.className = 'containerMusicaLinha'
 
@@ -1323,7 +1324,7 @@ async function RetornarMusicasArtista(Artista, Local) {
             img.className = 'ImgMusicaMeuPerfil'
             Genero.className = 'GeneroMeuPerfil'
 
-            contador.innerText = contadorMusicasLinha + 1
+            contador.innerText = contadorMusicasLinhaArtista + 1
             img.src = TodasMusicas.Musicas[c].LinkImg
             Nome.innerText = TodasMusicas.Musicas[c].NomeMusica
             AutorDaMusica.innerText = TodasMusicas.Musicas[c].Autor
@@ -1343,27 +1344,30 @@ async function RetornarMusicasArtista(Artista, Local) {
 
             
             //? Ao clicar na música
+            let numContador = contadorMusicasLinhaArtista
             div.addEventListener('click', (event) => {
-                AbrirTelaTocandoAgora(Artista)
-
+                console.log(numContador, c);
+                
                 if (event.target != AutorDaMusica && event.target != Heart) {
                     ListaProxMusica = {
                         Musicas: arrayMusicasArtista,
-                        Numero: contadorMusicasLinha,
+                        Numero: numContador,
                     }
-    
-                    DarPlayMusica(TodasMusicas.Musicas[c], c)
+
+                    
+                    AbrirTelaTocandoAgora(Artista)
+                    DarPlayMusica(TodasMusicas.Musicas[c], numContador)
                 }
             })
 
             //? Vai checar se as músicas foram curtidas pelo user
-            FavoritarDesfavoritarMusica(arrayMusicasArtista[contadorMusicasLinha].ID, 'Checar').then((resolve) => {
+            FavoritarDesfavoritarMusica(arrayMusicasArtista[numContador].ID, 'Checar').then((resolve) => {
                 Heart.src = resolve
             })
 
             //? Vai curtir / descurtir a música
             Heart.addEventListener('click', () => {
-                FavoritarDesfavoritarMusica(arrayMusicasArtista[contadorMusicasLinha].ID, 'Editar').then((resolve) => {
+                FavoritarDesfavoritarMusica(arrayMusicasArtista[numContador].ID, 'Editar').then((resolve) => {
                     Heart.src = resolve
                 })
             })
@@ -1398,6 +1402,7 @@ btnPlayHeaderArtista.addEventListener('click', () => {
 //? Vai adicionar as informações na tela tocando agora
 let infoMusicaTocandoAgora
 function AddInfoTelaTocandoAgora(Musica) {
+    let RetornarProximasMusicasFeito = false
     infoMusicaTocandoAgora = Musica
     document.getElementById('btnAbrirTelaTocandoAgora').style.display = 'block'
 
@@ -1550,7 +1555,8 @@ function AddInfoTelaTocandoAgora(Musica) {
     containerMusicaslistaTelaTocandoAgora.innerHTML = ''
     
     const infoLista = document.getElementById('infoLista')
-    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 0) {
+    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 0 && RetornarProximasMusicasFeito == false) {
+        RetornarProximasMusicasFeito = true
         let max = 4
 
         if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) < 4) {
@@ -1559,8 +1565,22 @@ function AddInfoTelaTocandoAgora(Musica) {
 
         infoLista.innerText = 'A seguir'
 
-        for(let c = 1; c < max; c++) {
-            RetornarMusicas(ListaProxMusica.Musicas[parseInt(ListaProxMusica.Numero) + c].NomeMusica, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
+        function getNextFourElements(arr, startIndex) {
+            const result = []
+            for (let i = startIndex + 1; result.length < 4; i++) {
+              result.push(arr[i % arr.length])
+            }
+            return result
+        }
+        
+        // Exemplo de uso:
+        const minhaArray = ListaProxMusica.Musicas
+        const startIndex = parseInt(ListaProxMusica.Numero); // Pode ser qualquer índice da sua escolha
+        const proximasQuatroCasas = getNextFourElements(minhaArray, startIndex)    
+        console.log(proximasQuatroCasas); 
+
+        for(let c = 0; c < proximasQuatroCasas.length; c++) {
+            RetornarMusicas(proximasQuatroCasas[c].ID, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
         } 
 
     } else {
