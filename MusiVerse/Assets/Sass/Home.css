@@ -2381,6 +2381,10 @@ body section.containerMusica article.articleContainer article.containerMusicaLin
   width: 90%;
   color: #fff;
   font-size: 15px;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 body section.containerMusica article.articleContainer article.containerMusicaLinha div.MusicasLinha div div.TextoMusicaCaixa span {
   color: #5d5d63;

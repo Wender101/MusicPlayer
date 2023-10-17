@@ -2627,7 +2627,6 @@ body {
                             font-weight: 500;
                             line-height: 24px;
                             z-index: 2;
-                            
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
@@ -2694,6 +2693,10 @@ body {
                                 width: 90%;
                                 color: #fff;
                                 font-size: 15px;
+                                width: 90%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
                             }
         
                             span {

@@ -248,6 +248,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         const Heart = document.createElement('img')
   
         div.className = 'MusicasLinha'
+        div.title = arrayMusicasRetornadas[c].NomeMusica
         divTexto.className = 'TextoMusicaCaixa'
         Heart.className = 'btnCurtirMeuPerfil'
         divImg.className = 'DivImgMusicaMeuPerfil'
@@ -576,6 +577,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                     const Heart = document.createElement('img')
 
                     div.className = 'MusicasLinha'
+                    div.title = TodasMusicas.Musicas[contadorTodasAsMusicas].NomeMusica
                     divTexto.className = 'TextoMusicaCaixa'
                     Heart.className = 'btnCurtirMeuPerfil'
                     divImg.className = 'DivImgMusicaMeuPerfil'
@@ -600,17 +602,17 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                     div.appendChild(Heart)
                     article.appendChild(div)
 
-                    let num = contadorMusicasLinha - 1
+                    let numMusicasFavoritas = contadorMusicasLinha - 1
                     div.addEventListener('click', (event) => {
-                        AbrirTelaTocandoAgora(musicasFavoritasUser[numMusicasFavoritas])
-
+                        
                         if (event.target != AutorDaMusica && event.target != Heart) {
                             ListaProxMusica = {
                                 Musicas: musicasFavoritasUser,
                                 Numero: contadorTodasAsMusicas,
                             }
-    
+                            
                             DarPlayMusica(musicasFavoritasUser[numMusicasFavoritas], numMusicasFavoritas)
+                            AbrirTelaTocandoAgora(musicasFavoritasUser[numMusicasFavoritas])
                         }
                     })
 
@@ -665,7 +667,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 }
 
  //? Ao clicar no btn de play
- document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
+document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click', () => {
     AbrirTelaTocandoAgora(musicasFavoritasUser[numMusicasFavoritas])
 
     ListaProxMusica = {
@@ -702,6 +704,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
             const Heart = document.createElement('img')
 
             div.className = 'MusicasLinha'
+            div.title = TodasMusicas.Musicas[c].NomeMusica
             divTexto.className = 'TextoMusicaCaixa'
             Heart.className = 'btnCurtirMeuPerfil'
             divImg.className = 'DivImgMusicaMeuPerfil'
@@ -1313,6 +1316,7 @@ async function RetornarMusicasArtista(Artista, Local) {
             const Heart = document.createElement('img')
 
             div.className = 'MusicasLinha'
+            div.title = TodasMusicas.Musicas[c].NomeMusica
             divTexto.className = 'TextoMusicaCaixa'
             Heart.className = 'btnCurtirMeuPerfil'
             divImg.className = 'DivImgMusicaMeuPerfil'
@@ -1720,6 +1724,7 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                         const Heart = document.createElement('img')
                 
                         div.className = 'MusicasLinha'
+                        div.title = TodasMusicas.Playlists[c].Musicas[i].NomeMusica
                         divTexto.className = 'TextoMusicaCaixa'
                         Heart.className = 'btnCurtirMeuPerfil'
                         divImg.className = 'DivImgMusicaMeuPerfil'
