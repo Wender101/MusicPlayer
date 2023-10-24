@@ -112,3 +112,76 @@ function SalvarEdicao() {
         })
     }
 }
+
+const novoNomeMusica = document.getElementById('novoNomeMusica')
+const novoNomeAutor = document.getElementById('novoNomeAutor')
+const novoGeneroMusica = document.getElementById('novoGeneroMusica')
+
+let nomeMusicaAntesDeEditar
+let nomeAutorAntesDeEditar
+let generoMusicaAntesDeEditar
+
+let podeSalvarAlteracaoMusica = false
+
+//? Vai checar se há alteração nas informações da música
+function checarEdicaoNaMusica(qmChamou = 'input') {
+    if(qmChamou == 'Editar') {
+        nomeMusicaAntesDeEditar = novoNomeMusica.value
+        nomeAutorAntesDeEditar = novoNomeAutor.value
+        generoMusicaAntesDeEditar = novoGeneroMusica.value
+
+    } else {
+        if(nomeMusicaAntesDeEditar != novoNomeMusica.value || nomeAutorAntesDeEditar != novoNomeAutor.value ||  generoMusicaAntesDeEditar != novoGeneroMusica.value) {
+            document.getElementById('btnSalvarAlteracaoNaMusica').style.backgroundColor = '#0FF'
+            podeSalvarAlteracaoMusica = true
+        } else {
+            document.getElementById('btnSalvarAlteracaoNaMusica').style.backgroundColor = '#1F1F22'
+            podeSalvarAlteracaoMusica = false
+        }
+    }
+}
+
+//? Vai salvar as alterações feitas na música adicionada pelo user, caso haja alteração
+function SalvarEdicaoNaMusica() {
+    if(podeSalvarAlteracaoMusica) {
+        document.getElementById('containerEditrarMusica').style.display = 'none'
+        let feito = false
+        let musicaEncontrada = false
+
+        let TodasMusicasAtuais = []
+        db.collection('InfoMusicas').limit(1).get().then((snapshot) => {
+            snapshot.docs.forEach(Musicas => {
+                TodasMusicasAtuais = Musicas.data()
+
+                if(feito == false) {
+                    feito = true
+
+                    // Encontre o objeto com o ID desejado
+                    for(let c = 0; c < TodasMusicasAtuais.Musicas.length; c++) {
+                        if(TodasMusicasAtuais.Musicas[c].ID == musicaSelecionadaParaEditar && musicaEncontrada == false) {
+                            musicaEncontrada = true
+                            TodasMusicasAtuais.Musicas[c].NomeMusica = novoNomeMusica.value
+                            TodasMusicasAtuais.Musicas[c].Autor = novoNomeAutor.value
+                            TodasMusicasAtuais.Musicas[c].Genero = novoGeneroMusica.value
+
+                            db.collection('InfoMusicas').doc(Musicas.id).update({Musicas: TodasMusicasAtuais.Musicas}).then(() => {
+                                TodasMusicas = TodasMusicasAtuais
+                                FecharEditarMusica()
+                                abrirMeuPerfil()
+                                alert('Música editada com sucesso!!')
+                            })
+                        }
+                    }
+                }
+            })
+        })
+    }
+}
+
+function FecharEditarMusica() {
+    novoNomeMusica.value = ''
+    novoNomeAutor.value = ''
+    novoGeneroMusica.value = ''
+    document.getElementById('btnSalvarAlteracaoNaMusica').style.backgroundColor = '#1F1F22'
+    document.getElementById('containerEditrarMusica').style.display = 'none'
+}

@@ -43,7 +43,6 @@
         <ul>
             <li class="linkPagina"><img src="Assets/Imgs/Icons/Albuns.png" id="arroz"> Adicionar Música</li>
             <li class="linkPagina" id="btnCriarPlaylist"><img src="Assets/Imgs/Icons/Faixas.png"> Criar Playlist</li>
-            <li class="linkPagina"><img src="Assets/Imgs/Icons/Artistas.png"> Adicionar Letra</li>
         </ul>
 
         <span>Seguindo</span>
@@ -222,6 +221,23 @@
                 </div>
             </div>
 
+            <div id="containerEditrarMusica">
+                <div id="conteudoEditarMusica">
+                    <p>Nome Música</p>
+                    <input type="text" placeholder="Nome da música" id="novoNomeMusica" oninput="checarEdicaoNaMusica()">
+                    <p>Autor</p>
+                    <input type="text" placeholder="Nome do autor" id="novoNomeAutor" oninput="checarEdicaoNaMusica()">
+                    <p>Genêro</p>
+                    <input type="text" placeholder="Genêro da música" id="novoGeneroMusica" oninput="checarEdicaoNaMusica()">
+
+                    <div id="containerBtnsEditarMusica">
+                        <button onclick="FecharEditarMusica()">Cancelar</button>
+                        <button>Letra da música</button>
+                        <button id="btnSalvarAlteracaoNaMusica" onclick="SalvarEdicaoNaMusica()">Salvar</button>
+                    </div>
+                </div>
+            </div>
+
             <div id="containerMusicasPerfilUser"></div>
         </article>
     </section>
@@ -386,7 +402,11 @@
         </div>
     </section>
 
-    <section class="Paginas" id="PagAdicionarLetra"></section>
+    <section class="Paginas" id="PagAdicionarLetra">
+        <article id="primeiraPartAdicionarLetra">
+            <textarea name="" id="textareaAddLetraMusica" cols="30" rows="10" placeholder="Adicione aqui seus versos..."></textarea>
+        </article>
+    </section>
 
     <section class="Paginas" id="PagPerfilOutroUser">
         <div id="headerPagPerfilOutroUser">

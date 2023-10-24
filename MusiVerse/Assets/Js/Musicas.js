@@ -178,7 +178,6 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         const divBlurTexto = document.createElement('div')
   
         div.className = 'MusicasCaixa'
-        div.title = arrayMusicasRetornadas[c].NomeMusica
         darPlay.className = 'BtnDarPlay'
         darPlay.style.backgroundImage = `url(./Assets/Imgs/Icons/DarPlay.png)`
         img.src = arrayMusicasRetornadas[c].LinkImg
@@ -190,7 +189,9 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
   
         divTexto.className = 'TextoMusicaCaixa'
         p.innerText = arrayMusicasRetornadas[c].NomeMusica
+        p.title = arrayMusicasRetornadas[c].NomeMusica
         span.innerText = arrayMusicasRetornadas[c].Autor
+        span.title = arrayMusicasRetornadas[c].Autor
         divBlurTexto.className = 'divBlurTexto'
   
         divTexto.appendChild(p)
@@ -204,7 +205,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
   
         div.addEventListener('click', (event) => {
             
-            if (event.target != span) {
+            if (event.target != span && event.target.className != 'BtnsEditarMusicaLinha') {
                 AbrirTelaTocandoAgora(Pesquisa)
 
                 ListaProxMusica = {
@@ -249,7 +250,6 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         const Heart = document.createElement('img')
   
         div.className = 'MusicasLinha'
-        div.title = arrayMusicasRetornadas[c].NomeMusica
         divTexto.className = 'TextoMusicaCaixa'
         Heart.className = 'btnCurtirMeuPerfil'
         divImg.className = 'DivImgMusicaMeuPerfil'
@@ -265,7 +265,9 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         }
   
         Nome.innerText = arrayMusicasRetornadas[c].NomeMusica
+        Nome.title = arrayMusicasRetornadas[c].NomeMusica
         AutorDaMusica.innerText = arrayMusicasRetornadas[c].Autor
+        AutorDaMusica.title = arrayMusicasRetornadas[c].Autor
         Genero.innerText = arrayMusicasRetornadas[c].Genero
         Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
         
@@ -483,7 +485,9 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
 
                             img.src = TodasMusicas.Musicas[i].LinkImg
                             NomeMusica.innerText = TodasMusicas.Musicas[i].NomeMusica
+                            NomeMusica.title = TodasMusicas.Musicas[i].NomeMusica
                             Autor.innerText = TodasMusicas.Musicas[i].Autor
+                            Autor.title = TodasMusicas.Musicas[i].Autor
                             Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
 
                             divInfosMusica.appendChild(img)
@@ -578,7 +582,6 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                     const Heart = document.createElement('img')
 
                     div.className = 'MusicasLinha'
-                    div.title = TodasMusicas.Musicas[contadorTodasAsMusicas].NomeMusica
                     divTexto.className = 'TextoMusicaCaixa'
                     Heart.className = 'btnCurtirMeuPerfil'
                     divImg.className = 'DivImgMusicaMeuPerfil'
@@ -588,7 +591,9 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                     contador.innerText = contadorMusicasLinha
                     img.src = TodasMusicas.Musicas[contadorTodasAsMusicas].LinkImg
                     Nome.innerText = TodasMusicas.Musicas[contadorTodasAsMusicas].NomeMusica
+                    Nome.title = TodasMusicas.Musicas[contadorTodasAsMusicas].NomeMusica
                     AutorDaMusica.innerText = TodasMusicas.Musicas[contadorTodasAsMusicas].Autor
+                    AutorDaMusica.title = TodasMusicas.Musicas[contadorTodasAsMusicas].Autor
                     Genero.innerText = TodasMusicas.Musicas[contadorTodasAsMusicas].Genero
                     Heart.src = './Assets/Imgs/Icons/icon _heart_.png'
                     
@@ -681,7 +686,8 @@ document.getElementById('imgMusicaFavoritaTocandoAgora').addEventListener('click
 
 
 let arrayMusicasPostadasPeloUser = []
-async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
+let musicaSelecionadaParaEditar
+async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = false) {
     arrayMusicasPostadasPeloUser = []
     const article = document.createElement('article')
     let contadorMusicasLinha = 0
@@ -702,15 +708,18 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
             const Nome = document.createElement('p')
             const AutorDaMusica = document.createElement('span')
             const Genero = document.createElement('p')
+            const Excluir = document.createElement('button')
+            const Editar = document.createElement('button')
             const Heart = document.createElement('img')
 
             div.className = 'MusicasLinha'
-            div.title = TodasMusicas.Musicas[c].NomeMusica
             divTexto.className = 'TextoMusicaCaixa'
             Heart.className = 'btnCurtirMeuPerfil'
             divImg.className = 'DivImgMusicaMeuPerfil'
             img.className = 'ImgMusicaMeuPerfil'
             Genero.className = 'GeneroMeuPerfil'
+            Editar.className = 'BtnsEditarMusicaLinha'
+            Excluir.className = 'BtnsEditarMusicaLinha'
 
             contador.innerText = contadorMusicasLinha
             img.src = TodasMusicas.Musicas[c].LinkImg
@@ -723,9 +732,13 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
             }
 
             Nome.innerText = TodasMusicas.Musicas[c].NomeMusica
+            Nome.title = TodasMusicas.Musicas[c].NomeMusica
             AutorDaMusica.innerText = TodasMusicas.Musicas[c].Autor
+            AutorDaMusica.title = TodasMusicas.Musicas[c].Autor
             Genero.innerText = TodasMusicas.Musicas[c].Genero
             Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
+            Editar.innerHTML = '<img src="./Assets/Imgs/Icons/edit.png" class="BtnsEditarMusicaLinha"/>'
+            Excluir.innerHTML = '<img src="./Assets/Imgs/Icons/icon _trash_.png" class="BtnsEditarMusicaLinha"/>'
             
             divTexto.appendChild(Nome)
             divTexto.appendChild(AutorDaMusica)
@@ -735,11 +748,21 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
             divPrimeiraParte.appendChild(divTexto)
             div.appendChild(divPrimeiraParte)
             div.appendChild(Genero)
-            div.appendChild(Heart)
+
+            if(ProprioUser == false) {
+                div.appendChild(Heart)
+            } else {
+                const containerBtns = document.createElement('div')
+                containerBtns.className = 'containerBtns'
+                containerBtns.appendChild(Excluir)
+                containerBtns.appendChild(Editar)
+                div.appendChild(containerBtns)
+            }
+
             article.appendChild(div)
 
             div.addEventListener('click', (event) => {
-                if (event.target != AutorDaMusica && event.target != Heart) {
+                if (event.target != AutorDaMusica && event.target != Heart && event.target.className != 'BtnsEditarMusicaLinha') {
                     ListaProxMusica = {
                         Musicas: TodasMusicas.Musicas,
                         Numero: c,
@@ -759,6 +782,17 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local) {
                 FavoritarDesfavoritarMusica(TodasMusicas.Musicas[c].ID, 'Editar').then((resolve) => {
                     Heart.src = resolve
                 })
+            })
+
+            //? Ao clicar no icone de editar a música
+            Editar.addEventListener('click', () => {
+                document.getElementById('containerEditrarMusica').style.display = 'flex'
+                document.getElementById('novoNomeMusica').value = TodasMusicas.Musicas[c].NomeMusica
+                document.getElementById('novoNomeAutor').value = TodasMusicas.Musicas[c].Autor
+                document.getElementById('novoGeneroMusica').value = TodasMusicas.Musicas[c].Genero
+
+                checarEdicaoNaMusica('Editar')
+                musicaSelecionadaParaEditar = TodasMusicas.Musicas[c].ID
             })
 
             //? Ao clicar no nome do Autor
@@ -833,6 +867,10 @@ inputPesquisa.addEventListener('keypress', (e) => {
 //? Vai pegar as músicas postadas pelo user ao abrir o perfil
 const btnMeuPerfil = document.getElementById('btnMeuPerfil')
 btnMeuPerfil.addEventListener('click', () => {
+    abrirMeuPerfil()
+})
+
+function abrirMeuPerfil() {
     document.getElementById('NomeUserMeuPerfil').innerText = currentUser.User.Nome
 
     if(currentUser.User.Personalizar.Background != null && currentUser.User.Personalizar.Background.trim() != '') {
@@ -876,8 +914,8 @@ btnMeuPerfil.addEventListener('click', () => {
     }
 
     document.getElementById('containerMusicasPerfilUser').innerHTML = ''
-    RetornarMusicasPostadasPeloUser(currentUser.InfoEmail.email, document.getElementById('containerMusicasPerfilUser'))
-})
+    RetornarMusicasPostadasPeloUser(currentUser.InfoEmail.email, document.getElementById('containerMusicasPerfilUser'), true)
+}
 
 //? Vai tocar as músicas do user
 //? Ao clicar no btn de play
@@ -1164,8 +1202,8 @@ PlayBtn.addEventListener('click', function() {
 })
 
 document.addEventListener('keydown', function(event) {
-    if (event.key === " ") { // Verifica se a tecla pressionada é a barra de espaço
-        event.preventDefault() //? Vai impedir de scrollar para baixo
+    if (event.key === " " && document.activeElement.tagName !== "INPUT" && document.activeElement.tagName !== "TEXTAREA") {
+        event.preventDefault()
         PausaDespausarMusica()
     }
 })
@@ -1317,7 +1355,6 @@ async function RetornarMusicasArtista(Artista, Local) {
             const Heart = document.createElement('img')
 
             div.className = 'MusicasLinha'
-            div.title = TodasMusicas.Musicas[c].NomeMusica
             divTexto.className = 'TextoMusicaCaixa'
             Heart.className = 'btnCurtirMeuPerfil'
             divImg.className = 'DivImgMusicaMeuPerfil'
@@ -1327,7 +1364,9 @@ async function RetornarMusicasArtista(Artista, Local) {
             contador.innerText = contadorMusicasLinhaArtista + 1
             img.src = TodasMusicas.Musicas[c].LinkImg
             Nome.innerText = TodasMusicas.Musicas[c].NomeMusica
+            Nome.title = TodasMusicas.Musicas[c].NomeMusica
             AutorDaMusica.innerText = TodasMusicas.Musicas[c].Autor
+            AutorDaMusica.title = TodasMusicas.Musicas[c].Autor
             Genero.innerText = TodasMusicas.Musicas[c].Genero
             Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
             
@@ -1744,7 +1783,6 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                         const Heart = document.createElement('img')
                 
                         div.className = 'MusicasLinha'
-                        div.title = TodasMusicas.Playlists[c].Musicas[i].NomeMusica
                         divTexto.className = 'TextoMusicaCaixa'
                         Heart.className = 'btnCurtirMeuPerfil'
                         divImg.className = 'DivImgMusicaMeuPerfil'
@@ -1760,7 +1798,9 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                         }
                 
                         Nome.innerText = TodasMusicas.Playlists[c].Musicas[i].NomeMusica
+                        Nome.title = TodasMusicas.Playlists[c].Musicas[i].NomeMusica
                         AutorDaMusica.innerText = TodasMusicas.Playlists[c].Musicas[i].Autor
+                        AutorDaMusica.title = TodasMusicas.Playlists[c].Musicas[i].Autor
                         Genero.innerText = TodasMusicas.Playlists[c].Musicas[i].Genero
                         Heart.src = './Assets/Imgs/Icons/icon _heart_ (1).png'
                         
