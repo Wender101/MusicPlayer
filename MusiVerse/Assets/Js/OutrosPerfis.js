@@ -237,7 +237,7 @@ function carregarUserArtistasSeguidos() {
             }
         }
     } catch(error) {
-        console.warn(error)
+        // console.warn(error)
         setTimeout(() => {
             carregarUserArtistasSeguidos()
         }, 1000)

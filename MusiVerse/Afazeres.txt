@@ -13,3 +13,7 @@ Arrumar o pesquisar por user, ao perquisar por algum user com nome semelhante ap
 Fazendo as músicas retornadas sairem de forma aleatórias "Musicas.js" RetornarMusicas
 
 Ao clicar no home no menu ele n fica verde
+
+//?
+
+Mudar o icone do coração para a música que está tocando agora caso ela for add ou removida dos favoritos

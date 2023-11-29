@@ -61,7 +61,47 @@
         </ul>
     </div>
 
-    
+    <!--? Menu Clicar em Música -->
+    <div id="containerOptionsClickMusic">
+        <ul>
+            <li>Adicionar à playlist</li>
+            <li id="liAddRemoveFavoritosClickMusic" class="noPaddingClickMusic"><span>Remover dos Favotitos</span></li>
+            <li onclick="AddMusicaFila()">Adicionar à fila</li>
+
+            <hr>
+
+            <li id="liIrParaArtistaClickMusic" class="noPaddingClickMusic"><span>Ir para o artista</span></li>
+            <li id="liMostrarCretidos" class="noPaddingClickMusic">Mostrar crétitos</li>
+
+            <hr>
+            <li>Compartilhar</li>
+        </ul>
+    </div>
+
+    <!--? Menu Clicar em um artista -->
+    <div id="containerOptionsClickArtista">
+        <ul>
+            <li>Seguir</li>
+            <li>Compartilhar</li>
+        </ul>
+    </div>
+
+    <!--? Menu Créditos -->
+    <div id="containerMenuCreditos">
+        <div id="menuCreditos">
+            <h1>Créditos</h1>
+
+            <button onclick="closeMenuCreditos()">x</button>
+            <hr>
+            <p>Nome da música:</p>
+            <p id="menuCreditosNomeMusica" class="varCreditos"></p>
+            <p>Interpretada por:</p>
+            <p id="menuCreditosAutor" class="varCreditos"></p>
+            <p>Postada por: <p id="menuCreditosNoneQuemPostou" class="varCreditos"></p></p>
+        </div>
+    </div>
+
+    <!--? Tela Principal | Home -->
     <main>
         <div id="btnVoltarPagina">
             <button id="btnBackPag" class="btnBloqueado" onclick="VolatarPaginaAnterior()">
@@ -82,10 +122,18 @@
                 <!-- <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60"> -->
 
                 <div id="containerMusicasAleatoriasBanner">
-                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
-                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
-                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
-                    <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    <div class="catainerImgMusicasAleatoriasBanner">
+                        <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    </div>  
+                     <div class="catainerImgMusicasAleatoriasBanner">
+                        <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    </div>  
+                     <div class="catainerImgMusicasAleatoriasBanner">
+                        <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    </div>  
+                     <div class="catainerImgMusicasAleatoriasBanner">
+                        <img src="https://images.unsplash.com/photo-1594623930572-300a3011d9ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG11c2ljJTIwYmFja2dyb3VuZHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=1000&q=60" class="imgMusicasAleatoriasBanner">
+                    </div>  
                 </div>
 
                 <div id="textoMusicasAleatoriasBanner">
@@ -565,7 +613,7 @@
     </div>
     <!--? fim do preloader --> 
 
-    <!--? --------------- Astronauta ----------------------->
+    <!--? --------------- Tela de Carregamento --------------->
     <div id="CarregamentoTela1">
         
         <div class="preloader">
@@ -583,7 +631,7 @@
             <p id="MensagemAleatoria"></p>
         </div>
     </div>
-    <!--? --------------- Fim Astronauta ------------------->
+    <!--? --------------- Fim Tela de Carregamento ------------------->
 
     <!--? audioPlayer -->
     <audio src="" id="audioPlayer" style="display: none;"></audio>
@@ -601,7 +649,7 @@
     <script src="Assets/Js/Paginas.js"></script>
     <script src="Assets/Js/PostarMusicas.js"></script>
     <script src="Assets/Js/EditarPerfilUser.js"></script>
-    <script src="Assets/Js/PlaylistsFavoritas.js"></script>
+    <script src="Assets/Js/Mensagens.js"></script>
     <script src="Assets/Js/CriarPlaylists.js"></script>
     <script src="Assets/Js/OutrosPerfis.js"></script>
 
@@ -669,6 +717,11 @@
 
     <!--? EsterEggs -->
     <script>
+        //? Vai remover do home a opção do navegador ao clicar com o btn direito
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault()
+        })
+
         const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight"];
         let konamiCodeIndex = 0;
 

@@ -24,6 +24,19 @@ function FecharPaginas() {
     }
 }
 
+//? Vai dar um display none para o containerOptionsClickMusic ao scrollar as sections Paginas
+const sectionPaginas = document.querySelectorAll('.Paginas')
+sectionPaginas.forEach(pagians => {
+    pagians.addEventListener('scroll', hideMenu)
+})
+
+//? Vai dar um display none para o containerOptionsClickMusic ao scrollar as sections Paginas
+function hideMenu() {
+    document.getElementById('containerOptionsClickMusic').style.display = 'none'
+    document.getElementById('containerOptionsClickArtista').style.display = 'none'
+    document.removeEventListener('scroll', hideMenu)
+}
+
 
 //? Vai salvar o históco das páginas que foram abertas para o user poder voltar
 let historiacoDasPaginas = {
@@ -154,6 +167,23 @@ function AbrirPaginas(contadorPagina, contadorLinkPagina = undefined) {
             document.getElementsByClassName(`Paginas`)[contadorPagina].style.display = 'block'
             document.querySelector('body').style.overflow = 'hidden'
         } catch{}
+    } else {
+        RecarregarHome()
+    }
+}
+
+let recarregarPaginaFeito = false
+function RecarregarHome() {
+    if(!recarregarPaginaFeito) {
+        recarregarPaginaFeito = true
+        setTimeout(() => {
+            recarregarPaginaFeito = false
+        }, 1000)
+
+        const containerMain = document.getElementById('containerMain')
+        containerMain.innerHTML = ''
+        RetornarMusicas('Aleatórias', containerMain)
+        carregarHistorico()
     }
 }
 

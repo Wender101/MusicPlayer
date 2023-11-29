@@ -47,6 +47,8 @@ function carregarHistorico() {
     }
 
   } catch(r){
+    // console.warn(r)
+
     if(feito == false) {
       setTimeout(() => {
         carregarHistorico()
@@ -180,6 +182,7 @@ function RecomendarMusicasHistorico() {
   ArtistasMaisOuvidosHistorico(autoresMaisRepetidos)
   RecomendarGeneros(generosMaisRepetidos)
   RecomendarAutoresPlaylistsHistorico()
+  randomMusics()
 }
 
 function ArtistasMaisOuvidosHistorico(Artistas) {
@@ -190,7 +193,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
     let artistaEncontrado = false
     for(let b = 0; b < TodasMusicas.Musicas.length; b++) {
 
-      if(Artistas[c] == TodasMusicas.Musicas[b].Autor && artistaEncontrado == false) {
+      if(formatarTexto(Artistas[c]) == formatarTexto(TodasMusicas.Musicas[b].Autor) && artistaEncontrado == false) {
         artistaEncontrado = true
 
         const div = document.createElement('div')
@@ -211,9 +214,9 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
         img.src = TodasMusicas.Musicas[b].LinkImg
         if(img.src.includes('treefy')) {
-            containerImg.classList.add('ContainerImgMusicaCaixa', 'ContainerImgArtistaHistoricoTreeFy')
+          containerImg.classList.add('ContainerImgMusicaCaixa', 'ContainerImgArtistaHistoricoTreeFy')
         } else {
-            containerImg.classList.add('ContainerImgMusicaCaixa')
+          containerImg.classList.add('ContainerImgMusicaCaixa')
         }
 
         divTexto.className = 'TextoMusicaCaixa'
@@ -271,13 +274,13 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
   //? Vai adicionar o article no html apenas se houver algunma música
   if(article.innerHTML != '') {
-      h1.innerText = `Artistas ouvidos recentemente`
-      section.className = 'containerMusica'
-      section.appendChild(h1)
-      articleContainer.className = 'articleContainer'
-      articleContainer.appendChild(article)
-      section.appendChild(articleContainer)
-      document.getElementById('containerMain').appendChild(section)
+    h1.innerText = `Artistas ouvidos recentemente`
+    section.className = 'containerMusica'
+    section.appendChild(h1)
+    articleContainer.className = 'articleContainer'
+    articleContainer.appendChild(article)
+    section.appendChild(articleContainer)
+    document.getElementById('containerMain').appendChild(section)
   }
 
   //? Scroll lateral
@@ -353,6 +356,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
 let containerMain = document.getElementById('containerMain')
 function RecomendarGeneros(Generos) {
+  // containerMain.innerHTML = ''
   for(let c = 0; c < Generos.length && c < 5; c++) {
     RetornarMusicas(Generos[c], containerMain)
   }
@@ -361,8 +365,8 @@ function RecomendarGeneros(Generos) {
 //? Vai recomendar os autores e as palylists vistas por ultimo no histórico
 function RecomendarAutoresPlaylistsHistorico() {
   // Suponhamos que você tenha as duas arrays Autores e Playlists
-  let Autores = GostoMusicalHistorico.Historico.Autores;
-  let Playlists = GostoMusicalHistorico.Historico.Playlists;
+  let Autores = GostoMusicalHistorico.Historico.Autores
+  let Playlists = GostoMusicalHistorico.Historico.Playlists
 
   const articleContainerPlaylistFavoritaPerfil = document.getElementById('articleContainerPlaylistFavoritaPerfil')
   articleContainerPlaylistFavoritaPerfil.innerHTML = '<div class="containerPlaylistFavoritaPerfil" id="musicasFavoritasPerfil"><img src="Assets/Imgs/Icons/Img Músicas Curtidas.png"><p>Músicas Curtidas</p><div class="iconPlayPlaylistFavoritaPerfil"></div></div>'
@@ -426,8 +430,57 @@ function RecomendarAutoresPlaylistsHistorico() {
             SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
             // coletarHistorico(nome.innerText, 'Autor')
           })
+
+           containerPlaylistFavoritaPerfil.addEventListener('contextmenu', function (e) {
+                e.preventDefault()
+                const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                // Position the custom menu at the mouse coordinates
+                containerOptionsClickArtista.style.left = e.clientX+ 'px'
+                containerOptionsClickArtista.style.top = e.clientY + 'px'
+                containerOptionsClickArtista.style.display = 'block'
+
+                // Close the menu when clicking outside of it
+                document.addEventListener('click', hideMenu)
+
+                document.addEventListener('scroll', hideMenu)
+            })
+
+            function hideMenu() {
+                document.getElementById('containerOptionsClickMusic').style.display = 'none'
+                document.getElementById('containerOptionsClickArtista').style.display = 'none'
+                document.removeEventListener('scroll', hideMenu)
+            }
         }
       }
     }
+  }
+}
+
+function randomMusics() {
+  try {
+    const imgMusicasAleatoriasBanner = document.getElementsByClassName('imgMusicasAleatoriasBanner')
+
+    for (let i = 0; i < imgMusicasAleatoriasBanner.length; i++) {
+      const numSorteado = [Math.floor(Math.random() * TodasMusicas.Musicas.length)]
+      const urlAleatoria = TodasMusicas.Musicas[numSorteado]
+
+      if(urlAleatoria.LinkImg.includes('treefy')) {
+        imgMusicasAleatoriasBanner[i].classList.add('imgMusicasAleatoriasBannerTreeFy')
+      } else {
+        imgMusicasAleatoriasBanner[i].classList.remove('imgMusicasAleatoriasBannerTreeFy')
+      }
+
+      imgMusicasAleatoriasBanner[i].src = urlAleatoria.LinkImg
+
+      imgMusicasAleatoriasBanner[i].addEventListener('click', () => {
+        ListaProxMusica = {
+          Musicas: TodasMusicas.Musicas,
+          Numero: numSorteado,
+        }
+        DarPlayMusica(urlAleatoria, numSorteado)
+      })
+    }
+  } catch (error) {
+    console.error(error)
   }
 }
