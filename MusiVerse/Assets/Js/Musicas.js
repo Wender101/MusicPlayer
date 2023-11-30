@@ -351,7 +351,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
 
                 if(NomeUserCreditos.innerText == '') {
                     document.querySelector('#menuCreditosNoneQuemPostou').style.textDecoration = 'none'
-                            document.querySelector('#menuCreditosNoneQuemPostou').style.cursor = 'default'
+                    document.querySelector('#menuCreditosNoneQuemPostou').style.cursor = 'default'
                     NomeUserCreditos.innerText = arrayMusicasRetornadas[c].EmailUser //? Caso o user não tiver uma conta nesse site ele vai informar o email do user que postou ao invés de mostrar "Desconhecido"
                 }
 
@@ -1561,7 +1561,7 @@ function DarPlayMusica(Lista, num) {
                         const DataAtual = `${dataHj.getDate()}${dataHj.getMonth() +1}${dataHj.getFullYear()}`
                         //? Caso tenha acabado a semana vai zerar as views do user
                         try {
-                            if(infosUser.ViewsSemanais.Data - DataAtual >= 7) {
+                            if(DataAtual - infosUser.ViewsSemanais.Data >= 7) {
                                 infosUser.ViewsSemanais.Data = DataAtual
                                 infosUser.ViewsSemanais.Views = 1
                             } else {
@@ -1839,18 +1839,28 @@ NextBtn2.addEventListener("click", () => {
 })
 
 function NextSong() {
-    try {
-        if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
-            ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
-        } else {
+
+    if(ListaProxMusica.FilaMusicas != undefined && ListaProxMusica.FilaMusicas.Musicas.length > 0) {
+        DarPlayMusica(ListaProxMusica.FilaMusicas.Musicas[0], 0)
+
+        ListaProxMusica.FilaMusicas.Musicas.splice(0, 1)
+        RetornarMusicasASeguir()
+
+    } else {
+
+        try {
+            if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
+                ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
+            } else {
+                ListaProxMusica.Numero = 0
+            }
+        } catch (error) {
+            console.warn(error)
             ListaProxMusica.Numero = 0
         }
-    } catch (error) {
-        console.warn(error);
-        ListaProxMusica.Numero = 0
+    
+        DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
     }
-
-    DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
 }
 
 // //? Vai voltar para a música anterior
@@ -2313,43 +2323,62 @@ function RetornarMusicasASeguir() {
     let RetornarProximasMusicasFeito = false
     const containerMusicaslistaTelaTocandoAgora = document.getElementById('containerMusicaslistaTelaTocandoAgora')
     containerMusicaslistaTelaTocandoAgora.innerHTML = ''
+
+    const infoLista = document.getElementById('infoLista');
     
-    const infoLista = document.getElementById('infoLista')
-    if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 0 && RetornarProximasMusicasFeito == false) {
-        RetornarProximasMusicasFeito = true
-        let max = 4
+    try {
+        if (ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) > 0 && !RetornarProximasMusicasFeito) {
+            RetornarProximasMusicasFeito = true;
+            let max = 4;
 
-        if(ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) < 4) {
-            max = ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero)
-        }
-
-        infoLista.innerText = 'A seguir'
-
-        function getNextFourElements(arr, startIndex) {
-            let maxContador = 4
-            if(arr.length < 4) {
-                maxContador = arr.length -1
+            if (ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero) < 4) {
+                max = ListaProxMusica.Musicas.length - parseInt(ListaProxMusica.Numero);
             }
-            const result = []
-            for (let i = startIndex + 1; result.length < maxContador; i++) {
-            result.push(arr[i % arr.length])
+
+            infoLista.innerText = 'A seguir';
+
+            function getNextFourElements(arr, startIndex) {
+                let maxContador = 4;
+                if (arr.length < 4) {
+                    maxContador = arr.length;
+                }
+
+                const result = [];
+                let i = startIndex + 1;
+
+                // Se houver elementos em FilaMusicas.Musicas, adiciona-os primeiro
+                if (ListaProxMusica.FilaMusicas && ListaProxMusica.FilaMusicas.Musicas) {
+                    const filaMusicas = ListaProxMusica.FilaMusicas.Musicas;
+                    for (let j = 0; j < filaMusicas.length && result.length < maxContador; j++) {
+                        result.push(filaMusicas[j]);
+                    }
+                }
+
+                // Adiciona os elementos restantes de Musicas
+                while (result.length < maxContador) {
+                    result.push(arr[i % arr.length]);
+                    i++;
+                }
+
+                return result;
             }
-            return result
+
+            // Exemplo de uso:
+            const minhaArray = ListaProxMusica.Musicas;
+            const startIndex = parseInt(ListaProxMusica.Numero); // Pode ser qualquer índice da sua escolha
+            const proximasQuatroCasas = getNextFourElements(minhaArray, startIndex);
+
+            for (let c = 0; c < proximasQuatroCasas.length; c++) {
+                RetornarMusicas(proximasQuatroCasas[c].ID, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll');
+            }
+        } else {
+            infoLista.innerText = 'Sua lista está vazia';
         }
-        
-        // Exemplo de uso:
-        const minhaArray = ListaProxMusica.Musicas
-        const startIndex = parseInt(ListaProxMusica.Numero); // Pode ser qualquer índice da sua escolha
-        const proximasQuatroCasas = getNextFourElements(minhaArray, startIndex)    
-
-        for(let c = 0; c < proximasQuatroCasas.length; c++) {
-            RetornarMusicas(proximasQuatroCasas[c].ID, containerMusicaslistaTelaTocandoAgora, 'Indeterminado', 'Linha', false, false, 'SemScroll')
-        } 
-
-    } else {
-        infoLista.innerText = 'Sua lista está vazia'
+    } catch (error) {
+        infoLista.innerText = 'Sua lista está vazia';
     }
 }
+
 
 //? Ao clicar na música tocando agora na barra tela música tocando agora, vai abir a aba mostrando todas as músicas do autor
 document.getElementById('containerMusicaTelaTocanAgora').addEventListener('click',() => {
@@ -2641,21 +2670,20 @@ document.getElementById('btnPlayHeaderPagPlaylist').addEventListener('click', ()
 
 //? Vai Adicionar a música a fila ao clicar em adiconar a fila
 function AddMusicaFila() {
-    console.log(musicaSelecionadaBtnDireito);
-    for(let i = 0; i < ListaProxMusica.Musicas.length; i++) {
-        if(ListaProxMusica.Musicas[i].ID == musicaSelecionadaBtnDireito.ID) {
-            ListaProxMusica.Musicas.splice(i, 1)
+    if(ListaProxMusica.FilaMusicas == undefined) {
+        ListaProxMusica.FilaMusicas = {
+            Musicas: [],
+            NumFila: ListaProxMusica.Numero
         }
     }
 
-    if(ListaProxMusica.NumFila) {
-        ListaProxMusica.Musicas.splice(ListaProxMusica.NumFila + 1, 0, musicaSelecionadaBtnDireito)
-        ListaProxMusica.NumFila = ListaProxMusica.NumFila + 1
-
-    } else {
-        ListaProxMusica.Musicas.splice(ListaProxMusica.Numero + 1, 0, musicaSelecionadaBtnDireito)
-        ListaProxMusica.NumFila = ListaProxMusica.Numero + 1
+    for(let i = 0; i < ListaProxMusica.FilaMusicas.length; i++) {
+        if(ListaProxMusica.FilaMusicas[i].ID == musicaSelecionadaBtnDireito.ID) {
+            ListaProxMusica.FilaMusicas.Musicas.splice(i, 1)
+            ListaProxMusica.FilaMusicas.Musicas.unshift(musicaSelecionadaBtnDireito)
+        }
     }
+    ListaProxMusica.FilaMusicas.Musicas.push(musicaSelecionadaBtnDireito)
     RetornarMusicasASeguir()
 }
 
