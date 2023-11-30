@@ -3005,5 +3005,15 @@ body {
             }
         }
     }
+
+    //? Particulas em formato de notas músicais
+    .note {
+        position: fixed;
+        font-size: 20px;
+        color: #000;
+        pointer-events: none;
+        z-index: 20;
+    }
+    //? Fim Particulas em formato de notas músicais
     
 }

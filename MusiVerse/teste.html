@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notas Musicais</title>
+
+  <style>
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.note {
+  position: absolute;
+  font-size: 20px;
+  color: #000;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+<body>
+  <div class="container" id="container"></div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById("container");
+
+    container.addEventListener("mousemove", function (e) {
+        createNoteParticle(e);
+    });
+
+    function createNoteParticle(e) {
+        const note = document.createElement("div");
+        note.className = "note";
+        note.innerHTML = "&#9835;"; // Nota musical (caractere Unicode)
+        container.appendChild(note);
+
+        const size = Math.random() * 20 + 10; // Tamanho aleatório entre 10 e 30
+        const color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Cor aleatória
+
+        note.style.fontSize = `${size}px`;
+        note.style.color = color;
+
+        const x = e.clientX - size / 2;
+        const y = e.clientY - size / 2;
+
+        note.style.left = `${x}px`;
+        note.style.top = `${y}px`;
+
+        // Remover a nota após um tempo
+        setTimeout(() => {
+            note.remove();
+            }, 1000);
+        }
+    });
+
+
+  </script>
+</body>
+</html>

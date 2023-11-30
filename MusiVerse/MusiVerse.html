@@ -657,6 +657,7 @@
 
     <!-- <script src="CodigosAParte/RecuperarMusicas.js"></script> -->
 
+    <!--? Mensagens -->
     <script>
         const mensagens = [
             "O primeiro som que um bebê ouve é o som do coração de sua mãe.",
@@ -727,27 +728,58 @@
         const konamiCode = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight"];
         let konamiCodeIndex = 0;
 
+        let codeActive = false
         function checkKonamiCode(event) {
             if (event.code === konamiCode[konamiCodeIndex]) {
                 konamiCodeIndex++;
                 if (konamiCodeIndex === konamiCode.length) {
-                    alert("Código Konami ativado!");
-                    konamiCodeIndex = 0; // Reinicia o índice
-                    changeBackgroundColor();
+                    if(!codeActive) {
+                        codeActive = true
+                        alert("Código Konami ativado!");
+                        konamiCodeIndex = 0; // Reinicia o índice
+                        ParticulasMouse();
+                    } else {
+                        alert("Você desativou o Código Kanami")
+                        codeActive = false
+                    }
                 }
             } else {
                 konamiCodeIndex = 0; // Reinicia o índice se a tecla errada for pressionada
             }
         }
 
-        function changeBackgroundColor() {
-            const colors = ['#FF0000', '#00FF00', '#0000FF']; // Cores RGB
-            let currentIndex = 0;
+        function ParticulasMouse() {
+            const container = document.querySelector("body");
 
-            setInterval(() => {
-                document.body.style.backgroundColor = colors[currentIndex];
-                currentIndex = (currentIndex + 1) % colors.length;
-            }, 500); // Altera a cor a cada 0,5 segundos
+            container.addEventListener("mousemove", function (e) {
+                if(codeActive) {
+                    createNoteParticle(e);
+                }
+            });
+
+            function createNoteParticle(e) {
+                const note = document.createElement("div");
+                note.className = "note";
+                note.innerHTML = "&#9835;"; // Nota musical (caractere Unicode)
+                container.appendChild(note);
+
+                const size = Math.random() * 20 + 10; // Tamanho aleatório entre 10 e 30
+                const color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Cor aleatória
+
+                note.style.fontSize = `${size}px`;
+                note.style.color = color;
+
+                const x = e.clientX - size / 2;
+                const y = e.clientY - size / 2;
+
+                note.style.left = `${x}px`;
+                note.style.top = `${y}px`;
+
+                // Remover a nota após um tempo
+                setTimeout(() => {
+                    note.remove();
+                }, 1000);
+            }
         }
 
         document.addEventListener("keydown", checkKonamiCode);
