@@ -124,19 +124,19 @@ function atualizarMsg() {
     if (hora >= 0 && hora < 5) {
         hrDoDia = 'Madrugada'
         h1BomDia.innerText = 'Boa Madrugada'
-        Mensagem.innerHTML = madrugadaMessages[Math.floor(Math.random() * madrugadaMessages.length)]
+        Mensagem.innerHTML = madrugadaMessages[Math.floor(Math.random() * madrugadaMessages.length)] + ' <span>↑↑ ↓↓ ←→ ←→</span>'
     } else if (hora >= 5 && hora < 12) {
         hrDoDia = 'Manhã'
         h1BomDia.innerText = 'Bom Dia'
-        Mensagem.innerHTML = manhaMessages[Math.floor(Math.random() * manhaMessages.length)]
+        Mensagem.innerHTML = manhaMessages[Math.floor(Math.random() * manhaMessages.length)] + ' <span>↑↑ ↓↓ ←→ ←→</span>'
     } else if (hora >= 12 && hora < 18) {
         hrDoDia = 'Tarde'
         h1BomDia.innerText = 'Boa Tarde'
-        Mensagem.innerHTML = tardeMessages[Math.floor(Math.random() * tardeMessages.length)]
+        Mensagem.innerHTML = tardeMessages[Math.floor(Math.random() * tardeMessages.length)] + ' <span>↑↑ ↓↓ ←→ ←→</span>'
     } else {
         hrDoDia = 'Noite'
         h1BomDia.innerText = 'Boa Noite'
-        Mensagem.innerHTML = noiteMessages[Math.floor(Math.random() * noiteMessages.length)]
+        Mensagem.innerHTML = noiteMessages[Math.floor(Math.random() * noiteMessages.length)] + ' <span>↑↑ ↓↓ ←→ ←→</span>'
     }
 
     RandomMsgs.innerHTML = musicTexts[Math.floor(Math.random() * musicTexts.length)]

@@ -472,6 +472,10 @@ body main section#MusicasAleatoriasBanner article div#textoMusicasAleatoriasBann
 body main section#MusicasAleatoriasBanner article div#textoMusicasAleatoriasBanner h1 {
   font-size: 3.5em;
 }
+body main section#MusicasAleatoriasBanner article div#textoMusicasAleatoriasBanner h1 span {
+  display: block;
+  font-size: 0.4em;
+}
 body main section#containerFavoritasDoPerfil {
   max-width: 1400px;
   width: 90%;
