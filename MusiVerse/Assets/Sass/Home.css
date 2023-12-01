@@ -677,14 +677,14 @@ body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.cont
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerPlaylistsCaixa article.articleContainer article {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(205px, 1fr));
   gap: 24px;
   height: auto;
   width: 100%;
   padding: 0px 0px 30px !important;
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerPlaylistsCaixa article.articleContainer article div.containerPlaylists {
-  min-width: 240px;
+  min-width: 205px;
   height: 244px;
   display: flex;
   flex-direction: column;
@@ -694,21 +694,18 @@ body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.cont
   overflow: hidden;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
   background-color: #1e1e20;
-  padding: 10px;
   cursor: pointer;
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerPlaylistsCaixa article.articleContainer article div.containerPlaylists div.containerImgPlaylist {
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: auto;
   overflow: hidden;
   position: relative;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
 }
 body section.Paginas#PagPesquisa article#containerResultadoPesquisa section.containerPlaylistsCaixa article.articleContainer article div.containerPlaylists div.containerImgPlaylist img {
   width: 100%;
-  height: 159%;
+  height: 146%;
   display: block;
   -o-object-fit: cover;
      object-fit: cover;
@@ -2326,7 +2323,7 @@ body article#BarraMusica div#ConfigsBarraMusicaCell img {
      object-fit: contain;
 }
 body section.containerMusica {
-  margin-bottom: 60px;
+  margin-bottom: 0px;
   width: 100%;
   max-width: 1400px;
   margin: auto;
@@ -2389,9 +2386,8 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
   height: 244px;
   display: flex;
   flex-direction: column;
-  background-position: center;
   position: relative;
-  border-radius: 0px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
   background-color: #1a1a1d;
@@ -2418,10 +2414,6 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico div.ContainerImgMusicaCaixa img {
   height: 134%;
 }
-body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa.ArtistaHistorico .divBlurTexto {
-  background-color: #1a1a1d;
-  opacity: 1;
-}
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa:hover div.BtnDarPlay {
   transition: 200ms opacity ease-in-out;
   opacity: 1;
@@ -2430,27 +2422,23 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
   width: 50px;
   height: 50px;
   position: absolute;
-  bottom: 45px;
+  bottom: 30px;
   right: 5px;
   opacity: 0;
-  z-index: 3;
+  z-index: 4;
   border-radius: 50%;
-}
-body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixaTreeFy {
-  height: 72% !important;
-  top: 0px !important;
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgArtistaHistoricoTreeFy img {
   height: 100% !important;
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa {
   width: 100%;
-  height: 107%;
-  z-index: 2;
+  height: 77%;
+  z-index: 3;
   overflow: hidden;
   position: absolute;
   display: flex;
-  top: -43px;
+  top: 0px;
   align-items: center;
   justify-content: center;
 }
@@ -2471,21 +2459,60 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.ContainerImgMusicaCaixa img {
   width: 100%;
-  height: 100%;
+  height: 146%;
   -o-object-fit: cover;
      object-fit: cover;
   -o-object-position: center;
      object-position: center;
 }
-body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto {
-  width: calc(100% + 40px);
-  height: calc(45% - 20px);
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTextoTreeFy {
+  width: 100%;
+  height: 100%;
   background-color: #1a1a1d;
-  filter: blur(1px);
+  filter: blur(10px);
+  opacity: 0.6;
   position: absolute;
-  bottom: -20px;
-  left: -20px;
+  bottom: 0px;
+  left: 0px;
   z-index: 2;
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTextoTreeFy img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto {
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1d;
+  filter: blur(10px);
+  opacity: 0.6;
+  position: absolute;
+  bottom: -50px;
+  left: 0px;
+  z-index: 2;
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto2 {
+  width: 100%;
+  height: 100%;
+  background-color: #1a1a1d;
+  filter: blur(10px);
+  opacity: 0.6;
+  position: absolute;
+  bottom: 40px;
+  left: 0px;
+  z-index: 2;
+}
+body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa .divBlurTexto2 img {
+  width: 100%;
+  height: 146%;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -2499,7 +2526,7 @@ body section.containerMusica article.articleContainer article.containerMusicaCai
   position: absolute;
   left: 0px;
   bottom: -3px;
-  z-index: 2;
+  z-index: 3;
 }
 body section.containerMusica article.articleContainer article.containerMusicaCaixa div.MusicasCaixa div.TextoMusicaCaixa p {
   width: 90%;

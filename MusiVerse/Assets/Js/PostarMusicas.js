@@ -82,15 +82,17 @@ async function prosseguirMusicaYT() {
                 // Vai postar a nova música na parte "MusicasPostadas" do Firebase
                 DadosNovaMusica = data;
               } else {
-                console.warn("Erro na requisição: " + response.statusText)
+                console.warn("Erro na requisição: ")
+                console.warn(response)
                 alert('Erro: ' + response.statusText)
                 document.getElementById('carregando').style.display = 'none'
               }
               
         } catch (error) {
-            console.warn("Erro na requisição: " + error.message)
+            console.warn("Erro na requisição: ")
+            console.warn(response)
             document.getElementById('carregando').style.display = 'none'
-            alert('Erro: ' + error.message )
+            alert('Erro: ' + error.status )
         }
     }
 }

@@ -192,8 +192,10 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         img.src = arrayMusicasRetornadas[c].LinkImg
         if(img.src.includes('treefy')) {
           containerImg.classList.add('ContainerImgMusicaCaixa', 'ContainerImgMusicaCaixaTreeFy')
+          divBlurTexto.className = 'divBlurTextoTreeFy'
         } else {
           containerImg.classList.add('ContainerImgMusicaCaixa')
+          divBlurTexto.className = 'divBlurTexto'
         }
   
         divTexto.className = 'TextoMusicaCaixa'
@@ -201,7 +203,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         p.title = arrayMusicasRetornadas[c].NomeMusica
         span.innerText = arrayMusicasRetornadas[c].Autor
         span.title = arrayMusicasRetornadas[c].Autor
-        divBlurTexto.className = 'divBlurTexto'
+        divBlurTexto.innerHTML = `<img src="${arrayMusicasRetornadas[c].LinkImg}">`
   
         divTexto.appendChild(p)
         divTexto.appendChild(span)

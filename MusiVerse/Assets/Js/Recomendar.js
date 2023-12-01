@@ -222,7 +222,8 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
         divTexto.className = 'TextoMusicaCaixa'
         p.innerText = TodasMusicas.Musicas[b].Autor
         span.innerText = 'Artista'
-        divBlurTexto.className = 'divBlurTexto'
+        divBlurTexto.className = 'divBlurTexto2'
+        divBlurTexto.innerHTML = `<img src="${TodasMusicas.Musicas[b].LinkImg}">`
 
         divTexto.appendChild(p)
         divTexto.appendChild(span)
