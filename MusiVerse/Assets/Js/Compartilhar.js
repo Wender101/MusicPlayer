@@ -1,45 +1,98 @@
 //? Vai pegar a ID na url da pag
-function pegarValorDaUrl() {
-    const urlCompleta = window.location.href;
-    const indexInterrogacao = urlCompleta.indexOf('?');
+function obterValoresDaURL() {
+  // Obtém a URL atual
+  var urlAtual = window.location.href;
 
-    if (indexInterrogacao !== -1) {
-        // O caractere '?' foi encontrado na URL
-        const valorDaQuery = urlCompleta.slice(indexInterrogacao + 1);
-        tocarMusicaDaUrl(valorDaQuery)
-    } else {
-        // Não foi encontrado o caractere '?' na URL
-        return null;
-    }
+  // Cria um novo objeto URL com a URL atual
+  var url = new URL(urlAtual);
+
+  // Obtém os parâmetros de pesquisa da URL
+  var parametros = url.searchParams;
+
+  // Obtém os valores de music, artist, playlist e profile
+  var music = parametros.get('music');
+  var artist = parametros.get('artist');
+  var playlist = parametros.get('playlist');
+  var profile = parametros.get('profile');
+
+  if(artist != undefined) {
+    InfosUrl.Page.Name = 'artist';
+    InfosUrl.Page.ID = artist;
+  } else if(playlist != undefined) {
+    InfosUrl.Page.Name = 'playlist';
+    InfosUrl.Page.ID = playlist;
+  } else if(profile != undefined) {
+    InfosUrl.Page.Name = 'profile';
+    InfosUrl.Page.ID = profile;
+  }
+
+  InfosUrl.Music = music
+  
+  tocarMusicaDaUrl(music, InfosUrl.Page)
 }
 
-function tocarMusicaDaUrl(ID) {
-    for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
-        if(TodasMusicas.Musicas[c].ID == ID) {
-            FecharPaginas()
-            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-            if(TodasMusicas.Musicas[c].LinkImg.includes ('treefy')) {
-              imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-            } else {
-                imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-            }
-            imgPerfilArtista.src = TodasMusicas.Musicas[c].LinkImg
-            document.getElementById('NomeArtista').innerText = TodasMusicas.Musicas[c].Autor
-            document.getElementById('containerMusicasArtista').innerHTML = ''
-            document.querySelector('body').style.overflow = 'hidden'
-            RetornarMusicasArtista(TodasMusicas.Musicas[c].Autor, document.getElementById('containerMusicasArtista'))
-            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
 
-             for(let b = 0; b < arrayMusicasArtista.length; b++) {
-                if(arrayMusicasArtista[b].ID == ID) {
-                    ListaProxMusica = {
-                        Musicas: arrayMusicasArtista,
-                        Numero: b,
+function tocarMusicaDaUrl(ID, Page) {
+    let MusicaDaUrl
+
+    //? Vai dar play na música
+    try {
+        for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+            if(TodasMusicas.Musicas[c].ID == ID) {
+                MusicaDaUrl = TodasMusicas.Musicas[c]
+
+                if(Page.Name == undefined || Page.Name == '') {
+                    try {
+                        AbrirPerfilArtista(MusicaDaUrl)
+                    } catch{}
+
+                    for(let b = 0; b < arrayMusicasArtista.length; b++) {
+
+                        if(arrayMusicasArtista[b].ID == ID) {
+                            ListaProxMusica = {
+                                Musicas: arrayMusicasArtista,
+                                Numero: b,
+                            }
+                            DarPlayMusica(arrayMusicasArtista[b], b)
+                        }
                     }
-                    DarPlayMusica(arrayMusicasArtista[b], b)
+                } else {
+                    ListaProxMusica = {
+                        Musicas: TodasMusicas.Musicas[c],
+                        Numero: c,
+                    }
+                    DarPlayMusica(TodasMusicas.Musicas[c], c)
                 }
             }
         }
+    } catch{}
+
+    if(Page.Name == 'artist') {
+        for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
+            if(TodasMusicas.Musicas[c].ID == Page.ID) {
+                try {
+                    AbrirPerfilArtista(TodasMusicas.Musicas[c])
+                } catch{}
+            }
+        }
+
+    } else if(Page.Name == 'playlist') {
+        try {
+            for(let c = 0; c < TodasMusicas.Playlists.length; c++) {
+                if(TodasMusicas.Playlists[c].ID == Page.ID) {
+                    AbrirPlaylist(TodasMusicas.Playlists[c])
+                }
+            }
+        } catch{}
+        
+    } else if(Page.Name == 'profile') {
+        try {
+            for(let c = 0; c < TodosOsUsers.length; c++) {
+                if(TodosOsUsers[c].User.Id == Page.ID) {
+                    AbrirPerfilOutroUser(TodosOsUsers[c].User)
+                }
+            }
+        } catch{}
     }
 }
 

@@ -249,21 +249,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
         //? Ao clicar no nome do Autor
         div.addEventListener('click', () => {
-          FecharPaginas()
-          // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-          if(img.src.includes ('treefy')) {
-            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-          } else {
-            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-          }
-          imgPerfilArtista.src = img.src
-          document.getElementById('NomeArtista').innerText = p.innerText
-          document.getElementById('containerMusicasArtista').innerHTML = ''
-          document.querySelector('body').style.overflow = 'hidden'
-          RetornarMusicasArtista(p.innerText, document.getElementById('containerMusicasArtista'))
-          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-          coletarHistorico(p.innerText, 'Autor')
+          AbrirPerfilArtista(TodasMusicas.Musicas[b])
         })
       }
     }
@@ -416,20 +402,7 @@ function RecomendarAutoresPlaylistsHistorico() {
           articleContainerPlaylistFavoritaPerfil.appendChild(containerPlaylistFavoritaPerfil)
 
           containerPlaylistFavoritaPerfil.addEventListener('click', () => {
-            FecharPaginas()
-            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-            if(imgCapa.src.includes ('treefy')) {
-              imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-            } else {
-              imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-            }
-            imgPerfilArtista.src = imgCapa.src
-            document.getElementById('NomeArtista').innerText = nome.innerText
-            document.getElementById('containerMusicasArtista').innerHTML = ''
-            document.querySelector('body').style.overflow = 'hidden'
-            RetornarMusicasArtista(nome.innerText, document.getElementById('containerMusicasArtista'))
-            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-            // coletarHistorico(nome.innerText, 'Autor')
+            AbrirPerfilArtista(TodasMusicas.Musicas[c])
           })
 
            containerPlaylistFavoritaPerfil.addEventListener('contextmenu', function (e) {

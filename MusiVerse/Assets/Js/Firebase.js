@@ -83,6 +83,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
           contador++
         })
+
+        try {
+          obterValoresDaURL()
+        } catch{}
       }).catch((e) => {
         location.href = `Error.html`
     })

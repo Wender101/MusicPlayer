@@ -2,6 +2,8 @@ const btnSeguirPagPerfilOutroUser = document.getElementById('btnSeguirPagPerfilO
 let  infosUserPesquisado
 
 function AbrirPerfilOutroUser(infosUser) {
+    updateURLParameter('profile', infosUser.Id)
+
     document.querySelector('body').style.overflow = 'hidden'
     document.getElementById('containerImgHeaderPagPerfilOutroUser').style.display = 'none'
     let seguindoEsseUser = false

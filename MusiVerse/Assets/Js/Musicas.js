@@ -75,9 +75,9 @@ function carregarMusicas() {
             const containerMain = document.getElementById('containerMain')
 
             await RetornarMusicas('Aleatórias', containerMain)
-            try {
-                pegarValorDaUrl()
-            } catch{}
+            // try {
+            //     obterValoresDaURL()
+            // } catch{}
 
             // for(let c = 0; c < arraymusicasAleatorias.length; c++) {
             //     try {
@@ -281,20 +281,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
             irParaArtista.innerText = 'Ir para o artista'
 
             irParaArtista.addEventListener('click', () => {
-                FecharPaginas()
-                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                if(img.src.includes ('treefy')) {
-                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                } else {
-                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                }
-                imgPerfilArtista.src = img.src
-                document.getElementById('NomeArtista').innerText = span.innerText
-                document.getElementById('containerMusicasArtista').innerHTML = ''
-                document.querySelector('body').style.overflow = 'hidden'
-                RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
-                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                coletarHistorico(span.innerText, 'Autor')
+                AbrirPerfilArtista(arrayMusicasRetornadas[c])
             })
 
             liIrParaArtistaClickMusic.innerHTML = ''
@@ -317,21 +304,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
                 document.querySelector('#menuCreditosAutor').appendChild(autorCreditos)
 
                 autorCreditos.addEventListener('click', () => {
-                    FecharPaginas()
-                    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                    if(img.src.includes ('treefy')) {
-                        imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                    } else {
-                        imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                    }
-                    imgPerfilArtista.src = img.src
-                    document.getElementById('NomeArtista').innerText = span.innerText
-                    document.getElementById('containerMusicasArtista').innerHTML = ''
-                    document.querySelector('body').style.overflow = 'hidden'
-                    RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
-                    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                    coletarHistorico(span.innerText, 'Autor')
-                    closeMenuCreditos()
+                   AbrirPerfilArtista(arrayMusicasRetornadas[c])
                 })
 
                 const NomeUserCreditos = document.createElement('span')
@@ -378,20 +351,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         }
   
         span.addEventListener('click', () => {
-          FecharPaginas()
-          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-          if(img.src.includes ('treefy')) {
-            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-          } else {
-            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-          }
-          imgPerfilArtista.src = img.src
-          document.getElementById('NomeArtista').innerText = span.innerText
-          document.getElementById('containerMusicasArtista').innerHTML = ''
-          document.querySelector('body').style.overflow = 'hidden'
-          RetornarMusicasArtista(span.innerText, document.getElementById('containerMusicasArtista'))
-          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-          coletarHistorico(span.innerText, 'Autor')
+          AbrirPerfilArtista(arrayMusicasRetornadas[c])
         })
   
       } else if(Estilo == 'Linha') {
@@ -465,20 +425,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
         })
   
         AutorDaMusica.addEventListener('click', () => {
-          FecharPaginas()
-          const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-          if(img.src.includes ('treefy')) {
-            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-          } else {
-            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-          }
-          imgPerfilArtista.src = img.src
-          document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-          document.getElementById('containerMusicasArtista').innerHTML = ''
-          document.querySelector('body').style.overflow = 'hidden'
-          RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-          SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-          coletarHistorico(AutorDaMusica.innerText, 'Autor')
+          AbrirPerfilArtista(arrayMusicasRetornadas[c])
         })
       }
     }
@@ -714,21 +661,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                                 irParaArtista.innerText = 'Ir para o artista'
 
                                 irParaArtista.addEventListener('click', () => {
-                                    FecharPaginas()
-                                    // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                                    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                                    if(img.src.includes ('treefy')) {
-                                        imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                                    } else {
-                                        imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                                    }
-                                    imgPerfilArtista.src = img.src
-                                    document.getElementById('NomeArtista').innerText = Autor.innerText
-                                    document.getElementById('containerMusicasArtista').innerHTML = ''
-                                    document.querySelector('body').style.overflow = 'hidden'
-                                    RetornarMusicasArtista(Autor.innerText, document.getElementById('containerMusicasArtista'))
-                                    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                                    coletarHistorico(Autor.innerText, 'Autor')
+                                   AbrirPerfilArtista(TodasMusicas.Musicas[i])
                                 })
 
                                 liIrParaArtistaClickMusic.innerHTML = ''
@@ -749,21 +682,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                                     document.querySelector('#menuCreditosAutor').appendChild(autorCreditos)
 
                                     autorCreditos.addEventListener('click', () => {
-                                        FecharPaginas()
-                                        const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                                        if(img.src.includes ('treefy')) {
-                                            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                                        } else {
-                                            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                                        }
-                                        imgPerfilArtista.src = img.src
-                                        document.getElementById('NomeArtista').innerText = Autor.innerText
-                                        document.getElementById('containerMusicasArtista').innerHTML = ''
-                                        document.querySelector('body').style.overflow = 'hidden'
-                                        RetornarMusicasArtista(Autor.innerText, document.getElementById('containerMusicasArtista'))
-                                        SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                                        coletarHistorico(Autor.innerText, 'Autor')
-                                        closeMenuCreditos()
+                                        AbrirPerfilArtista(TodasMusicas.Musicas[i])
                                     })
 
                                     const NomeUserCreditos = document.createElement('span')
@@ -823,21 +742,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
 
                             //? Ao clicar no nome do Autor
                             Autor.addEventListener('click', () => {
-                                FecharPaginas()
-                                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                                if(img.src.includes ('treefy')) {
-                                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                                } else {
-                                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                                }
-                                imgPerfilArtista.src = img.src
-                                document.getElementById('NomeArtista').innerText = Autor.innerText
-                                document.getElementById('containerMusicasArtista').innerHTML = ''
-                                document.querySelector('body').style.overflow = 'hidden'
-                                RetornarMusicasArtista(Autor.innerText, document.getElementById('containerMusicasArtista'))
-                                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                                coletarHistorico(Autor.innerText, 'Autor')
+                                AbrirPerfilArtista(TodasMusicas.Musicas[i])
                             })
                         }
                     }
@@ -978,21 +883,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                         irParaArtista.innerText = 'Ir para o artista'
 
                         irParaArtista.addEventListener('click', () => {
-                            FecharPaginas()
-                            // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                            if(img.src.includes ('treefy')) {
-                                imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                            } else {
-                                imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                            }
-                            imgPerfilArtista.src = img.src
-                            document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                            document.getElementById('containerMusicasArtista').innerHTML = ''
-                            document.querySelector('body').style.overflow = 'hidden'
-                            RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                            coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                            AbrirPerfilArtista(musicasFavoritasUser[numMusicasFavoritas])
                         })
 
                         liIrParaArtistaClickMusic.innerHTML = ''
@@ -1013,21 +904,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                             document.querySelector('#menuCreditosAutor').appendChild(autorCreditos)
 
                             autorCreditos.addEventListener('click', () => {
-                                FecharPaginas()
-                                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                                if(img.src.includes ('treefy')) {
-                                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                                } else {
-                                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                                }
-                                imgPerfilArtista.src = img.src
-                                document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                                document.getElementById('containerMusicasArtista').innerHTML = ''
-                                document.querySelector('body').style.overflow = 'hidden'
-                                RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                                coletarHistorico(AutorDaMusica.innerText, 'Autor')
-                                closeMenuCreditos()
+                                AbrirPerfilArtista(musicasFavoritasUser[numMusicasFavoritas])
                             })
 
                             const NomeUserCreditos = document.createElement('span')
@@ -1087,21 +964,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
 
                     //? Ao clicar no nome do Autor
                     AutorDaMusica.addEventListener('click', () => {
-                        FecharPaginas()
-                        // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                        const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                        if(img.src.includes ('treefy')) {
-                            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                        } else {
-                            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                        }
-                        imgPerfilArtista.src = img.src
-                        document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                        document.getElementById('containerMusicasArtista').innerHTML = ''
-                        document.querySelector('body').style.overflow = 'hidden'
-                        RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                        SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                        coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                        AbrirPerfilArtista(musicasFavoritasUser[numMusicasFavoritas])
                     })
                 }
             }
@@ -1272,21 +1135,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = f
                 irParaArtista.innerText = 'Ir para o artista'
 
                 irParaArtista.addEventListener('click', () => {
-                    FecharPaginas()
-                    // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                    if(img.src.includes ('treefy')) {
-                        imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                    } else {
-                        imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                    }
-                    imgPerfilArtista.src = img.src
-                    document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                    document.getElementById('containerMusicasArtista').innerHTML = ''
-                    document.querySelector('body').style.overflow = 'hidden'
-                    RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                    coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                    AbrirPerfilArtista(TodasMusicas.Musicas[c])
                 })
 
                 liIrParaArtistaClickMusic.innerHTML = ''
@@ -1309,21 +1158,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = f
                     document.querySelector('#menuCreditosAutor').appendChild(autorCreditos)
 
                     autorCreditos.addEventListener('click', () => {
-                        FecharPaginas()
-                        const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                        if(img.src.includes ('treefy')) {
-                            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                        } else {
-                            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                        }
-                        imgPerfilArtista.src = img.src
-                        document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                        document.getElementById('containerMusicasArtista').innerHTML = ''
-                        document.querySelector('body').style.overflow = 'hidden'
-                        RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                        SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                        coletarHistorico(AutorDaMusica.innerText, 'Autor')
-                        closeMenuCreditos()
+                        AbrirPerfilArtista(TodasMusicas.Musicas[c])
                     })
 
                     const NomeUserCreditos = document.createElement('span')
@@ -1394,21 +1229,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = f
 
             //? Ao clicar no nome do Autor
             AutorDaMusica.addEventListener('click', () => {
-                FecharPaginas()
-                // document.getElementById('imgPerfilArtista').style.backgroundImage = `url(${img.src})`
-                const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                if(img.src.includes ('treefy')) {
-                    imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                } else {
-                    imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                }
-                imgPerfilArtista.src = img.src
-                document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                document.getElementById('containerMusicasArtista').innerHTML = ''
-                document.querySelector('body').style.overflow = 'hidden'
-                RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                AbrirPerfilArtista(TodasMusicas.Musicas[c])
             })
         }
     }
@@ -1619,7 +1440,7 @@ function DarPlayMusica(Lista, num) {
 
     AddInfoTelaTocandoAgora(Lista)
 
-    substituirIDnaUrl(Lista.ID)
+    updateURLParameter('music', Lista.ID)
 
     MusicaTocandoAgora = Lista
     //? Vai checar se a música foi curtida ou n
@@ -1764,36 +1585,61 @@ function DarPlayMusica(Lista, num) {
 
         //? Vai abrir a aba com as músicas do autor ques está ouvindo a música
         document.getElementById('AutorMusicaBarraMusica').addEventListener('click', () => {
-            FecharPaginas()
-            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-            if(Lista.LinkImg.includes ('treefy')) {
-              imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-            } else {
-              imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-            }
-            imgPerfilArtista.src = Lista.LinkImg
-            document.getElementById('NomeArtista').innerText = Lista.Autor
-            document.getElementById('containerMusicasArtista').innerHTML = ''
-            document.querySelector('body').style.overflow = 'hidden'
-            RetornarMusicasArtista(Lista.Autor, document.getElementById('containerMusicasArtista'))
-            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-            coletarHistorico(Lista.Autor, 'Autor')
+            AbrirPerfilArtista(Lista)
         })
 
     }
 }
 
-function substituirIDnaUrl(novoID) {
-    if(novoID != undefined && novoID != null) {
-        // Obtém a URL atual sem a query string
-        const urlSemQuery = window.location.origin + window.location.pathname;
-    
-        // Cria uma nova URL com o novo ID
-        const novaURL = `${urlSemQuery}?${novoID}`;
-    
-        // Substitui a URL atual no histórico sem recarregar a página
-        history.replaceState(null, null, novaURL);
+//? Vai alterar a URL
+const InfosUrl = {
+    Music: '',
+    Page: {
+        Name: '',
+        ID: ''
     }
+}
+
+function updateURLParameter(Tipo, ID) {
+    removerParametros()
+    if(Tipo != 'music') {
+        InfosUrl.Page.Name = Tipo;
+        InfosUrl.Page.ID = ID;
+    } else {
+        InfosUrl.Music = ID;
+    }
+
+    let link = ''
+
+    if(InfosUrl.Music != '') {
+        link = `music=${InfosUrl.Music}`
+    }
+
+    if(InfosUrl.Page.Name != '' && InfosUrl.Music != '') {
+        link = `${link}&${InfosUrl.Page.Name}=${InfosUrl.Page.ID}`
+    } else if(InfosUrl.Music == '') {
+        link = `${InfosUrl.Page.Name}=${InfosUrl.Page.ID}`
+    }
+    
+    const newUrl = `${window.location.href}?${link}`
+    window.history.pushState({ path: newUrl }, '', newUrl)
+}
+
+//? Vai limpar a url
+function removerParametros() {
+  // Obtém a URL atual
+  var urlAtual = window.location.href;
+
+  // Encontra o índice do caractere "?" na URL
+  var indiceInterrogacao = urlAtual.indexOf('?');
+
+  // Se houver um "?" na URL, remove tudo após ele
+  if (indiceInterrogacao !== -1) {
+    var novaUrl = urlAtual.substring(0, indiceInterrogacao);
+    
+    // Atualiza a URL sem recarregar a página
+    window.history.pushState({ path: novaUrl }, '', novaUrl);
+  }
 }
 
 //? Vai curtir / descurtir a música ao clica no coração
@@ -2087,21 +1933,7 @@ async function RetornarMusicasArtista(Artista, Local) {
                     document.querySelector('#menuCreditosAutor').appendChild(autorCreditos)
 
                     autorCreditos.addEventListener('click', () => {
-                        FecharPaginas()
-                        const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                        if(img.src.includes ('treefy')) {
-                            imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                        } else {
-                            imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                        }
-                        imgPerfilArtista.src = img.src
-                        document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                        document.getElementById('containerMusicasArtista').innerHTML = ''
-                        document.querySelector('body').style.overflow = 'hidden'
-                        RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                        SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                        coletarHistorico(AutorDaMusica.innerText, 'Autor')
-                        closeMenuCreditos()
+                        AbrirPerfilArtista(TodasMusicas.Musicas[c])
                     })
 
                     const NomeUserCreditos = document.createElement('span')
@@ -2404,20 +2236,7 @@ function RetornarMusicasASeguir() {
 
 //? Ao clicar na música tocando agora na barra tela música tocando agora, vai abir a aba mostrando todas as músicas do autor
 document.getElementById('containerMusicaTelaTocanAgora').addEventListener('click',() => {
-    FecharPaginas()
-    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-    if(infoMusicaTocandoAgora.LinkImg.includes ('treefy')) {
-      imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-    } else {
-      imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-    }
-    imgPerfilArtista.src = infoMusicaTocandoAgora.LinkImg
-    document.getElementById('NomeArtista').innerText = infoMusicaTocandoAgora.Autor
-    document.getElementById('containerMusicasArtista').innerHTML = ''
-    document.querySelector('body').style.overflow = 'hidden'
-    RetornarMusicasArtista(infoMusicaTocandoAgora.Autor, document.getElementById('containerMusicasArtista'))
-    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-    coletarHistorico(infoMusicaTocandoAgora.Autor, 'Autor')
+    AbrirPerfilArtista(infoMusicaTocandoAgora)
 })
 
 //? Vai abrir a página do user que postou a música ao clicar no perfil dele da tela música tocando agora
@@ -2614,20 +2433,7 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
                         })
                 
                         AutorDaMusica.addEventListener('click', () => {
-                            FecharPaginas()
-                            const imgPerfilArtista = document.getElementById('imgPerfilArtista')
-                            if(img.src.includes ('treefy')) {
-                                imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
-                            } else {
-                                imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
-                            }
-                            imgPerfilArtista.src = img.src
-                            document.getElementById('NomeArtista').innerText = AutorDaMusica.innerText
-                            document.getElementById('containerMusicasArtista').innerHTML = ''
-                            document.querySelector('body').style.overflow = 'hidden'
-                            RetornarMusicasArtista(AutorDaMusica.innerText, document.getElementById('containerMusicasArtista'))
-                            SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-                            coletarHistorico(AutorDaMusica.innerText, 'Autor')
+                           AbrirPerfilArtista(TodasMusicas.Playlists[c])
                         })
                     }
                 }
@@ -2650,6 +2456,8 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
 
 //? Vai abrir a playlist selecionada
 function AbrirPlaylist(Playlist) {
+    updateURLParameter('playlist', Playlist.ID)
+
     FecharPaginas()
     const imgPerfilPagPlaylist = document.getElementById('imgPerfilPagPlaylist')
     if(Playlist.Musicas[0].LinkImg.includes ('treefy')) {
@@ -2722,3 +2530,22 @@ function closeMenuCreditos() {
 document.querySelector('#containerMenuCreditos').addEventListener('click', (e) => {
     if(e.target.id == 'containerMenuCreditos') closeMenuCreditos()
 })
+
+function AbrirPerfilArtista(arrayArtista) {
+    FecharPaginas()
+    const imgPerfilArtista = document.getElementById('imgPerfilArtista')
+    if(arrayArtista.LinkImg.includes ('treefy')) {
+        imgPerfilArtista.classList.add('imgPerfilArtistaTreeFy')
+    } else {
+        imgPerfilArtista.classList.remove('imgPerfilArtistaTreeFy')
+    }
+    imgPerfilArtista.src = arrayArtista.LinkImg
+    document.getElementById('NomeArtista').innerText = arrayArtista.Autor
+    document.getElementById('containerMusicasArtista').innerHTML = ''
+    document.querySelector('body').style.overflow = 'hidden'
+    RetornarMusicasArtista(arrayArtista.Autor, document.getElementById('containerMusicasArtista'))
+    SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
+    coletarHistorico(arrayArtista.Autor, 'Autor')
+
+    updateURLParameter('artist', arrayArtista.ID)
+}
