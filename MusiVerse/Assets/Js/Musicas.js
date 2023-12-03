@@ -1619,6 +1619,8 @@ function DarPlayMusica(Lista, num) {
 
     AddInfoTelaTocandoAgora(Lista)
 
+    substituirIDnaUrl(Lista.ID)
+
     MusicaTocandoAgora = Lista
     //? Vai checar se a música foi curtida ou n
     FavoritarDesfavoritarMusica(Lista.ID, 'Checar').then((resolve) => {
@@ -1778,6 +1780,19 @@ function DarPlayMusica(Lista, num) {
             coletarHistorico(Lista.Autor, 'Autor')
         })
 
+    }
+}
+
+function substituirIDnaUrl(novoID) {
+    if(novoID != undefined && novoID != null) {
+        // Obtém a URL atual sem a query string
+        const urlSemQuery = window.location.origin + window.location.pathname;
+    
+        // Cria uma nova URL com o novo ID
+        const novaURL = `${urlSemQuery}?${novoID}`;
+    
+        // Substitui a URL atual no histórico sem recarregar a página
+        history.replaceState(null, null, novaURL);
     }
 }
 
