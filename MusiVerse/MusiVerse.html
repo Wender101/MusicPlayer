@@ -76,7 +76,7 @@
             <li id="liMostrarCretidos" class="noPaddingClickMusic">Mostrar crétitos</li>
 
             <hr>
-            <li>Compartilhar</li>
+            <li id="liCompartilharMusica">Compartilhar</li>
         </ul>
     </div>
 
@@ -101,6 +101,12 @@
             <p id="menuCreditosAutor" class="varCreditos"></p>
             <p>Postada por: <p id="menuCreditosNoneQuemPostou" class="varCreditos"></p></p>
         </div>
+    </div>
+
+    <!--? Notificações -->
+    <div id="containerNotification">
+        <img src="Assets/Imgs/Icons/checkmark.png" id="imgNotification">
+        <p id="msgNotification">Link copiado para a área de transferência!</p>
     </div>
 
     <!--? Tela Principal | Home -->
@@ -656,6 +662,7 @@
     <script src="Assets/Js/Mensagens.js"></script>
     <script src="Assets/Js/CriarPlaylists.js"></script>
     <script src="Assets/Js/OutrosPerfis.js"></script>
+    <script src="Assets/Js/Compartilhar.js"></script>
 
     <!-- <script src="CodigosAParte/RecuperarMusicas.js"></script> -->
 
@@ -737,8 +744,8 @@
                 if (konamiCodeIndex === konamiCode.length) {
                     if(!codeActive) {
                         codeActive = true
-                        alert("Código Konami ativado!");
-                        konamiCodeIndex = 0; // Reinicia o índice
+                        alert("Código Konami ativado!")
+                        konamiCodeIndex = 0 // Reinicia o índice
                         ParticulasMouse()
                     } else {
                         alert("Você desativou o Código Kanami")
@@ -751,36 +758,35 @@
         }
 
         function ParticulasMouse() {
-            const container = document.querySelector("body");
+            const container = document.querySelector("body")
 
             container.addEventListener("mousemove", function (e) {
                 if(codeActive) {
-                    createNoteParticle(e);
+                    createNoteParticle(e)
                 }
-            });
+            })
 
             function createNoteParticle(e) {
-                const note = document.createElement("div");
-                note.className = "note";
-                note.innerHTML = "&#9835;"; // Nota musical (caractere Unicode)
-                container.appendChild(note);
+                const note = document.createElement("div")
+                note.className = "note"
+                note.innerHTML = "&#9835;" // Nota musical (caractere Unicode)
+                container.appendChild(note)
 
-                const size = Math.random() * 20 + 10; // Tamanho aleatório entre 10 e 30
+                const size = Math.random() * 20 + 10 // Tamanho aleatório entre 10 e 30
                 const color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Cor aleatória
 
-                note.style.fontSize = `${size}px`;
+                note.style.fontSize = `${size}px`
                 note.style.color = color;
 
-                const x = e.clientX - size / 2;
-                const y = e.clientY - size / 2;
-
-                note.style.left = `${x}px`;
-                note.style.top = `${y}px`;
+                const x = e.clientX - size / 2
+                const y = e.clientY - size / 2
+                note.style.left = `${x}px`
+                note.style.top = `${y}px`
 
                 // Remover a nota após um tempo
                 setTimeout(() => {
-                    note.remove();
-                }, 1000);
+                    note.remove()
+                }, 1000)
             }
         }
 
@@ -791,15 +797,12 @@
         }
 
         inputPesquisa.addEventListener('keypress', (e) => {
-            console.log(isEmoji(inputPesquisa.value));
-
             if(e.key == 'Enter' && isEmoji(inputPesquisa.value)) {
                 ParticulasMouseEmoji()
             }
         })
 
         function ParticulasMouseEmoji() {
-            console.log('Rapaz');
             const container = document.querySelector("body");
             const emojis = ["🎵", "🎶", "🎤", "🎹", "🎷", "🎺", "🎸", "🥁", "🎻"]
 

@@ -357,6 +357,31 @@ body div#containerMenuCreditos div#menuCreditos p.varCreditos#menuCreditosNomeMu
   text-decoration: none;
   cursor: default;
 }
+body div#containerNotification {
+  width: auto;
+  height: 30px;
+  position: fixed;
+  padding: 5px 10px;
+  bottom: -100px;
+  left: 10px;
+  transition: 0.5s bottom ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 6;
+  background-color: #3c3c42;
+  border-radius: 10px;
+}
+body div#containerNotification.containerNotificationActive {
+  bottom: 0;
+}
+body div#containerNotification img {
+  width: 30px;
+  height: 30px;
+}
+body div#containerNotification p {
+  color: #fff;
+}
 body div#btnVoltarPagina {
   position: absolute;
   top: 33px;

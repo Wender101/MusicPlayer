@@ -284,6 +284,36 @@ body {
         }
     }
 
+    //? Notification
+    div#containerNotification {
+        width: auto;
+        height: 30px;
+        position: fixed;
+        padding: 5px 10px;
+        bottom: -100px;
+        left: 10px;
+        transition: 0.5s bottom ease-in-out;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        z-index: 6;
+        background-color: #3c3c42;
+        border-radius: 10px;
+
+        &.containerNotificationActive {
+            bottom: 0;
+        }
+
+        img {
+            width: 30px;
+            height: 30px;
+        }
+
+        p {
+            color: #fff;
+        }
+    }
+
     //? ----------------------
     div#btnVoltarPagina {
         position: absolute;

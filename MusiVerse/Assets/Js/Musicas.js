@@ -75,6 +75,9 @@ function carregarMusicas() {
             const containerMain = document.getElementById('containerMain')
 
             await RetornarMusicas('Aleatórias', containerMain)
+            try {
+                pegarValorDaUrl()
+            } catch{}
 
             // for(let c = 0; c < arraymusicasAleatorias.length; c++) {
             //     try {
@@ -1890,47 +1893,49 @@ function BackSong() {
 function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
     let MusicaEncontrada = false
     return new Promise((resolve, reject) => {
-        for(let c = 0; c <= currentUser.User.MusicasCurtidas.length; c++) {
-            try {
-                if(currentUser.User.MusicasCurtidas[c] == IdMusica && MusicaEncontrada == false) {
-                    MusicaEncontrada = true
-    
-                    // Música encontrada nas curtidas, então descurta.
-                    if(OqFazer == 'Editar') {
-                        currentUser.User.MusicasCurtidas.splice(c, 1)
-                        db.collection('Users')
-                        .doc(currentUser.User.Id)
-                        .update({ MusicasCurtidas: currentUser.User.MusicasCurtidas })
-                        .then(() => {
-                            resolve('./Assets/Imgs/Icons/icon _heart_ (1).png')
-                        })
-    
-                    } else {
-                        resolve('./Assets/Imgs/Icons/icon _heart_.png')
-                    }
-                }
-    
-                // Música não encontrada nas curtidas, então curta.
-                if(c + 1 >= currentUser.User.MusicasCurtidas.length && MusicaEncontrada == false) {
-                    MusicaEncontrada = true
-                    
-                    if(OqFazer == 'Editar') {
-                        currentUser.User.MusicasCurtidas.push(IdMusica)
-                        db.collection('Users')
-                        .doc(currentUser.User.Id)
-                        .update({ MusicasCurtidas: currentUser.User.MusicasCurtidas })
-                        .then(() => {
+        try {
+            for(let c = 0; c <= currentUser.User.MusicasCurtidas.length; c++) {
+                try {
+                    if(currentUser.User.MusicasCurtidas[c] == IdMusica && MusicaEncontrada == false) {
+                        MusicaEncontrada = true
+        
+                        // Música encontrada nas curtidas, então descurta.
+                        if(OqFazer == 'Editar') {
+                            currentUser.User.MusicasCurtidas.splice(c, 1)
+                            db.collection('Users')
+                            .doc(currentUser.User.Id)
+                            .update({ MusicasCurtidas: currentUser.User.MusicasCurtidas })
+                            .then(() => {
+                                resolve('./Assets/Imgs/Icons/icon _heart_ (1).png')
+                            })
+        
+                        } else {
                             resolve('./Assets/Imgs/Icons/icon _heart_.png')
-                        })
-    
-                    } else {
-                        resolve('./Assets/Imgs/Icons/icon _heart_ (1).png')
+                        }
                     }
+        
+                    // Música não encontrada nas curtidas, então curta.
+                    if(c + 1 >= currentUser.User.MusicasCurtidas.length && MusicaEncontrada == false) {
+                        MusicaEncontrada = true
+                        
+                        if(OqFazer == 'Editar') {
+                            currentUser.User.MusicasCurtidas.push(IdMusica)
+                            db.collection('Users')
+                            .doc(currentUser.User.Id)
+                            .update({ MusicasCurtidas: currentUser.User.MusicasCurtidas })
+                            .then(() => {
+                                resolve('./Assets/Imgs/Icons/icon _heart_.png')
+                            })
+        
+                        } else {
+                            resolve('./Assets/Imgs/Icons/icon _heart_ (1).png')
+                        }
+                    }
+                } catch (error) {
+                    console.warn(error)
                 }
-            } catch (error) {
-                console.warn(error)
             }
-        }
+        } catch{}
     })
 }
 
