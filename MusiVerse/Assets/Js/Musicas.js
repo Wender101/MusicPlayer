@@ -9,6 +9,8 @@ let audioNoMudo = false
 let volumeAudioAtual = 0
 let ListaProxMusica = {}
 let musicaSelecionadaBtnDireito //? Vai guardar a música que o user clicou com btn Direito
+let autorSelecionadoBtnDireito //? Vai guardar o autor que o user clicou com btn Direito
+let userSelecionadoBtnDireito //? Vai guardar o autor que o user clicou com btn Direito
 
 const liAddRemoveFavoritosClickMusic = document.querySelector('#liAddRemoveFavoritosClickMusic')
 const liIrParaArtistaClickMusic = document.querySelector('#liIrParaArtistaClickMusic')
@@ -237,6 +239,7 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
             musicaSelecionadaBtnDireito = arrayMusicasRetornadas[c]
             const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
             const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+            autorSelecionadoBtnDireito = arrayMusicasRetornadas[c]
 
             if(e.target.innerText == span.innerText) {
                 hideMenu()
@@ -343,12 +346,6 @@ async function RetornarMusicas(Pesquisa, Local, maxMusicas = 10, Estilo = 'Caixa
             liMostrarCretidos.innerHTML = ''
             liMostrarCretidos.appendChild(spanCreditos)
         })
-
-        function hideMenu() {
-            document.getElementById('containerOptionsClickMusic').style.display = 'none'
-            document.getElementById('containerOptionsClickArtista').style.display = 'none'
-            document.removeEventListener('scroll', hideMenu)
-        }
   
         span.addEventListener('click', () => {
           AbrirPerfilArtista(arrayMusicasRetornadas[c])
@@ -542,6 +539,25 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                 DarkOverlay.addEventListener('click', () => {
                     AbrirPerfilOutroUser(TodosOsUsers[c].User)
                 })
+
+                DarkOverlay.addEventListener('contextmenu', function (e) {
+                    e.preventDefault()
+
+                    const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
+                    const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                    const containerOptionsClickUser = document.getElementById('containerOptionsClickUser')
+                    userSelecionadoBtnDireito = TodosOsUsers[c].User
+
+                    hideMenu()
+                    // Position the custom menu at the mouse coordinates
+                    containerOptionsClickUser.style.left = e.clientX+ 'px'
+                    containerOptionsClickUser.style.top = e.clientY + 'px'
+                    containerOptionsClickUser.style.display = 'block'
+
+                    // Close the menu when clicking outside of it
+                    document.addEventListener('click', hideMenu)
+                    document.addEventListener('scroll', hideMenu)
+                })
                 
                 //? Vai checar se está tudo certo com a img de background caso n esteja vai substituila
                 var imgTeste = new Image()
@@ -617,6 +633,7 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                                 musicaSelecionadaBtnDireito = TodasMusicas.Musicas[i]
                                 const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
                                 const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                                autorSelecionadoBtnDireito = TodasMusicas.Musicas[i]
 
                                 if(e.target.innerText == Autor.innerText) {
                                     hideMenu()
@@ -721,12 +738,6 @@ async function RetornarPerfil(Pesquisa, Local, PerfilDe = 'User') {
                                 liMostrarCretidos.innerHTML = ''
                                 liMostrarCretidos.appendChild(spanCreditos)
                             })
-
-                            function hideMenu() {
-                                document.getElementById('containerOptionsClickMusic').style.display = 'none'
-                                document.getElementById('containerOptionsClickArtista').style.display = 'none'
-                                document.removeEventListener('scroll', hideMenu)
-                            }
 
                             //? Vai checar se as músicas foram curtidas pelo user
                             FavoritarDesfavoritarMusica(TodasMusicas.Musicas[i].ID, 'Checar').then((resolve) => {
@@ -839,6 +850,7 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                         musicaSelecionadaBtnDireito = musicasFavoritasUser[numMusicasFavoritas]
                         const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
                         const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                        autorSelecionadoBtnDireito = TodasMusicas.Musicas[contadorTodasAsMusicas]
 
                         if(e.target.innerText == AutorDaMusica.innerText) {
                             hideMenu()
@@ -943,12 +955,6 @@ async function RetornarMusicasFavoritas(Email, Local, MusicaFavoritaOuPostada) {
                         liMostrarCretidos.innerHTML = ''
                         liMostrarCretidos.appendChild(spanCreditos)
                     })
-
-                    function hideMenu() {
-                        document.getElementById('containerOptionsClickMusic').style.display = 'none'
-                        document.getElementById('containerOptionsClickArtista').style.display = 'none'
-                        document.removeEventListener('scroll', hideMenu)
-                    }
 
                     Heart.addEventListener('click', () => {
                         FavoritarDesfavoritarMusica(musicasFavoritasUser[numMusicasFavoritas].ID)
@@ -1092,6 +1098,7 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = f
                 musicaSelecionadaBtnDireito = TodasMusicas.Musicas[c]
                 const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
                 const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                autorSelecionadoBtnDireito = TodasMusicas.Musicas[c]
 
                 if(e.target.innerText == AutorDaMusica.innerText) {
                     hideMenu()
@@ -1197,12 +1204,6 @@ async function RetornarMusicasPostadasPeloUser(EmailUser, Local, ProprioUser = f
                 liMostrarCretidos.innerHTML = ''
                 liMostrarCretidos.appendChild(spanCreditos)
             })
-
-            function hideMenu() {
-                document.getElementById('containerOptionsClickMusic').style.display = 'none'
-                document.getElementById('containerOptionsClickArtista').style.display = 'none'
-                document.removeEventListener('scroll', hideMenu)
-            }
 
             //? Vai checar se as músicas foram curtidas pelo user
             FavoritarDesfavoritarMusica(TodasMusicas.Musicas[c].ID, 'Checar').then((resolve) => {
@@ -1876,6 +1877,7 @@ async function RetornarMusicasArtista(Artista, Local) {
                 musicaSelecionadaBtnDireito = TodasMusicas.Musicas[c]
                 const containerOptionsClickMusic = document.getElementById('containerOptionsClickMusic')
                 const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                autorSelecionadoBtnDireito = TodasMusicas.Musicas[c]
 
                 if(e.target.innerText == AutorDaMusica.innerText) {
                     hideMenu()
@@ -1972,12 +1974,6 @@ async function RetornarMusicasArtista(Artista, Local) {
                 liMostrarCretidos.innerHTML = ''
                 liMostrarCretidos.appendChild(spanCreditos)
             })
-
-            function hideMenu() {
-                document.getElementById('containerOptionsClickMusic').style.display = 'none'
-                document.getElementById('containerOptionsClickArtista').style.display = 'none'
-                document.removeEventListener('scroll', hideMenu)
-            }
 
             //? Vai checar se as músicas foram curtidas pelo user
             FavoritarDesfavoritarMusica(arrayMusicasArtista[numContador].ID, 'Checar').then((resolve) => {
@@ -2531,6 +2527,7 @@ document.querySelector('#containerMenuCreditos').addEventListener('click', (e) =
     if(e.target.id == 'containerMenuCreditos') closeMenuCreditos()
 })
 
+let pagCarregada = false
 function AbrirPerfilArtista(arrayArtista) {
     FecharPaginas()
     const imgPerfilArtista = document.getElementById('imgPerfilArtista')
@@ -2543,9 +2540,23 @@ function AbrirPerfilArtista(arrayArtista) {
     document.getElementById('NomeArtista').innerText = arrayArtista.Autor
     document.getElementById('containerMusicasArtista').innerHTML = ''
     document.querySelector('body').style.overflow = 'hidden'
-    RetornarMusicasArtista(arrayArtista.Autor, document.getElementById('containerMusicasArtista'))
     SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-    coletarHistorico(arrayArtista.Autor, 'Autor')
+    RetornarMusicasArtista(arrayArtista.Autor, document.getElementById('containerMusicasArtista'))
+    console.log(arrayArtista.Autor)
+
+    setTimeout(() => {
+        pagCarregada = true
+    }, 2000)
+    
+    if(pagCarregada == true) {
+        coletarHistorico(arrayArtista.Autor, 'Autor')
+    }
 
     updateURLParameter('artist', arrayArtista.ID)
+}
+
+function hideMenu() {
+    document.getElementById('containerOptionsClickMusic').style.display = 'none'
+    document.getElementById('containerOptionsClickArtista').style.display = 'none'
+    document.getElementById('containerOptionsClickUser').style.display = 'none'
 }

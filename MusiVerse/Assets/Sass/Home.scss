@@ -171,7 +171,7 @@ body {
     }
 
     //? Opções ao clicar na música
-    div#containerOptionsClickMusic, div#containerOptionsClickArtista {
+    div#containerOptionsClickMusic, div#containerOptionsClickArtista, div#containerOptionsClickUser {
         width: 200px;
         height: auto;
         position: fixed;
@@ -3093,5 +3093,4 @@ body {
         z-index: 20;
     }
     //? Fim Particulas em formato de notas músicais
-    
 }

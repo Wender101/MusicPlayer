@@ -127,7 +127,10 @@ function coletarHistorico(Dados, Tipo = 'Música') {
     }
 
     currentUser.User.GostoMusical.Historico = GostoMusicalHistorico.Historico
-    db.collection('Users').doc(currentUser.User.Id).update({GostoMusical: currentUser.User.GostoMusical})
+    console.log('Falta só salvar agr');
+    db.collection('Users').doc(currentUser.User.Id).update({GostoMusical: currentUser.User.GostoMusical}).then(() => {
+      console.log('Aparentemente salvou');
+    })
     RecomendarAutoresPlaylistsHistorico()
   }
 }
@@ -408,6 +411,7 @@ function RecomendarAutoresPlaylistsHistorico() {
            containerPlaylistFavoritaPerfil.addEventListener('contextmenu', function (e) {
                 e.preventDefault()
                 const containerOptionsClickArtista = document.getElementById('containerOptionsClickArtista')
+                autorSelecionadoBtnDireito = TodasMusicas.Musicas[c]
                 // Position the custom menu at the mouse coordinates
                 containerOptionsClickArtista.style.left = e.clientX+ 'px'
                 containerOptionsClickArtista.style.top = e.clientY + 'px'

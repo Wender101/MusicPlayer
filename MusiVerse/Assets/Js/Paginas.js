@@ -1,6 +1,7 @@
 const linkPagina = document.getElementsByClassName('linkPagina')
 const Paginas = document.getElementsByClassName('Paginas')
 const Open = document.getElementsByClassName('Open')
+let EventoNasPagsAdd = false
 
 function FecharPaginas() {
     document.querySelector('body').style.overflow = 'auto'
@@ -29,13 +30,6 @@ const sectionPaginas = document.querySelectorAll('.Paginas')
 sectionPaginas.forEach(pagians => {
     pagians.addEventListener('scroll', hideMenu)
 })
-
-//? Vai dar um display none para o containerOptionsClickMusic ao scrollar as sections Paginas
-function hideMenu() {
-    document.getElementById('containerOptionsClickMusic').style.display = 'none'
-    document.getElementById('containerOptionsClickArtista').style.display = 'none'
-    document.removeEventListener('scroll', hideMenu)
-}
 
 
 //? Vai salvar o históco das páginas que foram abertas para o user poder voltar

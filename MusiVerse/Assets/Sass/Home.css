@@ -262,7 +262,7 @@ body div#navCelular ul li div#imgPerfilUserNavCell {
 body div#navCelular ul li div#imgPerfilUserNavCell p#LetraNomePerfilUserNavCell {
   display: none;
 }
-body div#containerOptionsClickMusic, body div#containerOptionsClickArtista {
+body div#containerOptionsClickMusic, body div#containerOptionsClickArtista, body div#containerOptionsClickUser {
   width: 200px;
   height: auto;
   position: fixed;
@@ -273,31 +273,31 @@ body div#containerOptionsClickMusic, body div#containerOptionsClickArtista {
   border-radius: 5px;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.4);
 }
-body div#containerOptionsClickMusic ul, body div#containerOptionsClickArtista ul {
+body div#containerOptionsClickMusic ul, body div#containerOptionsClickArtista ul, body div#containerOptionsClickUser ul {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px 0;
 }
-body div#containerOptionsClickMusic ul li, body div#containerOptionsClickArtista ul li {
+body div#containerOptionsClickMusic ul li, body div#containerOptionsClickArtista ul li, body div#containerOptionsClickUser ul li {
   width: calc(100% - 20px);
   font-size: 0.8em;
   padding: 10px;
   cursor: pointer;
 }
-body div#containerOptionsClickMusic ul li.noPaddingClickMusic, body div#containerOptionsClickArtista ul li.noPaddingClickMusic {
+body div#containerOptionsClickMusic ul li.noPaddingClickMusic, body div#containerOptionsClickArtista ul li.noPaddingClickMusic, body div#containerOptionsClickUser ul li.noPaddingClickMusic {
   width: 100%;
   padding: 0;
 }
-body div#containerOptionsClickMusic ul li.noPaddingClickMusic span, body div#containerOptionsClickArtista ul li.noPaddingClickMusic span {
+body div#containerOptionsClickMusic ul li.noPaddingClickMusic span, body div#containerOptionsClickArtista ul li.noPaddingClickMusic span, body div#containerOptionsClickUser ul li.noPaddingClickMusic span {
   width: 100%;
   display: block;
   padding: 10px;
 }
-body div#containerOptionsClickMusic ul li:hover, body div#containerOptionsClickArtista ul li:hover {
+body div#containerOptionsClickMusic ul li:hover, body div#containerOptionsClickArtista ul li:hover, body div#containerOptionsClickUser ul li:hover {
   background-color: #3c3c42;
 }
-body div#containerOptionsClickMusic ul hr, body div#containerOptionsClickArtista ul hr {
+body div#containerOptionsClickMusic ul hr, body div#containerOptionsClickArtista ul hr, body div#containerOptionsClickUser ul hr {
   width: 100%;
   border-color: rgba(76, 78, 84, 0.4431372549);
 }

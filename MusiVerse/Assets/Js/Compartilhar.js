@@ -1,32 +1,34 @@
 //? Vai pegar a ID na url da pag
 function obterValoresDaURL() {
   // Obtém a URL atual
-  var urlAtual = window.location.href;
+  var urlAtual = window.location.href
 
   // Cria um novo objeto URL com a URL atual
-  var url = new URL(urlAtual);
+  var url = new URL(urlAtual)
 
   // Obtém os parâmetros de pesquisa da URL
-  var parametros = url.searchParams;
+  var parametros = url.searchParams
 
   // Obtém os valores de music, artist, playlist e profile
-  var music = parametros.get('music');
-  var artist = parametros.get('artist');
-  var playlist = parametros.get('playlist');
-  var profile = parametros.get('profile');
+  var music = parametros.get('music')
+  var artist = parametros.get('artist')
+  var playlist = parametros.get('playlist')
+  var profile = parametros.get('profile')
 
   if(artist != undefined) {
-    InfosUrl.Page.Name = 'artist';
-    InfosUrl.Page.ID = artist;
+    InfosUrl.Page.Name = 'artist'
+    InfosUrl.Page.ID = artist
   } else if(playlist != undefined) {
-    InfosUrl.Page.Name = 'playlist';
-    InfosUrl.Page.ID = playlist;
+    InfosUrl.Page.Name = 'playlist'
+    InfosUrl.Page.ID = playlist
   } else if(profile != undefined) {
-    InfosUrl.Page.Name = 'profile';
-    InfosUrl.Page.ID = profile;
+    InfosUrl.Page.Name = 'profile'
+    InfosUrl.Page.ID = profile
   }
 
-  InfosUrl.Music = music
+  if(music != null && music != '' && music != undefined) {
+    InfosUrl.Music = music
+  }
   
   tocarMusicaDaUrl(music, InfosUrl.Page)
 }
@@ -100,12 +102,11 @@ function tocarMusicaDaUrl(ID, Page) {
 const liCompartilharMusica = document.querySelector('#liCompartilharMusica')
 liCompartilharMusica.addEventListener('click', () => {
     const urlSemQuery = window.location.origin + window.location.pathname
-    const link = `${urlSemQuery}?${musicaSelecionadaBtnDireito.ID}`
+    const link = `${urlSemQuery}?music=${musicaSelecionadaBtnDireito.ID}`
     navigator.clipboard.writeText(link).then(function() {
-        console.log('Link copiado para a área de transferência!')
         Notificar('Link copiado para a área de transferência!', 'Link Copiado')
     }, function(err) {
-        console.error('Erro ao copiar o link: ', err)
+        Notificar('Erro ao copiar o link: ')
     })
 })
 
@@ -128,3 +129,25 @@ function Notificar(text, notification) {
         containerNotification.classList.remove('containerNotificationActive')
     }, 5000)
 }
+
+//? Vai mandar o link do perfil do Artista para área de transferencia
+document.querySelector('#bntCompartilharArtista').addEventListener('click', () => {
+    const urlSemQuery = window.location.origin + window.location.pathname
+    const link = `${urlSemQuery}?artist=${autorSelecionadoBtnDireito.ID}`
+    navigator.clipboard.writeText(link).then(function() {
+        Notificar('Link copiado para a área de transferência!', 'Link Copiado')
+    }, function(err) {
+        Notificar('Erro ao copiar o link: ')
+    })
+})
+
+//? Vai mandar o link do perfil do usuario para área de transferencia
+document.querySelector('#bntCompartilharUser').addEventListener('click', () => {
+    const urlSemQuery = window.location.origin + window.location.pathname
+    const link = `${urlSemQuery}?profile=${userSelecionadoBtnDireito.Id}`
+    navigator.clipboard.writeText(link).then(function() {
+        Notificar('Link copiado para a área de transferência!', 'Link Copiado')
+    }, function(err) {
+        Notificar('Erro ao copiar o link: ')
+    })
+})
