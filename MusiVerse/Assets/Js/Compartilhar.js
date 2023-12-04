@@ -56,6 +56,7 @@ function tocarMusicaDaUrl(ID, Page) {
                                 Numero: b,
                             }
                             DarPlayMusica(arrayMusicasArtista[b], b)
+                            AbrirTelaTocandoAgora('OpenViaBtn')
                         }
                     }
                 } else {
@@ -64,6 +65,7 @@ function tocarMusicaDaUrl(ID, Page) {
                         Numero: c,
                     }
                     DarPlayMusica(TodasMusicas.Musicas[c], c)
+                    AbrirTelaTocandoAgora('OpenViaBtn')
                 }
             }
         }
