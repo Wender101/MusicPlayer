@@ -132,22 +132,25 @@ function Notificar(text, notification) {
 
 //? Vai mandar o link do perfil do Artista para área de transferencia
 document.querySelector('#bntCompartilharArtista').addEventListener('click', () => {
-    const urlSemQuery = window.location.origin + window.location.pathname
-    const link = `${urlSemQuery}?artist=${autorSelecionadoBtnDireito.ID}`
-    navigator.clipboard.writeText(link).then(function() {
-        Notificar('Link copiado para a área de transferência!', 'Link Copiado')
-    }, function(err) {
-        Notificar('Erro ao copiar o link: ')
-    })
+    salvarNaAreaDeTransferencia('artist', autorSelecionadoBtnDireito.Id)
 })
 
 //? Vai mandar o link do perfil do usuario para área de transferencia
 document.querySelector('#bntCompartilharUser').addEventListener('click', () => {
+    salvarNaAreaDeTransferencia('profile', userSelecionadoBtnDireito.Id)
+})
+
+//? Vai mandar o link do Playlist do usuario para área de transferencia
+document.querySelector('#bntCompartilharPlaylist').addEventListener('click', () => {
+    salvarNaAreaDeTransferencia('playlist', playlistSelecionadaBtnDireito.ID)
+})
+
+function salvarNaAreaDeTransferencia(Tipo, Link) {
     const urlSemQuery = window.location.origin + window.location.pathname
-    const link = `${urlSemQuery}?profile=${userSelecionadoBtnDireito.Id}`
+    const link = `${urlSemQuery}?${Tipo}=${Link}`
     navigator.clipboard.writeText(link).then(function() {
         Notificar('Link copiado para a área de transferência!', 'Link Copiado')
     }, function(err) {
         Notificar('Erro ao copiar o link: ')
     })
-})
+}

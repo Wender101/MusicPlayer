@@ -11,6 +11,7 @@ let ListaProxMusica = {}
 let musicaSelecionadaBtnDireito //? Vai guardar a música que o user clicou com btn Direito
 let autorSelecionadoBtnDireito //? Vai guardar o autor que o user clicou com btn Direito
 let userSelecionadoBtnDireito //? Vai guardar o autor que o user clicou com btn Direito
+let playlistSelecionadaBtnDireito //? Vai guardar o autor que o user clicou com btn Direito
 
 const liAddRemoveFavoritosClickMusic = document.querySelector('#liAddRemoveFavoritosClickMusic')
 const liIrParaArtistaClickMusic = document.querySelector('#liIrParaArtistaClickMusic')
@@ -2353,6 +2354,19 @@ function RetornarPlayList(Pesquisa, Local, Formato = 'Caixa', ID = null) {
 
                     })
 
+                    container.addEventListener('contextmenu', function (e) {
+                        e.preventDefault()
+
+                        playlistSelecionadaBtnDireito = TodasMusicas.Playlists[c]
+                        const containerOptionsClickPlaylist = document.getElementById('containerOptionsClickPlaylist')
+
+                        hideMenu()
+                        // Position the custom menu at the mouse coordinates
+                        containerOptionsClickPlaylist.style.left = e.clientX+ 'px'
+                        containerOptionsClickPlaylist.style.top = e.clientY + 'px'
+                        containerOptionsClickPlaylist.style.display = 'block'
+                    })
+
                 } else if(Formato == 'Linha') {
                     arrayMusicasPlaylist = []
 
@@ -2556,7 +2570,8 @@ function AbrirPerfilArtista(arrayArtista) {
 }
 
 function hideMenu() {
-    document.getElementById('containerOptionsClickMusic').style.display = 'none'
-    document.getElementById('containerOptionsClickArtista').style.display = 'none'
-    document.getElementById('containerOptionsClickUser').style.display = 'none'
+    const manusClickDireito = document.querySelectorAll('.manusClickDireito')
+    for(let c = 0; c < manusClickDireito.length; c++) {
+        manusClickDireito[c].style.display = 'none'
+    }
 }
