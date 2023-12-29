@@ -1113,11 +1113,10 @@ body {
                             right: 20px;
                             border-radius: 10px;
                             background-color: transparent;
-                            background-image: url('../Imgs/Icons/Edit.png');
-                            background-position: center;
-                            background-size: cover;
-                            background-repeat: no-repeat;
                             cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
                         }
 
                         div#containerImgPerfilUserHeaderUser {
@@ -1129,7 +1128,8 @@ body {
                             background-position: center center;
                             background-size: cover;
                             margin-left: 20px;
-                            display: flex;
+                            // display: flex;
+                            display: none;
                             align-items: center;
                             justify-content: baseline;
                             overflow: hidden;

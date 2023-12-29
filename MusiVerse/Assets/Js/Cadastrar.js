@@ -20,7 +20,9 @@ function atualizarCadastro() {
     }
 }
 
+let LogarOuCadastrar = 'Logar'
 function FazerLogin() {
+    LogarOuCadastrar = 'Logar'
     firebase.auth().signInWithEmailAndPassword(inputEmailUser.value, inputSenhaUser.value).then(() => {
         location.href = 'MusiVerse.html'
 
@@ -32,6 +34,7 @@ function FazerLogin() {
 }
 
 function Cadastrar() {
+    LogarOuCadastrar = 'Cadastrar'
     containerNomeUser.style.display = 'block'
     containerChave.style.display = 'block'
 
@@ -52,7 +55,94 @@ function Cadastrar() {
                 GostoMusical: {
                     Autores: [],
                     Genero: [],
-                    Playlists: []
+                    Playlists: [],
+                    Historico: {
+                        Autores: [],
+                        Musicas: [
+                            {
+                                "Tempo": 277.781,
+                                "Musica": "EHjfQawW1DSTTebceFSv"
+                            },
+                            {
+                                "Tempo": 224.281,
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj"
+                            },
+                            {
+                                "Musica": "IOcfSe3FIy8JlXCwKjca",
+                                "Tempo": 236.321
+                            },
+                            {
+                                "Musica": "PHH4xNwHdC7BNIJdfzlB",
+                                "Tempo": 177.581
+                            },
+                            {
+                                "Tempo": 277.781,
+                                "Musica": "EHjfQawW1DSTTebceFSv"
+                            },
+                            {
+                                "Tempo": 224.281,
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj"
+                            },
+                            {
+                                "Musica": "IOcfSe3FIy8JlXCwKjca",
+                                "Tempo": 236.321
+                            },
+                            {
+                                "Tempo": 177.581,
+                                "Musica": "PHH4xNwHdC7BNIJdfzlB"
+                            },
+                            {
+                                "Musica": "EHjfQawW1DSTTebceFSv",
+                                "Tempo": 277.781
+                            },
+                            {
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj",
+                                "Tempo": 224.281
+                            },
+                            {
+                                "Tempo": 236.321,
+                                "Musica": "IOcfSe3FIy8JlXCwKjca"
+                            },
+                            {
+                                "Tempo": 177.581,
+                                "Musica": "PHH4xNwHdC7BNIJdfzlB"
+                            },
+                            {
+                                "Musica": "lRDHFAnbQNUYIH74RG75",
+                                "Tempo": 11.882773
+                            },
+                            {
+                                "Tempo": 2.913585,
+                                "Musica": "PHH4xNwHdC7BNIJdfzlB"
+                            },
+                            {
+                                "Musica": "PHH4xNwHdC7BNIJdfzlB",
+                                "Tempo": 5.875011
+                            },
+                            {
+                                "Tempo": 164.789649,
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj"
+                            },
+                            {
+                                "Tempo": 224.281,
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj"
+                            },
+                            {
+                                "Musica": "8UeuGQVfBw8ePs6LxSRj",
+                                "Tempo": 224.281
+                            },
+                            {
+                                "Tempo": 160.462116,
+                                "Musica": "k9Vn5s3UFcCXgYE6PVoy"
+                            },
+                            {
+                                "Musica": "VhCkmrlShO65HbzzLKjh",
+                                "Tempo": 123.544272
+                            }
+                        ],
+                        Playlists: [],
+                        Users: []
+                    }
                 },
 
                 Personalizar: {
@@ -98,3 +188,14 @@ function Cadastrar() {
         })
     }
 }
+
+//? Vai fazer o ligin ao apertar o espaço
+document.addEventListener('keypress', (e) => {
+    if(e.code == 'Enter') {
+        if(LogarOuCadastrar == 'Logar') {
+            FazerLogin()
+        } else if(LogarOuCadastrar == 'Cadastrar') {
+            Cadastrar()
+        }
+    }
+})

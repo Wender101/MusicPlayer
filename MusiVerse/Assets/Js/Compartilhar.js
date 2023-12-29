@@ -33,7 +33,6 @@ function obterValoresDaURL() {
   tocarMusicaDaUrl(music, InfosUrl.Page)
 }
 
-
 function tocarMusicaDaUrl(ID, Page) {
     let MusicaDaUrl
 
@@ -75,15 +74,37 @@ function tocarMusicaDaUrl(ID, Page) {
         for(let c = 0; c < TodasMusicas.Musicas.length; c++) {
             if(TodasMusicas.Musicas[c].ID == Page.ID) {
                 try {
-                    AbrirPerfilArtista(TodasMusicas.Musicas[c])
+                    AbrirPerfilArtista(TodasMusicas.Musicas[c], 'PegarLista')
+                    for(let i = 0; i < ListaProxMusica.Musicas.length; i++) {
+                        if(ListaProxMusica.Musicas[i].ID == ID) {
+                            ListaProxMusica.Numero = i
+                        }
+                    }
                 } catch{}
             }
         }
 
+        //? Arrumar isso
     } else if(Page.Name == 'playlist') {
         try {
             for(let c = 0; c < TodasMusicas.Playlists.length; c++) {
                 if(TodasMusicas.Playlists[c].ID == Page.ID) {
+                    const arrayMusicasPlaylist = []
+                    let numMusicaPlaylist = 0
+
+                    for(let i = TodasMusicas.Playlists[c].Musicas.length - 1; i >= 0; i--) {
+                        arrayMusicasPlaylist.push(TodasMusicas.Playlists[c].Musicas[i])
+
+                        if(TodasMusicas.Playlists[c].Musicas[i].ID == ID) {
+                            numMusicaPlaylist = i
+                        }
+                    }
+
+                    ListaProxMusica = {
+                        Musicas: arrayMusicasPlaylist,
+                        Numero: numMusicaPlaylist,
+                    }
+
                     AbrirPlaylist(TodasMusicas.Playlists[c])
                 }
             }

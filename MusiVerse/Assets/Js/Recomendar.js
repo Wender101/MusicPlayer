@@ -127,9 +127,7 @@ function coletarHistorico(Dados, Tipo = 'Música') {
     }
 
     currentUser.User.GostoMusical.Historico = GostoMusicalHistorico.Historico
-    console.log('Falta só salvar agr');
     db.collection('Users').doc(currentUser.User.Id).update({GostoMusical: currentUser.User.GostoMusical}).then(() => {
-      console.log('Aparentemente salvou');
     })
     RecomendarAutoresPlaylistsHistorico()
   }
@@ -264,7 +262,7 @@ function ArtistasMaisOuvidosHistorico(Artistas) {
 
   //? Vai adicionar o article no html apenas se houver algunma música
   if(article.innerHTML != '') {
-    h1.innerText = `Artistas ouvidos recentemente`
+    h1.innerText = `Sujestão de artistas`
     section.className = 'containerMusica'
     section.appendChild(h1)
     articleContainer.className = 'articleContainer'
@@ -359,7 +357,7 @@ function RecomendarAutoresPlaylistsHistorico() {
   let Playlists = GostoMusicalHistorico.Historico.Playlists
 
   const articleContainerPlaylistFavoritaPerfil = document.getElementById('articleContainerPlaylistFavoritaPerfil')
-  articleContainerPlaylistFavoritaPerfil.innerHTML = '<div class="containerPlaylistFavoritaPerfil" id="musicasFavoritasPerfil"><img src="Assets/Imgs/Icons/Img Músicas Curtidas.png"><p>Músicas Curtidas</p><div class="iconPlayPlaylistFavoritaPerfil"></div></div>'
+  articleContainerPlaylistFavoritaPerfil.innerHTML = '<div class="containerPlaylistFavoritaPerfil" id="musicasFavoritasPerfil" onclick="abrirFavoritosBtnNoHome()"><img src="Assets/Imgs/Icons/Img Músicas Curtidas.png"><p>Músicas Curtidas</p><div class="iconPlayPlaylistFavoritaPerfil"></div></div>'
   let maxRetornosAutor = 3
   let maxRetornosPlaylist = 3
 

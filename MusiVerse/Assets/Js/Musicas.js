@@ -1316,13 +1316,19 @@ function abrirMeuPerfil() {
         var imgTeste2 = new Image()
         imgTeste2.src = currentUser.User.Personalizar.FotoPerfil
         const FotoPerfil = document.getElementById('imgPerfilUserHeaderUser')
-        imgTeste2.onload = function() {
-            FotoPerfil.src = currentUser.User.Personalizar.FotoPerfil
-            document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'block'
-            document.getElementById('coainerBackgroundPerfil').style.alignItems = 'center'
-            document.getElementById('coteudoHeaderPerfil').style.height = '80%'
-        }
-        imgTeste2.onerror = function() {
+        if(currentUser.User.Personalizar.FotoPerfil != null && currentUser.User.Personalizar.FotoPerfil != '') {
+            imgTeste2.onload = function() {
+                FotoPerfil.src = currentUser.User.Personalizar.FotoPerfil
+                document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'block'
+                document.getElementById('coainerBackgroundPerfil').style.alignItems = 'center'
+                document.getElementById('coteudoHeaderPerfil').style.height = '80%'
+            }
+            imgTeste2.onerror = function() {
+                document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
+                document.getElementById('coteudoHeaderPerfil').style.height = '50%'
+                document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
+            }
+        } else {
             document.getElementById('coainerBackgroundPerfil').style.alignItems = 'end'
             document.getElementById('coteudoHeaderPerfil').style.height = '50%'
             document.getElementById('containerImgPerfilUserHeaderUser').style.display = 'none'
@@ -1350,16 +1356,18 @@ btnPlayHeaderPerfil.addEventListener('click', () => {
 
 //? Vai abrir as músicas favoritas do user
 const btnMusicasFavoritas = document.getElementById('btnMusicasFavoritas')
-const musicasFavoritasPerfil = document.getElementById('musicasFavoritasPerfil')
 btnMusicasFavoritas.addEventListener('click', () => {
     document.getElementById('localMusicasCurtidas').innerHTML = ''
     RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
 })
-musicasFavoritasPerfil.addEventListener('click', () => {
-    AbrirPaginas(3)
+
+function abrirFavoritosBtnNoHome() {
+    FecharPaginas()
+    console.log('OPaaaaaaa');
     document.getElementById('localMusicasCurtidas').innerHTML = ''
     RetornarMusicasFavoritas(currentUser.InfoEmail.email, document.getElementById('localMusicasCurtidas'), 'Favoritas')
-})
+    AbrirPaginas(4, 3)
+}
 
 let trocouDeMusica = false
 let fimMusica = false
@@ -1706,28 +1714,46 @@ NextBtn2.addEventListener("click", () => {
     NextSong()
 })
 
+let RepetirMusica = false
+//? Vai repetir a música
+const CicleBtn = document.getElementById('CicleBtn')
+CicleBtn.addEventListener('click', () => {
+    if(RepetirMusica == true) {
+        RepetirMusica = false
+        CicleBtn.src = 'Assets/Imgs/Icons/Cicle.png'
+    } else {
+        RepetirMusica = true
+        CicleBtn.src = 'Assets/Imgs/Icons/CicleSelected.png'
+    }
+})
+
 function NextSong() {
 
-    if(ListaProxMusica.FilaMusicas != undefined && ListaProxMusica.FilaMusicas.Musicas.length > 0) {
-        DarPlayMusica(ListaProxMusica.FilaMusicas.Musicas[0], 0)
-
-        ListaProxMusica.FilaMusicas.Musicas.splice(0, 1)
-        RetornarMusicasASeguir()
+    if(RepetirMusica == true) {
+        DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
 
     } else {
-
-        try {
-            if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
-                ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
-            } else {
+        if(ListaProxMusica.FilaMusicas != undefined && ListaProxMusica.FilaMusicas.Musicas.length > 0) {
+            DarPlayMusica(ListaProxMusica.FilaMusicas.Musicas[0], 0)
+    
+            ListaProxMusica.FilaMusicas.Musicas.splice(0, 1)
+            RetornarMusicasASeguir()
+    
+        } else {
+    
+            try {
+                if(ListaProxMusica.Numero + 1 < ListaProxMusica.Musicas.length) {
+                    ListaProxMusica.Numero =  ListaProxMusica.Numero + 1
+                } else {
+                    ListaProxMusica.Numero = 0
+                }
+            } catch (error) {
+                console.warn(error)
                 ListaProxMusica.Numero = 0
             }
-        } catch (error) {
-            console.warn(error)
-            ListaProxMusica.Numero = 0
+        
+            DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
         }
-    
-        DarPlayMusica(ListaProxMusica.Musicas[ListaProxMusica.Numero], ListaProxMusica.Numero)
     }
 }
 
@@ -1803,7 +1829,7 @@ function FavoritarDesfavoritarMusica(IdMusica, OqFazer = 'Editar') {
 }
 
 let arrayMusicasArtista = []        
-async function RetornarMusicasArtista(Artista, Local) {
+async function RetornarMusicasArtista(Artista, Local, PegarLista) {
     const article = document.createElement('article')
     article.className = 'containerMusicasOverflow'
     let ArtistaFormadado = formatarTexto(Artista)
@@ -1856,6 +1882,13 @@ async function RetornarMusicasArtista(Artista, Local) {
             div.appendChild(Genero)
             div.appendChild(Heart)
             article.appendChild(div)
+
+            if(PegarLista == 'PegarLista') {
+                ListaProxMusica = {
+                    Musicas: arrayMusicasArtista,
+                    Numero: 0,
+                }
+            }
 
             
             //? Ao clicar na música
@@ -2542,7 +2575,7 @@ document.querySelector('#containerMenuCreditos').addEventListener('click', (e) =
 })
 
 let pagCarregada = false
-function AbrirPerfilArtista(arrayArtista) {
+function AbrirPerfilArtista(arrayArtista, PegarLista) {
     FecharPaginas()
     const imgPerfilArtista = document.getElementById('imgPerfilArtista')
     if(arrayArtista.LinkImg.includes ('treefy')) {
@@ -2555,8 +2588,7 @@ function AbrirPerfilArtista(arrayArtista) {
     document.getElementById('containerMusicasArtista').innerHTML = ''
     document.querySelector('body').style.overflow = 'hidden'
     SalvarHistoricoDePaginas(document.getElementById('PagArtistas'))
-    RetornarMusicasArtista(arrayArtista.Autor, document.getElementById('containerMusicasArtista'))
-    console.log(arrayArtista.Autor)
+    RetornarMusicasArtista(arrayArtista.Autor, document.getElementById('containerMusicasArtista'), PegarLista)
 
     setTimeout(() => {
         pagCarregada = true
